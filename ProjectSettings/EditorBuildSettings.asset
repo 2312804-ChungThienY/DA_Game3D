@@ -11,9 +11,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/_Project/Scenes/93_TestEnvironment.unity
     guid: 4db58299d5d70a244a9fca79de4e12a8
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Project/Scenes/90_TestMechanics.unity
     guid: bb7eeb7f211747f689ef1e2a19993d23
+  - enabled: 1
+    path: Assets/_Project/Scenes/02_HangLinhMach.unity
+    guid: c2f6a2cde1ba4005bc440407eb0fe399
   m_configObjects:
     com.unity.dt.app-ui: {fileID: 11400000, guid: 1b1c20d82303e4b5781c3ef50ac1449f, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

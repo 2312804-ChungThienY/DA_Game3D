@@ -4,6 +4,13 @@
 
 ## Yêu cầu gần nhất
 
+### Prototype câu đố Trống Đồng trong 90_TestMechanics (31/10/2026)
+
+- Theo tệp hướng dẫn người dùng gửi, thêm `DrumPuzzleDefinition`, `DrumPuzzleController`, `DrumInteractable`, `DrumPuzzleReset`, `DrumVisualLabel`; asset `DP_Drum_01` có chuỗi A → C → B, input delay 0,2 s và failure delay 0,7 s. Tiến độ chỉ ở runtime; `ApplySolvedState(bool)` đã có để nối save trong bước sau, chưa nối với `SaveService` hiện tại.
+- Tạo `PF_DrumPuzzle_01` với ba trống Cylinder cách 2 m, layer Interactable và collider thường; ba màu vàng/xanh/đỏ, nhãn 3D TextMeshPro được tạo khi Play, hit indicator không collider, bảng gợi ý `A -> C -> B`, Door có collider, RewardDisplay ban đầu tắt và ResetPedestal tương tác E. Âm thanh để trống vì là tùy chọn; bệ thưởng chỉ là marker, chưa cấp mảnh B.
+- Đặt instance tên `Puzzle_Drum_01` tại `(-4,0,2)` trong `90_TestMechanics`; thêm `TXT_DrumPuzzleStatus` vào Canvas, neo trên giữa, nối với controller instance. Scene vẫn dùng An/camera/InteractionScanner/sàn đã có. Prefab được để riêng để sau này đưa vào Điện Trống.
+- Kiểm tra tĩnh YAML: prefab có 71 fileID không trùng, scene có 87 fileID không trùng; tham chiếu local, asset định nghĩa, status text và prefab instance có mặt; `git diff --check` không báo lỗi. **Chưa xác nhận Unity biên dịch hoặc Play Mode** vì Editor đang mở; cần mở lại scene từ đĩa và thử A-C-B, A-B, A-C-A, nhấn E nhanh/giữ E, ResetPedestal, tầm 3 m, cửa và bệ thưởng. Không đánh dấu gameplay hoàn thành trước kiểm chứng này.
+
 ### F9 tải bản lưu chưa có đèn làm vật nhặt không tương tác được (31/10/2026)
 
 - Nguyên nhân xác nhận từ code: `LanternPickup.Interact` đặt `collected = true` rồi tắt GameObject. Khi F9 tải snapshot `hasLantern = false`, `SaveService` chỉ bật lại GameObject; cờ private vẫn `true`, nên `CanInteract` luôn trả về false.
