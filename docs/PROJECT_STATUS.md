@@ -4,6 +4,33 @@
 
 ## Yêu cầu gần nhất
 
+### F9 tải bản lưu chưa có đèn làm vật nhặt không tương tác được (31/10/2026)
+
+- Nguyên nhân xác nhận từ code: `LanternPickup.Interact` đặt `collected = true` rồi tắt GameObject. Khi F9 tải snapshot `hasLantern = false`, `SaveService` chỉ bật lại GameObject; cờ private vẫn `true`, nên `CanInteract` luôn trả về false.
+- Thêm `LanternPickup.ApplySavedState(bool owned)` để đặt lại `collected` đồng bộ với snapshot và bật/tắt vật. `SaveService` lấy component từ object đã gán và gọi phương thức này khi tải; đồng thời kiểm tra component tồn tại khi khởi tạo.
+- Đã rà soát thứ tự restore: `LanternController.ApplySavedState(false)` chạy trước khi bật vật nhặt, nên `CanInteract` có thể trả về true; tải bản lưu đã có đèn vẫn giữ vật tắt. Chưa xác nhận Play Mode trong Unity.
+
+### Không ngắm chọn được vật nhặt đèn (31/10/2026)
+
+- Người dùng làm rõ rằng lỗi là không chọn/nhặt được `PF_LanternPickup`, không phải Focus vào phong ấn. Tìm thấy `InteractionScanner` trên An tham chiếu action `Interact` của `Assets/InputSystem_Actions.inputactions`, trong khi `PlayerInput` của An dùng `StarterAssets.inputactions`. Scanner kiểm tra `action.enabled` trên asset khác, nên không đọc phím E của An và không hiện lời nhắc mục tiêu.
+- Sửa `InteractionScanner` lấy `Interact` trực tiếp từ `PlayerInput.actions` của cùng An trong `Start`; bỏ tham chiếu `InputActionReference` cũ khỏi `PF_An_Prototype`. `StarterAssets.inputactions` có action `Interact` dạng Button và binding `<Keyboard>/e`.
+- Mở rộng BoxCollider thường của `PF_LanternPickup` từ kích thước local 1×1×1 thành 2×1,5×2, tâm Y=0,25. Với scale scene 0,3×0,4×0,3, vùng ngắm khoảng 0,6×0,6×0,6 m, đáy Y≈0,85 cao hơn mặt bệ Y=0,8; vật vẫn phải ở trong tầm tương tác 3 m và không bị vật cản che.
+- Kiểm tra tĩnh action, prefab, scene. Chưa xác nhận Play Mode vì Unity Editor đang mở; cần mở lại scene từ đĩa, tiến đến bệ, ngắm vật và nhấn E để xác nhận lời nhắc và trạng thái sở hữu đèn.
+
+### Không Focus được phong ấn bằng đèn (31/10/2026)
+
+- Kiểm tra tĩnh cho thấy `Focus` trong `StarterAssets.inputactions` là chuột phải, `LanternController` và `LanternFocusScanner` cùng trên An; `Seal_CampExit` có `Barrier` layer `LanternTarget` và `AimPoint` ở trước mặt phong ấn. `visibilityMask` trên `PF_An_Prototype` lại chứa cả `Default`, `Environment`, `Interactable`, `LanternTarget` (`1289`), khiến collider vật tương tác hoặc mặc định có thể chặn tia Focus.
+- Đổi `visibilityMask` của prefab An thành chỉ `Environment` (`8`, theo `ProjectSettings/TagManager.asset`), đúng luật LOS của đèn trong spec. `targetMask` vẫn là `LanternTarget` (`1024`). Scene `02_HangLinhMach` thừa kế cấu hình prefab này; không có override mask trong scene.
+- Chưa xác nhận Play Mode vì Unity Editor đang mở. Cần mở lại scene từ đĩa, nhặt đèn bằng E, đi tới cách phong ấn dưới 8 m, giữ chuột phải 1,5 giây và quan sát `TXT_SealProgress` tăng. Nếu HUD không hiện `Dang Focus`, kiểm tra trạng thái đèn/action trước khi xét LOS.
+
+### Checkpoint trại và lưu/tải prototype (31/10/2026)
+
+- Theo tệp bước tiếp theo do người dùng gửi, thêm `WorldStateStore.ExportRelics/RestoreRelics`, `LanternController.ApplySavedState`, `SealTarget.IsSolved/ApplySavedState`. Restore thay tập ID, reset Focus/progress dở và không phát lại phần thưởng phong ấn.
+- Thêm `SaveData` version 1 cho `cp_trai`, `SaveService` ghi `save_v1.json` tại `Application.persistentDataPath` qua `.tmp`, đọc lại file tạm, thay file chính và tạo `.bak` khi ghi đè. Khi tải ưu tiên file chính, thử backup nếu không hợp lệ; hiện chỉ chấp nhận mảnh A và logic đoạn Trại → Vườn Rêu. Save thành công hồi năng lượng đèn; load đặt An lại checkpoint và khôi phục đèn, phong ấn, hai pickup.
+- Thêm action `LoadGame` phím F9 vào `StarterAssets.inputactions` mà `PlayerInput` của An dùng. `SaveService` lấy `PlayerInput` và `CharacterController` từ cùng object với `LanternController` nếu hai ô Inspector chưa gán, vì chúng được thừa kế từ prefab Starter Assets.
+- Trong `02_HangLinhMach` thêm `Checkpoint_CampSpawn` tại `(0,0.2,-5)` dưới Gameplay; gắn `SaveService` vào GameSession và `CampCheckpoint` lên `Campfire_Placeholder` để dùng collider `Fire_OrangeMarker` (layer Interactable) khi ngắm và nhấn E.
+- Kiểm tra tĩnh: scene có 556 ID không trùng và không thiếu tham chiếu local; JSON Input Actions hợp lệ, `Player/LoadGame` là Button có binding `<Keyboard>/f9`. Chưa có xác nhận Unity biên dịch, Play Mode lưu/tải, backup lỗi, hay build Windows. Cần mở lại scene từ đĩa trong Editor đang chạy trước khi kiểm tra để tránh ghi đè bởi bản scene cũ.
+
 ### Mảnh Trống A, HUD mục tiêu và camera hành lang (31/10/2026)
 
 - Theo tệp bước tiếp theo do người dùng gửi, thêm `GameSession` root identity trong `02_HangLinhMach`; gắn `WorldStateStore` giữ tập ID `relic_drum_a/b/c` trong lượt chơi hiện tại và `QuestTracker` suy mục tiêu từ đèn/mảnh trống. ID do yêu cầu mới quy định; chưa có save/Boot và chưa chuyển đổi ID từ thiết kế `fragment_a`.

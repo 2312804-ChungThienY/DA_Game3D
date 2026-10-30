@@ -41,4 +41,10 @@ public class LanternPickup : MonoBehaviour, IInteractable
         collected = true;
         gameObject.SetActive(false);
     }
+
+    public void ApplySavedState(bool owned)
+    {
+        collected = owned;
+        gameObject.SetActive(!owned);
+    }
 }

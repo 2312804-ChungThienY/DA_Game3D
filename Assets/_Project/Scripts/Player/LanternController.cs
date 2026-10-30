@@ -161,6 +161,17 @@ public class LanternController : MonoBehaviour
         return true;
     }
 
+    public void ApplySavedState(bool owned)
+    {
+        hasLantern = owned;
+        lanternOn = owned;
+        energy = maxEnergy;
+        timeSinceFocus = recoveryDelay;
+        exhaustedUntilRelease = false;
+        IsFocusing = false;
+        RefreshVisuals();
+    }
+
     private void RefreshVisuals()
     {
         if (lanternVisual != null)

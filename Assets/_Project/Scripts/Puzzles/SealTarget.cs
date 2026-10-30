@@ -17,6 +17,7 @@ public class SealTarget : MonoBehaviour, ILanternTarget
     private bool solved;
 
     public Transform AimPoint => aimPoint;
+    public bool IsSolved => solved;
 
     public bool CanReceiveFocus =>
         isActiveAndEnabled && !solved && aimPoint != null;
@@ -95,6 +96,15 @@ public class SealTarget : MonoBehaviour, ILanternTarget
         Debug.Log(
             $"{name}: Đã xóa phong ấn.",
             this);
+    }
+
+    public void ApplySavedState(bool savedSolved)
+    {
+        solved = savedSolved;
+        progress = 0f;
+        lastFocusTime = float.NegativeInfinity;
+        barrier.SetActive(!solved);
+        RefreshUI();
     }
 
     private void RefreshUI()

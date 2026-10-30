@@ -41,4 +41,27 @@ public class WorldStateStore : MonoBehaviour
         Changed?.Invoke();
         return true;
     }
+
+    public List<string> ExportRelics()
+    {
+        return new List<string>(collectedRelics);
+    }
+
+    public void RestoreRelics(List<string> ids)
+    {
+        collectedRelics.Clear();
+
+        if (ids != null)
+        {
+            foreach (string id in ids)
+            {
+                if (IsValidRelicId(id))
+                {
+                    collectedRelics.Add(id);
+                }
+            }
+        }
+
+        Changed?.Invoke();
+    }
 }

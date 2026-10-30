@@ -2,13 +2,15 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(PlayerInput))]
 public class InteractionScanner : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Camera viewCamera;
     [SerializeField] private Transform interactionOrigin;
     [SerializeField] private TMP_Text promptText;
-    [SerializeField] private InputActionReference interactAction;
+
+    private InputAction interactAction;
 
     [Header("Detection")]
     [SerializeField, Min(0.1f)] private float interactDistance = 3f;
@@ -21,9 +23,7 @@ public class InteractionScanner : MonoBehaviour
     {
         if (viewCamera == null ||
             interactionOrigin == null ||
-            promptText == null ||
-            interactAction == null ||
-            interactAction.action == null)
+            promptText == null)
         {
             Debug.LogError(
                 $"{name}: InteractionScanner thiếu tham chiếu.",
@@ -35,15 +35,26 @@ public class InteractionScanner : MonoBehaviour
         ClearPrompt();
     }
 
+    private void Start()
+    {
+        interactAction = GetComponent<PlayerInput>().actions.FindAction(
+            "Interact", false);
+
+        if (interactAction == null)
+        {
+            Debug.LogError($"{name}: PlayerInput thiếu action Interact.", this);
+            enabled = false;
+        }
+    }
+
     private void LateUpdate()
     {
         ClearPrompt();
 
-        InputAction action = interactAction.action;
-
         if (!Application.isFocused ||
             Time.timeScale == 0f ||
-            !action.enabled)
+            interactAction == null ||
+            !interactAction.enabled)
         {
             return;
         }
@@ -100,7 +111,7 @@ public class InteractionScanner : MonoBehaviour
 
         promptText.text = $"[E] {target.Prompt}";
 
-        if (action.WasPressedThisFrame())
+        if (interactAction.WasPressedThisFrame())
         {
             target.Interact(gameObject);
             ClearPrompt();

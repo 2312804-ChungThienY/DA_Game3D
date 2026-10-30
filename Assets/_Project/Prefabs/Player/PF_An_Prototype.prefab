@@ -541,7 +541,6 @@ MonoBehaviour:
   viewCamera: {fileID: 0}
   interactionOrigin: {fileID: 2892640460071876909}
   promptText: {fileID: 0}
-  interactAction: {fileID: 1781555164194001046, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   interactDistance: 3
   cameraRayDistance: 15
   detectionMask:
@@ -588,7 +587,7 @@ MonoBehaviour:
     m_Bits: 1024
   visibilityMask:
     serializedVersion: 2
-    m_Bits: 1289
+    m_Bits: 8
 --- !u!4 &8790347263950537340 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3893294197879345259, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}

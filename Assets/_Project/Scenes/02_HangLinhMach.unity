@@ -182,6 +182,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 9400000002}
   - {fileID: 9000000040}
   - {fileID: 1562629817}
   - {fileID: 300174}
@@ -421,6 +422,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 300194}
+  - component: {fileID: 9400000020}
   m_Layer: 0
   m_Name: Campfire_Placeholder
   m_TagString: Untagged
@@ -13470,6 +13472,7 @@ GameObject:
   - component: {fileID: 9300000001}
   - component: {fileID: 9300000002}
   - component: {fileID: 9300000003}
+  - component: {fileID: 9400000000}
   m_Layer: 0
   m_Name: GameSession
   m_TagString: Untagged
@@ -13809,6 +13812,80 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &9400000001
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9400000002}
+  m_Layer: 0
+  m_Name: Checkpoint_CampSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9400000002
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9400000001}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.2, z: -5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 300014}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9400000000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9300000000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1eecb4449fa48443868b8a19c9ce3b7, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: Assembly-CSharp::SaveService
+  worldState: {fileID: 9300000002}
+  lantern: {fileID: 9300000030}
+  campSeal: {fileID: 9400000010}
+  lanternPickup: {fileID: 9400000011}
+  drumAPickup: {fileID: 9000000141}
+  playerController: {fileID: 0}
+  playerInput: {fileID: 0}
+  campSpawn: {fileID: 9400000002}
+--- !u!114 &9400000010 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9152954936188729838, guid: a1e5da872e1261a449aff4842f3c2254, type: 3}
+  m_PrefabInstance: {fileID: 9000000039}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &9400000011 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 58516443568823121, guid: d1e135fd3f6e1794389ec94fa97bf44e, type: 3}
+  m_PrefabInstance: {fileID: 9000000037}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &9400000020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 300190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ab39c36c15656b40a6e7062af7c623a, type: 3}
+  m_Name: ''
+  m_EditorClassIdentifier: Assembly-CSharp::CampCheckpoint
+  saveService: {fileID: 9400000000}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
