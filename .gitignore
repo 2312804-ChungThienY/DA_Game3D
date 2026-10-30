@@ -1,0 +1,44 @@
+# Unity generated files and build output
+/Library/
+/Temp/
+/Obj/
+/Logs/
+/Build/
+/Builds/
+/UserSettings/
+/MemoryCaptures/
+/Recordings/
+
+# Local Unity Version Control workspace data
+/.plastic/
+
+# Generated IDE files
+/.vs/
+/.vscode/
+/.idea/
+*.csproj
+*.unityproj
+*.sln
+*.slnx
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+
+# OS files and exported packages
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.unitypackage
+
+# Unity temporary files
+sysinfo.txt
+crashlytics-build.properties
+~UnityDirMonSyncFile~*
