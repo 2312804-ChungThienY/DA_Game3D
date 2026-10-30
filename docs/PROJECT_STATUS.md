@@ -4,6 +4,12 @@
 
 ## Yêu cầu gần nhất
 
+### Máu, vùng sát thương và chết trong 91_TestCombat (31/10/2026)
+
+- Thêm `DamageInfo`/`DamageTeam`, `IDamageable`, `PlayerVitals` và `DamageZone`. An có 100 máu, sát thương hợp lệ mới trừ, chặn cùng phe, chặn số âm/NaN/vô cực, máu dừng ở 0 và sự kiện chết chỉ phát một lần. Vùng thử gây 20 sát thương mỗi 1 giây, ghi thời điểm theo `PlayerVitals` để nhiều collider không nhân đôi lần trúng; không gây sát thương khi pause.
+- Dựng `91_TestCombat` từ rig An, Cinemachine camera, Main Camera, Canvas và EventSystem của scene thử đang dùng; giữ một An, một camera, sàn Environment 20×20, HUD máu, panel chết phủ màn hình. `PlayerVitals` chỉ gắn trên instance An của scene này; `PlayerHealthPresenter` khóa PlayerInput, motor ThirdPersonController, InteractionScanner, LanternController và LanternFocusScanner khi chết. Tạo `PF_DamageZone_Test` màu đỏ với BoxCollider trigger và Rigidbody kinematic, không gravity, tại `(0,0.5,4)`.
+- Kiểm tra tĩnh: scene có 66 fileID không trùng, prefab vùng nguy hiểm có 7 fileID không trùng; các tham chiếu local hợp lệ, cấu hình trigger/rigidbody/20 damage/1 s/100 HP hiện diện, Player–Default được bật trong layer collision matrix; `git diff --check` không báo lỗi. **Chưa xác nhận Unity biên dịch hoặc Play Mode** vì Editor đang mở. Cần thử HUD 100→80→60→40→20→0, rời vùng ngừng trừ, chết một lần, khóa di chuyển/tương tác/đèn; chưa nối máu với save, F9 hoặc hồi sinh, chưa làm stamina/né.
+
 ### Hành Lang Quang, mảnh C và save v3 trong 02_HangLinhMach (31/10/2026)
 
 - Mở lối bắc Điện Trống tại Z=62, thêm `Area_LightCorridor` với sàn Z=62–82, vách/trần và hai đèn điểm. Đặt instance `Puzzle_Mirror_01` tại `(0,0,72)`; cửa gương chặn khoảng mở 3 m tại Z=80, bệ thưởng phía sau tại Z=81. `Pickup_DrumC` là con scene của `RewardDisplay`, layer Interactable và dùng `RelicPickup` với `relic_drum_c`; marker đồng cũ được tắt trên instance. Thêm `TXT_MirrorStatus` và nối receiver với `WorldStateStore`.
