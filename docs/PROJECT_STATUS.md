@@ -4,6 +4,12 @@
 
 ## Yêu cầu gần nhất
 
+### Thể lực và input Dodge chuẩn bị trong 91_TestCombat (31/10/2026)
+
+- Thêm `PlayerStamina` trên cùng An có `PlayerVitals` trong instance scene thử: tối đa 100, `TrySpend` giao dịch khi đủ, chờ 1 giây từ lần tiêu hao cuối rồi hồi 20/giây, không hồi hoặc tiêu khi chết/pause; có Context Menu thử trừ 25/100. Thêm `PlayerStaminaHUD` vào `CombatTestUI`, `TXT_PlayerStamina` dưới chữ máu và dời chữ đèn xuống để không chồng UI.
+- Thêm đúng một action `Dodge` kiểu Button với binding `<Keyboard>/leftCtrl` trong `StarterAssets.inputactions` đang dùng bởi PlayerInput của An. Chưa nối action này với di chuyển, bất tử hay tiêu thể lực; `ThirdPersonController` vẫn là motor duy nhất gọi CharacterController.Move. Không đổi prefab An hoặc scene chính vì stamina hiện chỉ ở instance `91_TestCombat`.
+- Kiểm tra tĩnh: JSON Input Actions đọc được, một action/binding Dodge; scene có 72 fileID không trùng và tham chiếu local hợp lệ; `git diff --check` không báo lỗi. **Chưa xác nhận Unity biên dịch hoặc Play Mode**. Cần dùng Context Menu thử 100→75→100, trừ đủ 100, trừ thiếu, đổi mốc hồi theo lần trừ cuối, pause và chết. Chưa commit khi các kiểm tra này chưa đạt.
+
 ### Máu, vùng sát thương và chết trong 91_TestCombat (31/10/2026)
 
 - Thêm `DamageInfo`/`DamageTeam`, `IDamageable`, `PlayerVitals` và `DamageZone`. An có 100 máu, sát thương hợp lệ mới trừ, chặn cùng phe, chặn số âm/NaN/vô cực, máu dừng ở 0 và sự kiện chết chỉ phát một lần. Vùng thử gây 20 sát thương mỗi 1 giây, ghi thời điểm theo `PlayerVitals` để nhiều collider không nhân đôi lần trúng; không gây sát thương khi pause.
