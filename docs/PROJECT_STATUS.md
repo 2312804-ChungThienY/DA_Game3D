@@ -4,6 +4,12 @@
 
 ## Yêu cầu gần nhất
 
+### Kiểm tra Pickup_Lantern trong 90_TestMechanics (30/10/2026)
+
+- `Pickup_Lantern` đã có BoxCollider, layer Interactable và `LanternPickup`; `PF_An_Prototype` có `InteractionScanner` và scene có `LanternController` gắn cùng object An. `LanternPickup.CanInteract` chỉ cho nhặt khi controller đang bật và chưa sở hữu đèn.
+- Vị trí cũ của pickup `(5.56, 1.18, 0.2)` cắm nhẹ vào `Block_High` (đáy pickup y≈0,98 trong khi mặt khối y=1), dễ bị raycast của scanner chạm khối trước. Đã chuyển pickup sang `(4.5, 0.2, 1.5)` ở chỗ thoáng; giữ nguyên script và các object khác.
+- Đã kiểm tra tham chiếu script/layer/action và tọa độ scene dạng text. Chưa có kiểm chứng Play Mode cho thao tác ngắm và nhấn E; cần kiểm tra trực tiếp trong Editor.
+
 Yêu cầu hiện tại: **nhập và thử môi trường theo từng đợt**, đúng mã A09/A11, hoãn A10 đến Điện Trống và giữ A12 làm phương án thay thế. Đã chuẩn bị khu thử, xem [ENVIRONMENT_ASSET_TRIALS.md](ENVIRONMENT_ASSET_TRIALS.md).
 
 Yêu cầu trước đó về đọc spec và ghi nhớ đã hoàn thành: đã đọc đủ bốn file nguồn, tạo AGENTS và tài liệu trong docs, không sửa game trong lượt đọc. Giới hạn “không chỉnh code gì thêm” áp dụng cho lượt đọc tài liệu đó; yêu cầu mới đã cho phép xử lý cảnh báo. Backlog gameplay phía dưới vẫn chỉ là ghi nhận.
