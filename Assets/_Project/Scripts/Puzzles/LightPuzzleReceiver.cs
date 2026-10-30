@@ -7,6 +7,9 @@ public class LightPuzzleReceiver : MonoBehaviour
     [SerializeField] private GameObject door;
     [SerializeField] private GameObject rewardDisplay;
     [SerializeField] private TMP_Text statusText;
+    [SerializeField] private WorldStateStore worldState;
+    [SerializeField] private MirrorRotator mirrorOne;
+    [SerializeField] private MirrorRotator mirrorTwo;
 
     private float progress;
 
@@ -22,9 +25,37 @@ public class LightPuzzleReceiver : MonoBehaviour
             return;
         }
 
-        door.SetActive(true);
-        rewardDisplay.SetActive(false);
-        RefreshUI();
+        ApplySolvedState(false);
+    }
+
+    private void OnEnable()
+    {
+        if (worldState != null) worldState.Changed += ApplyWorldState;
+    }
+
+    private void Start() => ApplyWorldState();
+
+    private void OnDisable()
+    {
+        if (worldState != null) worldState.Changed -= ApplyWorldState;
+    }
+
+    public void ApplyWorldState()
+    {
+        if (worldState == null || !isActiveAndEnabled) return;
+        bool solved = worldState.HasSolvedPuzzle(WorldStateStore.MirrorPuzzleId);
+        if (IsSolved != solved) ApplySolvedState(solved);
+    }
+
+    public void ApplySolvedState(bool solved)
+    {
+        progress = 0f;
+        IsSolved = solved;
+        if (mirrorOne != null) mirrorOne.ApplySolvedState(solved);
+        if (mirrorTwo != null) mirrorTwo.ApplySolvedState(solved);
+        if (door != null) door.SetActive(!solved);
+        if (rewardDisplay != null) rewardDisplay.SetActive(solved);
+        if (statusText != null) RefreshUI();
     }
 
     public void TickLight(bool receivingLight, float deltaTime)
@@ -37,10 +68,10 @@ public class LightPuzzleReceiver : MonoBehaviour
 
         if (progress >= requiredTime)
         {
-            IsSolved = true;
-            door.SetActive(false);
-            rewardDisplay.SetActive(true);
-            Debug.Log("Đã giải câu đố gương pz_guong_01 trong scene thử.", this);
+            if (worldState != null)
+                worldState.TrySolvePuzzle(WorldStateStore.MirrorPuzzleId);
+            ApplySolvedState(true);
+            Debug.Log("Đã giải câu đố gương pz_guong_01.", this);
         }
 
         RefreshUI();

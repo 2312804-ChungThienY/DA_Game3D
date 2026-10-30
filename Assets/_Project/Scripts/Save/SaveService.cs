@@ -16,6 +16,8 @@ public class SaveService : MonoBehaviour
     [SerializeField] private GameObject lanternPickup;
     [SerializeField] private GameObject drumAPickup;
     [SerializeField] private GameObject drumBPickup;
+    [SerializeField] private GameObject drumCPickup;
+    [SerializeField] private LightPuzzleReceiver mirrorReceiver;
 
     [Header("Player and checkpoint")]
     [SerializeField] private CharacterController playerController;
@@ -54,6 +56,7 @@ public class SaveService : MonoBehaviour
         ready = worldState != null && lantern != null && lantern.isActiveAndEnabled &&
                 campSeal != null && campSeal.isActiveAndEnabled &&
                 lanternPickupComponent != null && drumAPickup != null && drumBPickup != null &&
+                drumCPickup != null && mirrorReceiver != null &&
                 playerController != null && playerInput != null && campSpawn != null;
 
         if (!ready)
@@ -176,6 +179,9 @@ public class SaveService : MonoBehaviour
         lanternPickupComponent.ApplySavedState(data.hasLantern);
         drumAPickup.SetActive(!worldState.HasRelic(WorldStateStore.DrumA));
         drumBPickup.SetActive(!worldState.HasRelic(WorldStateStore.DrumB));
+        mirrorReceiver.ApplySolvedState(
+            worldState.HasSolvedPuzzle(WorldStateStore.MirrorPuzzleId));
+        drumCPickup.SetActive(!worldState.HasRelic(WorldStateStore.DrumC));
 
         bool wasEnabled = playerController.enabled;
         playerController.enabled = false;
@@ -203,6 +209,8 @@ public class SaveService : MonoBehaviour
                 candidate.version = 2;
                 candidate.solvedPuzzles = new List<string>();
             }
+            if (candidate != null && candidate.version == 2)
+                candidate.version = 3;
             if (!IsValid(candidate))
             {
                 return false;
@@ -220,7 +228,7 @@ public class SaveService : MonoBehaviour
 
     private static bool IsValid(SaveData data)
     {
-        if (data == null || data.version != 2 || data.checkpointId != "cp_trai" ||
+        if (data == null || data.version != 3 || data.checkpointId != "cp_trai" ||
             data.collectedRelics == null || data.solvedPuzzles == null)
         {
             return false;
@@ -229,7 +237,8 @@ public class SaveService : MonoBehaviour
         HashSet<string> uniqueIds = new HashSet<string>(StringComparer.Ordinal);
         foreach (string id in data.collectedRelics)
         {
-            if ((id != WorldStateStore.DrumA && id != WorldStateStore.DrumB) ||
+            if ((id != WorldStateStore.DrumA && id != WorldStateStore.DrumB &&
+                 id != WorldStateStore.DrumC) ||
                 !uniqueIds.Add(id))
             {
                 return false;
@@ -239,24 +248,29 @@ public class SaveService : MonoBehaviour
         HashSet<string> puzzles = new HashSet<string>(StringComparer.Ordinal);
         foreach (string id in data.solvedPuzzles)
         {
-            if (id != WorldStateStore.DrumPuzzleId || !puzzles.Add(id))
+            if ((id != WorldStateStore.DrumPuzzleId &&
+                 id != WorldStateStore.MirrorPuzzleId) || !puzzles.Add(id))
                 return false;
         }
 
         bool drumSolved = puzzles.Contains(WorldStateStore.DrumPuzzleId);
+        bool mirrorSolved = puzzles.Contains(WorldStateStore.MirrorPuzzleId);
 
         if (data.campSealSolved && !data.hasLantern)
         {
             return false;
         }
 
-        if ((uniqueIds.Count > 0 || drumSolved) &&
+        if ((uniqueIds.Count > 0 || drumSolved || mirrorSolved) &&
             (!data.hasLantern || !data.campSealSolved))
         {
             return false;
         }
 
         if (uniqueIds.Contains(WorldStateStore.DrumB) && !drumSolved)
+            return false;
+
+        if (uniqueIds.Contains(WorldStateStore.DrumC) && !mirrorSolved)
             return false;
 
         return true;

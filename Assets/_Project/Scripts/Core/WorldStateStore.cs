@@ -8,6 +8,7 @@ public class WorldStateStore : MonoBehaviour
     public const string DrumB = "relic_drum_b";
     public const string DrumC = "relic_drum_c";
     public const string DrumPuzzleId = "pz_trong_01";
+    public const string MirrorPuzzleId = "pz_guong_01";
 
     private readonly HashSet<string> collectedRelics =
         new HashSet<string>(StringComparer.Ordinal);
@@ -32,7 +33,7 @@ public class WorldStateStore : MonoBehaviour
 
     public bool TrySolvePuzzle(string id)
     {
-        if (id != DrumPuzzleId)
+        if (id != DrumPuzzleId && id != MirrorPuzzleId)
         {
             Debug.LogError($"ID câu đố không hợp lệ: {id}", this);
             return false;
@@ -56,7 +57,7 @@ public class WorldStateStore : MonoBehaviour
 
         if (puzzleIds != null)
             foreach (string id in puzzleIds)
-                if (id == DrumPuzzleId) solvedPuzzles.Add(id);
+                if (id == DrumPuzzleId || id == MirrorPuzzleId) solvedPuzzles.Add(id);
 
         Changed?.Invoke();
     }

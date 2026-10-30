@@ -41,7 +41,9 @@ public class RelicPickup : MonoBehaviour, IInteractable
         return isActiveAndEnabled && worldState != null &&
                !worldState.HasRelic(relicId) &&
                (relicId != WorldStateStore.DrumB ||
-                worldState.HasSolvedPuzzle(WorldStateStore.DrumPuzzleId));
+                worldState.HasSolvedPuzzle(WorldStateStore.DrumPuzzleId)) &&
+               (relicId != WorldStateStore.DrumC ||
+                worldState.HasSolvedPuzzle(WorldStateStore.MirrorPuzzleId));
     }
 
     public void Interact(GameObject interactor)

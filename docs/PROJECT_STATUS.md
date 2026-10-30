@@ -4,6 +4,12 @@
 
 ## Yêu cầu gần nhất
 
+### Hành Lang Quang, mảnh C và save v3 trong 02_HangLinhMach (31/10/2026)
+
+- Mở lối bắc Điện Trống tại Z=62, thêm `Area_LightCorridor` với sàn Z=62–82, vách/trần và hai đèn điểm. Đặt instance `Puzzle_Mirror_01` tại `(0,0,72)`; cửa gương chặn khoảng mở 3 m tại Z=80, bệ thưởng phía sau tại Z=81. `Pickup_DrumC` là con scene của `RewardDisplay`, layer Interactable và dùng `RelicPickup` với `relic_drum_c`; marker đồng cũ được tắt trên instance. Thêm `TXT_MirrorStatus` và nối receiver với `WorldStateStore`.
+- `WorldStateStore` nhận `pz_guong_01`; `LightPuzzleReceiver` ghi solved vào store, khôi phục cửa/bệ/tiến độ và đưa gương về nấc lời giải hoặc nấc ban đầu khi tải. `SaveData` lên version 3; `SaveService` chuyển v1/v2 hợp lệ trong bộ nhớ, lưu/tải mảnh C và trạng thái gương, bật lại pickup C khi tải lùi. Mảnh C chỉ tương tác được khi gương đã giải; HUD mục tiêu cập nhật đến 3/3.
+- Kiểm tra tĩnh: scene 723 fileID không trùng, tham chiếu local mới hợp lệ, có đúng một khu, instance gương, pickup C và status UI; `git diff --check` không báo lỗi. **Chưa xác nhận Unity biên dịch, Play Mode, F9 tải lùi, khởi động Play lại, đường đi/camera hoặc build Windows**. Cần thử ba trạng thái chưa giải / đã giải chưa nhận C / đã nhận C, đặc biệt lưu trước khi giải rồi giải và nhận C không lưu rồi F9. Không commit khi các kiểm tra này chưa đạt.
+
 ### Prototype câu đố xoay gương trong 90_TestMechanics (31/10/2026)
 
 - Đã thêm `LightPuzzleReceiver`, `MirrorRotator`, `MirrorBeamEmitter` và `PF_MirrorPuzzle_01`. Prefab có nguồn sáng, hai gương với mặt phản xạ và dấu mặt trước, ngọc nhận, cửa thử và bệ thưởng. Tia dùng Raycast qua Default/Environment/Interactable/PuzzleBeam, chặn mặt lưng và vật cản, giới hạn 3 phản xạ/40 m. Ngọc cần nhận sáng liên tục 1 giây; mất tia trước khi giải thì tiến độ về 0, tạm dừng thì giữ nguyên. Sau khi giải, gương khóa tương tác và cửa/bệ đổi trạng thái.

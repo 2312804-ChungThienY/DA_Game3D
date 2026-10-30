@@ -4,7 +4,7 @@ using System.Collections.Generic;
 [Serializable]
 public class SaveData
 {
-    public int version = 2;
+    public int version = 3;
     public string checkpointId = "cp_trai";
     public bool hasLantern;
     public bool campSealSolved;

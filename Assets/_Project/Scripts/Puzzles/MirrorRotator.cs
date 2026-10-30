@@ -42,6 +42,12 @@ public class MirrorRotator : MonoBehaviour, IInteractable
         transform.localRotation = Quaternion.Euler(0f, baseYaw + currentStep * 90f, 0f);
     }
 
+    public void ApplySolvedState(bool solved)
+    {
+        currentStep = solved ? 0 : initialStep;
+        ApplyRotation();
+    }
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;

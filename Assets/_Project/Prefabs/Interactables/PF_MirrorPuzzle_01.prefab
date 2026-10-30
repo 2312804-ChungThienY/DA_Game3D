@@ -327,6 +327,9 @@ MonoBehaviour:
   door: {fileID: 610000037}
   rewardDisplay: {fileID: 610000042}
   statusText: {fileID: 0}
+  worldState: {fileID: 0}
+  mirrorOne: {fileID: 610000015}
+  mirrorTwo: {fileID: 610000027}
 --- !u!1 &610000013
 GameObject:
   m_ObjectHideFlags: 0
