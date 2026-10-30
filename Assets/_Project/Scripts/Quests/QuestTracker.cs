@@ -30,9 +30,17 @@ public class QuestTracker : MonoBehaviour
         {
             objective = "Dung Focus mo phong an.\nTim Manh Trong A tai Vuon Reu.";
         }
+        else if (!worldState.HasSolvedPuzzle(WorldStateStore.DrumPuzzleId))
+        {
+            objective = "Den Dien Trong.\nDoc goi y va go dung thu tu.";
+        }
+        else if (!worldState.HasRelic(WorldStateStore.DrumB))
+        {
+            objective = "Cau do da giai.\nNhan Manh Trong B tren be thuong.";
+        }
         else
         {
-            objective = "Da nhan Manh Trong A.\nMuc tieu tiep theo: den Dien Trong.";
+            objective = "Da nhan hai manh trong.\nMuc tieu tiep theo: Hanh Lang Quang.";
         }
 
         string text = $"MUC TIEU\n{objective}\nManh trong: {worldState.RelicCount}/3";

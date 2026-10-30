@@ -38,7 +38,10 @@ public class RelicPickup : MonoBehaviour, IInteractable
 
     public bool CanInteract(GameObject interactor)
     {
-        return isActiveAndEnabled && worldState != null && !worldState.HasRelic(relicId);
+        return isActiveAndEnabled && worldState != null &&
+               !worldState.HasRelic(relicId) &&
+               (relicId != WorldStateStore.DrumB ||
+                worldState.HasSolvedPuzzle(WorldStateStore.DrumPuzzleId));
     }
 
     public void Interact(GameObject interactor)

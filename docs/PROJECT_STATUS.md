@@ -4,6 +4,14 @@
 
 ## Yêu cầu gần nhất
 
+### Điện Trống, mảnh B và save v2 trong 02_HangLinhMach (31/10/2026)
+
+- Theo bước người dùng gửi, mở vách bắc Vườn Rêu thành cửa 4 m, thêm `Area_DrumHall` với sàn hành lang Z=40–46, sàn Điện Trống Z=46–62, vách bao, trần và hai đèn điểm. Vách ngăn ở Z=57 ghép sát `Door` rộng 3 m, có dầm trên cửa để không đi vòng/nhảy qua; kích thước vẫn là blockout cần kiểm tra bằng An và camera.
+- Đặt instance `PF_DrumPuzzle_01` tại `(0,0,54)` trong Gameplay; override trống A/B/C ở X=-3/0/3, Z=-1, Door `(0,1.5,3)` scale `(3,3,0.5)`, RewardDisplay Z=6. Dời bảng gợi ý lên mặt trước vách ngăn ở Z=56,25 để không bị tường che. Thêm `TXT_DrumPuzzleStatus` trên Canvas và gán WorldStateStore của GameSession. Giữ scene `90_TestMechanics` nguyên trạng.
+- Thêm `Pickup_DrumB` làm con scene của RewardDisplay, active trong Edit Mode, layer Interactable, BoxCollider thường và `RelicPickup` với `relic_drum_b`; tắt khối marker B cũ ở instance màn chính. `RelicPickup` chỉ cho nhặt B khi `pz_trong_01` đã solved.
+- `WorldStateStore` giữ tập puzzle solved và khôi phục đồng thời relic/puzzle bằng một event; controller ghi solved trước khi mở cửa và áp lại cửa/bệ từ WorldState khi tải. `SaveData` lên version 2, `SaveService` lưu cả hai tập, khôi phục mảnh B và chuyển bản lưu v1 hợp lệ thành v2 trong bộ nhớ; bản v2 vẫn dùng `save_v1.json` để đọc lại slot cũ. Validation chỉ chấp nhận A/B và ràng buộc B cần puzzle solved. QuestTracker chuyển mục tiêu theo câu đố và mảnh B.
+- Kiểm tra tĩnh: scene có 654 fileID không trùng, 4.283 tham chiếu local đều tồn tại; có đúng một Area_DrumHall, một instance puzzle, một Pickup_DrumB và một status text; `git diff --check` không báo lỗi. Thử `dotnet build` trên csproj do Unity tạo không chạy được vì thiếu `Temp/obj/Assembly-CSharp/project.assets.json`; `dotnet restore` cũng thất bại không có chẩn đoán chi tiết. **Chưa xác nhận Unity biên dịch, Play Mode A-C-B, đường đi/camera, nhặt B, lưu tại trại/F9 hay build**. Cần mở lại scene từ đĩa trong Editor, đợi compile xong rồi chạy các ca này.
+
 ### Prototype câu đố Trống Đồng trong 90_TestMechanics (31/10/2026)
 
 - Theo tệp hướng dẫn người dùng gửi, thêm `DrumPuzzleDefinition`, `DrumPuzzleController`, `DrumInteractable`, `DrumPuzzleReset`, `DrumVisualLabel`; asset `DP_Drum_01` có chuỗi A → C → B, input delay 0,2 s và failure delay 0,7 s. Tiến độ chỉ ở runtime; `ApplySolvedState(bool)` đã có để nối save trong bước sau, chưa nối với `SaveService` hiện tại.

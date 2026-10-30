@@ -10,6 +10,7 @@ public class DrumPuzzleController : MonoBehaviour
     [SerializeField] private GameObject door;
     [SerializeField] private GameObject rewardDisplay;
     [SerializeField] private TMP_Text statusText;
+    [SerializeField] private WorldStateStore worldState;
 
     private int currentIndex;
     private bool busy;
@@ -31,6 +32,21 @@ public class DrumPuzzleController : MonoBehaviour
         }
 
         ApplySolvedState(false);
+    }
+
+    private void OnEnable()
+    {
+        if (worldState != null) worldState.Changed += ApplyWorldState;
+    }
+
+    private void Start() => ApplyWorldState();
+
+    public void ApplyWorldState()
+    {
+        if (worldState == null || !isActiveAndEnabled || definition == null ||
+            door == null || rewardDisplay == null || statusText == null) return;
+
+        ApplySolvedState(worldState.HasSolvedPuzzle(WorldStateStore.DrumPuzzleId));
     }
 
     public bool TryHit(DrumNote note)
@@ -63,6 +79,10 @@ public class DrumPuzzleController : MonoBehaviour
         currentIndex++;
         if (currentIndex == definition.Sequence.Length)
         {
+            State = DrumPuzzleState.Solved;
+            busy = false;
+            if (worldState != null)
+                worldState.TrySolvePuzzle(WorldStateStore.DrumPuzzleId);
             ApplySolvedState(true);
             Debug.Log("Puzzle pz_trong_01 da hoan thanh.", this);
             yield break;
@@ -96,6 +116,7 @@ public class DrumPuzzleController : MonoBehaviour
 
     private void OnDisable()
     {
+        if (worldState != null) worldState.Changed -= ApplyWorldState;
         StopAllCoroutines();
         busy = false;
         if (State != DrumPuzzleState.Solved)

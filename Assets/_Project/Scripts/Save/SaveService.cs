@@ -15,6 +15,7 @@ public class SaveService : MonoBehaviour
     [Header("Scene objects")]
     [SerializeField] private GameObject lanternPickup;
     [SerializeField] private GameObject drumAPickup;
+    [SerializeField] private GameObject drumBPickup;
 
     [Header("Player and checkpoint")]
     [SerializeField] private CharacterController playerController;
@@ -52,7 +53,7 @@ public class SaveService : MonoBehaviour
 
         ready = worldState != null && lantern != null && lantern.isActiveAndEnabled &&
                 campSeal != null && campSeal.isActiveAndEnabled &&
-                lanternPickupComponent != null && drumAPickup != null &&
+                lanternPickupComponent != null && drumAPickup != null && drumBPickup != null &&
                 playerController != null && playerInput != null && campSpawn != null;
 
         if (!ready)
@@ -94,7 +95,8 @@ public class SaveService : MonoBehaviour
         {
             hasLantern = lantern.HasLantern,
             campSealSolved = campSeal.IsSolved,
-            collectedRelics = worldState.ExportRelics()
+            collectedRelics = worldState.ExportRelics(),
+            solvedPuzzles = worldState.ExportSolvedPuzzles()
         };
 
         if (!IsValid(data))
@@ -168,11 +170,12 @@ public class SaveService : MonoBehaviour
             Debug.LogWarning("Đang dùng bản lưu dự phòng.", this);
         }
 
-        worldState.RestoreRelics(data.collectedRelics);
+        worldState.RestoreSnapshot(data.collectedRelics, data.solvedPuzzles);
         lantern.ApplySavedState(data.hasLantern);
         campSeal.ApplySavedState(data.campSealSolved);
         lanternPickupComponent.ApplySavedState(data.hasLantern);
         drumAPickup.SetActive(!worldState.HasRelic(WorldStateStore.DrumA));
+        drumBPickup.SetActive(!worldState.HasRelic(WorldStateStore.DrumB));
 
         bool wasEnabled = playerController.enabled;
         playerController.enabled = false;
@@ -195,6 +198,11 @@ public class SaveService : MonoBehaviour
             }
 
             SaveData candidate = JsonUtility.FromJson<SaveData>(File.ReadAllText(path));
+            if (candidate != null && candidate.version == 1)
+            {
+                candidate.version = 2;
+                candidate.solvedPuzzles = new List<string>();
+            }
             if (!IsValid(candidate))
             {
                 return false;
@@ -212,8 +220,8 @@ public class SaveService : MonoBehaviour
 
     private static bool IsValid(SaveData data)
     {
-        if (data == null || data.version != 1 || data.checkpointId != "cp_trai" ||
-            data.collectedRelics == null)
+        if (data == null || data.version != 2 || data.checkpointId != "cp_trai" ||
+            data.collectedRelics == null || data.solvedPuzzles == null)
         {
             return false;
         }
@@ -221,21 +229,35 @@ public class SaveService : MonoBehaviour
         HashSet<string> uniqueIds = new HashSet<string>(StringComparer.Ordinal);
         foreach (string id in data.collectedRelics)
         {
-            if (id != WorldStateStore.DrumA || !uniqueIds.Add(id))
+            if ((id != WorldStateStore.DrumA && id != WorldStateStore.DrumB) ||
+                !uniqueIds.Add(id))
             {
                 return false;
             }
         }
+
+        HashSet<string> puzzles = new HashSet<string>(StringComparer.Ordinal);
+        foreach (string id in data.solvedPuzzles)
+        {
+            if (id != WorldStateStore.DrumPuzzleId || !puzzles.Add(id))
+                return false;
+        }
+
+        bool drumSolved = puzzles.Contains(WorldStateStore.DrumPuzzleId);
 
         if (data.campSealSolved && !data.hasLantern)
         {
             return false;
         }
 
-        if (uniqueIds.Count > 0 && (!data.hasLantern || !data.campSealSolved))
+        if ((uniqueIds.Count > 0 || drumSolved) &&
+            (!data.hasLantern || !data.campSealSolved))
         {
             return false;
         }
+
+        if (uniqueIds.Contains(WorldStateStore.DrumB) && !drumSolved)
+            return false;
 
         return true;
     }
