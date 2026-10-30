@@ -1,8 +1,23 @@
 # Trạng thái thực tế và điểm tiếp nối
 
-**Cập nhật: 30/10/2026, Asia/Bangkok.** Đây là ảnh chụp từ file dự án và các lượt làm việc trước. Đọc lại file hiện hành trước khi sửa vì người dùng cũng chỉnh trong Unity giữa các lượt chat. Thiết kế đích ở [PROJECT_MEMORY.md](PROJECT_MEMORY.md), nguồn ở [SPEC_INDEX.md](SPEC_INDEX.md).
+**Cập nhật: 31/10/2026, Asia/Bangkok.** Đây là ảnh chụp từ file dự án và các lượt làm việc trước. Đọc lại file hiện hành trước khi sửa vì người dùng cũng chỉnh trong Unity giữa các lượt chat. Thiết kế đích ở [PROJECT_MEMORY.md](PROJECT_MEMORY.md), nguồn ở [SPEC_INDEX.md](SPEC_INDEX.md).
 
 ## Yêu cầu gần nhất
+
+### Mảnh Trống A, HUD mục tiêu và camera hành lang (31/10/2026)
+
+- Theo tệp bước tiếp theo do người dùng gửi, thêm `GameSession` root identity trong `02_HangLinhMach`; gắn `WorldStateStore` giữ tập ID `relic_drum_a/b/c` trong lượt chơi hiện tại và `QuestTracker` suy mục tiêu từ đèn/mảnh trống. ID do yêu cầu mới quy định; chưa có save/Boot và chưa chuyển đổi ID từ thiết kế `fragment_a`.
+- `FragmentA_LocationMarker` trở thành `Pickup_DrumA` tại `(0,1.27,28)`, layer Interactable, BoxCollider thường và `RelicPickup` tham chiếu WorldStateStore; `FragmentA_Pedestal` không đổi. Thêm `TXT_QuestObjective` vào `Canvas_Gameplay`, neo trên phải và nối với QuestTracker. QuestTracker trỏ tới LanternController của An trong `PrototypeRig`.
+- Tìm thấy `PlayerFollowCamera` trong scene override `AvoidObstacles.Enabled = 0` dù mask có Environment. Đã bật lên, đặt radius 0,2 m và near clip MainCamera 0,1 m. Thêm `Ceiling_Passage` có collider Environment, đáy Y=4, che tầm nhìn ra ngoài khi nhìn lên và không cản lối đi.
+- Kiểm tra tĩnh sau sửa: 550 ID scene không trùng, không thiếu tham chiếu local; script GUID khớp `.meta`, các tham chiếu WorldState/Quest/đèn/UI và camera override có mặt. Chưa kiểm tra biên dịch trong Unity, Play Mode nhặt E/focus, camera khi xoay ở mọi vị trí, hay build. Unity Editor đang mở; cần mở lại scene từ đĩa trước khi Play nếu scene đang giữ bản cũ.
+
+### Dựng Trại → Hành lang → Vườn Rêu trong 02_HangLinhMach (31/10/2026)
+
+- Theo yêu cầu mới đã đổi ba Empty `Floor_Camp`, `Floor_Passage`, `Floor_MossGarden` thành sàn Cube có BoxCollider thường, layer Environment, lần lượt 20×1×20 tại z0, 4×1×10 tại z15 và 20×1×20 tại z30; mặt trên Y=0. Tạo vách bao trại/vườn chừa cửa giữa, hai vách hành lang tại x±1,75, thêm trụ cửa và dầm cao chống đi vòng hoặc nhảy qua phong ấn.
+- Giữ An có camera, UI, scanner và đèn đã cấu hình trong `PrototypeRig`, chuyển rig vào Gameplay, dời An tới `(0,0.2,-5)`; bỏ instance An thứ hai chưa cấu hình. `Spawn_Camp` là dấu bố trí, không checkpoint.
+- Đổi placeholder đèn thành `Camp_Interactables`, đặt `LanternPedestal` và instance `PF_LanternPickup` trên bệ; tắt khối vàng giả. Đặt `Seal_CampExit` từ `PF_SealPrototype` tại z18 và nối `progressText` tới `TXT_SealProgress`. Bệ và khối đồng ở Vườn Rêu chỉ đánh dấu vị trí mảnh Trống A, chưa là pickup/nhiệm vụ.
+- Trang trí lối đi bằng 10 cây, 14 đá, 18 bụi và 18 cụm cỏ từ prefab variant A09/A11 đã thử; thêm đá bên lối, đá viền đường, vật liệu nền hang có texture và nền Vườn Rêu nhuộm xanh. Asset gốc không bị chỉnh. Vách dùng vật liệu A09 đã thử. Có thêm 5 đèn tại lửa trại/bệ đèn/phong ấn/vườn/bệ mảnh trống và giảm Directional Light để có tương phản hang. Phần trang trí này là bản dựng cảnh, chưa được nghiệm thu mỹ thuật/performance.
+- Đã kiểm tra tĩnh YAML: 534 object ID không trùng, tham chiếu local không thiếu, ba sàn có BoxCollider, một An, prefab pickup/phong ấn và tham chiếu UI. Unity Editor của dự án đang mở nên chưa chạy Editor batch mode; chưa có ảnh Game View, Play Mode để xác nhận raycast, đường đi, camera, mỹ thuật, FPS hoặc build. Cần mở lại scene từ đĩa trong Editor trước khi Play để tránh ghi đè bởi scene đang mở.
 
 ### Kiểm tra Pickup_Lantern trong 90_TestMechanics (30/10/2026)
 
