@@ -1,0 +1,106 @@
+{
+  "action": "refine",
+  "samples": [
+    {
+      "source": "Assets/A09 - Mines and Cave Set/MInesAndCaveSet/prefabs/Ground/Ground_Mines_A.prefab",
+      "size": {
+        "x": 6.0,
+        "y": 0.11425970494747162,
+        "z": 5.966832160949707
+      },
+      "colliders": 1,
+      "materials": [
+        "M_A09_A_MinesGround | Universal Render Pipeline/Lit"
+      ],
+      "prefab": "Assets/_Project/Prefabs/Environment/A09_Trials/PF_A09_Ground_Trial.prefab",
+      "collisionPolicy": "Source geometry collider",
+      "walkAroundPassed": true,
+      "blockingPassed": true
+    },
+    {
+      "source": "Assets/A09 - Mines and Cave Set/MInesAndCaveSet/prefabs/Wall/Cave_Rocks_A.prefab",
+      "size": {
+        "x": 2.200000762939453,
+        "y": 3.2435474395751953,
+        "z": 1.6998538970947266
+      },
+      "colliders": 1,
+      "materials": [
+        "M_A09_A_MineWalls | Universal Render Pipeline/Lit"
+      ],
+      "prefab": "Assets/_Project/Prefabs/Environment/A09_Trials/PF_A09_Rock_Trial.prefab",
+      "collisionPolicy": "Source geometry collider",
+      "walkAroundPassed": true,
+      "blockingPassed": true
+    },
+    {
+      "source": "Assets/A09 - Mines and Cave Set/MInesAndCaveSet/prefabs/Wall/Cave_Wall_Rocks_A.prefab",
+      "size": {
+        "x": 1.7349014282226562,
+        "y": 3.799999952316284,
+        "z": 0.7620096206665039
+      },
+      "colliders": 1,
+      "materials": [
+        "M_A09_A_MineWalls | Universal Render Pipeline/Lit"
+      ],
+      "prefab": "Assets/_Project/Prefabs/Environment/A09_Trials/PF_A09_Wall_Trial.prefab",
+      "collisionPolicy": "Source geometry collider",
+      "walkAroundPassed": true,
+      "blockingPassed": true
+    },
+    {
+      "source": "Assets/A11 - Ultimate Stylized Nature Pack/FBX/NormalTree_1.fbx",
+      "size": {
+        "x": 2.8318729400634766,
+        "y": 4.799999713897705,
+        "z": 1.9181365966796875
+      },
+      "colliders": 1,
+      "materials": [
+        "M_A11_NormalTree_Bark | Universal Render Pipeline/Lit",
+        "M_A11_NormalTree_Leaves | Universal Render Pipeline/Lit"
+      ],
+      "prefab": "Assets/_Project/Prefabs/Environment/A11_Trials/PF_A11_NormalTree_Trial.prefab",
+      "collisionPolicy": "Trunk capsule only",
+      "walkAroundPassed": true,
+      "blockingPassed": true
+    },
+    {
+      "source": "Assets/A11 - Ultimate Stylized Nature Pack/FBX/Bush_Small.fbx",
+      "size": {
+        "x": 0.9402694702148438,
+        "y": 0.7999999523162842,
+        "z": 0.8525190353393555
+      },
+      "colliders": 0,
+      "materials": [
+        "M_A11_Bush_Leaves | Universal Render Pipeline/Lit"
+      ],
+      "prefab": "Assets/_Project/Prefabs/Environment/A11_Trials/PF_A11_Bush_Trial.prefab",
+      "collisionPolicy": "Decorative foliage: no collider",
+      "walkAroundPassed": true,
+      "blockingPassed": true
+    },
+    {
+      "source": "Assets/A11 - Ultimate Stylized Nature Pack/FBX/Grass_Small.fbx",
+      "size": {
+        "x": 0.41744518280029297,
+        "y": 0.3500000238418579,
+        "z": 0.24647998809814453
+      },
+      "colliders": 0,
+      "materials": [
+        "M_A11_Grass | Universal Render Pipeline/Lit"
+      ],
+      "prefab": "Assets/_Project/Prefabs/Environment/A11_Trials/PF_A11_Grass_Trial.prefab",
+      "collisionPolicy": "Decorative foliage: no collider",
+      "walkAroundPassed": true,
+      "blockingPassed": true
+    }
+  ],
+  "failures": [],
+  "scene": "Assets/_Project/Scenes/93_TestEnvironment.unity",
+  "validation": "Editor CharacterController collision probes; visual Play Mode review is still required before promotion to the main level.",
+  "screenshot": "Logs/EnvironmentTrialOverview.png"
+}
