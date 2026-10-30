@@ -4,6 +4,12 @@
 
 ## Yêu cầu gần nhất
 
+### Prototype câu đố xoay gương trong 90_TestMechanics (31/10/2026)
+
+- Đã thêm `LightPuzzleReceiver`, `MirrorRotator`, `MirrorBeamEmitter` và `PF_MirrorPuzzle_01`. Prefab có nguồn sáng, hai gương với mặt phản xạ và dấu mặt trước, ngọc nhận, cửa thử và bệ thưởng. Tia dùng Raycast qua Default/Environment/Interactable/PuzzleBeam, chặn mặt lưng và vật cản, giới hạn 3 phản xạ/40 m. Ngọc cần nhận sáng liên tục 1 giây; mất tia trước khi giải thì tiến độ về 0, tạm dừng thì giữ nguyên. Sau khi giải, gương khóa tương tác và cửa/bệ đổi trạng thái.
+- Đã đặt instance `Puzzle_Mirror_01` ở gốc `90_TestMechanics`, thêm `TXT_MirrorStatus` trong Canvas, đổi Detection Mask trên `PF_An_Prototype` thành 2313 để thấy gương, tạo ba material URP/Unlit. Gương khởi đầu nấc 1/2; nấc lời giải là 0/0. Dời `Wall_FocusTest` từ X=4,21429 sang X=-7 để collider cũ không chặn đoạn tia cuối theo bố cục mới.
+- Kiểm tra tĩnh: prefab 52 fileID và scene 93 fileID không trùng, tham chiếu local mới hợp lệ; tính pháp tuyến/đường phản xạ tâm cho 16 tổ hợp chỉ cho cặp 0/0. `git diff --check` không báo lỗi. **Chưa xác nhận Unity biên dịch hoặc Play Mode**; cần thử tia thực tế, 16 cặp nấc, tường chắn, mặt lưng, reset tiến độ, pause và hiển thị UI trong Editor. Chưa nối scene chính, mảnh C, WorldStateStore hoặc save.
+
 ### Điện Trống, mảnh B và save v2 trong 02_HangLinhMach (31/10/2026)
 
 - Theo bước người dùng gửi, mở vách bắc Vườn Rêu thành cửa 4 m, thêm `Area_DrumHall` với sàn hành lang Z=40–46, sàn Điện Trống Z=46–62, vách bao, trần và hai đèn điểm. Vách ngăn ở Z=57 ghép sát `Door` rộng 3 m, có dầm trên cửa để không đi vòng/nhảy qua; kích thước vẫn là blockout cần kiểm tra bằng An và camera.

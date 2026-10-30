@@ -545,7 +545,7 @@ MonoBehaviour:
   cameraRayDistance: 15
   detectionMask:
     serializedVersion: 2
-    m_Bits: 265
+    m_Bits: 2313
 --- !u!114 &1061561105469168020
 MonoBehaviour:
   m_ObjectHideFlags: 0
