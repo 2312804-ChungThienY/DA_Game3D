@@ -1,46 +1,70 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PlayerInput))]
 public class LanternController : MonoBehaviour
 {
+    [Header("References")]
     [SerializeField] private GameObject lanternVisual;
+    [SerializeField] private Light focusLight;
+    [SerializeField] private Camera viewCamera;
+    [SerializeField] private TMP_Text energyText;
 
-    private PlayerInput playerInput;
+    [Header("Energy")]
+    [SerializeField] private float maxEnergy = 100f;
+    [SerializeField] private float focusCost = 12f;
+    [SerializeField] private float recoveryRate = 20f;
+    [SerializeField] private float recoveryDelay = 1f;
+
     private InputAction toggleAction;
+    private InputAction focusAction;
 
     private bool hasLantern;
     private bool lanternOn;
+    private bool exhaustedUntilRelease;
+
+    private float energy;
+    private float timeSinceFocus;
 
     public bool HasLantern => hasLantern;
     public bool IsLanternOn => hasLantern && lanternOn;
+    public bool IsFocusing { get; private set; }
 
     private void Awake()
     {
-        playerInput = GetComponent<PlayerInput>();
+        energy = maxEnergy;
+        timeSinceFocus = recoveryDelay;
 
-        if (lanternVisual == null)
+        if (lanternVisual == null ||
+            focusLight == null ||
+            viewCamera == null ||
+            energyText == null)
         {
             Debug.LogError(
-                $"{name}: Chưa gán Lantern Visual.", this);
+                $"{name}: LanternController thiếu tham chiếu.",
+                this);
 
             enabled = false;
-            return;
         }
 
-        ApplyVisual();
+        RefreshVisuals();
     }
 
     private void Start()
     {
-        // Đọc action từ bộ input thực tế của nhân vật.
-        toggleAction = playerInput.actions.FindAction(
+        PlayerInput input = GetComponent<PlayerInput>();
+
+        toggleAction = input.actions.FindAction(
             "ToggleLantern", false);
 
-        if (toggleAction == null)
+        focusAction = input.actions.FindAction(
+            "Focus", false);
+
+        if (toggleAction == null || focusAction == null)
         {
             Debug.LogError(
-                $"{name}: Không tìm thấy action ToggleLantern.",
+                $"{name}: Thiếu action ToggleLantern hoặc Focus.",
                 this);
 
             enabled = false;
@@ -49,19 +73,76 @@ public class LanternController : MonoBehaviour
 
     private void Update()
     {
-        if (!hasLantern ||
-            !Application.isFocused ||
+        IsFocusing = false;
+
+        // Không tiêu hao hoặc hồi năng lượng khi gameplay bị khóa.
+        if (!Application.isFocused ||
             Time.timeScale == 0f ||
             toggleAction == null ||
-            !toggleAction.enabled)
+            focusAction == null ||
+            !toggleAction.enabled ||
+            !focusAction.enabled)
         {
+            RefreshVisuals();
             return;
         }
 
-        if (toggleAction.WasPressedThisFrame())
+        if (hasLantern && toggleAction.WasPressedThisFrame())
         {
             lanternOn = !lanternOn;
-            ApplyVisual();
+        }
+
+        bool focusHeld = focusAction.IsPressed();
+
+        // Hết năng lượng phải thả chuột trước khi Focus lại.
+        if (!focusHeld || !IsLanternOn)
+        {
+            exhaustedUntilRelease = false;
+        }
+
+        IsFocusing =
+            IsLanternOn &&
+            focusHeld &&
+            !exhaustedUntilRelease &&
+            energy > 0f;
+
+        if (IsFocusing)
+        {
+            timeSinceFocus = 0f;
+            energy = Mathf.Max(
+                0f, energy - focusCost * Time.deltaTime);
+
+            if (energy <= 0f)
+            {
+                IsFocusing = false;
+                exhaustedUntilRelease = true;
+
+                Debug.Log(
+                    "Hết năng lượng. Thả chuột phải để chờ hồi.",
+                    this);
+            }
+        }
+        else if (hasLantern)
+        {
+            timeSinceFocus += Time.deltaTime;
+
+            if (timeSinceFocus >= recoveryDelay)
+            {
+                energy = Mathf.Min(
+                    maxEnergy,
+                    energy + recoveryRate * Time.deltaTime);
+            }
+        }
+
+        RefreshVisuals();
+    }
+
+    private void LateUpdate()
+    {
+        if (IsFocusing && focusLight != null && viewCamera != null)
+        {
+            // Nguồn sáng ở đèn, hướng chiếu theo camera.
+            focusLight.transform.rotation = viewCamera.transform.rotation;
         }
     }
 
@@ -74,33 +155,55 @@ public class LanternController : MonoBehaviour
 
         hasLantern = true;
         lanternOn = true;
-        ApplyVisual();
+        energy = maxEnergy;
 
-        Debug.Log(
-            "Đã nhận Lồng Đèn Sen. Nhấn F để bật/tắt.",
-            this);
-
+        RefreshVisuals();
         return true;
     }
 
-    private void OnEnable()
-    {
-        ApplyVisual();
-    }
-
-    private void OnDisable()
-    {
-        if (lanternVisual != null)
-        {
-            lanternVisual.SetActive(false);
-        }
-    }
-
-    private void ApplyVisual()
+    private void RefreshVisuals()
     {
         if (lanternVisual != null)
         {
             lanternVisual.SetActive(IsLanternOn);
+        }
+
+        if (focusLight != null)
+        {
+            focusLight.enabled = IsLanternOn && IsFocusing;
+        }
+
+        if (energyText != null)
+        {
+            if (!hasLantern)
+            {
+                energyText.text = string.Empty;
+            }
+            else
+            {
+                string state = exhaustedUntilRelease
+                    ? "Het nang luong - tha chuot phai"
+                    : IsFocusing ? "Dang Focus" : "Giu chuot phai de Focus";
+
+                energyText.text =
+                    $"Den: {Mathf.CeilToInt(energy)}/" +
+                    $"{Mathf.CeilToInt(maxEnergy)}\n{state}";
+            }
+        }
+    }
+
+    private void OnDisable()
+    {
+        IsFocusing = false;
+
+        if (focusLight != null)
+        {
+            focusLight.enabled = false;
+        }
+
+        if (lanternVisual != null)
+        {
+            lanternVisual.SetActive(false);
         }
     }
 }
