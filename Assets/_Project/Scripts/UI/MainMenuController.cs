@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class MainMenuController : MonoBehaviour
 {
@@ -9,6 +10,9 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private Button quitButton;
     [SerializeField] private GameObject newGameConfirmPanel;
     [SerializeField] private TMP_Text statusText;
+    [SerializeField] private Button settingsButton;
+    [SerializeField] private GameObject audioSettingsPanel;
+    private bool settingsOpen;
     private bool busy;
     private bool canContinue;
     private bool confirmationOpen;
@@ -20,7 +24,7 @@ public class MainMenuController : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         if (newGameButton == null || continueButton == null || quitButton == null ||
-            newGameConfirmPanel == null || statusText == null)
+            newGameConfirmPanel == null || statusText == null || settingsButton == null || audioSettingsPanel == null)
         {
             Debug.LogError("MainMenuController: assign buttons, confirmation panel and text.", this);
             enabled = false;
@@ -30,6 +34,7 @@ public class MainMenuController : MonoBehaviour
     private void Start()
     {
         newGameConfirmPanel.SetActive(false);
+        audioSettingsPanel.SetActive(false);
         RefreshContinue();
     }
 
@@ -45,14 +50,15 @@ public class MainMenuController : MonoBehaviour
     private void SetBusy(bool value)
     {
         busy = value;
-        newGameButton.interactable = !busy && !confirmationOpen;
-        continueButton.interactable = !busy && !confirmationOpen && canContinue;
-        quitButton.interactable = !busy && !confirmationOpen;
+        newGameButton.interactable = !busy && !confirmationOpen && !settingsOpen;
+        continueButton.interactable = !busy && !confirmationOpen && !settingsOpen && canContinue;
+        quitButton.interactable = !busy && !confirmationOpen && !settingsOpen;
+        settingsButton.interactable = !busy && !confirmationOpen && !settingsOpen;
     }
 
     public void NewGame()
     {
-        if (busy || confirmationOpen) return;
+        if (busy || confirmationOpen || settingsOpen) return;
         if (GameSaveStorage.HasAnySaveFiles)
         {
             confirmationOpen = true;
@@ -64,7 +70,7 @@ public class MainMenuController : MonoBehaviour
 
     public void ConfirmNewGame()
     {
-        if (busy) return;
+        if (busy || settingsOpen) return;
         confirmationOpen = false;
         newGameConfirmPanel.SetActive(false);
         SetBusy(true);
@@ -86,7 +92,7 @@ public class MainMenuController : MonoBehaviour
 
     public void ContinueGame()
     {
-        if (busy || confirmationOpen) return;
+        if (busy || confirmationOpen || settingsOpen) return;
         if (!GameSaveStorage.TryReadBest(out SaveData data, out bool backup))
         {
             RefreshContinue();
@@ -102,9 +108,32 @@ public class MainMenuController : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (settingsOpen && !busy && Keyboard.current != null &&
+            Keyboard.current.escapeKey.wasPressedThisFrame)
+            CloseAudioSettings();
+    }
+
+    public void OpenAudioSettings()
+    {
+        if (busy || confirmationOpen || settingsOpen) return;
+        settingsOpen = true;
+        audioSettingsPanel.SetActive(true);
+        SetBusy(false);
+    }
+
+    public void CloseAudioSettings()
+    {
+        if (busy) return;
+        settingsOpen = false;
+        audioSettingsPanel.SetActive(false);
+        SetBusy(false);
+    }
+
     public void QuitGame()
     {
-        if (busy || confirmationOpen) return;
+        if (busy || confirmationOpen || settingsOpen) return;
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #else

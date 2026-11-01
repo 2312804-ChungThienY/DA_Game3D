@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using StarterAssets;
 using TMPro;
 using UnityEngine;
@@ -21,6 +21,8 @@ public class PauseMenuController : MonoBehaviour
     [SerializeField] private GameObject returnConfirmPanel;
     [SerializeField] private CanvasGroup pauseCanvasGroup;
     [SerializeField] private TMP_Text statusText;
+
+    [SerializeField] private GameObject audioSettingsPanel;
 
     private InputAction pauseAction;
     private InputActionMap pausedGameplayMap;
@@ -47,7 +49,7 @@ public class PauseMenuController : MonoBehaviour
             starterInputs = playerInput.GetComponent<StarterAssetsInputs>();
 
         ready = playerInput != null && starterInputs != null && vitals != null && worldState != null &&
-            pausePanel != null && returnConfirmPanel != null && pauseCanvasGroup != null &&
+            pausePanel != null && returnConfirmPanel != null && pauseCanvasGroup != null && audioSettingsPanel != null &&
             pausePanel != gameObject && !transform.IsChildOf(pausePanel.transform);
 
         if (!ready)
@@ -86,7 +88,8 @@ public class PauseMenuController : MonoBehaviour
         if (isPaused)
         {
             if (resuming) return;
-            if (returnConfirmPanel.activeSelf) CancelReturnToMenu();
+            if (audioSettingsPanel.activeSelf) CloseAudioSettings();
+            else if (returnConfirmPanel.activeSelf) CancelReturnToMenu();
             else ResumeGameplay();
         }
         else if (CanPause()) PauseGameplay();
@@ -235,26 +238,57 @@ public class PauseMenuController : MonoBehaviour
         audioOwned = false;
     }
 
+    public void OpenAudioSettings()
+    {
+        if (!ready || !isPaused || resuming || leaving || returnConfirmPanel.activeSelf) return;
+        audioSettingsPanel.SetActive(true);
+        RefreshSelectableAvailability();
+        SelectFirst(false);
+    }
+
+    public void CloseAudioSettings()
+    {
+        if (!ready || resuming || leaving) return;
+        audioSettingsPanel.SetActive(false);
+        RefreshSelectableAvailability();
+        SelectFirst(false);
+    }
+
     private void SetReturnConfirmation(bool open)
     {
         if (returnConfirmPanel == null) return;
         returnConfirmPanel.SetActive(open);
-        if (pauseSelectables == null) return;
+        if (open && audioSettingsPanel != null) audioSettingsPanel.SetActive(false);
+        RefreshSelectableAvailability();
+    }
+
+    private void RefreshSelectableAvailability()
+    {
+        if (pauseSelectables == null || returnConfirmPanel == null) return;
+        bool confirm = returnConfirmPanel.activeSelf;
+        bool settings = audioSettingsPanel != null && audioSettingsPanel.activeSelf && !confirm;
         foreach (Selectable selectable in pauseSelectables)
         {
-            if (selectable != null &&
-                !selectable.transform.IsChildOf(returnConfirmPanel.transform))
-                selectable.interactable = !open;
+            if (selectable == null) continue;
+            bool inConfirm = selectable.transform.IsChildOf(returnConfirmPanel.transform);
+            bool inSettings = audioSettingsPanel != null &&
+                selectable.transform.IsChildOf(audioSettingsPanel.transform);
+            selectable.interactable = confirm ? inConfirm : settings ? inSettings : !inConfirm && !inSettings;
         }
     }
 
     private void SelectFirst(bool confirmation)
     {
         if (EventSystem.current == null || pauseSelectables == null) return;
+        bool settings = !confirmation && audioSettingsPanel != null && audioSettingsPanel.activeSelf;
         foreach (Selectable selectable in pauseSelectables)
         {
-            if (selectable != null && selectable.isActiveAndEnabled && selectable.IsInteractable() &&
-                selectable.transform.IsChildOf(returnConfirmPanel.transform) == confirmation)
+            if (selectable == null || !selectable.isActiveAndEnabled || !selectable.IsInteractable()) continue;
+            bool inConfirm = selectable.transform.IsChildOf(returnConfirmPanel.transform);
+            bool inSettings = audioSettingsPanel != null &&
+                selectable.transform.IsChildOf(audioSettingsPanel.transform);
+            bool desired = confirmation ? inConfirm : settings ? inSettings : !inConfirm && !inSettings;
+            if (desired)
             {
                 EventSystem.current.SetSelectedGameObject(selectable.gameObject);
                 return;
@@ -265,6 +299,8 @@ public class PauseMenuController : MonoBehaviour
     private void HidePanels()
     {
         SetReturnConfirmation(false);
+        if (audioSettingsPanel != null) audioSettingsPanel.SetActive(false);
+        RefreshSelectableAvailability();
         if (pausePanel != null) pausePanel.SetActive(false);
         if (pauseCanvasGroup != null) pauseCanvasGroup.interactable = true;
         SetStatus(string.Empty);

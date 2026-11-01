@@ -1,0 +1,15 @@
+{
+    "phase": "read",
+    "checks": [
+        "Boot/menu and SceneAudio initialized",
+        "preferences persisted across standalone launches",
+        "Native mixer MasterVolume matches preferences persisted across standalone launches",
+        "Native mixer MusicVolume matches preferences persisted across standalone launches",
+        "Native mixer SFXVolume matches preferences persisted across standalone launches"
+    ],
+    "failures": [],
+    "runtimeErrors": [],
+    "notes": [
+        "Original user audio preferences restored; no DeleteAll used."
+    ]
+}

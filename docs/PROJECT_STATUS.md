@@ -1,8 +1,15 @@
 # Trạng thái thực tế và điểm tiếp nối
 
-**Cập nhật: 31/10/2026, Asia/Bangkok.** Đây là ảnh chụp từ file dự án và các lượt làm việc trước. Đọc lại file hiện hành trước khi sửa vì người dùng cũng chỉnh trong Unity giữa các lượt chat. Thiết kế đích ở [PROJECT_MEMORY.md](PROJECT_MEMORY.md), nguồn ở [SPEC_INDEX.md](SPEC_INDEX.md).
+**Cập nhật: 02/11/2026, Asia/Bangkok.** Đây là ảnh chụp từ file dự án và các lượt làm việc trước. Đọc lại file hiện hành trước khi sửa vì người dùng cũng chỉnh trong Unity giữa các lượt chat. Thiết kế đích ở [PROJECT_MEMORY.md](PROJECT_MEMORY.md), nguồn ở [SPEC_INDEX.md](SPEC_INDEX.md).
 
 ## Yêu cầu gần nhất
+
+### Cài đặt âm lượng menu/pause (02/11/2026)
+
+- Đã tích hợp gói Audio Settings vào `01_MainMenu` và `02_HangLinhMach`: panel tiếng Việt, ba slider/phần trăm, Mặc định/Đóng, SceneAudio và mixer dùng chung; bước chân/tiếp đất của An đi qua SFX. Giữ GUID, fallback StarterAssetsInputs và SaveData v4; không sửa combat/né. Checkpoint trước sửa: `ae01a35`.
+- Windows x64 Development build thành công, không lỗi. Hai lượt chạy đạt 35 + 5 kiểm tra lưu/cấu hình/pause, không lỗi runtime; hash tiến trình không đổi và prefs âm thanh ban đầu đã khôi phục. Xem [AUDIO_SETTINGS.md](AUDIO_SETTINGS.md), báo cáo và ảnh.
+- Còn nghe âm thật, nhấn Esc và kéo chuột trực tiếp. Hai scene chưa đặt nhạc nền/nguồn trống/cửa/địch. Cảnh báo build chủ yếu từ compute shader AI Inference có sẵn, chưa xử lý trong công việc âm lượng.
+- Workspace hiện tại: `E:\DoAnGame3D\Doan_Game3D`; đường dẫn cũ có dấu không còn tồn tại.
 
 ### Sửa lỗi dựng NavMesh lúc chạy (31/10/2026)
 

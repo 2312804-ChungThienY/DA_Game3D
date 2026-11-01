@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Audio;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 #endif
@@ -31,6 +32,8 @@ namespace StarterAssets
 #endif
     public class ThirdPersonController : MonoBehaviour
     {
+        public AudioMixerGroup SfxOutput;
+
         [Header("Player")]
         [Tooltip("Move speed of the character in m/s")]
         public float MoveSpeed = 2.0f;
@@ -585,22 +588,18 @@ namespace StarterAssets
 
         private void OnFootstep(AnimationEvent animationEvent)
         {
-            if (animationEvent.animatorClipInfo.weight > 0.5f)
-            {
-                if (FootstepAudioClips.Length > 0)
-                {
-                    var index = Random.Range(0, FootstepAudioClips.Length);
-                    AudioSource.PlayClipAtPoint(FootstepAudioClips[index], transform.TransformPoint(_controller.center), FootstepAudioVolume);
-                }
-            }
+            if (animationEvent.animatorClipInfo.weight <= 0.5f ||
+                FootstepAudioClips == null || FootstepAudioClips.Length == 0) return;
+            int index = Random.Range(0, FootstepAudioClips.Length);
+            RoutedAudio.PlayClipAtPoint(FootstepAudioClips[index],
+                transform.TransformPoint(_controller.center), FootstepAudioVolume, SfxOutput);
         }
 
         private void OnLand(AnimationEvent animationEvent)
         {
             if (animationEvent.animatorClipInfo.weight > 0.5f)
-            {
-                AudioSource.PlayClipAtPoint(LandingAudioClip, transform.TransformPoint(_controller.center), FootstepAudioVolume);
-            }
+                RoutedAudio.PlayClipAtPoint(LandingAudioClip,
+                    transform.TransformPoint(_controller.center), FootstepAudioVolume, SfxOutput);
         }
     }
 }

@@ -1,0 +1,10 @@
+{
+    "action": "build-player",
+    "checks": [
+        "01_MainMenu: unique active service, shared mixer, inactive wired panel, three sliders, percentage labels and single button callbacks validated.",
+        "02_HangLinhMach: unique active service, shared mixer, inactive wired panel, three sliders, percentage labels and single button callbacks validated.",
+        "Mixer exposed names validated; SaveData version remains 4",
+        "Windows build: Succeeded, errors=0, warnings=0"
+    ],
+    "failures": []
+}
