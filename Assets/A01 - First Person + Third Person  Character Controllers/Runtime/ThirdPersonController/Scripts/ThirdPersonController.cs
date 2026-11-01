@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 #endif
@@ -8,6 +8,23 @@ using UnityEngine.InputSystem;
 
 namespace StarterAssets
 {
+    public interface IDodgeVitals
+    {
+        bool IsDead { get; }
+        void SetDodgeInvulnerability(float startsAt, float endsAt);
+        void ClearDodgeInvulnerability();
+    }
+
+    public interface IDodgeStamina
+    {
+        bool TrySpend(float amount);
+    }
+
+    public interface IPlayerAttackState
+    {
+        bool IsAttacking { get; }
+    }
+
     [RequireComponent(typeof(CharacterController))]
 #if ENABLE_INPUT_SYSTEM
     [RequireComponent(typeof(PlayerInput))]
@@ -75,6 +92,29 @@ namespace StarterAssets
         [Tooltip("For locking the camera position on all axis")]
         public bool LockCameraPosition = false;
 
+        [Header("Dodge")]
+        [Min(0.01f)] public float DodgeDuration = 0.45f;
+        [Min(0f)] public float DodgeStaminaCost = 25f;
+        [Min(0f)] public float DodgeCooldown = 0.65f;
+        [Min(0f)] public float DodgeSpeed = 6f;
+        [Min(0f)] public float DodgeInvulnerableStart = 0.10f;
+        [Min(0f)] public float DodgeInvulnerableEnd = 0.30f;
+
+        private IDodgeVitals _vitals;
+        private IDodgeStamina _stamina;
+        private IPlayerAttackState _combatController;
+        private bool _isDodging;
+        private bool _resetHorizontalVelocity;
+        private Vector3 _dodgeDirection;
+        private float _dodgeStartedAt;
+        private float _dodgeEndsAt;
+        private float _nextDodgeAllowedAt = float.NegativeInfinity;
+#if ENABLE_INPUT_SYSTEM
+        private InputAction _dodgeAction;
+#endif
+
+        public bool IsDodging => _isDodging;
+
         // cinemachine
         private float _cinemachineTargetYaw;
         private float _cinemachineTargetPitch;
@@ -134,6 +174,12 @@ namespace StarterAssets
 
         private void Start()
         {
+            if (CinemachineCameraTarget == null)
+            {
+                Debug.LogError($"{name}: Missing CinemachineCameraTarget.", this);
+                enabled = false;
+                return;
+            }
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
             
             _hasAnimator = TryGetComponent(out _animator);
@@ -145,6 +191,30 @@ namespace StarterAssets
 			Debug.LogError( "Starter Assets package is missing dependencies. Please use Tools/Starter Assets/Reinstall Dependencies to fix it");
 #endif
 
+            _vitals = GetComponent<IDodgeVitals>();
+            _stamina = GetComponent<IDodgeStamina>();
+            _combatController = GetComponent<IPlayerAttackState>();
+
+            if (_input == null || _mainCamera == null || CinemachineCameraTarget == null)
+            {
+                Debug.LogError(
+                    $"{name}: Check StarterAssetsInputs, MainCamera and camera target.", this);
+                enabled = false;
+                return;
+            }
+
+            // Other scenes still use this Starter Assets motor without combat components.
+            // They retain normal locomotion; dodge is available only where both are present.
+
+#if ENABLE_INPUT_SYSTEM
+            _dodgeAction = _playerInput.actions.FindAction("Dodge", false);
+            if (_dodgeAction == null)
+            {
+                Debug.LogWarning($"{name}: Missing Dodge action; normal movement still works.", this);
+            }
+#endif
+
+            _isDodging = false;
             AssignAnimationIDs();
 
             // reset our timeouts on start
@@ -156,14 +226,141 @@ namespace StarterAssets
         {
             _hasAnimator = TryGetComponent(out _animator);
 
-            JumpAndGravity();
+            if (!Application.isFocused || (_vitals != null && _vitals.IsDead) || !_controller.enabled)
+            {
+                CancelDodge();
+                return;
+            }
+
+            // Time.time and dodge movement freeze while paused.
+            if (Time.timeScale <= 0f) return;
+
+#if ENABLE_INPUT_SYSTEM
+            if (!_playerInput.isActiveAndEnabled || !_playerInput.inputIsActive ||
+                _playerInput.currentActionMap == null ||
+                !_playerInput.currentActionMap.enabled)
+            {
+                CancelDodge();
+                return;
+            }
+
+            if (_dodgeAction != null && !_dodgeAction.enabled)
+            {
+                CancelDodge();
+                return;
+            }
+#endif
+
             GroundedCheck();
-            Move();
+
+#if ENABLE_INPUT_SYSTEM
+            if (_dodgeAction != null && _dodgeAction.enabled &&
+                _dodgeAction.WasPressedThisFrame())
+            {
+                TryStartDodge();
+            }
+#endif
+
+            if (_isDodging || (_combatController != null && _combatController.IsAttacking))
+                _input.jump = false;
+            JumpAndGravity();
+
+            // Exactly one movement branch runs per frame.
+            if (_isDodging)
+                MoveDodge();
+            else
+                Move();
         }
 
         private void LateUpdate()
         {
-            CameraRotation();
+            if (_input != null && (_vitals == null || !_vitals.IsDead) &&
+                Application.isFocused && Time.timeScale > 0f)
+            {
+                CameraRotation();
+            }
+        }
+
+        private bool TryStartDodge()
+        {
+            if (_vitals == null || _stamina == null || _isDodging ||
+                (_combatController != null && _combatController.IsAttacking) ||
+                !Grounded || _verticalVelocity > 0f ||
+                Time.time < _nextDodgeAllowedAt || _vitals.IsDead)
+            {
+                return false;
+            }
+
+            if (!_stamina.TrySpend(DodgeStaminaCost)) return false;
+
+            Vector3 inputDirection = new Vector3(_input.move.x, 0f, _input.move.y);
+            _dodgeDirection = inputDirection.sqrMagnitude > 0.0001f
+                ? Quaternion.Euler(0f, _mainCamera.transform.eulerAngles.y, 0f) * inputDirection.normalized
+                : transform.forward;
+
+            _dodgeDirection.y = 0f;
+            _dodgeDirection.Normalize();
+            transform.rotation = Quaternion.LookRotation(_dodgeDirection, Vector3.up);
+            _targetRotation = transform.eulerAngles.y;
+            _rotationVelocity = 0f;
+
+            _isDodging = true;
+            _dodgeStartedAt = Time.time;
+            _dodgeEndsAt = _dodgeStartedAt + Mathf.Max(0.01f, DodgeDuration);
+            _nextDodgeAllowedAt = _dodgeStartedAt + Mathf.Max(DodgeCooldown, DodgeDuration);
+
+            float invulnerableStart = Mathf.Clamp(DodgeInvulnerableStart, 0f, DodgeDuration);
+            float invulnerableEnd = Mathf.Clamp(DodgeInvulnerableEnd, invulnerableStart, DodgeDuration);
+
+            _vitals.SetDodgeInvulnerability(
+                _dodgeStartedAt + invulnerableStart,
+                _dodgeStartedAt + invulnerableEnd);
+
+            _input.jump = false;
+            _speed = 0f;
+            return true;
+        }
+
+        private void MoveDodge()
+        {
+            // Integrate only the portion of this frame inside the dodge interval.
+            // A long frame cannot extend dodge travel beyond DodgeDuration.
+            float dodgeDelta = Mathf.Max(0f,
+                Mathf.Min(Time.time, _dodgeEndsAt) -
+                Mathf.Max(Time.time - Time.deltaTime, _dodgeStartedAt));
+
+            Vector3 displacement = _dodgeDirection * DodgeSpeed * dodgeDelta;
+            displacement.y = _verticalVelocity * Time.deltaTime;
+            _controller.Move(displacement);
+
+            if (_hasAnimator)
+            {
+                // No new animation parameters or roll clips are required yet.
+                _animator.SetFloat(_animIDSpeed, 0f);
+                _animator.SetFloat(_animIDMotionSpeed, 1f);
+            }
+
+            if (Time.time >= _dodgeEndsAt) CancelDodge();
+        }
+
+        private void CancelDodge()
+        {
+            if (_vitals != null) _vitals.ClearDodgeInvulnerability();
+
+            if (!_isDodging) return;
+
+            _isDodging = false;
+            _resetHorizontalVelocity = true;
+            _speed = 0f;
+            _animationBlend = 0f;
+            _rotationVelocity = 0f;
+            _jumpTimeoutDelta = JumpTimeout;
+            if (_input != null) _input.jump = false;
+        }
+
+        private void OnDisable()
+        {
+            CancelDodge();
         }
 
         private void AssignAnimationIDs()
@@ -213,6 +410,20 @@ namespace StarterAssets
 
         private void Move()
         {
+            if (_combatController != null && _combatController.IsAttacking)
+            {
+                _speed = 0f;
+                _animationBlend = 0f;
+                _rotationVelocity = 0f;
+                _controller.Move(new Vector3(0f, _verticalVelocity, 0f) * Time.deltaTime);
+                if (_hasAnimator)
+                {
+                    _animator.SetFloat(_animIDSpeed, 0f);
+                    _animator.SetFloat(_animIDMotionSpeed, 1f);
+                }
+                return;
+            }
+
             // set target speed based on move speed, sprint speed and if sprint is pressed
             float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
 
@@ -223,7 +434,10 @@ namespace StarterAssets
             if (_input.move == Vector2.zero) targetSpeed = 0.0f;
 
             // a reference to the players current horizontal velocity
-            float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
+            float currentHorizontalSpeed = _resetHorizontalVelocity
+                ? 0f
+                : new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
+            _resetHorizontalVelocity = false;
 
             float speedOffset = 0.1f;
             float inputMagnitude = _input.analogMovement ? _input.move.magnitude : 1f;
@@ -300,7 +514,7 @@ namespace StarterAssets
                 }
 
                 // Jump
-                if (_input.jump && _jumpTimeoutDelta <= 0.0f)
+                if (!_isDodging && _input.jump && _jumpTimeoutDelta <= 0.0f)
                 {
                     // the square root of H * -2 * G = how much velocity needed to reach desired height
                     _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);

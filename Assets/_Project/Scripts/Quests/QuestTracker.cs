@@ -46,9 +46,17 @@ public class QuestTracker : MonoBehaviour
         {
             objective = "Guong da giai.\nNhan Manh Trong C tren be thuong.";
         }
+        else if (!worldState.HasDefeatedEnemy(WorldStateStore.GuardianId))
+        {
+            objective = "Tien vao Dan Kim Quy.\nDanh bai Ho ve Da.";
+        }
+        else if (!worldState.IsRelicRestored)
+        {
+            objective = "Ho ve da bi danh bai.\nPhuc dung Trong Dong tren be.";
+        }
         else
         {
-            objective = "Da nhan du 3 manh trong.\nTien den Dan Kim Quy.";
+            objective = "Da hoan thanh chuong Kim Quy.";
         }
 
         string text = $"MUC TIEU\n{objective}\nManh trong: {worldState.RelicCount}/3";

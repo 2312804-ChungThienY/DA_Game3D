@@ -71,6 +71,8 @@ public class PlayerHealthPresenter : MonoBehaviour
         }
 
         Refresh();
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         Debug.Log("An đã chết. Gameplay đã bị khóa.", this);
     }
 }

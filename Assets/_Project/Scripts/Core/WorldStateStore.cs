@@ -9,15 +9,33 @@ public class WorldStateStore : MonoBehaviour
     public const string DrumC = "relic_drum_c";
     public const string DrumPuzzleId = "pz_trong_01";
     public const string MirrorPuzzleId = "pz_guong_01";
+    public const string GuardianId = "guardian_01";
 
     private readonly HashSet<string> collectedRelics =
         new HashSet<string>(StringComparer.Ordinal);
     private readonly HashSet<string> solvedPuzzles =
         new HashSet<string>(StringComparer.Ordinal);
+    private readonly HashSet<string> defeatedEnemies =
+        new HashSet<string>(StringComparer.Ordinal);
+    private bool relicRestored;
 
     public event Action Changed;
 
     public int RelicCount => collectedRelics.Count;
+    public bool IsRelicRestored => relicRestored;
+    public bool ChapterPrerequisitesMet =>
+        HasRelic(DrumA) && HasRelic(DrumB) && HasRelic(DrumC) &&
+        HasSolvedPuzzle(DrumPuzzleId) && HasSolvedPuzzle(MirrorPuzzleId) &&
+        HasDefeatedEnemy(GuardianId);
+    public bool CanRestoreRelic => !relicRestored && ChapterPrerequisitesMet;
+
+    public bool TryRestoreRelic()
+    {
+        if (!CanRestoreRelic) return false;
+        relicRestored = true;
+        Changed?.Invoke();
+        return true;
+    }
 
     public static bool IsValidRelicId(string id)
     {
@@ -30,6 +48,22 @@ public class WorldStateStore : MonoBehaviour
     }
 
     public bool HasSolvedPuzzle(string id) => solvedPuzzles.Contains(id);
+    public bool HasDefeatedEnemy(string id) => defeatedEnemies.Contains(id);
+
+    public bool TryMarkEnemyDefeated(string id)
+    {
+        if (id != GuardianId)
+        {
+            Debug.LogError($"ID địch độc nhất không hợp lệ: {id}", this);
+            return false;
+        }
+
+        if (!defeatedEnemies.Add(id)) return false;
+        Changed?.Invoke();
+        return true;
+    }
+
+    public List<string> ExportDefeatedEnemies() => new List<string>(defeatedEnemies);
 
     public bool TrySolvePuzzle(string id)
     {
@@ -46,10 +80,13 @@ public class WorldStateStore : MonoBehaviour
 
     public List<string> ExportSolvedPuzzles() => new List<string>(solvedPuzzles);
 
-    public void RestoreSnapshot(List<string> relicIds, List<string> puzzleIds)
+    public void RestoreSnapshot(List<string> relicIds, List<string> puzzleIds,
+        List<string> defeatedIds = null, bool restored = false)
     {
         collectedRelics.Clear();
         solvedPuzzles.Clear();
+        defeatedEnemies.Clear();
+        relicRestored = restored;
 
         if (relicIds != null)
             foreach (string id in relicIds)
@@ -58,6 +95,10 @@ public class WorldStateStore : MonoBehaviour
         if (puzzleIds != null)
             foreach (string id in puzzleIds)
                 if (id == DrumPuzzleId || id == MirrorPuzzleId) solvedPuzzles.Add(id);
+
+        if (defeatedIds != null)
+            foreach (string id in defeatedIds)
+                if (id == GuardianId) defeatedEnemies.Add(id);
 
         Changed?.Invoke();
     }

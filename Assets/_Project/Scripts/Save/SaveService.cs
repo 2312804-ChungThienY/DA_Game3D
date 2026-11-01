@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -22,14 +18,15 @@ public class SaveService : MonoBehaviour
     [Header("Player and checkpoint")]
     [SerializeField] private CharacterController playerController;
     [SerializeField] private PlayerInput playerInput;
-    [SerializeField] private Transform campSpawn;
+    [SerializeField] private SaveCheckpoint[] checkpoints;
+    [SerializeField] private CheckpointRespawnFlow respawnFlow;
 
     private InputAction loadAction;
     private LanternPickup lanternPickupComponent;
     private bool ready;
 
-    private string SavePath => Path.Combine(Application.persistentDataPath, "save_v1.json");
-    private string BackupPath => SavePath + ".bak";
+    private string SavePath => GameSaveStorage.SavePath;
+    private string BackupPath => GameSaveStorage.BackupPath;
 
     private void Start()
     {
@@ -57,7 +54,12 @@ public class SaveService : MonoBehaviour
                 campSeal != null && campSeal.isActiveAndEnabled &&
                 lanternPickupComponent != null && drumAPickup != null && drumBPickup != null &&
                 drumCPickup != null && mirrorReceiver != null &&
-                playerController != null && playerInput != null && campSpawn != null;
+                playerController != null && playerInput != null && respawnFlow != null &&
+                playerInput.GetComponent<PlayerVitals>() != null &&
+                playerInput.GetComponent<PlayerStamina>() != null &&
+                FindCheckpoint("cp_trai") != null &&
+                FindCheckpoint("cp_truoc_dan") != null &&
+                FindCheckpoint("cp_kim_quy") != null;
 
         if (!ready)
         {
@@ -87,19 +89,54 @@ public class SaveService : MonoBehaviour
         }
     }
 
-    public bool SaveAtCamp()
+    private SaveCheckpoint FindCheckpoint(string id)
     {
-        if (!ready)
+        if (checkpoints == null ||
+            (id != "cp_trai" && id != "cp_truoc_dan" && id != "cp_kim_quy"))
+            return null;
+
+        SaveCheckpoint found = null;
+        foreach (SaveCheckpoint checkpoint in checkpoints)
+        {
+            if (checkpoint == null || checkpoint.CheckpointId != id)
+                continue;
+            if (!checkpoint.IsConfigured || found != null)
+            {
+                Debug.LogError($"Checkpoint thiếu cấu hình hoặc trùng ID: {id}", this);
+                return null;
+            }
+            found = checkpoint;
+        }
+        return found;
+    }
+
+    public bool SaveAtCheckpoint(string checkpointId)
+    {
+        if (!ready || Time.timeScale == 0f ||
+            (worldState.IsRelicRestored && checkpointId != "cp_kim_quy"))
         {
             return false;
         }
 
+        SaveCheckpoint selectedCheckpoint = FindCheckpoint(checkpointId);
+        if (selectedCheckpoint == null ||
+            !selectedCheckpoint.CanInteract(playerInput.gameObject))
+            return false;
+
+        PlayerVitals vitals = playerInput.GetComponent<PlayerVitals>();
+        PlayerStamina stamina = playerInput.GetComponent<PlayerStamina>();
+        if (vitals == null || stamina == null || vitals.IsDead)
+            return false;
+
         SaveData data = new SaveData
         {
+            checkpointId = checkpointId,
             hasLantern = lantern.HasLantern,
             campSealSolved = campSeal.IsSolved,
+            relicRestored = worldState.IsRelicRestored,
             collectedRelics = worldState.ExportRelics(),
-            solvedPuzzles = worldState.ExportSolvedPuzzles()
+            solvedPuzzles = worldState.ExportSolvedPuzzles(),
+            defeatedEnemies = worldState.ExportDefeatedEnemies()
         };
 
         if (!IsValid(data))
@@ -108,57 +145,66 @@ public class SaveService : MonoBehaviour
             return false;
         }
 
-        string temporaryPath = SavePath + ".tmp";
-
-        try
-        {
-            Directory.CreateDirectory(Application.persistentDataPath);
-
-            using (FileStream stream = new FileStream(
-                       temporaryPath, FileMode.Create, FileAccess.Write, FileShare.None))
-            using (StreamWriter writer = new StreamWriter(stream, new UTF8Encoding(false)))
-            {
-                writer.Write(JsonUtility.ToJson(data, true));
-                writer.Flush();
-                stream.Flush(true);
-            }
-
-            if (!TryRead(temporaryPath, out _))
-            {
-                Debug.LogError("Bản lưu tạm không hợp lệ; giữ file cũ.", this);
-                return false;
-            }
-
-            if (File.Exists(SavePath))
-            {
-                // Keep a valid backup if the primary file was already damaged.
-                string backupForReplace =
-                    !TryRead(SavePath, out _) && TryRead(BackupPath, out _)
-                        ? null
-                        : BackupPath;
-
-                File.Replace(temporaryPath, SavePath, backupForReplace);
-            }
-            else
-            {
-                File.Move(temporaryPath, SavePath);
-            }
-
-            lantern.ApplySavedState(data.hasLantern);
-            Debug.Log($"Đã lưu tại trại: {SavePath}", this);
-            return true;
-        }
-        catch (Exception exception)
-        {
-            Debug.LogError($"Không lưu được game: {exception.Message}", this);
-            return false;
-        }
+        if (!TryWriteSnapshot(data)) return false;
+        RefillPlayer(vitals, stamina);
+        Debug.Log($"Đã lưu tại {checkpointId}: {SavePath}", this);
+        return true;
     }
+
+    public bool TryCompleteChapter()
+    {
+        if (!ready || Time.timeScale == 0f || !worldState.CanRestoreRelic)
+            return false;
+
+        SaveCheckpoint checkpoint = FindCheckpoint("cp_kim_quy");
+        PlayerVitals vitals = playerInput.GetComponent<PlayerVitals>();
+        PlayerStamina stamina = playerInput.GetComponent<PlayerStamina>();
+        if (checkpoint == null || !checkpoint.CanInteract(playerInput.gameObject) ||
+            vitals == null || stamina == null || vitals.IsDead)
+            return false;
+
+        SaveData data = new SaveData
+        {
+            checkpointId = "cp_kim_quy",
+            hasLantern = lantern.HasLantern,
+            campSealSolved = campSeal.IsSolved,
+            relicRestored = true,
+            collectedRelics = worldState.ExportRelics(),
+            solvedPuzzles = worldState.ExportSolvedPuzzles(),
+            defeatedEnemies = worldState.ExportDefeatedEnemies()
+        };
+        if (!IsValid(data) || !TryWriteSnapshot(data)) return false;
+
+        worldState.TryRestoreRelic();
+        RefillPlayer(vitals, stamina);
+        Debug.Log("Đã lưu hoàn thành chương tại cp_kim_quy.", this);
+        return true;
+    }
+
+    private bool TryWriteSnapshot(SaveData data) => GameSaveStorage.TryWrite(data);
+
+    public bool TryStartNewGame()
+    {
+        if (!ready) return false;
+        SaveData initial = new SaveData();
+        if (!IsValid(initial) || !ApplySnapshot(initial)) return false;
+        return TryWriteSnapshot(initial);
+    }
+
+    private void RefillPlayer(PlayerVitals vitals, PlayerStamina stamina)
+    {
+        lantern.ApplySavedState(lantern.HasLantern);
+        vitals.RestoreFull();
+        stamina.RestoreFull();
+    }
+
+    public bool SaveAtCamp() => SaveAtCheckpoint("cp_trai");
 
     public void LoadGame()
     {
-        if (!ready)
+        if (!ready || respawnFlow == null || !respawnFlow.isActiveAndEnabled)
         {
+            Debug.LogWarning("SaveService chưa sẵn sàng để tải.", this);
             return;
         }
 
@@ -173,7 +219,27 @@ public class SaveService : MonoBehaviour
             Debug.LogWarning("Đang dùng bản lưu dự phòng.", this);
         }
 
-        worldState.RestoreSnapshot(data.collectedRelics, data.solvedPuzzles);
+        respawnFlow.ReloadWithSnapshot(data);
+    }
+
+    public bool ApplySnapshot(SaveData data)
+    {
+        if (!ready || !IsValid(data)) return false;
+
+        SaveCheckpoint checkpoint = FindCheckpoint(data.checkpointId);
+        if (checkpoint == null) return false;
+
+        PlayerVitals vitals = playerInput.GetComponent<PlayerVitals>();
+        PlayerStamina stamina = playerInput.GetComponent<PlayerStamina>();
+        if (vitals == null || stamina == null)
+        {
+            Debug.LogError("Không thể khôi phục: An thiếu Vitals hoặc Stamina.", this);
+            return false;
+        }
+
+        worldState.RestoreSnapshot(
+            data.collectedRelics, data.solvedPuzzles, data.defeatedEnemies,
+            data.relicRestored);
         lantern.ApplySavedState(data.hasLantern);
         campSeal.ApplySavedState(data.campSealSolved);
         lanternPickupComponent.ApplySavedState(data.hasLantern);
@@ -183,96 +249,27 @@ public class SaveService : MonoBehaviour
             worldState.HasSolvedPuzzle(WorldStateStore.MirrorPuzzleId));
         drumCPickup.SetActive(!worldState.HasRelic(WorldStateStore.DrumC));
 
+        vitals.RestoreFull();
+        stamina.RestoreFull();
+
         bool wasEnabled = playerController.enabled;
         playerController.enabled = false;
-        playerController.transform.SetPositionAndRotation(campSpawn.position, campSpawn.rotation);
+        playerController.transform.SetPositionAndRotation(
+            checkpoint.RespawnPoint.position, checkpoint.RespawnPoint.rotation);
         Physics.SyncTransforms();
         playerController.enabled = wasEnabled;
 
-        Debug.Log("Đã tải game tại cp_trai.", this);
+        return true;
     }
 
     private bool TryRead(string path, out SaveData data)
     {
+        if (!GameSaveStorage.TryReadOne(path, out data)) return false;
+        if (IsValid(data)) return true;
         data = null;
-
-        try
-        {
-            if (!File.Exists(path))
-            {
-                return false;
-            }
-
-            SaveData candidate = JsonUtility.FromJson<SaveData>(File.ReadAllText(path));
-            if (candidate != null && candidate.version == 1)
-            {
-                candidate.version = 2;
-                candidate.solvedPuzzles = new List<string>();
-            }
-            if (candidate != null && candidate.version == 2)
-                candidate.version = 3;
-            if (!IsValid(candidate))
-            {
-                return false;
-            }
-
-            data = candidate;
-            return true;
-        }
-        catch (Exception exception)
-        {
-            Debug.LogWarning($"Không đọc được bản lưu: {exception.Message}", this);
-            return false;
-        }
+        return false;
     }
 
-    private static bool IsValid(SaveData data)
-    {
-        if (data == null || data.version != 3 || data.checkpointId != "cp_trai" ||
-            data.collectedRelics == null || data.solvedPuzzles == null)
-        {
-            return false;
-        }
-
-        HashSet<string> uniqueIds = new HashSet<string>(StringComparer.Ordinal);
-        foreach (string id in data.collectedRelics)
-        {
-            if ((id != WorldStateStore.DrumA && id != WorldStateStore.DrumB &&
-                 id != WorldStateStore.DrumC) ||
-                !uniqueIds.Add(id))
-            {
-                return false;
-            }
-        }
-
-        HashSet<string> puzzles = new HashSet<string>(StringComparer.Ordinal);
-        foreach (string id in data.solvedPuzzles)
-        {
-            if ((id != WorldStateStore.DrumPuzzleId &&
-                 id != WorldStateStore.MirrorPuzzleId) || !puzzles.Add(id))
-                return false;
-        }
-
-        bool drumSolved = puzzles.Contains(WorldStateStore.DrumPuzzleId);
-        bool mirrorSolved = puzzles.Contains(WorldStateStore.MirrorPuzzleId);
-
-        if (data.campSealSolved && !data.hasLantern)
-        {
-            return false;
-        }
-
-        if ((uniqueIds.Count > 0 || drumSolved || mirrorSolved) &&
-            (!data.hasLantern || !data.campSealSolved))
-        {
-            return false;
-        }
-
-        if (uniqueIds.Contains(WorldStateStore.DrumB) && !drumSolved)
-            return false;
-
-        if (uniqueIds.Contains(WorldStateStore.DrumC) && !mirrorSolved)
-            return false;
-
-        return true;
-    }
+    private bool IsValid(SaveData data) =>
+        GameSaveStorage.IsValid(data) && FindCheckpoint(data.checkpointId) != null;
 }

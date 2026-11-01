@@ -86,6 +86,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                  },
+                  {
+                      "name": "Attack",
+                      "type": "Button",
+                      "id": "6f5b831f-189b-4b37-93c8-6971a804e972",
+                      "expectedControlType": "Button",
+                      "processors": "",
+                      "interactions": "",
+                      "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -319,6 +328,17 @@
                     "action": "Dodge",
                     "isComposite": false,
                     "isPartOfComposite": false
+                  },
+                  {
+                      "name": "",
+                      "id": "d906fd76-2c27-4b9f-b873-af72d9989103",
+                      "path": "<Mouse>/leftButton",
+                      "interactions": "",
+                      "processors": "",
+                      "groups": "KeyboardMouse",
+                      "action": "Attack",
+                      "isComposite": false,
+                      "isPartOfComposite": false
                 }
             ]
         }

@@ -1,9 +1,10 @@
 using System;
 using UnityEngine;
+using StarterAssets;
 
 [DisallowMultipleComponent]
 [RequireComponent(typeof(PlayerVitals))]
-public class PlayerStamina : MonoBehaviour
+public class PlayerStamina : MonoBehaviour, IDodgeStamina
 {
     [SerializeField, Min(1f)] private float maxStamina = 100f;
     [SerializeField, Min(0f)] private float recoveryRate = 20f;
