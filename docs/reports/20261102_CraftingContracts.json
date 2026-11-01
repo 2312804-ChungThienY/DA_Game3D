@@ -1,0 +1,7 @@
+{
+    "action": "contracts",
+    "checks": [
+        "PASS: all 7 supplied crafting contracts."
+    ],
+    "failures": []
+}

@@ -98,6 +98,16 @@ public class PlayerInventory : MonoBehaviour
         return false;
     }
 
+    // Only the camp interaction calls this in the current gameplay flow.
+    public PotionCraftResult TryCraftHealthPotion()
+    {
+        PotionCraftResult result = HealthPotionCrafting.BuildDraft(slots, out List<InventorySlotData> draft);
+        if (result != PotionCraftResult.Success) return result;
+        slots = draft;
+        Changed?.Invoke();
+        return PotionCraftResult.Success;
+    }
+
     public List<InventorySlotData> ExportSlots() => InventoryRules.Clone(slots);
 
     public bool RestoreSlots(List<InventorySlotData> saved, bool notify = true)

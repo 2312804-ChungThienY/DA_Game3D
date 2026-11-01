@@ -1,5 +1,7 @@
 # Túi đồ, pickup và thuốc hồi máu
 
+Bước tiếp nối đã có [bàn chế thuốc tại trại](CAMP_CRAFTING.md); các mô tả chưa chế thuốc dưới đây ghi lại phạm vi bước inventory.
+
 Triển khai theo `Son_Doong_Inventory_Potions.zip` và yêu cầu ngày 02/11/2026 trong scene `02_HangLinhMach`. Mốc trước sửa: `7af0cf2`. Sao lưu mã/scene/input/gói gốc tại `Temp/InventoryPotionsBackup_20261102`; Git giữ snapshot toàn bộ phần dự án được theo dõi.
 
 ## Cấu hình hiện tại

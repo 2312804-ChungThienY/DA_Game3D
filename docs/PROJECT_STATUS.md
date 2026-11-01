@@ -4,6 +4,14 @@
 
 ## Yêu cầu gần nhất
 
+### Bàn chế thuốc tại Trại Giếng Trời (02/11/2026)
+
+- Theo ZIP Camp Crafting: ghép duy nhất `TryCraftHealthPotion()` vào PlayerInventory, giữ `.meta`; thêm HealthPotionCrafting, CampCraftingStation và menu CraftingContractChecks. E tại bàn đổi 1 Lá cẩm + 1 Linh chi → 1 Thuốc máu trên bản nháp, commit toàn bộ và phát Changed một lần; thất bại giữ nguyên túi. **Lưu thủ công tại checkpoint theo yêu cầu mới**, không tự gọi SaveAtCamp, không hồi máu khi chế; SaveData/SaveService vẫn nguyên v5.
+- Scene `02_HangLinhMach`: `Gameplay/Camp_CraftingStation` ở `(-5.8,0,0)`, cách checkpoint lửa trại 1.8m, có TableVisual đúng kích thước và collider/layer Interactable; gán túi An, WorldState GameSession, range3/interval0.35. `TXT_CraftFeedback` giữa dưới, font Việt 24, 850×70, không raycast, không dùng chung prompt E.
+- **7 contract checks và 57 kiểm tra Play Mode đạt**, không lỗi runtime. Đã thử ba nhánh lưu/tải, thiếu nguyên liệu/không chỗ/ô vừa trống/chồng chưa đầy, debounce, pause/xa/đánh/né/chết/hoàn thành; save gốc khôi phục byte-for-byte. Đã xem ảnh UI; bấm phím E/Q và cảm giác ngắm/đi lại trực tiếp vẫn cần thử thủ công.
+- Bản Windows Development dựng thành công (bản cuối 0 lỗi, 0 cảnh báo mới), đạt **57 kiểm tra**, không lỗi runtime; save gốc được khôi phục.
+- Chi tiết và báo cáo: [CAMP_CRAFTING.md](CAMP_CRAFTING.md). Mốc trước sửa `a6fb50e`; sao lưu `Temp/CampCraftingBackup_20261102`. Chưa có panel chế thuốc; dùng E trực tiếp.
+
 ### Túi đồ, nguyên liệu và Q dùng thuốc (02/11/2026)
 
 - Theo ZIP Inventory Potions: scene `02_HangLinhMach` có túi 12 ô trên An, Q dùng thuốc hồi 35/2 giây, ba ItemDefinition (Lá cẩm/Linh chi chồng 10, Thuốc máu chồng 5), ba pickup ID riêng trên bệ gần trại và HUD danh sách dưới trái. Input của An dùng bản riêng `Assets/_Project/Input/PlayerControls.inputactions`, giữ ID các action cũ và thêm `Player/UsePotion`.

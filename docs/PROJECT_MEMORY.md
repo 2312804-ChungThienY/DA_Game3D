@@ -206,7 +206,7 @@ Nguồn: kế hoạch §14–16, §25.
 - Q: sống, chưa full HP, có thuốc, hết cooldown **2 s**; một lệnh trừ 1 thuốc + hồi35. Không tiêu hai lần cùng press. Dùng nhanh ngoài menu, túi chỉ xem.
 - Craft tại trại: **1 lá cẩm + 1 linh chi → 1 thuốc máu**. Kiểm tra inventory **sau giao dịch**: ô trống do tiêu nguyên liệu có thể dùng chứa kết quả.
 - Thử trên bản thay đổi tạm, commit toàn bộ khi trừ/thêm đều hợp lệ; thất bại trả lý do và giữ túi nguyên. UI không Remove/Add riêng.
-- Mỗi craft thành công tại trại yêu cầu save an toàn.
+- Mỗi craft thành công tại trại yêu cầu save an toàn. Ở bước tích hợp **02/11/2026**, yêu cầu hiện hành dùng **E chế trực tiếp**, rồi người chơi **E tại checkpoint để lưu thủ công**; thông báo chế thành công chỉ xác nhận runtime inventory. Chưa có panel chế thuốc, không tự gọi SaveAtCamp sau mỗi lần chế.
 
 Nguồn: kế hoạch §17, §25.
 

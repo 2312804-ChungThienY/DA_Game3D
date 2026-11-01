@@ -1,0 +1,10 @@
+{
+    "action": "build",
+    "checks": [
+        "Station separate from checkpoint, 1.8m away; parent/child Interactable, solid BoxCollider, scanner parent interaction validated.",
+        "An inventory and GameSession world references, 3m range, 0.35s craft interval and Vietnamese feedback HUD validated.",
+        "PASS: all 7 supplied crafting contracts.",
+        "Windows build: Succeeded, errors=0, warnings=0"
+    ],
+    "failures": []
+}
