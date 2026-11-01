@@ -1,5 +1,7 @@
 # Cài đặt âm lượng
 
+Ghi chép bước âm lượng. Sau bước [túi đồ/thuốc](INVENTORY_POTIONS.md), SaveData đã lên v5; các tham chiếu v4 dưới đây ghi lại trạng thái khi làm âm lượng.
+
 Triển khai ngày 02/11/2026 từ `Son_Doong_Audio_Settings.zip` theo yêu cầu. Dự án hiện ở `E:\DoAnGame3D\Doan_Game3D`, Unity 6000.4.8f1.
 
 - Menu chính và menu pause đều có nút Âm thanh, ba slider Tổng/Nhạc/Hiệu ứng, phần trăm, Mặc định và Đóng. Panel tắt trong Edit Mode, callback slider đăng ký trong script. Đóng panel trong pause vẫn giữ trò chơi dừng; Esc ưu tiên đóng cài đặt.

@@ -1,0 +1,11 @@
+{
+    "action": "build",
+    "checks": [
+        "Validated An + SaveService, Button Q/2s cooldown, three unique active Interactable pickups, HUD references and initial v5 snapshot.",
+        "IT_LaCam: item_la_cam, stack=10",
+        "IT_LinhChi: item_linh_chi, stack=10",
+        "IT_ThuocMau: item_thuoc_mau, stack=5",
+        "Windows build: Succeeded, errors=0, warnings=0"
+    ],
+    "failures": []
+}

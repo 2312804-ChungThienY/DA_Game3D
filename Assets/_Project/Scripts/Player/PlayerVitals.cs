@@ -64,6 +64,18 @@ public class PlayerVitals : MonoBehaviour, IDamageable, IDodgeVitals
         Changed?.Invoke();
     }
 
+    public bool TryHeal(float amount)
+    {
+        if (!isActiveAndEnabled || Time.timeScale == 0f || IsDead ||
+            currentHealth >= maxHealth || amount <= 0f ||
+            float.IsNaN(amount) || float.IsInfinity(amount)) return false;
+        float after = Mathf.Min(maxHealth, currentHealth + amount);
+        if (after <= currentHealth) return false;
+        currentHealth = after;
+        Changed?.Invoke();
+        return true;
+    }
+
     public bool TryTakeDamage(DamageInfo damage)
     {
         if (!isActiveAndEnabled || Time.timeScale == 0f ||

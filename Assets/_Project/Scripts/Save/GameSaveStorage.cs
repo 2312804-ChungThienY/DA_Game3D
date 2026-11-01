@@ -15,6 +15,8 @@ public static class GameSaveStorage
     {
         public int version = 0;
         public string checkpointId = null;
+        public List<InventorySlotData> inventory = null;
+        public List<string> collectedPickups = new List<string> { "<missing>" };
     }
 
     public static bool TryReadBest(out SaveData data, out bool usedBackup)
@@ -33,8 +35,15 @@ public static class GameSaveStorage
         {
             if (!File.Exists(path)) return false;
             string json = File.ReadAllText(path);
-            SaveHeader header = JsonUtility.FromJson<SaveHeader>(json);
-            if (header == null || header.version < 1 || header.version > 4)
+            var header = new SaveHeader();
+            JsonUtility.FromJsonOverwrite(json, header);
+            if (header == null || header.version < 1 || header.version > 5)
+                return false;
+
+            // Missing v5 fields are corruption, not an invitation to reset the bag.
+            // Earlier schemas intentionally initialize these fields during migration.
+            if (header.version == 5 && (!InventoryRules.IsValidSlots(header.inventory) || header.collectedPickups == null ||
+                header.collectedPickups.Contains("<missing>")))
                 return false;
 
             SaveData candidate = JsonUtility.FromJson<SaveData>(json);
@@ -61,6 +70,12 @@ public static class GameSaveStorage
                     candidate.defeatedEnemies = new List<string>();
                 candidate.relicRestored = false;
                 candidate.version = 4;
+            }
+            if (candidate.version == 4)
+            {
+                candidate.inventory = InventoryRules.EmptySlots();
+                candidate.collectedPickups = new List<string>();
+                candidate.version = 5;
             }
             if (!IsValid(candidate)) return false;
             data = candidate;
@@ -110,8 +125,13 @@ public static class GameSaveStorage
         bool knownCheckpoint = data != null &&
             (data.checkpointId == "cp_trai" || data.checkpointId == "cp_truoc_dan" ||
              data.checkpointId == "cp_kim_quy");
-        if (!knownCheckpoint || data.version != 4 || data.collectedRelics == null ||
+        if (!knownCheckpoint || data.version != 5 || data.collectedRelics == null ||
             data.solvedPuzzles == null || data.defeatedEnemies == null) return false;
+
+        if (!InventoryRules.IsValidSlots(data.inventory) || data.collectedPickups == null) return false;
+        HashSet<string> pickups = new HashSet<string>(StringComparer.Ordinal);
+        foreach (string id in data.collectedPickups)
+            if (!InventoryRules.IsValidPickupId(id) || !pickups.Add(id)) return false;
 
         HashSet<string> relics = new HashSet<string>(StringComparer.Ordinal);
         foreach (string id in data.collectedRelics)

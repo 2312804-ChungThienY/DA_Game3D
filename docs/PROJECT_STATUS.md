@@ -4,6 +4,14 @@
 
 ## Yêu cầu gần nhất
 
+### Túi đồ, nguyên liệu và Q dùng thuốc (02/11/2026)
+
+- Theo ZIP Inventory Potions: scene `02_HangLinhMach` có túi 12 ô trên An, Q dùng thuốc hồi 35/2 giây, ba ItemDefinition (Lá cẩm/Linh chi chồng 10, Thuốc máu chồng 5), ba pickup ID riêng trên bệ gần trại và HUD danh sách dưới trái. Input của An dùng bản riêng `Assets/_Project/Input/PlayerControls.inputactions`, giữ ID các action cũ và thêm `Player/UsePotion`.
+- Ghép năm script cũ thay vì ghi đè các sửa đổi riêng: giữ IDodgeVitals/bất tử né, fallback component của SaveService, ApplySavedState của đèn/gương, quy trình ghi file tạm/flush/kiểm tra/backup. SaveData hiện là **v5**, có inventory và collectedPickups; giữ đọc v1–v4, kể cả bản camp cũ thiếu checkpoint ID. Save v5 thiếu hai trường mới bị từ chối để tránh mất/nhân đồ.
+- Play Mode từ Boot đạt **76 kiểm tra**, không lỗi runtime: nhặt một lần/chồng/túi đầy, 40→75 và giới hạn max, cooldown simulation/pause, rollback trước/sau nhặt hoặc dùng thuốc, migration, backup, chết/hồi sinh, Continue, hoàn thành và xác nhận Chơi mới. Save chính/backup/tmp của người dùng được sao lưu rồi khôi phục byte-for-byte. Ảnh HUD đã xem; E/Q trực tiếp bằng bàn phím và cảm giác ngắm/đi lại vẫn cần thử thủ công. Kiểm thử gọi cùng các lệnh tương tác/sử dụng mà input gọi, không giả là đã bấm phím thật.
+- Bản Windows Development dựng thành công (bản cuối 0 lỗi, 0 cảnh báo mới), đạt cùng **76 kiểm tra**, không lỗi runtime; mã mới đã bỏ hai lời gọi API FindObjectsSortMode cũ của gói.
+- Chi tiết cấu hình, kiểm chứng và công cụ tái kiểm tra ở [INVENTORY_POTIONS.md](INVENTORY_POTIONS.md). Mốc trước sửa `7af0cf2`; backup ở `Temp/InventoryPotionsBackup_20261102`. Chưa có cửa sổ phím I, chọn ô hoặc chế thuốc trong bước này.
+
 ### Cài đặt âm lượng menu/pause (02/11/2026)
 
 - Đã tích hợp gói Audio Settings vào `01_MainMenu` và `02_HangLinhMach`: panel tiếng Việt, ba slider/phần trăm, Mặc định/Đóng, SceneAudio và mixer dùng chung; bước chân/tiếp đất của An đi qua SFX. Giữ GUID, fallback StarterAssetsInputs và SaveData v4; không sửa combat/né. Checkpoint trước sửa: `ae01a35`.

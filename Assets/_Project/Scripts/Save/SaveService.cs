@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -20,6 +21,10 @@ public class SaveService : MonoBehaviour
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private SaveCheckpoint[] checkpoints;
     [SerializeField] private CheckpointRespawnFlow respawnFlow;
+
+    [SerializeField] private PlayerInventory inventory;
+    private readonly List<WorldItemPickup> scenePickups = new List<WorldItemPickup>();
+    private readonly HashSet<string> scenePickupIds = new HashSet<string>();
 
     private InputAction loadAction;
     private LanternPickup lanternPickupComponent;
@@ -50,7 +55,10 @@ public class SaveService : MonoBehaviour
             lanternPickupComponent = lanternPickup.GetComponent<LanternPickup>();
         }
 
-        ready = worldState != null && lantern != null && lantern.isActiveAndEnabled &&
+        bool pickupsValid = RegisterScenePickups();
+        ready = pickupsValid && inventory != null && playerInput != null &&
+                inventory.gameObject == playerInput.gameObject && worldState != null &&
+                lantern != null && lantern.isActiveAndEnabled &&
                 campSeal != null && campSeal.isActiveAndEnabled &&
                 lanternPickupComponent != null && drumAPickup != null && drumBPickup != null &&
                 drumCPickup != null && mirrorReceiver != null &&
@@ -73,6 +81,26 @@ public class SaveService : MonoBehaviour
         {
             Debug.LogWarning("Không có action LoadGame; chưa thể tải bằng F9.", this);
         }
+    }
+
+    private bool RegisterScenePickups()
+    {
+        scenePickups.Clear();
+        scenePickupIds.Clear();
+        WorldItemPickup[] found = UnityEngine.Object.FindObjectsByType<WorldItemPickup>(
+            FindObjectsInactive.Include);
+        foreach (WorldItemPickup pickup in found)
+        {
+            if (pickup.gameObject.scene.handle != gameObject.scene.handle) continue;
+            if (!pickup.IsConfigured || pickup.Inventory != inventory || pickup.WorldState != worldState ||
+                !scenePickupIds.Add(pickup.PickupId))
+            {
+                Debug.LogError($"Pickup is unconfigured, duplicated or references another inventory: {pickup.name}", pickup);
+                return false;
+            }
+            scenePickups.Add(pickup);
+        }
+        return true;
     }
 
     private void Update()
@@ -136,7 +164,9 @@ public class SaveService : MonoBehaviour
             relicRestored = worldState.IsRelicRestored,
             collectedRelics = worldState.ExportRelics(),
             solvedPuzzles = worldState.ExportSolvedPuzzles(),
-            defeatedEnemies = worldState.ExportDefeatedEnemies()
+            defeatedEnemies = worldState.ExportDefeatedEnemies(),
+            inventory = inventory.ExportSlots(),
+            collectedPickups = worldState.ExportCollectedPickups()
         };
 
         if (!IsValid(data))
@@ -171,7 +201,9 @@ public class SaveService : MonoBehaviour
             relicRestored = true,
             collectedRelics = worldState.ExportRelics(),
             solvedPuzzles = worldState.ExportSolvedPuzzles(),
-            defeatedEnemies = worldState.ExportDefeatedEnemies()
+            defeatedEnemies = worldState.ExportDefeatedEnemies(),
+            inventory = inventory.ExportSlots(),
+            collectedPickups = worldState.ExportCollectedPickups()
         };
         if (!IsValid(data) || !TryWriteSnapshot(data)) return false;
 
@@ -237,9 +269,13 @@ public class SaveService : MonoBehaviour
             return false;
         }
 
+        if (!inventory.RestoreSlots(data.inventory, false)) return false;
         worldState.RestoreSnapshot(
             data.collectedRelics, data.solvedPuzzles, data.defeatedEnemies,
-            data.relicRestored);
+            data.relicRestored, data.collectedPickups);
+        foreach (WorldItemPickup pickup in scenePickups)
+            if (pickup != null) pickup.ApplyWorldState();
+        inventory.NotifyChanged();
         lantern.ApplySavedState(data.hasLantern);
         campSeal.ApplySavedState(data.campSealSolved);
         lanternPickupComponent.ApplySavedState(data.hasLantern);
@@ -270,6 +306,17 @@ public class SaveService : MonoBehaviour
         return false;
     }
 
-    private bool IsValid(SaveData data) =>
-        GameSaveStorage.IsValid(data) && FindCheckpoint(data.checkpointId) != null;
+    private bool IsValid(SaveData data)
+    {
+        if (!GameSaveStorage.IsValid(data) || FindCheckpoint(data.checkpointId) == null) return false;
+        foreach (string id in data.collectedPickups)
+        {
+            if (!scenePickupIds.Contains(id))
+            {
+                Debug.LogError($"Saved pickup ID is missing from this scene: {id}", this);
+                return false;
+            }
+        }
+        return true;
+    }
 }

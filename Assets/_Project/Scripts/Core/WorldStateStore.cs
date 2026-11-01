@@ -17,6 +17,17 @@ public class WorldStateStore : MonoBehaviour
         new HashSet<string>(StringComparer.Ordinal);
     private readonly HashSet<string> defeatedEnemies =
         new HashSet<string>(StringComparer.Ordinal);
+    private readonly HashSet<string> collectedPickups = new HashSet<string>(StringComparer.Ordinal);
+    public bool HasCollectedPickup(string id) => collectedPickups.Contains(id);
+    public List<string> ExportCollectedPickups() => new List<string>(collectedPickups);
+
+    public bool TryMarkPickupCollected(string id)
+    {
+        if (!InventoryRules.IsValidPickupId(id) || !collectedPickups.Add(id)) return false;
+        Changed?.Invoke();
+        return true;
+    }
+
     private bool relicRestored;
 
     public event Action Changed;
@@ -81,12 +92,16 @@ public class WorldStateStore : MonoBehaviour
     public List<string> ExportSolvedPuzzles() => new List<string>(solvedPuzzles);
 
     public void RestoreSnapshot(List<string> relicIds, List<string> puzzleIds,
-        List<string> defeatedIds = null, bool restored = false)
+        List<string> defeatedIds = null, bool restored = false, List<string> pickupIds = null)
     {
         collectedRelics.Clear();
         solvedPuzzles.Clear();
         defeatedEnemies.Clear();
         relicRestored = restored;
+        collectedPickups.Clear();
+        if (pickupIds != null)
+            foreach (string id in pickupIds)
+                if (InventoryRules.IsValidPickupId(id)) collectedPickups.Add(id);
 
         if (relicIds != null)
             foreach (string id in relicIds)
