@@ -56,6 +56,7 @@ Kế hoạch cho **2–3 người / 12 tuần**, hoàn thành **một chương K
 - Nền trại **20 × 20 m** là đề xuất dựng thử của người dùng trong chat, không phải kích thước khóa trong spec.
 - Các object gốc `World_Geometry`, `Gameplay`, `Lighting`, `Cameras`, `UI` có position/rotation 0 và scale 1 theo yêu cầu dựng scene của người dùng.
 - Quest suy ra từ dữ kiện WorldStateStore, **không lưu bộ đếm tăng theo số event**. Event có thể phát lại khi tải.
+- HUD tích hợp theo yêu cầu **02/11/2026** bắt đầu bằng Vườn Rêu/nhặt A, dùng ChapterObjectiveRules và ChapterQuestHUD; bước nhận đèn vẫn do gameplay hiện có đảm nhiệm, chưa có mục tiêu nhận đèn trong HUD này.
 
 | Quest ID | Điều kiện |
 | --- | --- |

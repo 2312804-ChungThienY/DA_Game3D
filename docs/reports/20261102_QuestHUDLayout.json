@@ -1,0 +1,11 @@
+{
+    "action": "preview",
+    "checks": [
+        "Active QuestUI observes the scene WorldState; optional checklist unset; legacy QuestTracker and text disabled.",
+        "Panel/text anchors, dimensions, fonts, alpha and raycast settings match the requested HUD.",
+        "Quest panel rendered without text overflow at (1920, 1080): Logs/QuestHUD_1920x1080.png",
+        "Quest panel rendered without text overflow at (1280, 720): Logs/QuestHUD_1280x720.png",
+        "Quest panel rendered without text overflow at (1600, 1000): Logs/QuestHUD_1600x1000.png"
+    ],
+    "failures": []
+}

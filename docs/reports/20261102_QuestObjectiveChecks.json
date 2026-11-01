@@ -1,0 +1,7 @@
+{
+    "action": "contracts",
+    "checks": [
+        "PASS: 128 objective combinations plus completed-to-new-game reset."
+    ],
+    "failures": []
+}

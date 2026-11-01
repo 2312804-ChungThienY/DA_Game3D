@@ -4,6 +4,13 @@
 
 ## Yêu cầu gần nhất
 
+### HUD mục tiêu chương Kim Quy (02/11/2026)
+
+- Thêm nguyên gói Quest HUD: ChapterObjectiveRules ở `Scripts/Quests` sẵn có, ChapterQuestHUD và menu ChapterObjectiveChecks; không sửa script cũ. Trong `Canvas_Gameplay`, `PNL_Quest` 480×210 neo trên phải, nền đen alpha0.55, hai text đúng thông số có font Việt/raycast tắt; QuestUI luôn bật, checklist trống. Tắt component QuestTracker và TXT_QuestObjective cũ trong scene để tránh trùng hiển thị.
+- Chỉ đọc WorldStateStore, tính lại tám mục tiêu và progress 3 mảnh/2 puzzle; không lưu chỉ số nhiệm vụ, không cấp thưởng. Mục tiêu đầu là Vườn Rêu theo yêu cầu; bước nhận đèn vẫn ở gameplay hiện có, không nằm trong HUD mới. Save v5, pickup/chế/uống và mã gameplay giữ nguyên.
+- **128 tổ hợp + reset New Game và 64 kiểm tra Play Mode đạt**, không lỗi runtime. Đã thử tiến trình qua API nhặt/puzzle/Hộ vệ/bệ, rollback checkpoint trước B, Continue hoàn thành, reset Chơi mới, inventory không đổi mục tiêu và đăng ký event không trùng. Save chính/backup/tmp gốc khôi phục byte-for-byte.
+- Đã xem ảnh HUD Play Mode và panel tại 1920×1080, 1280×720, 1600×1000: đủ dấu Việt, chữ không tràn. Ảnh đa tỉ lệ là render riêng panel; còn thử tuyến đầy đủ bằng tay và Windows cho bước này. Chi tiết/báo cáo: [QUEST_HUD.md](QUEST_HUD.md). Mốc trước sửa `24b34e4`; backup `Temp/QuestHUDBackup_20261102`.
+
 ### Bàn chế thuốc tại Trại Giếng Trời (02/11/2026)
 
 - Theo ZIP Camp Crafting: ghép duy nhất `TryCraftHealthPotion()` vào PlayerInventory, giữ `.meta`; thêm HealthPotionCrafting, CampCraftingStation và menu CraftingContractChecks. E tại bàn đổi 1 Lá cẩm + 1 Linh chi → 1 Thuốc máu trên bản nháp, commit toàn bộ và phát Changed một lần; thất bại giữ nguyên túi. **Lưu thủ công tại checkpoint theo yêu cầu mới**, không tự gọi SaveAtCamp, không hồi máu khi chế; SaveData/SaveService vẫn nguyên v5.
