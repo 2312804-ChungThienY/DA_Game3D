@@ -1134,3 +1134,419 @@ Các nguồn dưới được kiểm tra ngày 29/10/2026. Dùng đúng nhánh t
 Học component, prefab, scene và Inspector trước; tiếp theo là CharacterController, Input System và Animator. Sau đó làm raycast, interface, dữ liệu ScriptableObject, FSM và NavMesh. Chỉ học shader, IK hoặc tối ưu sâu khi hệ thống hiện có đặt ra một vấn đề cụ thể cần giải quyết.
 
 Sơn Đoòng Cõi Mộng Kỳ Thần  |  1
+# 40 Điều chỉnh kế hoạch ngày 01/11/2026
+
+## Lý do và phạm vi mới
+
+Ngày 01/11/2026, người dùng chốt hướng mới cho toàn game sau khi xem kết quả chạy thử chương 1. Game được mở rộng thành **5 chương ngắn** (Kim Quy, Chim Lạc, Sơn Tinh, Thủy Tinh và chương kết Trục Linh Mạch), có thêm lớp **lịch sử – giáo dục**, **hai cái kết** và **bộ di chuyển do Kim Quy trao**. Thời gian sản xuất thực tế khoảng **1 tuần**, nên mọi chương được rút gọn thành các phòng nhỏ, chơi nhanh, ít kỹ thuật nhưng phải làm trọn vẹn.
+
+Các phần 40–54 là bản điều chỉnh. Khi mâu thuẫn với các phần 1–39, **ưu tiên phần 40–54**. Các luật kỹ thuật cũ (một motor, một hệ input, WorldStateStore, save nguyên tử, quest suy từ dữ kiện, thông số đèn, câu đố trống và gương) vẫn giữ nguyên.
+
+| Phần cũ | Nội dung thay đổi |
+| --- | --- |
+| 1 Phạm vi | Từ 1 chương 25–35 phút thành 5 chương ngắn, tổng mục tiêu 65–95 phút |
+| 2 Bản đồ toàn game | Chương 2–5 được thiết kế chi tiết tại phần 46–49; mỗi chương chỉ có 1 cơ chế mới |
+| 10 Né trong chương 1 | Chương 1 **không có lộn né**. Toàn bộ bộ di chuyển nâng cao là quà Kim Quy khi hoàn thành chương 1 (phần 43) |
+| 8 Scene và build | Thêm scene cho chương 2–5 (phần 50) |
+| 18–19 Dữ liệu lưu | Mở rộng schema cho chương, năng lực, tri thức, cơ chế ẩn và cái kết (phần 50) |
+| 20 Nhật ký | Thêm mục Tri thức; câu hỏi kiến thức bắt đầu từ chương 2 |
+| 27–30 Lịch 12 tuần | Lịch sản xuất thực tế là 7 ngày (phần 52). Phần 27–30 giữ làm tham chiếu |
+| 32 Nỏ và móc dây | Không làm. Không có đu dây, cưỡi chim, bơi trong toàn game |
+
+# 41 Nguyên tắc sản xuất bắt buộc
+
+1. **Cơ chế trước, đồ họa sau.** Mỗi chương chơi được từ đầu đến cuối bằng khối cơ bản (logic, tương tác, UI blockout, lưu tải, luồng màn) trước khi làm đồ họa.
+2. **Concept đồ họa cố định:** Stylized Semi-Realistic, huyền ảo cổ tích Việt, cảm hứng Đông Sơn – Hồng Bàng. Trước khi import phải trình concept và danh sách asset cho người dùng duyệt. Không tải hoặc dựng asset tràn lan.
+3. **Cơ chế tinh gọn, có ý nghĩa với cốt truyện.** Mỗi chương chỉ thêm **một** cơ chế mới, lấy từ chính Linh Thần của chương đó. Lồng Đèn Sen và Trống Đồng là công cụ nền xuyên suốt.
+4. **Đặt độ phức tạp vào môi trường thay vì nhân vật.** Gió, cột đất, mặt nước là vật thể môi trường. Nhân vật An chỉ dùng một bộ animation làm ở chương 1.
+5. **Chức năng nào đã đưa vào phải làm tới nơi:** có phản hồi, có lưu tải, có kiểm thử. Không để tính năng dở dang trong bản nộp; nếu không kịp thì cắt hẳn theo thứ tự ở phần 52.
+6. **Hỏi người dùng tại điểm then chốt:** góc nhìn, cách biến đổi môi trường, di chuyển mới, diễn biến cốt truyện, duyệt asset.
+7. **Lịch sử – giáo dục chính xác:** mỗi nội dung gắn nhãn Lịch sử, Truyền thuyết hoặc Tự nhiên; đối chiếu nguồn tin cậy trước khi đưa vào build; không hỏi phần hư cấu của game như sự thật.
+8. **Một mức độ khó mặc định.** Không có menu chọn độ khó.
+
+# 42 Khuôn chung của một chương
+
+Mỗi chương 2–4 gồm **5 phòng gọn**, mỗi phòng khoảng 12 × 12 m (đấu trường khoảng 18 × 18 m), chơi 2–3 phút một phòng, cả chương **10–15 phút**. Phòng được dựng bằng prefab blockout dùng chung để làm nhanh.
+
+| Phòng | Vai trò | Phần thưởng |
+| --- | --- | --- |
+| P1 Mở đầu | Nhận năng lực của chương, học cách dùng ở nơi an toàn; lửa trại (lưu, chế thuốc); Bia văn tự 1 | **Mảnh cổ vật 1** qua Bệ Vấn Đáp |
+| P2 Thử thách nhỏ | Dùng năng lực để tới bệ; Bia văn tự 2 | **Mảnh cổ vật 2** qua Bệ Vấn Đáp |
+| P3 Thử thách lớn | Câu đố chính của chương; mốc lưu giữa chương; Bia văn tự 3 | **Mảnh cổ vật 3** qua Bệ Vấn Đáp |
+| P4 Giao chiến | Đánh quái thường kết hợp năng lực; Bia văn tự 4; mốc lưu trước đấu trường | **Công cụ trận trùm** và thuốc qua Bệ Vấn Đáp |
+| P5 Đấu trường | Cổng kiểm tra đủ 3 mảnh và công cụ; đánh trùm; phục dựng cổ vật; Bia văn tự 5; **Linh Thần Vấn Đáp** 3 câu; Linh Thần thức tỉnh, chuyển chương | Năng lực được giữ vĩnh viễn, mở chương sau |
+
+- Mảnh cổ vật ở P1–P3 dựng nên cốt truyện; công cụ ở P4 phục vụ trận trùm ở P5.
+- Người chơi phải vượt thử thách của phòng mới tới được bệ. Bệ Vấn Đáp là cách nhận vật phẩm, không thay cho thử thách.
+- Chương 1 giữ cấu trúc 5 khu đã dựng (phần 3–4) và không có Bệ Vấn Đáp.
+- Chương 5 có 6 phòng, dài và khó hơn (phần 49).
+
+# 43 Bộ di chuyển "Quà Kim Quy" và chiến đấu
+
+## Chương 1
+
+An chỉ có đi, chạy, nhảy, đánh dao, Lồng Đèn và khóa mục tiêu. Không có lộn né. Chiến đấu chương 1 được cân bằng để né bằng cách chạy ra khỏi vùng báo trước: đòn quét của Hộ vệ đánh phía trước, bước sang ngang là tránh được; đòn nện có vòng cảnh báo bán kính 3 m trong 1,2 giây, chạy 5,5 m/s thoát được khoảng 6,6 m. Đèn làm yếu địch là cách chính để rút ngắn trận. Thể lực chương 1 chỉ tiêu cho chạy (8/giây) và đánh dao (10/đòn).
+
+## Quà Kim Quy
+
+Khi phục dựng Trống Đồng và hoàn thành chương 1, Kim Quy trao **Phúc Kim Quy**. Toàn bộ bộ di chuyển nâng cao được mở khóa vĩnh viễn, lưu bằng cờ `movement_kit` và dùng cho chương 2–5. Phòng P1 chương 2 có khu hướng dẫn an toàn cho các thao tác này.
+
+| Thao tác | Phím | Hành vi | Chi phí |
+| --- | --- | --- | --- |
+| Lộn theo hướng | Ctrl + W/A/S/D | Lộn theo hướng phím, tính theo camera | 25 thể lực, 0,45 giây, bất tử 0,10–0,30 giây |
+| Lộn khi không bấm hướng | Ctrl | Lộn về hướng An đang nhìn (giữ luật phần 10) | Như trên |
+| Chạy + lộn | Shift rồi Ctrl | Lộn xa khoảng 1,5 lần | Như trên |
+| Lộn + chém | Chuột trái ngay khi kết thúc lộn | Đâm tới, sát thương ×1,25 | 10 thể lực |
+| Né đúng lúc | Lộn khi đòn địch sắp trúng (trong 0,15 giây đầu của khoảng bất tử) | Chậm thời gian 0,3 giây, hồi 15 năng lượng đèn | Không thêm |
+| Lộn chui khe thấp | Lộn vào khe thấp | Capsule hạ còn khoảng 0,9 m trong lúc lộn | Không thêm |
+
+Khoảng giữa hai lần bắt đầu lộn tối thiểu 0,65 giây. Mọi chuyển động đi qua PlayerMotor nên vẫn bị tường chặn.
+
+## Khóa mục tiêu
+
+Bấm chuột giữa để khóa hoặc bỏ khóa mục tiêu gần nhất trong tầm nhìn. Khi khóa, camera giữ quái trong khung hình và An quay mặt về quái; lộn trái hoặc phải thành lộn ngang quanh mục tiêu. Mục tiêu chết, ra khỏi tầm 15 m hoặc bị che quá 1 giây thì tự bỏ khóa. Dùng được từ chương 1.
+
+## Animation làm một lần
+
+- Làm toàn bộ ở chương 1, dùng Humanoid retarget để chạy được cả trên nhân vật tạm và An bản cuối.
+- Bộ clip: blend tree đứng, đi, chạy, chạy nhanh; bật nhảy, trên không, rơi, chạm đất; **4 clip lộn trước, sau, trái, phải**; chuỗi 2–3 nhát dao; đòn chém sau lộn; bị đánh; chết; tương tác; tư thế giơ đèn ở layer nửa thân trên.
+- Nguồn: ưu tiên thư viện miễn phí A04 Universal Animation Library Standard, sau đó A06 Mixamo. Kiểm tra clip có thật trong gói trước khi dùng. Nếu không có đủ 4 clip lộn thì dùng 1 clip lộn và xoay thân theo hướng lộn, ghi lại trong danh sách asset.
+- Tiêu chí mượt: không trượt chân, chuyển đổi có thời gian blend, lộn nối về đứng hoặc chạy không giật, Apply Root Motion tắt.
+
+# 44 Hệ thống Tri thức
+
+## Thành phần
+
+| Thành phần | Cách hoạt động |
+| --- | --- |
+| Bia văn tự | Mỗi phòng 1 bia. Chữ chỉ hiện khi rọi đèn trong 5 m (chế độ sáng thường, phần 11). Đọc xong ghi vào Nhật ký, mục Tri thức |
+| Bệ Vấn Đáp | Tương tác E mở bảng câu hỏi 4 lựa chọn, gameplay tạm dừng, dùng UI map. Đúng thì bệ mở và trao vật phẩm của phòng. Sai thì hiện lời giải thích, chỉ ra bia liên quan rồi cho trả lời lại; **vẫn nhận đủ đồ** |
+| Linh Thần Vấn Đáp | Cuối mỗi chương 2–4, 3 câu hỏi trước khi Linh Thần thức tỉnh, luật trả lời như Bệ Vấn Đáp |
+| Đại Vấn Đáp | Chương 5, 5 câu tổng hợp, trong đó có câu sắp xếp mốc thời gian |
+| Điểm Tri Thức | Mỗi câu trả lời **đúng ngay lần đầu** được ghi ID. Điểm được suy ra từ tập ID này, không lưu bộ đếm riêng. Điểm mở dần các manh mối dẫn tới cơ chế ẩn của chương 5 (phần 49) |
+
+## Quy tắc nội dung
+
+- Mỗi bia và câu hỏi gắn nhãn **Lịch sử**, **Truyền thuyết** hoặc **Tự nhiên**. Truyền thuyết luôn ghi là truyền thuyết.
+- Không hỏi về Hắc Sương, cách gọi Linh Thần, chuỗi gõ trống hay bất kỳ chi tiết hư cấu nào của game.
+- Mọi nội dung đối chiếu SGK Lịch sử lớp 6, Bảo tàng Lịch sử Quốc gia, UNESCO, VQG Phong Nha – Kẻ Bàng hoặc nguồn tương đương trước khi đưa vào build. Mục ghi "cần kiểm chứng" chưa được đưa vào build khi chưa kiểm tra.
+- Người chơi mục tiêu là mọi lứa tuổi: chương 2 câu dễ, nhận biết trực tiếp từ bia; chương 3–4 cần hiểu ý nghĩa; chương 5 tổng hợp và sắp xếp thời gian.
+- Câu hỏi luôn trả lời được từ bia trong cùng chương, trừ Đại Vấn Đáp dùng bia của nhiều chương.
+
+## Dữ liệu
+
+QuizDefinition là ScriptableObject gồm ID, chương, nhãn, câu hỏi, 4 đáp án, chỉ số đúng, lời giải thích, nguồn tham chiếu và ID bia liên quan. LoreDefinition gồm ID, nhãn, nội dung, nguồn. Trạng thái đã đọc, đã trả lời, đúng lần đầu nằm trong WorldStateStore và được lưu.
+
+# 45 Chương 1 Kim Quy: bổ sung hoàn thiện
+
+Chương 1 giữ 5 khu và tuyến chính ở phần 3–4, thời lượng mục tiêu rút xuống **15–25 phút**. Ba văn tự của chương dùng nội dung thật, chưa có câu hỏi: Sơn Đoòng thuộc VQG Phong Nha – Kẻ Bàng; văn hóa Đông Sơn đặt theo tên làng Đông Sơn (Thanh Hóa); truyền thuyết Kim Quy giúp An Dương Vương xây thành Cổ Loa (Truyền thuyết).
+
+## Sửa lỗi tồn đọng
+
+| Mã | Việc | Điều kiện xong |
+| --- | --- | --- |
+| C1-F01 | Gộp hai file Input Actions còn một file PlayerControls với map Gameplay và UI; bỏ tham chiếu InputSystem_Actions | Chỉ một asset input được dùng; mọi phím ở phần 10 chạy đúng |
+| C1-F02 | Bật Avoid Obstacles cho camera trong 90_TestMechanics | Camera không xuyên tường ở scene thử |
+| C1-F03 | Thêm tường bao và vùng chết dưới sàn ở 91_TestCombat và mọi map | Rơi khỏi sàn thì hồi sinh tại mốc lưu |
+| C1-F04 | HUD: tiếng Việt có dấu thống nhất bằng font Noto Sans; ẩn dòng debug trạng thái câu đố khỏi HUD chính, chỉ hiện khi ở gần câu đố; căn giữa màn chết | Không còn chữ không dấu, không chồng chữ |
+| C1-F05 | Ký hiệu A, B, C trên trống to, khác hình, nhìn rõ từ lối vào phòng; gợi ý thứ tự chỉ hiện khi rọi đèn | Người chơi mới đọc được ký hiệu ở chất lượng thấp |
+| C1-F06 | Lần đầu mở scene vật thể hiện màu xanh lơ do shader biên dịch bất đồng bộ trong Editor. Kiểm tra lại trong build Windows; nếu còn lỗi màu tím (vật liệu hỏng) thì chuyển vật liệu sang URP/Lit | Build không có vật liệu hồng hoặc tím |
+| C1-F07 | Build Settings: 00_Boot, 01_MainMenu, 02_HangLinhMach và các scene chương ở phần 50; bỏ SampleScene | Build mở từ Boot |
+| C1-F08 | DrumPuzzleController không reset lượt gõ dở khi world state đổi vì lý do khác | Nhặt vật trong lúc đang gõ không mất tiến độ |
+
+## Thay đồ tạm bằng hệ thống chuẩn
+
+| Mã | Việc |
+| --- | --- |
+| C1-R01 | Thay ThirdPersonController bằng PlayerMotor và InputReader theo phần 9–10; giữ thông số capsule, tốc độ, nhảy, camera |
+| C1-R02 | CombatController: đòn dao 0,65 giây, khoảng sát thương 0,15–0,30 giây, tầm 1,8 m, một mục tiêu trúng một lần mỗi đòn; thể lực chạy 8/giây, đánh 10/đòn |
+| C1-R03 | Hắc Ảnh: FSM Patrol → Chase → Attack → Search → Return, NavMeshAgent, tầm 10 m, góc 120°, leash 18 m; đèn chiếu 1 giây làm yếu ×1,5 trong 4 giây |
+| C1-R04 | Khu 5 Đàn Kim Quy: cổng kiểm tra 3 mảnh và 2 câu đố, mốc lưu trước cổng, đấu trường khoảng 18 × 18 m khóa cổng khi vào |
+| C1-R05 | Hộ vệ Đá: quét tay (báo 0,8 giây, 20 sát thương) và nện đất (báo 1,2 giây, bán kính 3 m, 25 sát thương); 180 máu; chết ghi guardian_01 |
+| C1-R06 | Phục dựng Trống Đồng: relicRestored, cảnh kết chương bằng ảnh tĩnh và lời dẫn, **trao Quà Kim Quy**, lưu, chuyển sang chương 2 |
+| C1-R07 | HUD dạng thanh: máu, thể lực, năng lượng đèn, số thuốc, mục tiêu |
+| C1-R08 | Túi 12 ô chỉ xem, thuốc máu dùng bằng Q, chế thuốc tại lửa trại (1 lá cẩm + 1 linh chi) theo phần 17 |
+| C1-R09 | Boot, Main Menu (Chơi mới, Tiếp tục, Cài đặt, Thoát), Pause, Settings (âm lượng, độ nhạy chuột, cửa sổ hoặc toàn màn hình) |
+| C1-R10 | Chết và rơi vực hồi sinh tại mốc lưu; đủ 4 mốc cp_trai, cp_dien_trong, cp_truoc_dan, cp_kim_quy; F9 chỉ còn trong bản Development |
+| C1-R11 | Đổi ID mảnh relic_drum_a/b/c sang fragment_a/b/c theo phần 17, chuyển đổi bản lưu cũ |
+| C1-R12 | Bộ animation di chuyển và khóa mục tiêu ở phần 43 |
+
+# 46 Chương 2 Chim Lạc: Giếng Trời
+
+| Hạng mục | Thiết kế |
+| --- | --- |
+| Bố cục | 5 phòng đi lên cao, tổng chênh khoảng 30 m: P1 Đáy Giếng Gió → P2 Vách Gió → P3 Nhà Sàn Đá Treo → P4 Cầu Mây Gãy → P5 Đỉnh Tổ Chim (đấu trường tròn khoảng 18 m) |
+| Cơ chế mới | **Cột Gió.** Lông Chim Lạc nhận ở P1 cho phép An bước vào cột gió để được nâng lên tới đỉnh cột rồi nhảy sang bệ khác. Cột gió là vùng trigger cộng vận tốc lên, An dùng clip rơi hoặc trên không. Một số cột chỉ bật khi tương tác với chuông gió trong phòng |
+| Câu đố chính (P3) | Bật đúng 3 chuông gió theo thứ tự hình chim trên phù điêu để tạo chuỗi cột gió lên nhà sàn cao nhất |
+| Quái thường | Hắc Ảnh; **Hắc Ảnh Ném**: cùng model, đứng trên gờ cao ném cầu sương chậm có báo trước |
+| Công cụ P4 | **Lông Gió Lớn**: trong đấu trường, bật được cột gió trung tâm để lên ngang tầm lõi của trùm |
+| Trùm | **Chim Lạc nhiễm Hắc Sương**. Đậu luân phiên trên 3 cột, lao xuống theo vệt cảnh báo 1 giây, quạt gió đẩy An về mép. Chiếu đèn khi chim đậu làm nó choáng; dùng cột gió trung tâm lên đánh. Máu 200 |
+| Môi trường | Giếng trời có nắng xiên, rêu và dương xỉ, nhà sàn đá bám vách, hoa văn chim bay quanh mặt trời. Màu xanh lá, vàng nắng, đá xám |
+| Cổ vật | 3 mảnh **Mặt Trời Lông Chim** của Trống Đồng |
+| Cốt truyện | Hình mặt trời và vòng chim trên mặt trống là bản đồ linh mạch trong thế giới game. Hắc Sương tràn vào qua các giếng trời bị bịt kín |
+
+## Tri thức chương 2 (dễ)
+
+| Phòng | Bia | Nhãn |
+| --- | --- | --- |
+| P1 | Hố sụt ở Sơn Đoòng cho ánh sáng lọt xuống nên có rừng cây mọc trong lòng hang | Tự nhiên |
+| P2 | Chính giữa mặt trống đồng Đông Sơn là ngôi sao nhiều cánh, thường được hiểu là hình mặt trời | Lịch sử |
+| P3 | Hoa văn trống đồng có hình nhà sàn, kiểu nhà phổ biến của cư dân Lạc Việt | Lịch sử |
+| P4 | Hoa văn trống đồng còn có người hóa trang lông chim, cảnh giã gạo, thuyền | Lịch sử |
+| P5 | Chim Lạc thường được coi là biểu tượng của cư dân Lạc Việt | Lịch sử |
+
+Câu hỏi mẫu: hình gì ở giữa mặt trống đồng; vì sao trong hang có rừng; hoa văn cho thấy cư dân Lạc Việt ở kiểu nhà nào.
+
+# 47 Chương 3 Sơn Tinh: Thành Đá
+
+| Hạng mục | Thiết kế |
+| --- | --- |
+| Bố cục | 5 phòng đi xuống tầng giữa: P1 Cổng Thành Đá → P2 Mỏ Cột Núi → P3 Sân Dáng Núi → P4 Hầm Hộ Vệ → P5 Điện Sơn Tinh (khoảng 18 × 18 m) |
+| Cơ chế mới | **Ấn Núi.** Nhận ở P1. Tương tác E tại ô đất có dấu để chuyển khối đất qua 3 mức cao (0 m, 1,5 m, 3 m). Khối đất làm bậc thang, cầu qua vực hoặc tường chặn quái. Trạng thái mức của từng ô được lưu |
+| Câu đố chính (P3) | Đặt 4 ô đất đúng độ cao theo hình "dáng núi" khắc trên tường thì cổng mở |
+| Quái thường | Hắc Ảnh; **Hộ Vệ Đá Nhỏ**: dùng lại Hộ vệ Đá thu nhỏ, chỉ có đòn nện, 80 máu |
+| Công cụ P4 | **Ấn Núi Lớn**: trong đấu trường, nâng được cùng lúc 4 cột chặn hang |
+| Trùm | **Rết Đá**. Chui ra từ 4 hang theo thứ tự có rung đất báo trước 1,2 giây, quét thân thành đường thẳng. Nâng cột chặn hang thì rết bị kẹt và lộ đầu để đánh. Máu 220 |
+| Môi trường | Thành đá, cổng xếp đá lớn, hoa văn núi, ánh lửa cam, bụi đá rơi khi khối đất chuyển động |
+| Cổ vật | 3 mảnh **Vành Núi** của Trống Đồng |
+| Cốt truyện | Hắc Sương khơi lại mối tranh chấp núi và nước. Sơn Tinh thức tỉnh và cảnh báo An về Thủy Tinh |
+
+## Tri thức chương 3 (trung bình)
+
+| Phòng | Bia | Nhãn |
+| --- | --- | --- |
+| P1 | Nhà nước Văn Lang do các vua Hùng đứng đầu, kinh đô Phong Châu (Phú Thọ ngày nay) | Lịch sử |
+| P2 | Hang động đá vôi hình thành do nước hòa tan đá vôi trong thời gian rất dài | Tự nhiên |
+| P3 | Hùng Vương thứ 18 kén rể cho công chúa Mỵ Nương | Truyền thuyết |
+| P4 | Sính lễ gồm voi chín ngà, gà chín cựa, ngựa chín hồng mao; Sơn Tinh mang đến trước | Truyền thuyết |
+| P5 | Sơn Tinh là thần núi Tản Viên (Ba Vì) | Truyền thuyết |
+
+Câu hỏi mẫu: kinh đô Văn Lang; sính lễ vua Hùng yêu cầu; Sơn Tinh là thần núi nào.
+
+# 48 Chương 4 Thủy Tinh: Sông Ngầm
+
+| Hạng mục | Thiết kế |
+| --- | --- |
+| Bố cục | 5 phòng dọc sông, đi ngang tầng sâu: P1 Bến Ngầm → P2 Hồ Cửa Van → P3 Đền Ngập → P4 Thác Ngược → P5 Vực Thuồng Luồng (hồ tròn khoảng 18 m) |
+| Cơ chế mới | **Ngọc Nước.** Nhận ở P1. Tương tác tại đền thờ trong phòng để đổi mực nước giữa 3 mức Thấp, Giữa, Cao. Nước thấp lộ đường dưới đáy; nước cao làm bè và đá nổi thành bậc đi. Không có bơi: rơi vào nước sâu thì về điểm đứng an toàn gần nhất. Ấn Núi của chương 3 vẫn dùng được và nâng khối đất lên trên mặt nước |
+| Câu đố chính (P3) | Đền có hai gian: rút nước để vào gian dưới lấy chìa, dâng nước để lên gian trên đặt chìa |
+| Quái thường | **Hắc Ảnh Nước**: trồi lên khi nước dâng; **Hắc Ảnh Vỏ Đá**: phải chiếu đèn làm vỡ giáp rồi mới gây sát thương |
+| Công cụ P4 | **Ngọc Triều**: trong đấu trường, đổi mực nước ngay cả khi đang giao chiến |
+| Trùm | **Thuồng Luồng**. Ẩn trong nước, trồi lên ở 3 điểm cố định, quất đuôi theo vệt sóng báo trước 1 giây. Rút nước thì thân lộ ra để đánh; nước cao thì nó lặn và hồi máu chậm. Máu 240 |
+| Môi trường | Sông ngầm, thạch nhũ phát sáng tím và đỏ, rêu phát quang, thuyền độc mộc cũ trang trí, đền ngập nửa nước |
+| Cổ vật | 3 mảnh **Vành Sóng** của Trống Đồng |
+| Cốt truyện | Thủy Tinh bị Hắc Sương giam dưới đáy vực, Thuồng Luồng là kẻ canh ngục. Mối thù núi và nước hóa ra đã bị lợi dụng; Thủy Tinh và Sơn Tinh hòa giải |
+
+## Tri thức chương 4 (trung bình đến khó)
+
+| Phòng | Bia | Nhãn |
+| --- | --- | --- |
+| P1 | Sơn Đoòng có sông ngầm chảy qua lòng hang (tên sông cần kiểm chứng) | Tự nhiên |
+| P2 | Thạch nhũ và măng đá hình thành từ nước nhỏ giọt mang chất đá vôi, lắng đọng qua thời gian rất dài | Tự nhiên |
+| P3 | Truyền thuyết Sơn Tinh – Thủy Tinh giải thích hiện tượng lũ lụt hằng năm | Truyền thuyết |
+| P4 | Cư dân Văn Lang sống chủ yếu bằng nghề trồng lúa nước ven các dòng sông lớn | Lịch sử |
+| P5 | Truyền thuyết thể hiện khát vọng chế ngự thiên tai của người Việt cổ; hoa văn thuyền trên trống đồng cho thấy vai trò của sông nước | Truyền thuyết, Lịch sử |
+
+Câu hỏi mẫu: truyền thuyết giải thích hiện tượng gì; nghề chính của cư dân Văn Lang; thạch nhũ hình thành do đâu.
+
+# 49 Chương 5 Trục Linh Mạch: màn kết
+
+Chương 5 dài hơn (**20–25 phút**), khó hơn và dùng nhiều cơ chế nhất. Không thêm cơ chế di chuyển mới; độ khó đến từ ghép các năng lực đã có, quái hỗn hợp, trùm nhiều pha và đoạn chạy giới hạn thời gian. Quái vẫn báo đòn rõ, không tăng độ khó chỉ bằng tăng máu.
+
+| Phòng | Nội dung | Cơ chế dùng |
+| --- | --- | --- |
+| P1 Cửa Linh Mạch | Bóng tối gần như hoàn toàn, An chỉ dựa vào Lồng Đèn. Hành lang có quái hỗn hợp của chương 1–4 | Đèn, lộn né, khóa mục tiêu |
+| P2 Cầu Tứ Linh | Một câu đố liên hoàn: dâng nước, nâng khối đất trên mặt nước, cột gió lên cao, chiếu đèn mở phong ấn | Cột Gió, Ấn Núi, Ngọc Nước, đèn |
+| P3 Chiến Lũy | Hai đợt quái liên tiếp, đợt cuối có Hộ vệ Đá tái xuất làm trùm phụ | Toàn bộ chiến đấu |
+| P4 Đàn Đồng Tế | Đặt 4 cổ vật; **Đại Vấn Đáp** 5 câu; gõ Trống Đồng 4 vành theo thứ tự được gợi ý rải rác qua các chương. Nơi đặt **cơ chế ẩn** | Tri thức, trống |
+| P5 Lõi Hắc Sương | **Trùm cuối Hắc Sương Vương**, 4 pha. Thắng mỗi pha thì một Linh Thần hỗ trợ bằng hiệu ứng môi trường: Kim Quy dựng khiên ánh sáng, Chim Lạc thổi cột gió, Sơn Tinh nâng núi chắn, Thủy Tinh rút nước để lộ lõi. Có mốc lưu ở đầu mỗi pha | Mọi năng lực |
+| P6 Lối Lên Mặt Đất | Hang sụp, chạy thoát trong 90 giây, dùng lộn, cột gió và khối đất | Di chuyển |
+
+Mốc lưu chương 5: đầu chương, trước P4, trước P5 và đầu mỗi pha trùm. Chỉ có một lửa trại ở P1.
+
+## Trùm cuối Hắc Sương Vương
+
+| Pha | Hành vi | Cách thắng |
+| --- | --- | --- |
+| 1 Ánh sáng | Tạo màn sương che, phóng cầu sương | Chiếu đèn xóa màn sương rồi đánh |
+| 2 Gió | Bay lên cao, nện xuống theo vòng cảnh báo | Lên cột gió để đánh khi nó ở trên cao |
+| 3 Núi | Quét sóng sương sát mặt đất khắp đấu trường | Nâng khối đất để đứng trên và chặn sóng |
+| 4 Nước | Lặn vào hồ trung tâm, tạo vòng xoáy kéo An vào giữa | Rút nước để lộ lõi, đánh lõi |
+
+Máu 120 mỗi pha. Hình dạng là người khổng lồ bằng sương, dùng lại rig humanoid của Hắc Ảnh phóng to cùng particle sương để có animation thật mà không cần model mới.
+
+## Cơ chế ẩn và hai cái kết
+
+**Kết 1 "Ánh Sáng Trở Lại":** hoàn thành chương 5. Hắc Sương bị đẩy lùi và phong ấn, linh mạch hồi phục, An thoát lên mặt đất. Lời dẫn cuối cảnh báo Hắc Sương còn ngủ yên nơi ký ức bị lãng quên.
+
+**Cơ chế ẩn "Vành Ký Ức":**
+
+1. Ở P4 có một **Bia Câm** không có dấu hiệu nào, nằm khuất sau Đàn Đồng Tế. Chữ trên bia chỉ hiện khi An đứng đúng điểm giao nhau của 4 luồng sáng Linh Thần và giữ Focus đèn vào bia trong 3 giây.
+2. Manh mối dẫn tới bia mở dần trong Nhật ký theo Điểm Tri Thức. Mỗi 5 điểm mở một dòng gợi ý, ví dụ "nơi bốn ánh sáng gặp nhau", "điều không được khắc trên đàn". Người chơi không đủ điểm vẫn có thể tự tìm ra nhưng khó hơn.
+3. Bia Câm đưa ra **Câu hỏi Cội Nguồn**: sắp xếp đúng thứ tự Văn Lang → Âu Lạc và gắn đúng truyền thuyết với Linh Thần. Trả lời sai được làm lại.
+4. Thành công thì nhận **Vành Ký Ức**, vành thứ năm của Trống Đồng; cờ `hidden_memory_ring` được lưu ngay.
+
+**Kết 2 "Ký Ức Không Tắt"** (cần Vành Ký Ức trước khi thắng trùm cuối): Trống Đồng được phục dựng đủ 5 vành. Hắc Sương, hiện thân của sự lãng quên, tan hoàn toàn chứ không chỉ bị phong ấn. Bốn Linh Thần hiện ra tiễn An. An lên tới mặt đất lúc bình minh ở Sơn Đoòng. Phần kết điểm lại từng chương bằng ảnh tĩnh, cuốn nhật ký của An trở thành bộ sưu tập tri thức, và màn danh đề hiện toàn bộ thẻ kiến thức đã thu thập.
+
+Cả hai kết dùng ảnh tĩnh, camera di chuyển ngắn, ánh sáng, âm thanh và lời dẫn theo phần 2, không cần cutscene animation.
+
+## Tri thức chương 5 (khó, tổng hợp)
+
+| Phòng | Bia | Nhãn |
+| --- | --- | --- |
+| P1 | Từ nước Văn Lang của các vua Hùng đến nước Âu Lạc của An Dương Vương | Lịch sử |
+| P2 | Trống đồng được tìm thấy ở nhiều nơi tại Đông Nam Á, cho thấy giao lưu văn hóa | Lịch sử |
+| P3 | Phong Nha – Kẻ Bàng được UNESCO công nhận là Di sản thiên nhiên thế giới (năm cần kiểm chứng) | Tự nhiên |
+| P4 | Giỗ Tổ Hùng Vương ngày mùng 10 tháng 3 âm lịch | Lịch sử |
+| P5 | Tín ngưỡng thờ cúng Hùng Vương ở Phú Thọ được UNESCO ghi danh là di sản văn hóa phi vật thể đại diện của nhân loại (năm cần kiểm chứng) | Lịch sử |
+
+# 50 Dữ liệu, scene và lưu tải mở rộng
+
+## Scene
+
+| Scene | Nội dung |
+| --- | --- |
+| 00_Boot | Tạo dịch vụ dùng chung một lần |
+| 01_MainMenu | Chơi mới, Tiếp tục, Cài đặt, Thoát |
+| 02_HangLinhMach | Chương 1 Kim Quy |
+| 03_GiengTroiChimLac | Chương 2 |
+| 04_ThanhDaSonTinh | Chương 3 |
+| 05_SongNgamThuyTinh | Chương 4 |
+| 06_TrucLinhMach | Chương 5 và hai cái kết |
+
+Các scene 90–93 vẫn là scene thử, không vào build.
+
+## Lưu tải
+
+Tăng schemaVersion và chuyển đổi bản lưu cũ. Thêm các trường:
+
+| Trường | Ý nghĩa |
+| --- | --- |
+| chapterId, sceneId, checkpointId | Chương và mốc đang kích hoạt |
+| unlockedAbilities | movement_kit, ability_wind, ability_earth, ability_water |
+| fragments | ID mảnh cổ vật của mọi chương |
+| bossTools | Công cụ trận trùm đã nhận |
+| earthTileLevels, waterLevels | Mức của từng ô đất và từng phòng nước đã giải xong |
+| readLoreIds, answeredQuizIds, firstTryCorrectQuizIds | Trạng thái tri thức; Điểm Tri Thức suy ra từ tập cuối |
+| defeatedUniqueEnemies | Thêm ID trùm từng chương |
+| hiddenMemoryRing | Đã có Vành Ký Ức |
+| endingsSeen | Kết đã xem |
+
+Chuyển chương lưu một snapshot ở mốc đầu chương mới. Continue mở đúng chương và mốc. Năng lực và tri thức không mất khi chết vì đã nằm trong snapshot ở mốc.
+
+# 51 Quy trình sản xuất và duyệt asset
+
+## Bốn giai đoạn cho mỗi chương
+
+| Giai đoạn | Việc | Điều kiện chuyển |
+| --- | --- | --- |
+| A Blockout | Dựng phòng bằng ProBuilder hoặc khối cơ bản, bake NavMesh, code cơ chế, câu đố, AI, trùm, Bệ Vấn Đáp, nhiệm vụ, lưu tải | Chơi được từ đầu đến cuối chương bằng khối |
+| B Chơi thử và cân bằng | Chỉnh thời gian lộn, tầm đánh, nhịp đòn trùm, độ khó câu đố và câu hỏi; chạy lại các ca lưu tải | Không còn lỗi chặn tiến trình |
+| C Duyệt concept và asset | Trình bảng concept theo tông màu và danh sách asset đề xuất cho người dùng duyệt | Người dùng duyệt |
+| D Làm đồ họa | Thay khối bằng model đã duyệt, bake ánh sáng, đặt VFX, âm thanh qua AudioMixer | Không thay đổi collider, ID và tuyến chơi đã kiểm thử |
+
+Giai đoạn A và B của mọi chương làm xong trước giai đoạn C của toàn game.
+
+## Bảng concept trình duyệt
+
+| Tầng | Chương | Tông màu và chất liệu |
+| --- | --- | --- |
+| Tầng trên | 1 (Trại, Vườn Rêu), 2 | Xanh lá, vàng nắng, sương mỏng, đá xám, rêu |
+| Tầng giữa | 1 (Điện Trống, Đàn Kim Quy), 3 | Đá nâu, đồng xỉn, hoa văn Đông Sơn, ánh lửa cam |
+| Tầng sâu | 4, 5 | Thạch nhũ tím và đỏ, nước tối, rêu phát quang, sương đen của Hắc Sương |
+
+Mỗi bảng concept gồm ảnh chụp blockout, ảnh tham chiếu màu, mô tả vật liệu và danh sách asset của chương. Không import trước khi người dùng duyệt.
+
+## Quy tắc tìm asset
+
+1. Ưu tiên asset miễn phí có giấy phép rõ: danh mục A01–A40, sau đó Quaternius, Kenney, Poly Haven, ambientCG, OpenGameArt, Sketchfab (lọc Downloadable và giấy phép cho phép), Unity Asset Store bản miễn phí, Mixamo cho animation humanoid.
+2. Với mỗi asset ghi tên, tác giả, URL, giấy phép, phần dùng, phần đã chỉnh vào Asset_Sources.
+3. Chỉ đề xuất tự làm khi không tìm được asset miễn phí phù hợp; ghi rõ lý do và cách làm (Blender, ProBuilder, Shader Graph, particle).
+
+## Ứng viên asset cho trùm có animation
+
+Trùm phải là sinh vật có animation thật. Danh sách dưới là hướng tìm, chưa xác nhận tồn tại hoặc đủ clip; giai đoạn C phải kiểm tra từng ứng viên.
+
+| Trùm | Ứng viên miễn phí cần kiểm tra | Phương án tự làm nếu không có |
+| --- | --- | --- |
+| Hộ vệ Đá (chương 1, chương 5) | A07 Giant Monster Model Golem (Kevin Iglesias) | Retarget clip humanoid từ Mixamo cho rig golem |
+| Chim Lạc nhiễm sương | Chim có rig và clip bay, đậu, lao trên Quaternius hoặc Sketchfab | Model chim đơn giản trong Blender, rig ít xương, 3 clip đậu, vỗ cánh, lao |
+| Rết Đá | Rết hoặc côn trùng nhiều đốt có animation trên Sketchfab | Chuỗi đốt đá nối nhau chuyển động bằng code |
+| Thuồng Luồng | Rắn hoặc rồng nước có animation trong A08 Ultimate Monsters, Quaternius hoặc Sketchfab | Dùng chung code chuỗi đốt của Rết Đá |
+| Hắc Sương Vương | Rig humanoid của Hắc Ảnh (A08) phóng to, clip Mixamo | Particle sương bao quanh mô hình humanoid cơ bản |
+
+# 52 Lịch sản xuất 7 ngày
+
+Lịch giả định người dùng làm cùng trợ lý AI, mỗi ngày kết thúc bằng một bản chơi được trong Editor. Giai đoạn A–B của toàn game xong trước ngày 6.
+
+| Ngày | Việc | Kết quả cuối ngày |
+| --- | --- | --- |
+| 1 | C1-F01 đến F08; PlayerMotor, InputReader; Boot, Menu, Pause, Settings; hồi sinh, vùng chết, đủ 4 mốc chương 1 | Chơi chương 1 hiện có từ Menu, chết và hồi sinh đúng |
+| 2 | Đánh dao, thể lực, Hắc Ảnh và NavMesh, đèn làm yếu; Đàn Kim Quy, Hộ vệ Đá, phục dựng, kết chương; HUD thanh; túi đồ và chế thuốc | Chương 1 hoàn chỉnh bằng khối |
+| 3 | Bộ animation di chuyển, Quà Kim Quy, khóa mục tiêu; hệ Tri thức (bia, Bệ Vấn Đáp, Linh Thần Vấn Đáp, Nhật ký); khuôn phòng dùng chung; chương 2 | Chương 1 chuyển sang chương 2, chương 2 chơi hết bằng khối |
+| 4 | Chương 3 và chương 4 (Ấn Núi, Ngọc Nước, quái biến thể, Rết Đá, Thuồng Luồng) | Chơi chương 2–4 bằng khối |
+| 5 | Chương 5: 6 phòng, Hắc Sương Vương 4 pha, cơ chế ẩn, hai cái kết; schema lưu đầy đủ | Chơi từ Menu đến cả hai kết bằng khối |
+| 6 | Chơi thử toàn game, cân bằng, sửa lỗi, chạy các ca kiểm thử; soạn và kiểm chứng nội dung tri thức; trình concept và danh sách asset cho người dùng duyệt | Bản blockout ổn định; concept đã gửi duyệt |
+| 7 | Làm đồ họa theo asset đã duyệt, âm thanh cơ bản; build Windows; chạy thử bản build từ đầu đến hai kết | Build Windows chơi được, có bằng chứng kiểm thử |
+
+## Mức tối thiểu không được cắt
+
+Chơi được từ Menu đến cả hai kết; lưu, tải, hồi sinh đúng; mỗi chương có cơ chế mới, câu hỏi kiến thức, quái thường và trùm; Quà Kim Quy; nội dung tri thức đã kiểm chứng.
+
+## Thứ tự cắt khi trễ
+
+1. Giảm phạm vi đồ họa: giữ blockout với vật liệu màu theo concept, chỉ thay model nhân vật, quái và trùm.
+2. Túi 12 ô thu về hiển thị số thuốc trên HUD; giữ chế thuốc tại lửa trại.
+3. Bỏ "lộn chui khe thấp" và các khe thiết kế cho nó.
+4. Bỏ "lộn + chém".
+5. Giảm quái thường mỗi phòng giao chiến xuống một đợt.
+
+Mỗi thứ bị cắt phải được gỡ hẳn khỏi game và tài liệu, không để dở dang.
+
+# 53 Kiểm thử bổ sung
+
+| Mã | Thao tác | Kết quả phải đạt |
+| --- | --- | --- |
+| MV01 | Bấm Ctrl trong chương 1 | Không lộn |
+| MV02 | Hoàn thành chương 1, tiếp tục chương 2, thoát và Continue | Lộn và các thao tác nâng cao dùng được, còn sau khi tải |
+| MV03 | Lộn 4 hướng có và không khóa mục tiêu, sát tường, ở FPS thấp | Đúng hướng, không xuyên tường, bất tử đúng khoảng |
+| LK01 | Khóa mục tiêu rồi để mục tiêu chết, đi xa, bị che | Tự bỏ khóa, camera không giật |
+| QZ01 | Trả lời sai rồi đúng tại Bệ Vấn Đáp | Có giải thích, nhận đủ đồ, không có điểm lần đầu |
+| QZ02 | Trả lời đúng ngay, lưu, chết, tải | Điểm và đồ còn đúng, bệ không trao lại |
+| QZ03 | Mở bảng câu hỏi khi đang giữ phím di chuyển hoặc đánh | Gameplay dừng, đóng bảng không còn input treo |
+| AB01 | Dùng năng lực chương, lưu giữa câu đố, tải | Ô đất, mực nước, cột gió về đúng trạng thái đã lưu |
+| BS02 | Chết ở mỗi trùm rồi thắng | Đấu trường, công cụ, mốc lưu đúng; trùm không sống lại sau Continue |
+| CH01 | Chuyển chương và Continue ở mọi chương | Mở đúng scene và mốc, năng lực giữ nguyên |
+| EN01 | Hoàn thành chương 5 không có Vành Ký Ức | Kết 1 |
+| EN02 | Lấy Vành Ký Ức, chết trước trùm, tải, thắng | Vẫn ra Kết 2 |
+| KN01 | Đối chiếu từng bia và câu hỏi với nguồn | Mỗi mục có nguồn ghi lại, không còn mục "cần kiểm chứng" trong build |
+
+# 54 Giả định và điểm cần xác nhận
+
+1. **Bệ Vấn Đáp theo phòng:** người dùng chốt "P1–P3 lấy mảnh để dựng cốt truyện, P4 lấy công cụ cho trận trùm". Kế hoạch hiểu đây là các phòng trong mỗi chương. Nếu ý người dùng là theo chương (chương 1–3 lấy mảnh, chương 4 lấy công cụ cho chương 5) thì sửa phần 42.
+2. **Chương 1 không có lộn né** theo quyết định Kim Quy trao toàn bộ bộ di chuyển sau chương 1. Chiến đấu chương 1 cân bằng lại theo phần 43.
+3. **Lịch 7 ngày rất sát** cho 5 chương. Nếu đến cuối ngày 3 chương 2 chưa chơi được hết thì dừng lại hỏi người dùng để giảm phạm vi trước khi làm tiếp.
+4. Số máu trùm, thời lượng và kích thước phòng là điểm bắt đầu để cân bằng, chưa phải số liệu đo.
+5. Nội dung tri thức trong phần 45–49 là bản đề xuất, phải kiểm chứng nguồn trước khi đưa vào build.
+
+Sơn Đoòng Cõi Mộng Kỳ Thần  |  2
+
+# 55 Đặc tả triển khai từng chương
+
+Đặc tả cho AI Agent nằm trong thư mục `spec/chapters/`. Mỗi file chương có đúng 2 phần: Tóm tắt tổng quan, và Đặc tả kỹ thuật gồm 5 hạng mục (greybox, cơ chế mới, AI và đấu trường, lưu tải, kiểm thử).
+
+| File | Nội dung |
+| --- | --- |
+| `00_Nen_tang_dung_chung.md` | Quy ước, layer (thêm Hazard index 12), API dùng chung phải có sau chương 1, thành phần tri thức, địch, trùm, lưu tải v4, thứ tự làm một chương |
+| `C2_Chim_Lac.md` | Cột Gió, câu đố chuông gió, Hắc Ảnh Ném, trùm Chim Lạc |
+| `C3_Son_Tinh.md` | Ấn Núi (mức 0 / 1 / 2 m), câu đố dáng núi, Hộ Vệ Đá Nhỏ, trùm Rết Đá |
+| `C4_Thuy_Tinh.md` | Ngọc Nước, cửa van, đền ngập, Hắc Ảnh Nước, Hắc Ảnh Vỏ Đá, trùm Thuồng Luồng |
+| `C5_Truc_Linh_Mach.md` | Cầu Tứ Linh, Chiến Lũy, Đàn Đồng Tế, cơ chế ẩn Vành Ký Ức, Hắc Sương Vương 4 pha, thoát hang, hai cái kết |
+
+Điều chỉnh phát sinh khi viết đặc tả, ưu tiên hơn phần 46–49:
+1. Mức khối đất chương 3 là 0 / 1 / 2 m thay vì 0 / 1,5 / 3 m, vì An chỉ nhảy cao 1,2 m.
+2. Hướng Focus của Lồng Đèn lấy theo hướng camera (có góc ngẩng) để chiếu được mục tiêu trên cao.
+3. Câu đố chuỗi (chuông gió, trống bốn vành) dùng `SequencePuzzleController` chung; `DrumPuzzleController` chương 1 giữ nguyên.
+4. Đền thờ trong đấu trường chương 4 chỉ rút nước, tự dâng lại sau 6 giây.
+5. Chương 5 thêm mốc `c5_cp_bridge` trước Chiến Lũy và hai bệ vấn đáp trao thuốc ở P1, P3.
+6. Thẻ thức tỉnh Kim Quy (chương 1) có câu gợi ý thứ tự trống bốn vành; ID phục dựng chương 1 trong bản lưu v4 là `c1_relic_restored`.

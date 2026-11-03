@@ -4,8 +4,7 @@ public class LanternPickup : MonoBehaviour, IInteractable
 {
     private bool collected;
 
-    // Dùng không dấu để thử với font TMP mặc định.
-    public string Prompt => "Nhan Long Den Sen";
+    public string Prompt => "Nhận Lồng Đèn Sen";
 
     public bool CanInteract(GameObject interactor)
     {

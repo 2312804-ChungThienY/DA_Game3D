@@ -56,6 +56,27 @@ Kế hoạch có tham chiếu tên `.docx` ở D1/D2; các file thực tế đan
 |37| Rủi ro/symptoms, scope-cut khi trễ, tương thích asset |
 |38|6 nhóm hồ sơ, demo8–10 phút, snapshot demo và build máy khác |
 |39| D1/D2,S1–S8, thứ tự học công nghệ |
+|40| Điều chỉnh 01/11/2026: 5 chương ngắn, 1 tuần, bảng thay đổi so với phần 1–39 (ưu tiên phần 40–54 khi mâu thuẫn) |
+|41| 8 nguyên tắc sản xuất bắt buộc |
+|42| Khuôn chương 5 phòng: P1–P3 mảnh cổ vật qua Bệ Vấn Đáp, P4 công cụ trùm, P5 trùm + Linh Thần Vấn Đáp |
+|43| Chương 1 không lộn né; Quà Kim Quy mở bộ di chuyển; khóa mục tiêu; bộ animation làm một lần |
+|44| Hệ Tri thức: bia, Bệ Vấn Đáp, Điểm Tri Thức suy từ tập ID, nhãn nội dung, kiểm chứng nguồn |
+|45| Chương 1: mã sửa lỗi C1-F01–F08, thay đồ tạm C1-R01–R12 |
+|46–48| Chương 2 Chim Lạc (Cột Gió), 3 Sơn Tinh (Ấn Núi), 4 Thủy Tinh (Ngọc Nước): phòng, quái, trùm, tri thức |
+|49| Chương 5: 6 phòng, Hắc Sương Vương 4 pha, cơ chế ẩn Vành Ký Ức, Kết 1 và Kết 2 |
+|50| Scene 00–06, trường lưu mới |
+|51| Quy trình A–D, bảng concept, quy tắc tìm asset miễn phí trước, ứng viên trùm |
+|52| Lịch 7 ngày, mức tối thiểu, thứ tự cắt |
+|53| Ca kiểm thử MV/LK/QZ/AB/BS02/CH/EN/KN |
+|54| Giả định cần xác nhận |
+|55| Trỏ tới đặc tả `spec/chapters/` (00 nền tảng, C2–C5) và 6 điều chỉnh phát sinh khi viết đặc tả |
+
+## Đặc tả chương cho AI Agent (`spec/chapters/`, 01/11/2026)
+
+| File | Đọc khi |
+| --- | --- |
+| `00_Nen_tang_dung_chung.md` | Trước mọi việc chương 2–5, và khi làm các hệ dùng chung trong chương 1 (WorldStateStore tổng quát, PlayerMotor, tri thức, địch, trùm, lưu v4) |
+| `C2_Chim_Lac.md` … `C5_Truc_Linh_Mach.md` | Khi làm chương tương ứng; mỗi file có Phần 1 tóm tắt và Phần 2 với 5 hạng mục kỹ thuật |
 
 ## Tài nguyên: các nguyên tắc đọc danh mục
 
@@ -152,7 +173,7 @@ Các_kỹ_thuật_làm_game.md
 DCDC858B431BD7D224E2CC16A39BD65BAEBB5A148A95C35195AA6499742CB1E5
 
 Ke_hoach_game_Son_Doong_12_tuan.md
-82EAB3ACBF52467C2AFBA99A9A2563B4B9F830F5D5B7ED12EE1030527F3B050D
+D54D7A0A5CA149163CEF21C35D1D08DF1FEBB4FED7A0F617F8B2CC67A1E0B36F  (01/11/2026, sau khi thêm phần 40–55 theo yêu cầu người dùng; bản gốc: 82EAB3AC...F050D)
 
 Danh_muc_asset_free_Son_Doong.md
 68FECE9A64467B3835701DAFFC1C30C2480A4AF237F4B198EF10B706D956B9B6

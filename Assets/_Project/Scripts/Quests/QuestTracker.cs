@@ -24,42 +24,46 @@ public class QuestTracker : MonoBehaviour
 
         if (!lantern.HasLantern)
         {
-            objective = "Nhan Long Den Sen tai trai.";
+            objective = "Nhận Lồng Đèn Sen tại trại.";
         }
         else if (!worldState.HasRelic(WorldStateStore.DrumA))
         {
-            objective = "Dung Focus mo phong an.\nTim Manh Trong A tai Vuon Reu.";
+            objective = "Giữ chuột phải chiếu đèn mở phong ấn.\nTìm Mảnh Trống A ở Vườn Rêu.";
         }
         else if (!worldState.HasSolvedPuzzle(WorldStateStore.DrumPuzzleId))
         {
-            objective = "Den Dien Trong.\nDoc goi y va go dung thu tu.";
+            objective = "Đến Điện Trống.\nRọi đèn đọc gợi ý, gõ đúng thứ tự.";
         }
         else if (!worldState.HasRelic(WorldStateStore.DrumB))
         {
-            objective = "Cau do da giai.\nNhan Manh Trong B tren be thuong.";
+            objective = "Câu đố đã giải.\nNhận Mảnh Trống B trên bệ thưởng.";
         }
         else if (!worldState.HasSolvedPuzzle(WorldStateStore.MirrorPuzzleId))
         {
-            objective = "Den Hanh Lang Quang.\nXoay hai guong dua tia den ngoc.";
+            objective = "Đến Hành Lang Quang.\nXoay hai gương đưa tia sáng tới ngọc.";
         }
         else if (!worldState.HasRelic(WorldStateStore.DrumC))
         {
-            objective = "Guong da giai.\nNhan Manh Trong C tren be thuong.";
+            objective = "Câu đố gương đã giải.\nNhận Mảnh Trống C trên bệ thưởng.";
         }
-        else if (!worldState.HasDefeatedEnemy(WorldStateStore.GuardianId))
+        else if (!worldState.Has(StateSet.Doors, WorldIds.DoorKimQuy))
         {
-            objective = "Tien vao Dan Kim Quy.\nDanh bai Ho ve Da.";
+            objective = "Đã đủ 3 mảnh trống.\nĐi qua cổng gương, mở cổng Đàn Kim Quy.";
         }
-        else if (!worldState.IsRelicRestored)
+        else if (!worldState.Has(StateSet.Bosses, WorldIds.GuardianBoss))
         {
-            objective = "Ho ve da bi danh bai.\nPhuc dung Trong Dong tren be.";
+            objective = "Đánh bại Hộ vệ Đá.\nTránh vùng đỏ, chiếu đèn để làm yếu.";
+        }
+        else if (!worldState.Has(StateSet.Puzzles, WorldIds.RelicRestoredC1))
+        {
+            objective = "Phục dựng Trống Đồng tại bệ Kim Quy.";
         }
         else
         {
-            objective = "Da hoan thanh chuong Kim Quy.";
+            objective = "Chương 1 hoàn thành.\nĐã nhận Quà Kim Quy.";
         }
 
-        string text = $"MUC TIEU\n{objective}\nManh trong: {worldState.RelicCount}/3";
+        string text = $"MỤC TIÊU\n{objective}\nMảnh trống: {worldState.RelicCount}/3";
         if (text != lastText)
         {
             objectiveText.text = text;

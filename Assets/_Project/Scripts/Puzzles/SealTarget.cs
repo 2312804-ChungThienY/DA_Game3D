@@ -9,7 +9,7 @@ public class SealTarget : MonoBehaviour, ILanternTarget
     [SerializeField] private TMP_Text progressText;
 
     [Header("Rules")]
-    [SerializeField] private float requiredTime = 1.5f;
+    [SerializeField] private float requiredTime = 1f;
     [SerializeField] private float graceTime = 0.25f;
 
     private float progress;
@@ -115,7 +115,7 @@ public class SealTarget : MonoBehaviour, ILanternTarget
         }
 
         progressText.text = solved
-            ? "Da xoa phong an"
-            : $"Phong an: {progress:0.0}/{requiredTime:0.0} giay";
+            ? "Đã xóa phong ấn"
+            : $"Phong ấn: {progress:0.0}/{requiredTime:0.0} giây";
     }
 }

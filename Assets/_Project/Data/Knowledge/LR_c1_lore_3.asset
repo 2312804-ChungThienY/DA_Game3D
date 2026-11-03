@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c0b32727d4eb734ca0ffefdec8c184e, type: 3}
+  m_Name: LR_c1_lore_3
+  m_EditorClassIdentifier: Assembly-CSharp::LoreDefinition
+  loreId: c1_lore_3
+  tag: 1
+  title: "R\xF9a V\xE0ng v\xE0 th\xE0nh C\u1ED5 Loa"
+  body: "Truy\u1EC1n thuy\u1EBFt k\u1EC3 r\u1EB1ng Th\u1EA7n Kim Quy (R\xF9a V\xE0ng)
+    \u0111\xE3 gi\xFAp An D\u01B0\u01A1ng V\u01B0\u01A1ng x\xE2y th\xE0nh C\u1ED5
+    Loa v\xE0 trao chi\u1EBFc vu\u1ED1t \u0111\u1EC3 l\xE0m l\u1EABy n\u1ECF th\u1EA7n."
+  sourceRef: "Truy\u1EC1n thuy\u1EBFt An D\u01B0\u01A1ng V\u01B0\u01A1ng x\xE2y th\xE0nh
+    C\u1ED5 Loa (SGK L\u1ECBch s\u1EED 6; B\u1EA3o t\xE0ng L\u1ECBch s\u1EED Qu\u1ED1c
+    gia)."
+  verified: 1

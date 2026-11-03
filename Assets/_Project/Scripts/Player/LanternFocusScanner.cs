@@ -11,11 +11,18 @@ public class LanternFocusScanner : MonoBehaviour
     [Header("Rules")]
     [SerializeField] private float range = 8f;
     [SerializeField, Range(1f, 180f)]
-    private float fullConeAngle = 60f;
+    private float fullConeAngle = 90f;
+
+    // Camera ở sau và cao hơn An nên thường chúc xuống; nới góc dọc để chiếu dễ hơn.
+    [SerializeField, Range(1f, 90f)]
+    private float verticalTolerance = 45f;
 
     [Header("Layers")]
     [SerializeField] private LayerMask targetMask;
     [SerializeField] private LayerMask visibilityMask;
+
+    // Hướng chiếu theo camera (có góc ngẩng), gốc chiếu ở đèn.
+    private Transform aimTransform;
 
     private readonly HashSet<ILanternTarget> checkedTargets =
         new HashSet<ILanternTarget>();
@@ -31,6 +38,15 @@ public class LanternFocusScanner : MonoBehaviour
             enabled = false;
         }
     }
+
+    private void Start()
+    {
+        Camera main = Camera.main;
+        aimTransform = main != null ? main.transform : null;
+    }
+
+    private Vector3 AimForward =>
+        aimTransform != null ? aimTransform.forward : focusSource.forward;
 
     private void LateUpdate()
     {
@@ -73,11 +89,8 @@ public class LanternFocusScanner : MonoBehaviour
                 continue;
             }
 
-            float angle = Vector3.Angle(
-                focusSource.forward, offset);
-
-            // Góc toàn phần 60° nghĩa là mỗi bên 30°.
-            if (angle > fullConeAngle * 0.5f)
+            // Góc ngang theo nón chiếu (mỗi bên một nửa góc toàn phần), góc dọc cho phép lệch verticalTolerance.
+            if (!IsInsideCone(AimForward, offset))
             {
                 continue;
             }
@@ -107,6 +120,21 @@ public class LanternFocusScanner : MonoBehaviour
         }
     }
 
+    private bool IsInsideCone(Vector3 aim, Vector3 offset)
+    {
+        Vector3 flatAim = new Vector3(aim.x, 0f, aim.z);
+        Vector3 flatOffset = new Vector3(offset.x, 0f, offset.z);
+
+        float yawAngle = flatAim.sqrMagnitude < 0.0001f || flatOffset.sqrMagnitude < 0.0001f
+            ? 0f
+            : Vector3.Angle(flatAim, flatOffset);
+        if (yawAngle > fullConeAngle * 0.5f) return false;
+
+        float aimPitch = Mathf.Atan2(aim.y, flatAim.magnitude) * Mathf.Rad2Deg;
+        float targetPitch = Mathf.Atan2(offset.y, flatOffset.magnitude) * Mathf.Rad2Deg;
+        return Mathf.Abs(targetPitch - aimPitch) <= verticalTolerance;
+    }
+
     private void OnDrawGizmosSelected()
     {
         if (focusSource == null)
@@ -121,6 +149,6 @@ public class LanternFocusScanner : MonoBehaviour
 
         Gizmos.DrawRay(
             focusSource.position,
-            focusSource.forward * range);
+            AimForward * range);
     }
 }
