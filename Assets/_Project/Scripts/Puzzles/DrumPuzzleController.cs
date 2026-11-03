@@ -46,7 +46,11 @@ public class DrumPuzzleController : MonoBehaviour
         if (worldState == null || !isActiveAndEnabled || definition == null ||
             door == null || rewardDisplay == null || statusText == null) return;
 
-        ApplySolvedState(worldState.HasSolvedPuzzle(WorldStateStore.DrumPuzzleId));
+        // Chỉ áp lại khi trạng thái solved đổi; thay đổi world state khác không reset lượt đang gõ.
+        bool solved = worldState.HasSolvedPuzzle(WorldStateStore.DrumPuzzleId);
+        if (solved == (State == DrumPuzzleState.Solved)) return;
+
+        ApplySolvedState(solved);
     }
 
     public bool TryHit(DrumNote note)
@@ -61,13 +65,13 @@ public class DrumPuzzleController : MonoBehaviour
 
     private IEnumerator EvaluateHit(DrumNote note)
     {
-        statusText.text = $"Vua go: {note}";
+        statusText.text = $"Vừa gõ: {note}";
         yield return new WaitForSeconds(definition.InputDelay);
 
         if (note != definition.Sequence[currentIndex])
         {
             State = DrumPuzzleState.Failed;
-            statusText.text = "Sai thu tu. Hay thu lai!";
+            statusText.text = "Sai thứ tự. Hãy thử lại!";
             yield return new WaitForSeconds(definition.FailureDelay);
             currentIndex = 0;
             busy = false;
@@ -84,7 +88,7 @@ public class DrumPuzzleController : MonoBehaviour
             if (worldState != null)
                 worldState.TrySolvePuzzle(WorldStateStore.DrumPuzzleId);
             ApplySolvedState(true);
-            Debug.Log("Puzzle pz_trong_01 da hoan thanh.", this);
+            Debug.Log("Câu đố pz_trong_01 đã hoàn thành.", this);
             yield break;
         }
 
@@ -110,7 +114,7 @@ public class DrumPuzzleController : MonoBehaviour
         State = solved ? DrumPuzzleState.Solved : DrumPuzzleState.Unsolved;
         door.SetActive(!solved);
         rewardDisplay.SetActive(solved);
-        if (solved) statusText.text = "Da giai cau do! Be thuong da mo.";
+        if (solved) statusText.text = "Đã giải câu đố! Bệ thưởng đã mở.";
         else ShowProgress();
     }
 
@@ -130,6 +134,6 @@ public class DrumPuzzleController : MonoBehaviour
 
     private void ShowProgress()
     {
-        statusText.text = $"Thu tu trong: {currentIndex}/{definition.Sequence.Length}";
+        statusText.text = $"Thứ tự trống: {currentIndex}/{definition.Sequence.Length}";
     }
 }

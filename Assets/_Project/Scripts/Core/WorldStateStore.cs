@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Nguồn sự thật của trạng thái thế giới. Object trong scene chỉ đọc ở đây, không tự đọc file lưu.
 public class WorldStateStore : MonoBehaviour
 {
     public const string DrumA = "relic_drum_a";
@@ -10,95 +11,75 @@ public class WorldStateStore : MonoBehaviour
     public const string DrumPuzzleId = "pz_trong_01";
     public const string MirrorPuzzleId = "pz_guong_01";
 
-    private readonly HashSet<string> collectedRelics =
-        new HashSet<string>(StringComparer.Ordinal);
-    private readonly HashSet<string> solvedPuzzles =
-        new HashSet<string>(StringComparer.Ordinal);
+    private readonly Dictionary<StateSet, HashSet<string>> sets = new Dictionary<StateSet, HashSet<string>>();
 
     public event Action Changed;
 
-    public int RelicCount => collectedRelics.Count;
+    public int RelicCount => Count(StateSet.Fragments);
 
-    public static bool IsValidRelicId(string id)
+    public bool Has(StateSet set, string id) => id != null && GetSet(set).Contains(id);
+
+    public int Count(StateSet set) => GetSet(set).Count;
+
+    // false nếu đã có hoặc ID không thuộc danh mục.
+    public bool TryAdd(StateSet set, string id)
     {
-        return id == DrumA || id == DrumB || id == DrumC;
-    }
-
-    public bool HasRelic(string id)
-    {
-        return collectedRelics.Contains(id);
-    }
-
-    public bool HasSolvedPuzzle(string id) => solvedPuzzles.Contains(id);
-
-    public bool TrySolvePuzzle(string id)
-    {
-        if (id != DrumPuzzleId && id != MirrorPuzzleId)
+        if (!WorldIds.IsKnown(set, id))
         {
-            Debug.LogError($"ID câu đố không hợp lệ: {id}", this);
+            Debug.LogError($"ID không có trong danh mục {set}: {id}", this);
             return false;
         }
 
-        if (!solvedPuzzles.Add(id)) return false;
+        if (!GetSet(set).Add(id)) return false;
         Changed?.Invoke();
         return true;
     }
 
-    public List<string> ExportSolvedPuzzles() => new List<string>(solvedPuzzles);
-
-    public void RestoreSnapshot(List<string> relicIds, List<string> puzzleIds)
+    public WorldSnapshot Export()
     {
-        collectedRelics.Clear();
-        solvedPuzzles.Clear();
-
-        if (relicIds != null)
-            foreach (string id in relicIds)
-                if (IsValidRelicId(id)) collectedRelics.Add(id);
-
-        if (puzzleIds != null)
-            foreach (string id in puzzleIds)
-                if (id == DrumPuzzleId || id == MirrorPuzzleId) solvedPuzzles.Add(id);
-
-        Changed?.Invoke();
-    }
-
-    public bool TryCollectRelic(string id)
-    {
-        if (!IsValidRelicId(id))
+        WorldSnapshot snapshot = new WorldSnapshot();
+        foreach (KeyValuePair<StateSet, HashSet<string>> pair in sets)
         {
-            Debug.LogError($"ID mảnh trống không hợp lệ: {id}", this);
-            return false;
+            if (pair.Value.Count == 0) continue;
+            List<string> ids = new List<string>(pair.Value);
+            ids.Sort(StringComparer.Ordinal);
+            snapshot.sets.Add(new StringSetDto { set = pair.Key.ToString(), ids = ids });
         }
-
-        if (!collectedRelics.Add(id))
-        {
-            return false;
-        }
-
-        Changed?.Invoke();
-        return true;
+        return snapshot;
     }
 
-    public List<string> ExportRelics()
+    // Thay toàn bộ, không trộn; phát Changed đúng một lần.
+    public void Restore(WorldSnapshot snapshot)
     {
-        return new List<string>(collectedRelics);
-    }
+        foreach (HashSet<string> set in sets.Values) set.Clear();
 
-    public void RestoreRelics(List<string> ids)
-    {
-        collectedRelics.Clear();
-
-        if (ids != null)
+        if (snapshot != null && snapshot.sets != null)
         {
-            foreach (string id in ids)
+            foreach (StringSetDto dto in snapshot.sets)
             {
-                if (IsValidRelicId(id))
-                {
-                    collectedRelics.Add(id);
-                }
+                if (dto == null || dto.ids == null || !Enum.TryParse(dto.set, out StateSet set)) continue;
+                foreach (string id in dto.ids)
+                    if (WorldIds.IsKnown(set, id)) GetSet(set).Add(id);
             }
         }
 
         Changed?.Invoke();
     }
+
+    private HashSet<string> GetSet(StateSet set)
+    {
+        if (!sets.TryGetValue(set, out HashSet<string> ids))
+        {
+            ids = new HashSet<string>(StringComparer.Ordinal);
+            sets.Add(set, ids);
+        }
+        return ids;
+    }
+
+    // Hàm cũ của chương 1, giữ làm wrapper.
+    public static bool IsValidRelicId(string id) => WorldIds.IsKnown(StateSet.Fragments, id);
+    public bool HasRelic(string id) => Has(StateSet.Fragments, id);
+    public bool TryCollectRelic(string id) => TryAdd(StateSet.Fragments, id);
+    public bool HasSolvedPuzzle(string id) => Has(StateSet.Puzzles, id);
+    public bool TrySolvePuzzle(string id) => TryAdd(StateSet.Puzzles, id);
 }

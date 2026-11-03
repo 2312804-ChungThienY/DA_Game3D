@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c0b32727d4eb734ca0ffefdec8c184e, type: 3}
+  m_Name: LR_c1_lore_2
+  m_EditorClassIdentifier: Assembly-CSharp::LoreDefinition
+  loreId: c1_lore_2
+  tag: 0
+  title: "V\u0103n h\xF3a \u0110\xF4ng S\u01A1n"
+  body: "V\u0103n h\xF3a \u0110\xF4ng S\u01A1n \u0111\u01B0\u1EE3c \u0111\u1EB7t
+    theo t\xEAn l\xE0ng \u0110\xF4ng S\u01A1n (Thanh H\xF3a), n\u01A1i l\u1EA7n \u0111\u1EA7u
+    t\xECm th\u1EA5y nhi\u1EC1u hi\u1EC7n v\u1EADt \u0111\u1ED3ng nh\u01B0 tr\u1ED1ng
+    \u0111\u1ED3ng, r\xECu, gi\xE1o."
+  sourceRef: "SGK L\u1ECBch s\u1EED v\xE0 \u0110\u1ECBa l\xED 6 (ph\u1EA7n V\u0103n
+    Lang \u2013 \xC2u L\u1EA1c); B\u1EA3o t\xE0ng L\u1ECBch s\u1EED Qu\u1ED1c gia:
+    tr\u1ED1ng \u0111\u1ED3ng Ng\u1ECDc L\u0169, v\u0103n h\xF3a \u0110\xF4ng S\u01A1n."
+  verified: 1

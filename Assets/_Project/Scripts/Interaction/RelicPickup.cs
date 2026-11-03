@@ -4,9 +4,9 @@ public class RelicPickup : MonoBehaviour, IInteractable
 {
     [SerializeField] private WorldStateStore worldState;
     [SerializeField] private string relicId = WorldStateStore.DrumA;
-    [SerializeField] private string displayName = "Manh Trong A";
+    [SerializeField] private string displayName = "Mảnh Trống A";
 
-    public string Prompt => $"Nhan {displayName}";
+    public string Prompt => $"Nhận {displayName}";
 
     private void Awake()
     {

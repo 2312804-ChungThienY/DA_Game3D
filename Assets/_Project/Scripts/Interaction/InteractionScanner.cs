@@ -2,7 +2,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(PlayerInput))]
 public class InteractionScanner : MonoBehaviour
 {
     [Header("References")]
@@ -12,9 +11,11 @@ public class InteractionScanner : MonoBehaviour
 
     private InputAction interactAction;
 
+    public event System.Action Interacted;
+
     [Header("Detection")]
     [SerializeField, Min(0.1f)] private float interactDistance = 3f;
-    [SerializeField, Min(1f)] private float cameraRayDistance = 15f;
+    [SerializeField, Min(1f)] private float cameraRayDistance = 25f;
 
     // Bao gồm vật tương tác và vật cản; loại Player.
     [SerializeField] private LayerMask detectionMask;
@@ -37,12 +38,12 @@ public class InteractionScanner : MonoBehaviour
 
     private void Start()
     {
-        interactAction = GetComponent<PlayerInput>().actions.FindAction(
-            "Interact", false);
+        InputReader input = AppRoot.Instance != null ? AppRoot.Instance.Input : null;
+        interactAction = input != null && input.IsReady ? input.Interact : null;
 
         if (interactAction == null)
         {
-            Debug.LogError($"{name}: PlayerInput thiếu action Interact.", this);
+            Debug.LogError($"{name}: Không tìm thấy action Interact trong InputReader.", this);
             enabled = false;
         }
     }
@@ -85,7 +86,12 @@ public class InteractionScanner : MonoBehaviour
         Vector3 toTarget = hit.point - interactionOrigin.position;
         float distance = toTarget.magnitude;
 
-        if (distance > interactDistance)
+        // Vật tương tác có thể quy định tầm riêng (ví dụ ô đất điều khiển từ xa).
+        float maxDistance = target is IInteractRange range
+            ? range.MaxInteractDistance
+            : interactDistance;
+
+        if (distance > maxDistance)
         {
             return;
         }
@@ -114,6 +120,7 @@ public class InteractionScanner : MonoBehaviour
         if (interactAction.WasPressedThisFrame())
         {
             target.Interact(gameObject);
+            Interacted?.Invoke();
             ClearPrompt();
         }
     }

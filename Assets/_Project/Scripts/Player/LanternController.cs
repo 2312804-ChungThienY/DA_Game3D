@@ -2,7 +2,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(PlayerInput))]
 public class LanternController : MonoBehaviour
 {
     [Header("References")]
@@ -53,18 +52,14 @@ public class LanternController : MonoBehaviour
 
     private void Start()
     {
-        PlayerInput input = GetComponent<PlayerInput>();
-
-        toggleAction = input.actions.FindAction(
-            "ToggleLantern", false);
-
-        focusAction = input.actions.FindAction(
-            "Focus", false);
+        InputReader input = AppRoot.Instance != null ? AppRoot.Instance.Input : null;
+        toggleAction = input != null && input.IsReady ? input.ToggleLantern : null;
+        focusAction = input != null && input.IsReady ? input.Focus : null;
 
         if (toggleAction == null || focusAction == null)
         {
             Debug.LogError(
-                $"{name}: Thiếu action ToggleLantern hoặc Focus.",
+                $"{name}: Không tìm thấy action ToggleLantern hoặc Focus trong InputReader.",
                 this);
 
             enabled = false;
@@ -161,6 +156,24 @@ public class LanternController : MonoBehaviour
         return true;
     }
 
+    public float Energy => energy;
+    public float MaxEnergy => maxEnergy;
+
+    // Cộng năng lượng từ nguồn ngoài (ví dụ vòm sáng Kim Quy ở chương 5).
+    public void AddEnergy(float amount)
+    {
+        if (!hasLantern || amount <= 0f || float.IsNaN(amount) || float.IsInfinity(amount)) return;
+        energy = Mathf.Min(maxEnergy, energy + amount);
+        RefreshVisuals();
+    }
+
+    public void RefillEnergy()
+    {
+        energy = maxEnergy;
+        exhaustedUntilRelease = false;
+        RefreshVisuals();
+    }
+
     public void ApplySavedState(bool owned)
     {
         hasLantern = owned;
@@ -193,12 +206,11 @@ public class LanternController : MonoBehaviour
             else
             {
                 string state = exhaustedUntilRelease
-                    ? "Het nang luong - tha chuot phai"
-                    : IsFocusing ? "Dang Focus" : "Giu chuot phai de Focus";
+                    ? "Hết năng lượng – thả chuột phải để hồi"
+                    : IsFocusing ? "Đang chiếu tập trung" : "Giữ chuột phải để chiếu tập trung";
 
-                energyText.text =
-                    $"Den: {Mathf.CeilToInt(energy)}/" +
-                    $"{Mathf.CeilToInt(maxEnergy)}\n{state}";
+                // Số năng lượng hiện ở thanh HUD; dòng này chỉ là gợi ý thao tác.
+                energyText.text = state;
             }
         }
     }

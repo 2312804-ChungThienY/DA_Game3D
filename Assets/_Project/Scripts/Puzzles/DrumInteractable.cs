@@ -9,13 +9,13 @@ public class DrumInteractable : MonoBehaviour, IInteractable
     [SerializeField] private AudioClip hitSound;
     [SerializeField] private GameObject hitIndicator;
 
-    public string Prompt => $"Go trong {note}";
+    public string Prompt => $"Gõ trống {note}";
 
     private void Awake()
     {
         if (puzzle == null || hitIndicator == gameObject)
         {
-            Debug.LogError($"{name}: Gan Puzzle va HitIndicator rieng.", this);
+            Debug.LogError($"{name}: Gán Puzzle và HitIndicator riêng.", this);
             enabled = false;
             return;
         }

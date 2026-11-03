@@ -3,7 +3,7 @@ using UnityEngine;
 public class DrumPuzzleReset : MonoBehaviour, IInteractable
 {
     [SerializeField] private DrumPuzzleController puzzle;
-    public string Prompt => "Lam lai cau do trong";
+    public string Prompt => "Làm lại câu đố trống";
 
     public bool CanInteract(GameObject interactor) =>
         isActiveAndEnabled && puzzle != null && puzzle.isActiveAndEnabled &&

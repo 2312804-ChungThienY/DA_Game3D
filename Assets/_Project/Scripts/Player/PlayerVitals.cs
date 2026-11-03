@@ -16,6 +16,8 @@ public class PlayerVitals : MonoBehaviour, IDamageable
 
     public event Action Changed;
     public event Action Died;
+    // Đòn hợp lệ bị bất tử chặn (dùng cho né đúng lúc).
+    public event Action<DamageInfo> DamageAvoided;
 
     private void Awake()
     {
@@ -26,11 +28,17 @@ public class PlayerVitals : MonoBehaviour, IDamageable
 
     public bool TryTakeDamage(DamageInfo damage)
     {
-        if (!isActiveAndEnabled || Time.timeScale == 0f || IsDead || IsInvulnerable ||
+        if (!isActiveAndEnabled || Time.timeScale == 0f || IsDead ||
             float.IsNaN(damage.Amount) || float.IsInfinity(damage.Amount) ||
             damage.Amount <= 0f ||
             (damage.SourceTeam != DamageTeam.Neutral && damage.SourceTeam == team))
             return false;
+
+        if (IsInvulnerable)
+        {
+            DamageAvoided?.Invoke(damage);
+            return false;
+        }
 
         currentHealth = Mathf.Max(0f, currentHealth - damage.Amount);
         Changed?.Invoke();
@@ -42,5 +50,36 @@ public class PlayerVitals : MonoBehaviour, IDamageable
         }
 
         return true;
+    }
+
+    // Rơi vào vùng chết: chết ngay, bỏ qua bất tử.
+    public void Kill()
+    {
+        if (!isActiveAndEnabled || IsDead) return;
+
+        currentHealth = 0f;
+        IsInvulnerable = false;
+        Changed?.Invoke();
+        Died?.Invoke();
+    }
+
+    // Hồi máu từ thuốc; không vượt máu trần, không hồi khi đã chết.
+    public bool Heal(float amount)
+    {
+        if (!isActiveAndEnabled || IsDead || float.IsNaN(amount) || float.IsInfinity(amount) ||
+            amount <= 0f || currentHealth >= maxHealth)
+            return false;
+
+        currentHealth = Mathf.Min(maxHealth, currentHealth + amount);
+        Changed?.Invoke();
+        return true;
+    }
+
+    // Hồi đầy tại mốc lưu.
+    public void RestoreFull()
+    {
+        currentHealth = maxHealth;
+        IsInvulnerable = false;
+        Changed?.Invoke();
     }
 }

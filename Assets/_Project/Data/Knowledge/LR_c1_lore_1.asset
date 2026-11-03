@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c0b32727d4eb734ca0ffefdec8c184e, type: 3}
+  m_Name: LR_c1_lore_1
+  m_EditorClassIdentifier: Assembly-CSharp::LoreDefinition
+  loreId: c1_lore_1
+  tag: 2
+  title: "Hang S\u01A1n \u0110o\xF2ng"
+  body: "Hang S\u01A1n \u0110o\xF2ng n\u1EB1m trong V\u01B0\u1EDDn qu\u1ED1c gia
+    Phong Nha \u2013 K\u1EBB B\xE0ng (Qu\u1EA3ng B\xECnh), v\xF9ng n\xFAi \u0111\xE1
+    v\xF4i \u0111\xE3 \u0111\u01B0\u1EE3c UNESCO c\xF4ng nh\u1EADn l\xE0 Di s\u1EA3n
+    thi\xEAn nhi\xEAn th\u1EBF gi\u1EDBi."
+  sourceRef: "VQG Phong Nha \u2013 K\u1EBB B\xE0ng (phongnhakebang.vn); UNESCO World
+    Heritage List: Phong Nha-Ke Bang National Park."
+  verified: 1

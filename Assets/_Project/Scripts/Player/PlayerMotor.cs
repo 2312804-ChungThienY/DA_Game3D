@@ -1,0 +1,368 @@
+using UnityEngine;
+
+// Nơi duy nhất gọi CharacterController.Move cho An.
+[DisallowMultipleComponent]
+[RequireComponent(typeof(CharacterController))]
+public class PlayerMotor : MonoBehaviour
+{
+    private const float LiftRequestTimeout = 0.1f;
+    private const float TerminalVelocity = -53f;
+
+    [Header("References")]
+    [SerializeField] private Animator animator;
+    [SerializeField] private PlayerStamina stamina;
+    [SerializeField] private LanternController lantern;
+    [SerializeField] private PlayerVitals vitals;
+
+    [Header("Speed")]
+    [SerializeField] private float walkSpeed = 3.5f;
+    [SerializeField] private float sprintSpeed = 5.5f;
+    [SerializeField] private float focusSpeed = 2f;
+    [SerializeField] private float sprintStaminaPerSecond = 8f;
+    [SerializeField, Range(0f, 0.3f)] private float rotationSmoothTime = 0.12f;
+    [SerializeField] private float speedChangeRate = 10f;
+
+    [Header("Jump and gravity")]
+    [SerializeField] private float jumpHeight = 1.2f;
+    [SerializeField] private float gravity = -20f;
+    [SerializeField] private float jumpTimeout = 0.2f;
+    [SerializeField] private float fallTimeout = 0.15f;
+
+    [Header("Ground check")]
+    [SerializeField] private float groundedOffset = -0.14f;
+    [SerializeField] private float groundedRadius = 0.28f;
+    [SerializeField] private LayerMask groundLayers = 9;
+
+    private CharacterController controller;
+    private Transform cameraTransform;
+    private InputReader input;
+
+    private float speed;
+    private float animationBlend;
+    private float targetRotation;
+    private float rotationVelocity;
+    private float verticalVelocity;
+    // Vận tốc dọc trung bình trong frame: giữ đúng độ cao nhảy khi FPS thấp.
+    private float appliedVerticalVelocity;
+    private float jumpTimeoutDelta;
+    private float fallTimeoutDelta;
+
+    private float liftUpSpeed;
+    private float liftTopY;
+    private float lastLiftRequestTime = float.NegativeInfinity;
+    private Vector3 externalVelocity;
+
+    // Lộn (DodgeController) và thân thấp khi chui khe.
+    private Vector3 dashVelocity;
+    private float dashUntil = float.NegativeInfinity;
+    private bool dashKeepsFacing;
+    private float standingHeight;
+    private Vector3 standingCenter;
+    private bool isLow;
+
+    private int animSpeed;
+    private int animGrounded;
+    private int animJump;
+    private int animFreeFall;
+    private int animMotionSpeed;
+
+    public bool IsGrounded { get; private set; } = true;
+    public bool IsHovering { get; private set; }
+    public bool IsSprinting { get; private set; }
+    public Vector3 Velocity => controller != null ? controller.velocity : Vector3.zero;
+    public bool IsDashing => Time.time < dashUntil;
+    public bool IsLow => isLow;
+    // Khóa mục tiêu: An luôn quay mặt về đây (hướng đi vẫn theo camera).
+    public Transform FacingTarget { get; set; }
+    // Hướng đi mong muốn theo input và camera (dùng để chọn hướng lộn).
+    public Vector3 DesiredMoveDirection { get; private set; }
+
+    private void Awake()
+    {
+        controller = GetComponent<CharacterController>();
+        if (animator == null) animator = GetComponent<Animator>();
+        if (stamina == null) stamina = GetComponent<PlayerStamina>();
+        if (lantern == null) lantern = GetComponent<LanternController>();
+        if (vitals == null) vitals = GetComponent<PlayerVitals>();
+
+        animSpeed = Animator.StringToHash("Speed");
+        animGrounded = Animator.StringToHash("Grounded");
+        animJump = Animator.StringToHash("Jump");
+        animFreeFall = Animator.StringToHash("FreeFall");
+        animMotionSpeed = Animator.StringToHash("MotionSpeed");
+
+        standingHeight = controller.height;
+        standingCenter = controller.center;
+
+        jumpTimeoutDelta = jumpTimeout;
+        fallTimeoutDelta = fallTimeout;
+        targetRotation = transform.eulerAngles.y;
+    }
+
+    private void Start()
+    {
+        input = AppRoot.Instance != null ? AppRoot.Instance.Input : null;
+        if (input == null || !input.IsReady)
+        {
+            Debug.LogError($"{name}: PlayerMotor không tìm thấy InputReader.", this);
+            enabled = false;
+            return;
+        }
+
+        Camera main = Camera.main;
+        if (main == null)
+        {
+            Debug.LogError($"{name}: PlayerMotor cần một camera có tag MainCamera.", this);
+            enabled = false;
+            return;
+        }
+        cameraTransform = main.transform;
+    }
+
+    private void Update()
+    {
+        // Đã chết thì đứng yên chờ hồi sinh.
+        if (Time.deltaTime <= 0f || (vitals != null && vitals.IsDead)) return;
+
+        GroundedCheck();
+        JumpAndGravity();
+        Move();
+
+        externalVelocity = Vector3.zero;
+    }
+
+    // Gọi mỗi frame khi An đứng trong cột gió.
+    public void RequestLift(float upSpeed, float hoverTopY)
+    {
+        liftUpSpeed = upSpeed;
+        liftTopY = hoverTopY;
+        lastLiftRequestTime = Time.time;
+    }
+
+    // Gọi mỗi frame để cộng vận tốc ngang từ môi trường (gió đẩy, xoáy nước).
+    public void AddExternalVelocity(Vector3 horizontalVelocity)
+    {
+        horizontalVelocity.y = 0f;
+        externalVelocity += horizontalVelocity;
+    }
+
+    public void Teleport(Vector3 position, Quaternion rotation)
+    {
+        bool wasEnabled = controller.enabled;
+        controller.enabled = false;
+        transform.SetPositionAndRotation(position, rotation);
+        Physics.SyncTransforms();
+        controller.enabled = wasEnabled;
+
+        verticalVelocity = 0f;
+        appliedVerticalVelocity = 0f;
+        speed = 0f;
+        dashUntil = float.NegativeInfinity;
+        externalVelocity = Vector3.zero;
+        targetRotation = rotation.eulerAngles.y;
+        lastLiftRequestTime = float.NegativeInfinity;
+        IsHovering = false;
+    }
+
+    // Lộn: vận tốc ngang cố định trong một khoảng; vẫn bị tường chặn vì đi qua CharacterController.Move.
+    public void BeginDash(Vector3 horizontalVelocity, float duration, bool keepFacing = false)
+    {
+        horizontalVelocity.y = 0f;
+        dashVelocity = horizontalVelocity;
+        dashUntil = Time.time + Mathf.Max(0f, duration);
+        dashKeepsFacing = keepFacing;
+        if (!keepFacing && horizontalVelocity.sqrMagnitude > 0.0001f)
+        {
+            targetRotation = Quaternion.LookRotation(horizontalVelocity).eulerAngles.y;
+            transform.rotation = Quaternion.Euler(0f, targetRotation, 0f);
+        }
+    }
+
+    public void CancelDash() => dashUntil = float.NegativeInfinity;
+
+    // Hạ capsule còn nửa chiều cao (lộn chui khe thấp). Đứng dậy chỉ khi trên đầu trống.
+    public bool SetLow(bool low)
+    {
+        if (low == isLow) return true;
+        if (low)
+        {
+            controller.height = standingHeight * 0.5f;
+            controller.center = new Vector3(standingCenter.x, standingCenter.y * 0.5f, standingCenter.z);
+            isLow = true;
+            return true;
+        }
+
+        Vector3 bottom = transform.position + Vector3.up * (controller.radius + 0.05f);
+        Vector3 top = transform.position + Vector3.up * (standingHeight - controller.radius);
+        if (Physics.CheckCapsule(bottom, top, controller.radius * 0.95f, groundLayers, QueryTriggerInteraction.Ignore))
+            return false;
+
+        controller.height = standingHeight;
+        controller.center = standingCenter;
+        isLow = false;
+        return true;
+    }
+
+    private bool IsLifting => Time.time - lastLiftRequestTime <= LiftRequestTimeout;
+
+    // groundedOffset âm: tâm cầu nằm hơi cao hơn chân, giống Starter Assets.
+    private Vector3 GroundCheckPosition =>
+        new Vector3(transform.position.x, transform.position.y - groundedOffset, transform.position.z);
+
+    private void GroundedCheck()
+    {
+        Vector3 spherePosition = GroundCheckPosition;
+        IsGrounded = Physics.CheckSphere(spherePosition, groundedRadius, groundLayers, QueryTriggerInteraction.Ignore);
+        if (animator != null) animator.SetBool(animGrounded, IsGrounded || IsHovering);
+    }
+
+    private void JumpAndGravity()
+    {
+        bool jumpPressed = input.GameplayEnabled && input.Jump.WasPressedThisFrame();
+
+        if (IsLifting)
+        {
+            // Cột gió: tiến dần tới vận tốc nâng, dừng lại ở đỉnh để lơ lửng.
+            if (transform.position.y >= liftTopY - 0.3f)
+            {
+                verticalVelocity = 0f;
+                IsHovering = true;
+            }
+            else
+            {
+                verticalVelocity = Mathf.MoveTowards(verticalVelocity, liftUpSpeed, 30f * Time.deltaTime);
+                IsHovering = false;
+            }
+
+            if (IsHovering && jumpPressed)
+            {
+                verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
+                lastLiftRequestTime = float.NegativeInfinity;
+                IsHovering = false;
+                if (animator != null) animator.SetBool(animJump, true);
+            }
+            appliedVerticalVelocity = verticalVelocity;
+            return;
+        }
+
+        IsHovering = false;
+
+        if (IsGrounded)
+        {
+            fallTimeoutDelta = fallTimeout;
+            if (animator != null)
+            {
+                animator.SetBool(animJump, false);
+                animator.SetBool(animFreeFall, false);
+            }
+
+            if (verticalVelocity < 0f) verticalVelocity = -2f;
+
+            if (jumpPressed && jumpTimeoutDelta <= 0f)
+            {
+                verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
+                if (animator != null) animator.SetBool(animJump, true);
+            }
+
+            if (jumpTimeoutDelta >= 0f) jumpTimeoutDelta -= Time.deltaTime;
+        }
+        else
+        {
+            jumpTimeoutDelta = jumpTimeout;
+            if (fallTimeoutDelta >= 0f) fallTimeoutDelta -= Time.deltaTime;
+            else if (animator != null) animator.SetBool(animFreeFall, true);
+        }
+
+        float startVelocity = verticalVelocity;
+        if (verticalVelocity > TerminalVelocity) verticalVelocity += gravity * Time.deltaTime;
+        appliedVerticalVelocity = 0.5f * (startVelocity + verticalVelocity);
+    }
+
+    private void Move()
+    {
+        Vector2 move = input.MoveValue;
+        bool hasMove = move.sqrMagnitude > 0.0001f;
+        DesiredMoveDirection = hasMove
+            ? Quaternion.Euler(0f, cameraTransform.eulerAngles.y, 0f) * new Vector3(move.x, 0f, move.y).normalized
+            : Vector3.zero;
+
+        if (IsDashing)
+        {
+            if (dashKeepsFacing) FaceTarget();
+            controller.Move((dashVelocity + Vector3.up * appliedVerticalVelocity) * Time.deltaTime);
+            if (animator != null) animator.SetFloat(animSpeed, dashVelocity.magnitude);
+            return;
+        }
+        bool focusing = lantern != null && lantern.IsFocusing;
+
+        // Chạy tốn thể lực; Focus đi chậm và không chạy.
+        IsSprinting = false;
+        float targetSpeed = focusing ? focusSpeed : walkSpeed;
+        if (hasMove && !focusing && input.Sprint.IsPressed())
+        {
+            IsSprinting = stamina == null || stamina.TrySpend(sprintStaminaPerSecond * Time.deltaTime);
+            if (IsSprinting) targetSpeed = sprintSpeed;
+        }
+        if (!hasMove) targetSpeed = 0f;
+
+        // Dùng tốc độ tự điều khiển, không lẫn vận tốc đẩy từ môi trường.
+        float currentSpeed = speed;
+        if (Mathf.Abs(currentSpeed - targetSpeed) > 0.1f)
+        {
+            speed = Mathf.Lerp(currentSpeed, targetSpeed, Time.deltaTime * speedChangeRate);
+            speed = Mathf.Round(speed * 1000f) / 1000f;
+        }
+        else
+        {
+            speed = targetSpeed;
+        }
+
+        animationBlend = Mathf.Lerp(animationBlend, targetSpeed, Time.deltaTime * speedChangeRate);
+        if (animationBlend < 0.01f) animationBlend = 0f;
+
+        // Hướng đi theo camera, chuẩn hóa để đi chéo không nhanh hơn.
+        if (hasMove)
+        {
+            Vector3 inputDirection = new Vector3(move.x, 0f, move.y).normalized;
+            targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg + cameraTransform.eulerAngles.y;
+            if (FacingTarget == null)
+            {
+                float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref rotationVelocity, rotationSmoothTime);
+                transform.rotation = Quaternion.Euler(0f, rotation, 0f);
+            }
+        }
+        FaceTarget();
+
+        Vector3 direction = Quaternion.Euler(0f, targetRotation, 0f) * Vector3.forward;
+        Vector3 motion = direction * speed + externalVelocity + Vector3.up * appliedVerticalVelocity;
+        controller.Move(motion * Time.deltaTime);
+
+        if (animator != null)
+        {
+            animator.SetFloat(animSpeed, animationBlend);
+            animator.SetFloat(animMotionSpeed, 1f);
+        }
+    }
+
+    private void FaceTarget()
+    {
+        if (FacingTarget == null) return;
+        Vector3 d = FacingTarget.position - transform.position;
+        d.y = 0f;
+        if (d.sqrMagnitude < 0.01f) return;
+        float yaw = Mathf.Atan2(d.x, d.z) * Mathf.Rad2Deg;
+        float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, yaw, ref rotationVelocity, rotationSmoothTime);
+        transform.rotation = Quaternion.Euler(0f, rotation, 0f);
+    }
+
+    // Animation Event của bộ clip Starter Assets; âm bước chân sẽ gắn ở đây khi làm âm thanh.
+    private void OnFootstep(AnimationEvent animationEvent) { }
+
+    private void OnLand(AnimationEvent animationEvent) { }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = IsGrounded ? new Color(0f, 1f, 0f, 0.35f) : new Color(1f, 0f, 0f, 0.35f);
+        Gizmos.DrawSphere(GroundCheckPosition, groundedRadius);
+    }
+}

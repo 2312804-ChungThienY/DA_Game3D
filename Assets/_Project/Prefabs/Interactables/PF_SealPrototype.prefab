@@ -49,7 +49,7 @@ MonoBehaviour:
   aimPoint: {fileID: 5088978142291778137}
   barrier: {fileID: 5774778000706200551}
   progressText: {fileID: 0}
-  requiredTime: 1.5
+  requiredTime: 1
   graceTime: 0.25
 --- !u!1 &4286207810225593232
 GameObject:

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 208c6675d17f290489d6a8b4d900f1c3, type: 3}
+  m_Name: ID_relic_kim_quy
+  m_EditorClassIdentifier: Assembly-CSharp::ItemDefinition
+  itemId: relic_kim_quy
+  displayName: "Tr\u1ED1ng \u0110\u1ED3ng Kim Quy"
+  description: "Tr\u1ED1ng \u0110\u1ED3ng \u0111\xE3 ph\u1EE5c d\u1EF1ng t\u1EA1i
+    \u0110\xE0n Kim Quy."
+  kind: 4
+  maxStack: 1

@@ -273,6 +273,21 @@ Gói công 300h: công cụ18, controller32, đèn28, puzzle32, combat/AI42, ite
 - Bàn giao không crash/mất save/nhân đôi/blocker; known issues không thay được tính năng bắt buộc. Gói đủ thư mục build (không chỉ exe), source Assets/Packages/ProjectSettings/.meta, README/phím/save/hardware, design/phân công/scope log, test/perf evidence, Asset_Sources, video dự phòng.
 - Demo8–10 phút: bối cảnh→đèn/seal→trống/gương→combat→save/Continue→kiến trúc/kết quả. Snapshot demo riêng đúng build, không ghi đè save cá nhân; vẫn cần bằng chứng chơi từ đầu đến cuối.
 
+## 13a. Nguyên tắc người dùng chốt ngày 01/11/2026 (toàn game)
+
+- **Cơ chế trước, đồ họa sau:** mỗi chương phải chơi được từ đầu đến cuối bằng khối cơ bản (logic, tương tác, UI blockout, save/load, flow) trước khi làm đồ họa cuối.
+- **Concept đồ họa cố định:** Stylized Semi-Realistic, huyền ảo cổ tích Việt, Đông Sơn/Hồng Bàng. Trước khi import phải trình concept + danh sách asset để người dùng duyệt; không tải/dựng asset tràn lan.
+- **Cơ chế tinh gọn, có ý nghĩa cốt truyện;** không thêm cơ chế hoành tráng trên giấy nhưng vô dụng hoặc kéo dài sản xuất.
+- **Hỏi người dùng ở điểm then chốt:** góc nhìn, biến đổi môi trường, cách di chuyển mới, diễn biến cốt truyện.
+- **Cơ chế mới mỗi chương lấy từ Linh Thần/chủ đề của chương** (Chim Lạc, Sơn Tinh, Thủy Tinh...); không bắt buộc phải xoay quanh Lồng Đèn Sen và Trống Đồng, hai thứ này vẫn là công cụ nền xuyên suốt.
+- **Mỗi chương có các khu được định hình rõ.** Chương cuối gọi là **Chương 5**, là màn kết game, **khó hơn các chương trước một chút**.
+- **Ưu tiên cơ chế rẻ về đồ họa:** tránh đu dây, cưỡi chim, bơi... vì cần nhiều animation/model. Ưu tiên biến thể của bộ di chuyển sẵn có (chạy, nhảy, lộn né theo hướng, tổ hợp phím) và đặt độ phức tạp vào vật thể môi trường thay vì nhân vật.
+- **Game mang tính lịch sử – giáo dục:** mỗi chương có nội dung kiến thức (bia văn tự) và câu hỏi đi kèm. Mỗi mục ghi rõ loại **Lịch sử / Truyền thuyết / Tự nhiên**; không bao giờ hỏi phần hư cấu của game như sự thật. Nội dung phải đối chiếu nguồn tin cậy (SGK Lịch sử, bảo tàng, UNESCO...) trước khi đưa vào build.
+- **Khuôn mỗi chương giữ như chương 1:** khu học → câu đố → mảnh cổ vật → đánh quái → đấu trùm → thức tỉnh Linh Thần; thêm **câu hỏi kiến thức có cơ chế trả lời để nhận vật phẩm**.
+- **Chương 5 (màn cuối) dài hơn, khó hơn, nhiều cơ chế hơn** các chương trước để kết game trọn vẹn.
+- **Bộ di chuyển (lộn theo hướng, tổ hợp phím) có animation mượt, làm một lần ở chương 1, dùng lại cho mọi chương. Chương 1 không có lộn né; Kim Quy trao toàn bộ bộ di chuyển khi hoàn thành chương 1.**
+- **Kế hoạch đã chốt ngày 01/11/2026** và ghi vào phần 40–54 của `spec/Ke_hoach_game_Son_Doong_12_tuan.md`, ưu tiên hơn phần 1–39 khi mâu thuẫn. Tóm tắt: 5 chương ngắn (chương 2–4 mỗi chương 5 phòng, 1 cơ chế mới: Cột Gió, Ấn Núi, Ngọc Nước; chương 5 có 6 phòng, dài và khó nhất); khóa mục tiêu có; Ctrl không hướng thì lộn theo hướng nhìn; Bệ Vấn Đáp trả lời sai vẫn nhận đủ đồ; tri thức từ chương 2, mọi lứa tuổi khó dần; trùm là sinh vật có animation, tìm asset miễn phí trước rồi mới tự làm; 2 kết (Kết 2 cần cơ chế ẩn Vành Ký Ức ở chương 5); một mức độ khó; lịch sản xuất thực tế 7 ngày.
+
 ## 13. Mở rộng — lưu để hiểu, không tự triển khai
 
 - Nỏ: damage15, cooldown1s, tốn20 năng lượng/phát; phím1 dao/2 nỏ; RMB dao=Focus, nỏ=aim (Focus tạm tắt), HUD đúng. Projectile sinh muzzle theo aim có kiểm tra vật cản, sweep/Rigidbody, bỏ chủ thể, damage một lần. Không yêu cầu nỏ để qua tuyến.

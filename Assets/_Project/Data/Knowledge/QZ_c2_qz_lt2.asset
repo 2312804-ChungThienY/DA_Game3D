@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 510e4a8b7ca60a54cae728c052083110, type: 3}
+  m_Name: QZ_c2_qz_lt2
+  m_EditorClassIdentifier: Assembly-CSharp::QuizDefinition
+  quizId: c2_qz_lt2
+  tag: 0
+  question: "Nh\xE0 s\xE0n tr\xEAn hoa v\u0103n tr\u1ED1ng \u0111\u1ED3ng g\u1EAFn
+    v\u1EDBi c\u01B0 d\xE2n n\xE0o?"
+  options:
+  - "Ng\u01B0\u1EDDi La M\xE3"
+  - "Ng\u01B0\u1EDDi Ai C\u1EADp c\u1ED5"
+  - "C\u01B0 d\xE2n L\u1EA1c Vi\u1EC7t"
+  - "Ng\u01B0\u1EDDi Viking"
+  correctIndex: 2
+  explanation: "Nh\xE0 s\xE0n l\xE0 ki\u1EC3u nh\xE0 ph\u1ED5 bi\u1EBFn c\u1EE7a
+    c\u01B0 d\xE2n L\u1EA1c Vi\u1EC7t th\u1EDDi x\u01B0a."
+  relatedLore: {fileID: 11400000, guid: 3910084ca9005cd45a048279ee1870fd, type: 2}
+  sourceRef: "SGK L\u1ECBch s\u1EED v\xE0 \u0110\u1ECBa l\xED 6 (ph\u1EA7n V\u0103n
+    Lang \u2013 \xC2u L\u1EA1c); B\u1EA3o t\xE0ng L\u1ECBch s\u1EED Qu\u1ED1c gia:
+    tr\u1ED1ng \u0111\u1ED3ng Ng\u1ECDc L\u0169, v\u0103n h\xF3a \u0110\xF4ng S\u01A1n."
+  verified: 1
