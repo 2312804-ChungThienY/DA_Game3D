@@ -1,5 +1,7 @@
 # Trại Giếng Trời — khu mẫu môi trường, 04/11/2026
 
+**Lưu ý phong cách 06/11/2026:** nội dung và ảnh dưới đây mô tả bản low poly ở mốc 04–05/11. Phong cách hiện hành đã đổi sang **Stylized Việt Nam**; xem [ART_BIBLE](ART_BIBLE.md). Chưa có lượt chỉnh art trại theo quyết định mới.
+
 **Bản hiện hành 05/11:** [CHAPTER01_EXPANDED](CHAPTER01_EXPANDED.md) mở rộng địa hình toàn C1 và bốn đường nối. Ràng buộc giữ kích thước/collider bản khối và tọa độ trong tài liệu trại này thuộc mốc trước mở rộng.
 
 **Cập nhật sau khu mẫu:** yêu cầu tiếp theo mở rộng art ra toàn C1; `92_EnvironmentPreview` nay chứa toàn chương. Những bố trí/trạng thái thử riêng trại bên dưới là mốc trước lượt này; xem [CHAPTER01_ENVIRONMENT](CHAPTER01_ENVIRONMENT.md) để biết sửa tiếp xúc, NavMesh và ảnh mới.

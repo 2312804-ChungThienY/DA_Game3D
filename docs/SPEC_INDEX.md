@@ -4,13 +4,15 @@
 
 ## Nguồn ưu tiên và quyết định mới
 
+**Phong cách mới nhất 06/11/2026:** người dùng chọn **Stylized Việt Nam**, cho phép mức chi tiết cao hơn; low poly không còn bắt buộc. Các dòng “low poly” trong chỉ mục/spec/worklog dưới đây ghi quyết định và bản dựng ở mốc 04–05/11. Xem [ART_BIBLE](ART_BIBLE.md) và [PROJECT_MEMORY](PROJECT_MEMORY.md).
+
 **Yêu cầu 05/11:** dựng đẹp hơn và mở rộng toàn cảnh C1, đường nối liên tục, dùng asset đã nhập/free. Cho phép thay kích thước/địa hình cũ, giữ hợp đồng gameplay/save. [Bản mở rộng](CHAPTER01_EXPANDED.md) có ưu tiên hơn ràng buộc giữ footprint trong lượt trại trước.
 
 Phản hồi mới nhất 04/11: tăng nhẹ tầm chiếu vào quái và bỏ tia khi LMB. Cấu hình triển khai: quái 10 m, puzzle 8 m; [FocusCombat](reports/FocusCombat_2026-11-04.md).
 
 Phản hồi tiếp 04/11 xác nhận sửa **cả hướng đánh lẫn động tác**; [triển khai melee và bằng chứng mới](reports/MeleeVisual_2026-11-04.md). Không mở rộng thành yêu cầu model/quái mới.
 
-1. Yêu cầu mới nhất bổ sung 04/11: chỉnh cơ chế An **nhanh, gọn, ít quán tính**; [báo cáo triển khai/kiểm thử](reports/CharacterPolish_2026-11-04.md). Các lựa chọn nội dung còn hiệu lực: ngày 04/11 xác nhận **5 chương**, ưu tiên môi trường C1; **chưa có hạn mới**, lịch 7 ngày chỉ dự kiến cũ; chọn low poly, giữ ba thanh Master/Music/SFX và HUD C1 bắt đầu Vườn Rêu, progress 3 mảnh/2 câu đố; nhân vật/quái mới chờ yêu cầu sau.
+1. Yêu cầu bổ sung 04/11: chỉnh cơ chế An **nhanh, gọn, ít quán tính**; [báo cáo triển khai/kiểm thử](reports/CharacterPolish_2026-11-04.md). Ngày 04/11 xác nhận **5 chương**, ưu tiên môi trường C1; **chưa có hạn mới**, lịch 7 ngày chỉ dự kiến cũ; low poly là lựa chọn lúc đó, đã được quyết định Stylized Việt Nam 06/11 thay ở cấp phong cách. Giữ ba thanh Master/Music/SFX và HUD C1 bắt đầu Vườn Rêu, progress 3 mảnh/2 câu đố; nhân vật/quái mới làm theo phạm vi được giao.
 2. Kế hoạch §55 và `spec/chapters/` chi tiết hóa, điều chỉnh các điểm của §46–49.
 3. Kế hoạch §40–54 ưu tiên §1–39 khi mâu thuẫn: 5 chương, Quà Kim Quy, lớp Tri thức, hai kết, không nỏ/móc dây. Lịch/thẩm mỹ trong nguồn cũ đã được yêu cầu 04/11 thay ở phạm vi nêu trên.
 4. §1–39 giữ luật kỹ thuật chưa bị thay; ý tưởng và danh mục kỹ thuật/asset là nguồn tham khảo, không phải trạng thái triển khai.
@@ -28,7 +30,7 @@ Phản hồi tiếp 04/11 xác nhận sửa **cả hướng đánh lẫn động
 
 Kế hoạch có tham chiếu tên `.docx` ở D1/D2; các file thực tế đang đọc là bản `.md` trong spec. Giữ nguyên tên tiếng Việt/Unicode khi mở file bằng UTF-8.
 
-Yêu cầu art mới 04/11/2026: toàn năm khu C1 theo năm ảnh người dùng gửi, tiếp tục low poly, sửa đá/cỏ và chỉ asset miễn phí. [CHAPTER01_ENVIRONMENT](CHAPTER01_ENVIRONMENT.md) ghi triển khai, vị trí scene và nguồn A10/A11/A16 đã đối chiếu. Đây là yêu cầu mới, không sửa lịch sử hoặc nâng các ảnh mẫu thành ảnh hiện trường.
+Yêu cầu art ở mốc 04/11/2026: toàn năm khu C1 theo năm ảnh người dùng gửi, khi đó tiếp tục low poly, sửa đá/cỏ và chỉ asset miễn phí. [CHAPTER01_ENVIRONMENT](CHAPTER01_ENVIRONMENT.md) ghi triển khai, vị trí scene và nguồn A10/A11/A16 đã đối chiếu. Bản dựng này chưa được chuyển/duyệt theo hướng Stylized Việt Nam 06/11; không nâng các ảnh mẫu thành ảnh hiện trường.
 
 ## Tra cứu 55 phần kế hoạch
 

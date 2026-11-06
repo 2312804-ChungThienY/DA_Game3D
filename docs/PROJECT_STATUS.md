@@ -1,5 +1,27 @@
 # Trạng thái thực tế — Sơn Đoòng
 
+## Trại Giếng Trời C1 theo phác thảo đã duyệt — 06/11/2026
+
+Đã sửa `Assets/_Project/Scenes/02_HangLinhMach.unity` ở `ENV_01_TraiGiengTroi` và đầu đường nối sang Vườn Rêu: tia nắng, 14 thạch nhũ có LOD, 30 phiến lát bất quy tắc, 6 dương xỉ rìa và biến thể màu vách. Giữ gameplay root, `cp_trai`, bệ đèn, phong ấn, collider nền và NavMesh. [Ảnh, file và kiểm chứng](C1_GIENG_TROI_WORKLOG.md): Unity Edit Mode validate 0 issues, 5 điểm NavMesh/4 đoạn PathComplete, 0 collider mới; Console không có lỗi. Chưa kiểm Play Mode sau lượt art, Windows build, chơi tay hoặc FPS; cần người dùng duyệt ảnh trước khi chuyển sang khu C1 kế tiếp.
+
+## Chuẩn art Mid Poly Stylized Việt Nam — 06/11/2026 (quyết định, chưa chuyển asset)
+
+Người dùng chốt texture 1K mặc định, 2K cho nhân vật/công trình chính, material URP Lit và LOD cho vật thể lớn. Đã cập nhật tài liệu hướng dẫn và project skills liên quan; không sửa model, texture, material, prefab hay scene và không chạy test Unity/Blender trong lượt này. Chưa đo hiệu năng theo chuẩn mới; số polygon, ngưỡng chuyển LOD, bảng màu và phạm vi chuyển đổi C1/C2 vẫn cần quyết định khi triển khai.
+
+## Bốn project skills Codex — 06/11/2026 (chỉ hướng dẫn)
+
+Đã tạo `.agents/skills/unity-scene-builder`, `blender-asset-creator`, `unity-test-and-debug`, `vietnam-world-builder` theo `skill-creator`. Mỗi skill có phạm vi kích hoạt, quy trình MCP, giới hạn thao tác và điều kiện kiểm chứng riêng; phong cách Stylized Việt Nam cho phép chi tiết cao hơn. Đã kiểm tra chỉ đọc Unity MCP (Editor mở `MCP_Test`, Edit Mode) và Blender bridge (`Scene`: Cube/Light/Camera); không chỉnh scene, model hay chạy test game trong lượt tạo skill. Bộ `quick_validate.py` của skill-creator chưa chạy được vì môi trường Python thiếu `PyYAML`; đã kiểm tra frontmatter/cấu trúc riêng. Cần mở phiên Codex mới để thử kích hoạt từng skill.
+
+## Định hướng Stylized Việt Nam —06/11/2026 (chỉ quyết định thiết kế)
+
+Ở thời điểm ghi nhận, người dùng chọn **Stylized Việt Nam** và **cho phép mức chi tiết cao hơn**; low poly không còn là giới hạn bắt buộc. Đã đồng bộ AGENTS, ART_BIBLE, GAME_DESIGN, TASKS, MEMORY, MATRIX và chỉ mục; chưa đổi scene, prefab, model, material, shader hoặc build. C1/C2 vẫn là bản dựng/kiểm thử trước quyết định này. Khi đó chưa có concept, bảng màu hoặc ngân sách polygon/texture/LOD định lượng; chuẩn mới nhất xem đầu tài liệu. Không ghi kết quả Play Mode/build cũ là kiểm chứng cho phong cách mới.
+
+## Bộ hướng dẫn Codex —06/11/2026 (chỉ tài liệu)
+
+Đã rà soát repository và tạo bộ định hướng [AGENTS](../AGENTS.md), [ART_BIBLE](ART_BIBLE.md), [GAME_DESIGN](GAME_DESIGN.md), [TECHNICAL_DESIGN](TECHNICAL_DESIGN.md), [TASKS](TASKS.md); cập nhật [chỉ mục](README.md). Nguồn quyết định/bằng chứng hiện hành vẫn ở MEMORY/STATUS/MATRIX/ARCHITECTURE/spec; các tệp mới đánh dấu điều chưa chốt thay vì đặt yêu cầu game mới.
+
+Kiểm tĩnh xác nhận Unity `6000.4.8f1`, URP qua Graphics/Quality, package trong manifest, Git LFS cài nhưng chưa theo dõi file, `.gitignore` bỏ cache. Unity MCP chỉ đọc trạng thái Editor: `MCP_Test` đang mở, Edit Mode, scene sạch; Blender MCP chỉ đọc scene `Scene` gồm Cube/Light/Camera. Không sửa code, scene, prefab, asset, package hoặc cache; không chạy Play Mode/build/test trong lượt tài liệu. Kiểm tra liên kết Markdown và `git diff --check` đạt; các lượt kiểm thử gameplay trước đây không được chạy lại ở đây.
+
 ## Ba trống giải đố Đông Sơn mới —06/11/2026 (mới nhất)
 
 Đã thay ba `VIS_DongSon_Playable` ở Điện Trống trong Preview→Main bằng FBX/texture2K từ ZIP người dùng: **ndnguyen3d, CC BY4.0** đã xác minh API nguồn và ghi credit. URP PBR giữ hoa văn gốc, bảng Mặt Trời/Cánh Chim/Sóng Nước tách khỏi thân, ba spot không shadow giúp đọc hoa văn. Giữ component/root/collider/ref, chuỗi/giấy/Journal/ID/schema4; không đổi An hoặc model đàn/mảnh ở nơi khác. [Worklog/ảnh/giấy phép](DONGSON_DRUM_WORKLOG.md).
@@ -168,7 +190,7 @@ Theo yêu cầu mới, đã thay địa hình hẹp bằng năm khoang lớn và
 ## Quyết định hiện hành của người dùng
 
 1. **5 chương**, ưu tiên **chương 1**. Yêu cầu 05/11 đã giao hoàn thiện cả Hắc Ảnh/Hộ vệ/UI/audio/đèn/cửa; model An vẫn loại trừ.
-2. **Low poly hoạt hình 3D**; A09/A11/A16 làm bộ chính cho Trại Giếng Trời. Giữ collider nền/tuyến, gameplay root/ref/ID khi thay model.
+2. **Stylized Việt Nam**, cho phép chi tiết cao hơn, là quyết định phong cách mới nhất 06/11; low poly hoạt hình 3D là lựa chọn/bản dựng 04/11 trước đó. A09/A11/A16 đã dùng cho Trại Giếng Trời. Giữ collider nền/tuyến, gameplay root/ref/ID khi thay model.
 3. **Chưa chốt hạn mới**. Lịch 7 ngày và 12 tuần chỉ là dự kiến/tham chiếu cũ.
 4. Giữ **Master/Music/SFX** riêng; đã nối lại ba slider/mixer ở lượt 05/11.
 5. Giữ HUD C1 bắt đầu **Vườn Rêu**, tiến độ **3 mảnh/2 câu đố**; QuestTracker đã khôi phục yêu cầu này ngày 05/11.

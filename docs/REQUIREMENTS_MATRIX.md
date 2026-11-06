@@ -1,8 +1,8 @@
-# Yêu cầu hiện hành và phần còn thiếu — cập nhật 05/11/2026
+# Yêu cầu hiện hành và phần còn thiếu — cập nhật 06/11/2026
 
 Đây là bảng đối chiếu **yêu cầu với thực tế**, không phải lệnh triển khai toàn bộ backlog. Nguồn thiết kế đầy đủ ở [SPEC_INDEX](SPEC_INDEX.md); tên API/ID đang dùng ở [CURRENT_ARCHITECTURE](CURRENT_ARCHITECTURE.md). Sau đợt đồng bộ tài liệu, lượt điều khiển 04/11 đã cập nhật các hàng liên quan theo [CharacterPolish](reports/CharacterPolish_2026-11-04.md); không coi backlog còn lại là lệnh tự triển khai.
 
-**Quyết định hiện hành:** 5 chương; ưu tiên C1; lịch cũ không là hạn mới; ba slider Master/Music/SFX; HUD mở đầu Vườn Rêu, 3 mảnh/2 câu đố; low poly. Yêu cầu 05/11 đã cho phép hoàn thiện Hắc Ảnh/Hộ vệ/đèn/UI/audio bằng asset miễn phí đã nhập; vẫn không thay model An. Các mốc kiểm chứng cũ không tự nghiệm thu phần mới.
+**Quyết định hiện hành:** 5 chương; ưu tiên C1; lịch cũ không là hạn mới; ba slider Master/Music/SFX; HUD mở đầu Vườn Rêu, 3 mảnh/2 câu đố; **Mid Poly Stylized Việt Nam**, texture 1K mặc định/2K cho nhân vật và công trình chính, URP Lit, LOD cho vật thể lớn. Yêu cầu 05/11 đã cho phép hoàn thiện Hắc Ảnh/Hộ vệ/đèn/UI/audio bằng asset miễn phí đã nhập; vẫn không thay model An. Các mốc kiểm chứng cũ không tự nghiệm thu phần mới.
 
 **Phản hồi mới nhất 05/11:** chế bình máu trong túi thay bàn; lửa động/ghế gỗ dày; ba trống A20 và ký hiệu Mặt Trời/Cánh Chim/Sóng Nước; A22 cửa/A23 gương/A24 bệ theo thư mục thực tế. Hai giấy gợi ý nhặt bằng E/lưu Nhật ký, không là prerequisite. Hắc Ảnh choáng4s/Hộ vệ2s, immunity3s và lượt giữ mới, cúi đầu/dấu sao/khóa đòn; sương mỏng URP và UI mới. Triển khai/kiểm chứng tại [C1_REVISION_WORKLOG](C1_REVISION_WORKLOG.md); bằng chứng Completion trước revision chỉ là mốc nền.
 
@@ -30,7 +30,7 @@ Các mã có gạch nối như SCOPE-01, KN-02, DATA-01 là mã tra cứu riêng
 | SCOPE-02 | Tổng mục tiêu 65–95 phút; C1 15–25, C2–C4 mỗi chương 10–15, C5 20–25; §40/42/45/49 | Mục tiêu thiết kế; chưa có đo playtest người mới. 25–35 phút C1 ở bản 29/10 không còn là mục tiêu hiện hành |
 | SCOPE-03 | Windows x64, chơi đơn offline, tiếng Việt, bàn phím/chuột; §1/40 | Có Windows/input/TMP. C1 mở rộng có 569 checks Editor Play Mode; bản Windows và kết quả build cuối ở PROJECT_STATUS. Chưa chơi tay toàn build hoặc thử máy thứ hai |
 | SCOPE-04 | Một độ khó; không nỏ/móc dây/đu dây/cưỡi chim/bơi; §40–43 | Giữ phạm vi; không khôi phục nhánh “mở rộng tuần 8” của bản cũ thành việc bắt buộc |
-| SCOPE-05 | Low poly, đá xám lạnh/cây xanh rêu/nắng vàng; người dùng 04–05/11 | C1 mở rộng năm khoang, bốn đường nối; A09/A10/A11/A14/A15/A16/A20 đã nhập và mesh dự án. Xem CHAPTER01_EXPANDED/STATUS cho ảnh, credit và kiểm thử. Còn duyệt hình/cảm giác bằng tay, bake GI và performance |
+| SCOPE-05 | Mid Poly Stylized Việt Nam; texture 1K mặc định, 2K nhân vật/công trình chính, URP Lit, LOD vật thể lớn; người dùng 06/11. Low poly/bảng màu định tính là mốc 04–05/11 | C1/C2 và asset hiện có được dựng trước quyết định mới; chưa xác minh đã chuyển phong cách/texture/material/LOD. C1 mở rộng năm khoang/bốn đường nối, có ảnh/credit/kiểm thử ở CHAPTER01_EXPANDED/STATUS. Cần concept, ngân sách polygon/ngưỡng LOD, duyệt hình bằng tay và đo hiệu năng khi có phạm vi triển khai |
 | SCOPE-06 | Hoàn thiện C1 trừ model An; cho phép Hắc Ảnh/Hộ vệ, UI/audio/đèn; người dùng 05/11 | Ghost A08 + Golem Kevin dưới root cũ, controller trình bày riêng; không tạo C3–C5 hoặc thay model An |
 | SCOPE-07 | Lịch 7 ngày và 12 tuần chỉ để tham chiếu; người dùng xác nhận 04/11 | Chưa chốt hạn mới. Không gắn các “ngày 1–7” vào lịch hiện tại hoặc tự đặt deadline |
 | SCOPE-08 | Cơ chế rẻ, mỗi chương C2–C4 thêm một năng lực; duyệt asset trước nhập; §41/51 | C1/C2 có blockout; A09/A11/A16 đã được chọn cho trại. Không có duyệt mặc định cho mọi asset/chương còn lại |

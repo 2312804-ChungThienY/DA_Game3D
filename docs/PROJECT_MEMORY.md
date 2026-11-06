@@ -4,6 +4,8 @@
 
 ## 1. Quyết định mới nhất và nguồn ưu tiên
 
+**Phong cách mỹ thuật 06/11/2026 — quyết định mới nhất:** người dùng chọn **Mid Poly Stylized Việt Nam**, texture **1K mặc định**, **2K cho nhân vật và công trình chính**, material **URP Lit**, **LOD cho vật thể lớn**. Đây là chuẩn áp dụng cho art mới/phần được giao chỉnh, chưa phải bằng chứng asset cũ đã chuyển đổi. Bảng màu số, ngân sách polygon, ngưỡng chuyển LOD và phạm vi chuyển art C1/C2 chưa được chốt. Quyết định “3D hoạt hình low poly” ngày 04/11 và “Stylized Semi-Realistic” trong kế hoạch là các mốc trước, không dùng làm ràng buộc phong cách hiện hành; xem [ART_BIBLE](ART_BIBLE.md) và [PROJECT_STATUS](PROJECT_STATUS.md).
+
 **Ba trống giải đố06/11/2026:** người dùng gửi `trong-ong-ong-son-viet-nam.zip`, yêu cầu thay cả ba trống tại Điện Trống C1 và ưu tiên hoa văn văn hóa Việt rõ nét. Dùng model **ndnguyen3d**, Sketchfab `21e418a517a74b49a17ebbad94ba26c0`, CC BY4.0 đã đối chiếu API nguồn. Giữ mesh/texture nguồn2K; material URP PBR và ánh sáng cục bộ, ký hiệu gameplay Mặt Trời/Cánh Chim/Sóng Nước ở bảng riêng không che hoa văn. Giữ root/ref/ID/chuỗi A–C–B, giấy/Journal, schema4; model A20 Aaannnn vẫn ở các vị trí trang trí/đàn khác. [Chi tiết](DONGSON_DRUM_WORKLOG.md).
 
 **Chương2 ngày05–06/11/2026:** người dùng yêu cầu chia việc cơ chế Chim Lạc, kiểm tra/sửa phần đã có trước và làm từng lượt khi nói “thực hiện tiếp”. Hàng đợi [CHAPTER02_MECHANICS_PLAN](CHAPTER02_MECHANICS_PLAN.md), lượt0–7 có bằng chứng trong STATUS. Lượt6 giữ lời “Vành của ta đứng thứ nhất” trong thẻ/Journal và nhánh C3 chưa có. **Lượt7 đã dựng đồ họa năm khu, âm thanh/HUD/túi riêng C2 và development Windows**, có hồi quy input/native Continue và đo góc đứng yên; không coi đó là duyệt mỹ thuật/animation cuối, cân nhịp trận tay/nghe cân âm hoặc thời lượng người mới. Các khoảng thiếu này giữ trong STATUS. Chưa được giao triển khai C3–C5 hoặc thay model/rig An; không tự bắt đầu C3 chỉ vì xong bản dựng C2. Giữ mạch Kim Quy→Giếng Trời→Chim Lạc→gợi ý Thành Đá; fallback không phải chuyển C3 thành công.
@@ -22,7 +24,7 @@ Người dùng xác nhận trong lượt đồng bộ ngày 04/11/2026:
 
 - **Mục tiêu toàn game là 5 chương**, ưu tiên **môi trường chương 1 trước**.
 - **Chưa chốt hạn mới**. Lịch 7 ngày và lịch 12 tuần trong spec giữ làm dự kiến/tham chiếu cũ, không phải deadline hiện hành.
-- **3D hoạt hình low poly** thay định hướng Stylized Semi-Realistic/bán thực tế. Trại Giếng Trời là khu mẫu; nhân vật/quái mới chờ yêu cầu sau.
+- **Tại mốc 04/11:** đã chọn 3D hoạt hình low poly thay Stylized Semi-Realistic/bán thực tế; quyết định **Mid Poly Stylized Việt Nam ngày 06/11** ở đầu tài liệu thay mốc này. Trại Giếng Trời là khu mẫu của bản dựng lúc đó; nhân vật/quái mới chờ yêu cầu sau.
 - Giữ **ba thanh Tổng/Master, Nhạc/Music, Hiệu ứng/SFX**. Không giảm yêu cầu để khớp code thiếu sau merge; cấu hình mới xem AUDIO_SETTINGS và PROJECT_STATUS.
 - Giữ HUD C1 bắt đầu ở **Vườn Rêu**, tiến độ **3 mảnh/2 câu đố** theo lựa chọn 02/11. Mục tiêu suy từ world state, phân biệt giải đố và nhận thưởng B/C.
 - Trại C1 có **bàn E chế riêng và checkpoint E lưu riêng**; giữ ID, tham chiếu và điểm hồi sinh khi thay hình.
@@ -120,7 +122,7 @@ Nội dung đối chiếu nguồn tin cậy trước build, có hồ sơ/sourceR
 
 ## 9. Môi trường, UI/audio và asset
 
-**Yêu cầu tiếp theo 04/11/2026:** dựng lại bối cảnh **toàn bộ năm khu C1** theo năm ảnh người dùng gửi; sửa đá/cỏ lệch tiếp xúc; chỉ dùng asset miễn phí, cần bộ nào thì tìm nguồn miễn phí và báo người dùng nhập. Vẫn theo low poly đã chọn. A09/A11/A16 và cột A10 có trên đĩa đủ cho lượt này; có thể dựng mesh trang trí riêng, không cần tải bộ trả phí. Không đổi tuyến/puzzle/ID/save hoặc làm model actor mới. Xem [CHAPTER01_ENVIRONMENT](CHAPTER01_ENVIRONMENT.md) và STATUS để phân biệt ảnh tham chiếu, art đã ghép và kiểm thử.
+**Yêu cầu tiếp theo 04/11/2026 (mốc art trước đổi phong cách 06/11):** dựng lại bối cảnh **toàn bộ năm khu C1** theo năm ảnh người dùng gửi; sửa đá/cỏ lệch tiếp xúc; chỉ dùng asset miễn phí, cần bộ nào thì tìm nguồn miễn phí và báo người dùng nhập. Bản dựng khi đó theo low poly đã chọn. A09/A11/A16 và cột A10 có trên đĩa đủ cho lượt này; có thể dựng mesh trang trí riêng, không cần tải bộ trả phí. Không đổi tuyến/puzzle/ID/save hoặc làm model actor mới. Xem [CHAPTER01_ENVIRONMENT](CHAPTER01_ENVIRONMENT.md) và STATUS để phân biệt ảnh tham chiếu, art đã ghép và kiểm thử.
 
 Trại mẫu từ cửa tối ra vùng nắng: lửa trái, bàn giữa, lối Vườn Rêu phải. Dựng **92_EnvironmentPreview**, chuyển **ART_Camp** vào **02_HangLinhMach/World_Geometry/ENV_01_Camp** sau kiểm tra. Đá lớn→cây→đồ nhỏ; xem từ spawn/cạnh bàn/cửa bằng camera thấp. Giữ collider nền/tuyến 20×20 m và hành lang 4×10 m/lòng 3 m hiện có; đây không phải kích thước hang thật.
 

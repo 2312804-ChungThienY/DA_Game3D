@@ -1,6 +1,6 @@
 # Bối cảnh chương 1 — 04/11/2026
 
-**Mốc lịch sử:** bản mới nhất ngày 05/11 đã mở rộng địa hình và làm lại đường nối theo yêu cầu mới. Đọc [CHAPTER01_EXPANDED](CHAPTER01_EXPANDED.md) và PROJECT_STATUS trước; ràng buộc giữ footprint/collider cũ và tọa độ dưới đây thuộc bản ngày 04/11.
+**Mốc lịch sử:** bản ngày 05/11 đã mở rộng địa hình và làm lại đường nối. Ngày 06/11 người dùng đổi phong cách sang **Stylized Việt Nam**; mô tả low poly dưới đây thuộc lượt art cũ, chưa là kết quả chuyển phong cách. Đọc [ART_BIBLE](ART_BIBLE.md), [CHAPTER01_EXPANDED](CHAPTER01_EXPANDED.md) và PROJECT_STATUS trước; ràng buộc giữ footprint/collider cũ và tọa độ dưới đây thuộc bản ngày 04/11.
 
 Yêu cầu mới nhất: dựng lại **toàn bộ năm khu chương 1** theo năm ảnh người dùng gửi, sửa đá/cỏ lệch nhau và chỉ dùng asset miễn phí. Phong cách vẫn là **3D hoạt hình low poly** đã chọn; ảnh mới dùng cho bố cục, nhịp sáng và không khí. Không chuyển game sang đồ họa photorealistic, không thêm chương hoặc nhân vật/quái mới.
 

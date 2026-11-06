@@ -1,5 +1,7 @@
 # Thử asset môi trường — đồng bộ 04/11/2026
 
+**Lưu ý 06/11:** các nhận xét “low poly hiện tại” dưới đây là trạng thái thử asset ngày 04/11. Phong cách mới là **Stylized Việt Nam**; chưa có kiểm thử lại asset theo hướng này. Xem [ART_BIBLE](ART_BIBLE.md).
+
 Khu mẫu đang dùng là **92_EnvironmentPreview**, đã ghép ART_Camp vào 02_HangLinhMach theo yêu cầu 04/11. Chi tiết và cách thử hiện hành ở [CAMP_ENVIRONMENT.md](CAMP_ENVIRONMENT.md). Scene **93_TestEnvironment** và dữ liệu 30/10 dưới đây là khu thử sáu mẫu trước merge, không phải bản khu trại mới hoặc bằng chứng mọi asset đã nghiệm thu.
 
 ## Lựa chọn và nguồn hiện hành

@@ -1,8 +1,10 @@
 # Tài liệu dự án Sơn Đoòng
 
-Kiểm kê toàn dự án ngày **04/11/2026**, cập nhật môi trường C1 mở rộng ngày **05/11/2026**, Asia/Bangkok. Mục tiêu: **5 chương; ưu tiên môi trường chương 1 trước; chưa chốt hạn mới**. Lịch 7 ngày và lịch 12 tuần trong spec là lịch tham chiếu cũ.
+Kiểm kê toàn dự án ngày **04/11/2026**, cập nhật môi trường C1 mở rộng ngày **05/11/2026** và chỉ mục làm việc ngày **06/11/2026**, Asia/Bangkok. Mục tiêu: **5 chương; ưu tiên môi trường chương 1 trước; chưa chốt hạn mới**. Lịch 7 ngày và lịch 12 tuần trong spec là lịch tham chiếu cũ.
 
-## Đọc theo thứ tự
+## Tìm tài liệu theo công việc
+
+Đọc `PROJECT_MEMORY` và phần mới nhất của `PROJECT_STATUS` trước công việc gameplay/art. Chỉ mở tài liệu chuyên biệt, các hàng `REQUIREMENTS_MATRIX` và phần `spec/` liên quan tới thay đổi đang làm; khi chỉ sửa tài liệu, đọc nguồn mà tài liệu đó tóm tắt. `AGENTS.md` ở thư mục gốc là quy trình làm việc ngắn.
 
 | Tài liệu | Dùng để biết |
 | --- | --- |
@@ -10,6 +12,10 @@ Kiểm kê toàn dự án ngày **04/11/2026**, cập nhật môi trường C1 m
 | [PROJECT_STATUS](PROJECT_STATUS.md) | Trạng thái thật, bằng chứng kiểm thử và việc còn lại |
 | [REQUIREMENTS_MATRIX](REQUIREMENTS_MATRIX.md) | Từng yêu cầu: nguồn, triển khai hiện có, khoảng thiếu và mức kiểm chứng |
 | [CURRENT_ARCHITECTURE](CURRENT_ARCHITECTURE.md) | Component/API/ID/save/input/scene thực tế sau merge |
+| [ART_BIBLE](ART_BIBLE.md) | Hướng Mid Poly Stylized Việt Nam, chuẩn texture/URP Lit/LOD và điều chưa chốt |
+| [GAME_DESIGN](GAME_DESIGN.md) | Tóm tắt vòng chơi/chương và ranh giới map, nhân vật, NPC, vật phẩm |
+| [TECHNICAL_DESIGN](TECHNICAL_DESIGN.md) | Hợp đồng kỹ thuật hiện dùng và quy tắc sửa runtime |
+| [TASKS](TASKS.md) | Ảnh chụp công việc và mức bằng chứng; trạng thái mới nhất vẫn ở PROJECT_STATUS |
 | [DONGSON_DRUM_WORKLOG](DONGSON_DRUM_WORKLOG.md) | Ba trống giải đố C1 dùng FBX ndnguyen3d từ ZIP06/11, texture2K/PBR, ảnh, credit và kiểm thử |
 | [SPEC_INDEX](SPEC_INDEX.md) | Tìm đúng phần thiết kế nguồn và phiên bản đã đối chiếu |
 | [CHAPTER02_MECHANICS_PLAN](CHAPTER02_MECHANICS_PLAN.md) | Chia cơ chế Chim Lạc thành từng lượt; sửa phần đã có trước, phần mới làm khi người dùng yêu cầu tiếp |
@@ -32,7 +38,7 @@ Kiểm kê toàn dự án ngày **04/11/2026**, cập nhật môi trường C1 m
 
 ## Cách giải quyết khác biệt
 
-1. Yêu cầu mới nhất của người dùng ưu tiên cao nhất. Ngày04/11 chọn **3D hoạt hình low poly**, **Master/Music/SFX** và HUD mở đầu **Vườn Rêu**, tiến độ **3mảnh/2câu đố**. Ngày05/11 chuyển chế thuốc vào túi thay bàn, dùng A20/A22/A23/A24 thực tế, giấy gợi ý tùy chọn và choáng Hắc Ảnh4s/Hộ vệ2s. Chỉ model An vẫn được giữ nguyên.
+1. Yêu cầu mới nhất của người dùng ưu tiên cao nhất. Ngày06/11 chốt **Mid Poly Stylized Việt Nam**, texture 1K mặc định/2K cho nhân vật và công trình chính, URP Lit, LOD cho vật thể lớn; low poly ngày04/11 là mốc trước. Các quyết định **Master/Music/SFX**, HUD mở đầu **Vườn Rêu**, tiến độ **3mảnh/2câu đố** vẫn giữ. Ngày05/11 chuyển chế thuốc vào túi thay bàn, dùng A20/A22/A23/A24 thực tế, giấy gợi ý tùy chọn và choáng Hắc Ảnh4s/Hộ vệ2s; trống giải đố đã thay bằng model mới 06/11. Model An vẫn giữ nguyên.
 2. `spec/chapters/` và kế hoạch §55 chi tiết hóa chương; §40–54 thay các điểm mâu thuẫn trong §1–39. Phần cũ còn giá trị khi chưa bị thay thế.
 3. Code/scene là bằng chứng của **cái đang có**. Code thiếu một yêu cầu không có nghĩa người dùng đã bỏ yêu cầu đó. Ghi khoảng thiếu vào bảng yêu cầu; không tự sửa thiết kế để hợp thức hóa code.
 4. File/prefab tồn tại, cấu hình đã đọc, thử Editor, thử Play Mode và thử Windows build là các mức khác nhau. Không chuyển kết quả của phiên bản trước merge sang phiên bản hiện tại.
