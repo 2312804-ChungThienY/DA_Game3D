@@ -1,0 +1,30 @@
+{
+  "action": "validate",
+  "checks": [
+    "Native locomotion left-foot height=0.3018956",
+    "AN_Slash1 @0: foot=0.3012613, baseline delta=-0.000634253, grip distance=0.04499995",
+    "AN_Slash1 @0.11: foot=0.2932405, baseline delta=-0.008655071, grip distance=0.04500003",
+    "AN_Slash1 @0.21: foot=0.3070319, baseline delta=0.005136371, grip distance=0.04500006",
+    "AN_Slash1 @0.31: foot=0.3043011, baseline delta=0.002405584, grip distance=0.04500001",
+    "AN_Slash1 @0.6: foot=0.3010797, baseline delta=-0.0008158684, grip distance=0.04499998",
+    "AN_Slash1 @0.65: foot=0.3012613, baseline delta=-0.000634253, grip distance=0.04499995",
+    "AN_Slash1 validated body/foot/palm/wrist travel=0.6780236",
+    "AN_Slash2 @0: foot=0.3012613, baseline delta=-0.000634253, grip distance=0.04499995",
+    "AN_Slash2 @0.11: foot=0.298779, baseline delta=-0.003116608, grip distance=0.04500002",
+    "AN_Slash2 @0.21: foot=0.30405, baseline delta=0.002154469, grip distance=0.04499999",
+    "AN_Slash2 @0.31: foot=0.2965769, baseline delta=-0.005318642, grip distance=0.0449999",
+    "AN_Slash2 @0.6: foot=0.3008242, baseline delta=-0.001071334, grip distance=0.04500005",
+    "AN_Slash2 @0.65: foot=0.3012613, baseline delta=-0.000634253, grip distance=0.04499995",
+    "AN_Slash2 validated body/foot/palm/wrist travel=0.6690896",
+    "AN_Lunge @0: foot=0.3012613, baseline delta=-0.000634253, grip distance=0.04499995",
+    "AN_Lunge @0.11: foot=0.2982574, baseline delta=-0.003638208, grip distance=0.04499999",
+    "AN_Lunge @0.21: foot=0.3115098, baseline delta=0.009614289, grip distance=0.04500007",
+    "AN_Lunge @0.31: foot=0.3067673, baseline delta=0.004871786, grip distance=0.04500004",
+    "AN_Lunge @0.6: foot=0.3011281, baseline delta=-0.0007674694, grip distance=0.04500005",
+    "AN_Lunge @0.65: foot=0.3012613, baseline delta=-0.000634253, grip distance=0.04499995",
+    "AN_Lunge validated body/foot/palm/wrist travel=0.5453538",
+    "Three distinct melee motions, hand-held knife and blade trail are configured; root motion off=True"
+  ],
+  "failures": [],
+  "images": []
+}

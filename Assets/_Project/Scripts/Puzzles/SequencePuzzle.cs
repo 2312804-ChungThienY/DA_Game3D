@@ -13,6 +13,7 @@ public class SequencePuzzleController : MonoBehaviour
 
     private int currentIndex;
     private bool busy;
+    private uint restoreVersion;
 
     public bool IsSolved => worldState != null && definition != null && worldState.Has(StateSet.Puzzles, definition.puzzleId);
     public bool CanAcceptInput => isActiveAndEnabled && !busy && !IsSolved;
@@ -30,6 +31,7 @@ public class SequencePuzzleController : MonoBehaviour
 
     private void OnEnable()
     {
+        restoreVersion = worldState != null ? worldState.RestoreVersion : 0;
         if (worldState != null) worldState.Changed += ShowStatus;
     }
 
@@ -38,6 +40,7 @@ public class SequencePuzzleController : MonoBehaviour
         if (worldState != null) worldState.Changed -= ShowStatus;
         StopAllCoroutines();
         busy = false;
+        currentIndex = 0;
     }
 
     private void Start() => ShowStatus();
@@ -78,6 +81,15 @@ public class SequencePuzzleController : MonoBehaviour
     // Khi world state đổi chỉ cập nhật hiển thị solved, không reset lượt đang thử.
     private void ShowStatus()
     {
+        if (worldState != null && worldState.RestoreVersion != restoreVersion)
+        {
+            restoreVersion = worldState.RestoreVersion;
+            StopAllCoroutines();
+            busy = false;
+            currentIndex = 0;
+        }
+        // Snapshot restore or an external solve invalidates a delayed input.
+        if (IsSolved && busy) { StopAllCoroutines(); busy = false; currentIndex = 0; }
         if (statusText == null || definition == null) return;
         statusText.text = IsSolved ? "Đã giải" : $"{currentIndex}/{definition.sequence.Length}";
     }

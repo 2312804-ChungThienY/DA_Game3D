@@ -7,6 +7,13 @@ public static class WorldIds
 {
     // Chương 1
     public const string FlagLantern = "equipment_lantern";
+    public const string ClueDrum = "c1_clue_drum";
+    public const string ClueMirror = "c1_clue_mirror";
+    public const string GuideCampIntro = "c1_guide_camp_intro";
+    public const string GuideCampControls = "c1_guide_camp_controls";
+    public const string GuideKimQuy = "c1_guide_kim_quy";
+    public const string GuideWindC2 = "c2_guide_wind";
+    public const string ClueBellsC2 = "c2_clue_bells";
     public const string SealGarden = "seal_vuon_01";
     public const string DoorKimQuy = "door_dan_kim_quy";
     public const string GuardianBoss = "guardian_01";
@@ -40,8 +47,11 @@ public static class WorldIds
                              "c2_lore_p1", "c2_lore_p2", "c2_lore_p3", "c2_lore_p4", "c2_lore_p5") },
         { StateSet.QuizAnswered, Set("c2_qz_p1", "c2_qz_p2", "c2_qz_p3", "c2_qz_p4", "c2_qz_lt1", "c2_qz_lt2", "c2_qz_lt3") },
         { StateSet.QuizFirstTry, Set("c2_qz_p1", "c2_qz_p2", "c2_qz_p3", "c2_qz_p4", "c2_qz_lt1", "c2_qz_lt2", "c2_qz_lt3") },
-        { StateSet.Flags, Set(FlagLantern) }
+        { StateSet.Flags, Set(FlagLantern,ClueDrum,ClueMirror,GuideCampIntro,GuideCampControls,GuideKimQuy,GuideWindC2,ClueBellsC2) }
     };
+
+    static WorldIds(){foreach(string id in Known[StateSet.QuizAnswered])Known[StateSet.Flags].Add("quiz_wrong_"+id);}
+    public static string QuizMistakeFlag(string quizId)=>IsKnown(StateSet.QuizAnswered,quizId)?"quiz_wrong_"+quizId:null;
 
     // Mốc lưu theo scene.
     private static readonly Dictionary<string, string> CheckpointScene = new Dictionary<string, string>(StringComparer.Ordinal)

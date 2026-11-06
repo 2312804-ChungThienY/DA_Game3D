@@ -9,7 +9,8 @@ public class DrumInteractable : MonoBehaviour, IInteractable
     [SerializeField] private AudioClip hitSound;
     [SerializeField] private GameObject hitIndicator;
 
-    public string Prompt => $"Gõ trống {note}";
+    public static string NoteName(DrumNote value)=>value==DrumNote.A?"Mặt Trời":value==DrumNote.B?"Sóng Nước":"Cánh Chim";
+    public string Prompt => $"Gõ trống {NoteName(note)}";
 
     private void Awake()
     {

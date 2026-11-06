@@ -35,6 +35,7 @@ public class MirrorRotator : MonoBehaviour, IInteractable
         if (!CanInteract(interactor)) return;
         currentStep = (currentStep + 1) % 4;
         ApplyRotation();
+        SoundscapeRuntime.Play(SoundCue.Stone,transform.position,.25f,1.25f);
     }
 
     private void ApplyRotation()

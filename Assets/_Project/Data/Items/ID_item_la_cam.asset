@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 208c6675d17f290489d6a8b4d900f1c3, type: 3}
   m_Name: ID_item_la_cam
   m_EditorClassIdentifier: Assembly-CSharp::ItemDefinition
+  icon: {fileID: 21300000, guid: ffab6485d3e0c8c4e868610b73a95397, type: 3}
   itemId: item_la_cam
   displayName: "L\xE1 c\u1EA9m"
   description: "L\xE1 c\xE2y m\u1ECDc \u1EDF v\xF9ng \u1EA9m trong hang. Nguy\xEAn

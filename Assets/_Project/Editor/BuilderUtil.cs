@@ -130,6 +130,7 @@ public static class BuilderUtil
             case int i: if (p.propertyType == SerializedPropertyType.Enum) p.enumValueIndex = i; else p.intValue = i; break;
             case float f: p.floatValue = f; break;
             case Vector3 v: p.vector3Value = v; break;
+            case Color c: p.colorValue = c; break;
             case Enum e: p.enumValueIndex = Convert.ToInt32(e); break;
             case Array arr:
                 p.arraySize = arr.Length;

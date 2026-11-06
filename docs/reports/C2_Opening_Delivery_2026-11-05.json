@@ -1,0 +1,137 @@
+{
+  "stage": "C2 opening stage 1",
+  "date": "2026-11-05",
+  "backup": "SourceAssets\\SceneBackups\\2026-11-05_C2Opening\\164904",
+  "editorChecks": 21,
+  "playModeChecks": 74,
+  "runtimeErrors": 0,
+  "personalSaveRestored": true,
+  "metadata": [
+    {
+      "path": "Assets/_Project/Scenes/02_HangLinhMach.unity.meta",
+      "preserved": true
+    },
+    {
+      "path": "Assets/_Project/Scenes/92_EnvironmentPreview.unity.meta",
+      "preserved": true
+    },
+    {
+      "path": "Assets/_Project/Scenes/03_GiengTroiChimLac.unity.meta",
+      "preserved": true
+    },
+    {
+      "path": "Assets/_Project/Scenes/03_GiengTroiChimLac_NavMesh.asset.meta",
+      "preserved": true
+    },
+    {
+      "path": "Assets/_Project/Data/Chapters/C2/SC_C2_LongChimLac.asset.meta",
+      "preserved": true
+    },
+    {
+      "path": "Assets/_Project/Scripts/Core/GameSession.cs.meta",
+      "preserved": true
+    },
+    {
+      "path": "Assets/_Project/Scripts/Core/WorldIds.cs.meta",
+      "preserved": true
+    },
+    {
+      "path": "Assets/_Project/Scripts/Interaction/AbilityPickup.cs.meta",
+      "preserved": true
+    },
+    {
+      "path": "Assets/_Project/Scripts/Puzzles/PuzzleCluePickup.cs.meta",
+      "preserved": true
+    },
+    {
+      "path": "Assets/_Project/Editor/Chapter01UISetup.cs.meta",
+      "preserved": true
+    }
+  ],
+  "files": [
+    {
+      "path": "Assets/_Project/Scenes/02_HangLinhMach.unity",
+      "sha256": "c94343aac7d18aeff8d1370fcedfd6d693c9be2ea25b4173bcff5d97dab0f57e"
+    },
+    {
+      "path": "Assets/_Project/Scenes/92_EnvironmentPreview.unity",
+      "sha256": "896e58e8e8ce083fc8ed39f49ce6a5e542ac3bfd4338ceffe85ad085a2c2c141"
+    },
+    {
+      "path": "Assets/_Project/Scenes/03_GiengTroiChimLac.unity",
+      "sha256": "f6a0af07e1ae26723a1f2a0a6d3513e5ffdb65d50e7914eb3574a82eda052d5a"
+    },
+    {
+      "path": "Assets/_Project/Scenes/03_GiengTroiChimLac_NavMesh.asset",
+      "sha256": "57ec5ca0a560dceb1241ed2be326e3df97ee2df0d361393aca54f6ee23a9cf8f"
+    },
+    {
+      "path": "Assets/_Project/Data/Chapters/C2/SC_C2_LongChimLac.asset",
+      "sha256": "43da0a395ef404cca9813b12f8a77da5289faa789e0c3f0853a780923b36c8ce"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Core/GameSession.cs",
+      "sha256": "5512aaf471602197b12c811d06acc279c7126caad44ee3350a503eb401198d5d"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Core/WorldIds.cs",
+      "sha256": "bfcc5874bebbb677c5cce40e3796dab8ae8b6d63c6b2980c86c23a03d6d754ee"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Interaction/AbilityPickup.cs",
+      "sha256": "fb9516d5deb5f44ccd7be9e177d9702da6c232423190a8b22afee8fdd59c6835"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Puzzles/PuzzleCluePickup.cs",
+      "sha256": "c944c590df4fd1778c41abd4460c58380b82335c96406ed4d1faf41704a863a1"
+    },
+    {
+      "path": "Assets/_Project/Editor/Chapter02OpeningSetup.cs",
+      "sha256": "74622dcdcca6b8b1d4a83bf00573415619f4263f0b70ed412cfe1b6f6d8c1b3d"
+    },
+    {
+      "path": "Assets/_Project/Tests/Chapter02OpeningProbe.cs",
+      "sha256": "5e37509193e138a4e498471a758a460e90c8f84643c627d835f3e0a4c9af3028"
+    },
+    {
+      "path": "Assets/_Project/Editor/Chapter01UISetup.cs",
+      "sha256": "c7a2db0c30829dcdbf7de060de6853d6902404018fcd5662a85c7a9825989c86"
+    }
+  ],
+  "images": [
+    {
+      "path": "docs/images/c2-opening-arrival-2026-11-05.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "c71ecac62d305a16473f0dfd3fd0c2d7f3958ac6c3d3c6666212cca1d0e41db6"
+    },
+    {
+      "path": "docs/images/c2-opening-guide-2026-11-05.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "e097a2266a97cf82be089f07e5a95587345d0e2e34884b0de24a6a2b57485d86"
+    },
+    {
+      "path": "docs/images/c2-opening-guide-bottom-2026-11-05.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "4d0141bd152d2ae4c9930cbd7dfc21025bb295a7fd17f23d023dedf58451f146"
+    },
+    {
+      "path": "docs/images/c2-opening-feather-tutorial-2026-11-05.png",
+      "size": [
+        1920,
+        1080
+      ],
+      "sha256": "b168cb3986931f40f2246fc1fee7c3b6a03fb8283f749c7341c02821fa3580f8"
+    }
+  ],
+  "windowsBuildUpdated": false,
+  "manualKeyboardOrFullTraversalVerified": false
+}

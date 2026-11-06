@@ -1,0 +1,20 @@
+Trống đồng Đông Sơn - Việt Nam
+Author: ndnguyen3d
+Source: https://sketchfab.com/3d-models/trong-ong-ong-son-viet-nam-21e418a517a74b49a17ebbad94ba26c0
+License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+https://creativecommons.org/licenses/by/4.0/
+
+Source and license verified through the public Sketchfab model API on 2026-11-06:
+https://api.sketchfab.com/v3/models/21e418a517a74b49a17ebbad94ba26c0
+License returned: CC Attribution; author must be credited; commercial use is allowed.
+
+Changes by the Sơn Đoòng game project:
+Unity import settings, uniform world scale and placement; URP/Lit material;
+metallic/red and inverted roughness/alpha channel packing for URP smoothness;
+2K BC7 base/PBR textures, BC5 normal, mipmapping and local display lighting.
+Source FBX and five source PNG files are retained byte-for-byte from the supplied ZIP.
+No mesh decimation, repainted patterns or added claims of historical authenticity.
+The Sun/Bird/Water puzzle symbols are separate game signs, not changes to the artwork.
+
+This is a different model from the project's earlier A20 drum by Aaannnn.
+The older model remains in its existing decorative/altar uses.

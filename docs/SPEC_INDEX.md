@@ -1,6 +1,21 @@
-# Chỉ mục nguồn đã đọc
+# Chỉ mục nguồn — đồng bộ 04/11/2026
 
-Đã đọc **toàn văn bốn file** ngày30/10/2026. Không sửa nội dung nguồn. Các ghi chú chỉ là cách tra cứu; khi triển khai phải quay lại đoạn nguồn tương ứng. Tài liệu trên web được dẫn bên trong spec chưa được kiểm chứng lại trong lượt đọc này.
+Đã đối chiếu lại **9 tài liệu nguồn** trong `spec/`: bốn file gốc và năm đặc tả chương, cùng code/scene/config/docs hiện hành. Đợt đồng bộ ban đầu chỉ cập nhật tài liệu điều hướng và ghi nhớ; lượt điều khiển sau đó có bằng chứng riêng liên kết bên dưới. Đợt đồng bộ nguồn không sửa thiết kế nguồn, chạy game hoặc xác minh lại các URL bên trong spec.
+
+## Nguồn ưu tiên và quyết định mới
+
+**Yêu cầu 05/11:** dựng đẹp hơn và mở rộng toàn cảnh C1, đường nối liên tục, dùng asset đã nhập/free. Cho phép thay kích thước/địa hình cũ, giữ hợp đồng gameplay/save. [Bản mở rộng](CHAPTER01_EXPANDED.md) có ưu tiên hơn ràng buộc giữ footprint trong lượt trại trước.
+
+Phản hồi mới nhất 04/11: tăng nhẹ tầm chiếu vào quái và bỏ tia khi LMB. Cấu hình triển khai: quái 10 m, puzzle 8 m; [FocusCombat](reports/FocusCombat_2026-11-04.md).
+
+Phản hồi tiếp 04/11 xác nhận sửa **cả hướng đánh lẫn động tác**; [triển khai melee và bằng chứng mới](reports/MeleeVisual_2026-11-04.md). Không mở rộng thành yêu cầu model/quái mới.
+
+1. Yêu cầu mới nhất bổ sung 04/11: chỉnh cơ chế An **nhanh, gọn, ít quán tính**; [báo cáo triển khai/kiểm thử](reports/CharacterPolish_2026-11-04.md). Các lựa chọn nội dung còn hiệu lực: ngày 04/11 xác nhận **5 chương**, ưu tiên môi trường C1; **chưa có hạn mới**, lịch 7 ngày chỉ dự kiến cũ; chọn low poly, giữ ba thanh Master/Music/SFX và HUD C1 bắt đầu Vườn Rêu, progress 3 mảnh/2 câu đố; nhân vật/quái mới chờ yêu cầu sau.
+2. Kế hoạch §55 và `spec/chapters/` chi tiết hóa, điều chỉnh các điểm của §46–49.
+3. Kế hoạch §40–54 ưu tiên §1–39 khi mâu thuẫn: 5 chương, Quà Kim Quy, lớp Tri thức, hai kết, không nỏ/móc dây. Lịch/thẩm mỹ trong nguồn cũ đã được yêu cầu 04/11 thay ở phạm vi nêu trên.
+4. §1–39 giữ luật kỹ thuật chưa bị thay; ý tưởng và danh mục kỹ thuật/asset là nguồn tham khảo, không phải trạng thái triển khai.
+
+Đọc [PROJECT_MEMORY](PROJECT_MEMORY.md) cho quyết định hiện hành, [REQUIREMENTS_MATRIX](REQUIREMENTS_MATRIX.md) cho khoảng thiếu, [CURRENT_ARCHITECTURE](CURRENT_ARCHITECTURE.md) cho API thật và [PROJECT_STATUS](PROJECT_STATUS.md) cho mức kiểm chứng. Thiếu code không tự hủy yêu cầu; tài liệu lịch sử trong `history/` không dùng làm chỉ dẫn hiện tại.
 
 ## Nguồn và vai trò
 
@@ -8,12 +23,14 @@
 | --- | --- | --- |
 | [Tên_dự_án.md](../spec/Tên_dự_án.md) | Tên dự kiến, bối cảnh, cốt truyện toàn game, core loop, art/audio và gợi ý công nghệ | Tầm nhìn lớn có4 Linh Thần, móc/leo/thuyền/nỏ/parry; không phải tất cả bắt buộc12 tuần |
 | [Các_kỹ_thuật_làm_game.md](../spec/Các_kỹ_thuật_làm_game.md) |9 nhóm kỹ thuật: controller,interaction,inventory,building,AI/combat,survival,quest,save,architecture | Có cả FPS/cưỡi ngựa/sinh tồn; mức áp dụng được kế hoạch§34 lọc lại |
-| [Ke_hoach_game_Son_Doong_12_tuan.md](../spec/Ke_hoach_game_Son_Doong_12_tuan.md) | Thiết kếv1.0 ngày29/10/2026,39 phần, scope/logic/kiến trúc/thông số/triển khai/lịch/test/bàn giao | Tài liệu vận hành chi tiết cho chương Kim Quy; số gameplay là khởi điểm, chưa phải số liệu đo |
+| [Ke_hoach_game_Son_Doong_12_tuan.md](../spec/Ke_hoach_game_Son_Doong_12_tuan.md) | Bản gốc v1.0 ngày29/10 và cập nhật01/11, **55 phần**; xem thứ tự ưu tiên ở trên | §40–55 mở thành 5 chương; số gameplay/thời lượng là mục tiêu cần đo, lịch cũ không còn deadline hiện hành |
 | [Danh_muc_asset_free_Son_Doong.md](../spec/Danh_muc_asset_free_Son_Doong.md) |40 asset A01–A40,8 công cụ T01–T08,10 phần cần tự làm M01–M10 | Ứng viên phân Chính/Thay thế/Tùy chọn, nguồn kiểm tra29/10/2026; không chứng minh đã nhập/thử/license hiện tại |
 
 Kế hoạch có tham chiếu tên `.docx` ở D1/D2; các file thực tế đang đọc là bản `.md` trong spec. Giữ nguyên tên tiếng Việt/Unicode khi mở file bằng UTF-8.
 
-## Tra cứu đủ39 phần kế hoạch
+Yêu cầu art mới 04/11/2026: toàn năm khu C1 theo năm ảnh người dùng gửi, tiếp tục low poly, sửa đá/cỏ và chỉ asset miễn phí. [CHAPTER01_ENVIRONMENT](CHAPTER01_ENVIRONMENT.md) ghi triển khai, vị trí scene và nguồn A10/A11/A16 đã đối chiếu. Đây là yêu cầu mới, không sửa lịch sử hoặc nâng các ảnh mẫu thành ảnh hiện trường.
+
+## Tra cứu 55 phần kế hoạch
 
 | Phần | Nội dung cần đọc trước công việc tương ứng |
 | --- | --- |
@@ -56,7 +73,7 @@ Kế hoạch có tham chiếu tên `.docx` ở D1/D2; các file thực tế đan
 |37| Rủi ro/symptoms, scope-cut khi trễ, tương thích asset |
 |38|6 nhóm hồ sơ, demo8–10 phút, snapshot demo và build máy khác |
 |39| D1/D2,S1–S8, thứ tự học công nghệ |
-|40| Điều chỉnh 01/11/2026: 5 chương ngắn, 1 tuần, bảng thay đổi so với phần 1–39 (ưu tiên phần 40–54 khi mâu thuẫn) |
+|40| Điều chỉnh 01/11: 5 chương ngắn, 65–95 phút, bảng thay đổi so1–39; lịch 1 tuần được người dùng04/11 chuyển thành dự kiến cũ |
 |41| 8 nguyên tắc sản xuất bắt buộc |
 |42| Khuôn chương 5 phòng: P1–P3 mảnh cổ vật qua Bệ Vấn Đáp, P4 công cụ trùm, P5 trùm + Linh Thần Vấn Đáp |
 |43| Chương 1 không lộn né; Quà Kim Quy mở bộ di chuyển; khóa mục tiêu; bộ animation làm một lần |
@@ -66,7 +83,7 @@ Kế hoạch có tham chiếu tên `.docx` ở D1/D2; các file thực tế đan
 |49| Chương 5: 6 phòng, Hắc Sương Vương 4 pha, cơ chế ẩn Vành Ký Ức, Kết 1 và Kết 2 |
 |50| Scene 00–06, trường lưu mới |
 |51| Quy trình A–D, bảng concept, quy tắc tìm asset miễn phí trước, ứng viên trùm |
-|52| Lịch 7 ngày, mức tối thiểu, thứ tự cắt |
+|52| Lịch 7 ngày tham chiếu cũ; chưa chốt hạn mới. Mức tối thiểu/thứ tự cắt vẫn là nguồn thiết kế, không tự cắt khi chưa có yêu cầu |
 |53| Ca kiểm thử MV/LK/QZ/AB/BS02/CH/EN/KN |
 |54| Giả định cần xác nhận |
 |55| Trỏ tới đặc tả `spec/chapters/` (00 nền tảng, C2–C5) và 6 điều chỉnh phát sinh khi viết đặc tả |
@@ -79,6 +96,8 @@ Kế hoạch có tham chiếu tên `.docx` ở D1/D2; các file thực tế đan
 | `C2_Chim_Lac.md` … `C5_Truc_Linh_Mach.md` | Khi làm chương tương ứng; mỗi file có Phần 1 tóm tắt và Phần 2 với 5 hạng mục kỹ thuật |
 
 ## Tài nguyên: các nguyên tắc đọc danh mục
+
+Kiểm kê hiện hành: thư mục nguồn A01, A09, A10, A11, A12, A14, A16, A31 đã có trong Assets. Khu mẫu trại dùng A09/A11/A16; các bộ còn lại không tự được coi đã duyệt hoặc đã nghiệm thu. README A09 ghi CC0 khác mô tả danh mục, License A11 có tiêu đề khác tên bộ; xem [CAMP_ENVIRONMENT](CAMP_ENVIRONMENT.md) và [báo cáo runtime](reports/RuntimeAudit_2026-11-04.md) trước phát hành. Không sửa trạng thái gốc của danh mục để giả đã kiểm hết từng asset.
 
 - Không nhập Chính/Thay thế/Tùy chọn đồng thời chỉ để có nhiều asset. Ưu tiên một bộ nhân vật/hang/animation/phong cách thống nhất, thử ở scene riêng trước.
 - “Miễn phí” không tự có nghĩa CC0. Giữ file LICENSE, tác giả, URL, phiên bản/ngày, quyền dùng, phần đã chỉnh, credit cần thiết trong Asset_Sources khi thực sự nhập.
@@ -137,6 +156,8 @@ Các ưu tiên/quyền trong bảng sau là **thông tin ghi trong spec ngày29/
 
 ## Công cụ T01–T08 và phần tự làm M01–M10
 
+Bảng dưới phản ánh danh mục gốc 29/10 để tra cứu. Riêng M10 nỏ/móc dây đã bị phạm vi §40 và yêu cầu hiện hành loại ra, không còn là backlog bắt buộc hoặc nhánh mở rộng tự triển khai.
+
 | ID | Công cụ | Quy tắc |
 | --- | --- | --- |
 |T01|Input System|Released tương thích Editor, Gameplay/UI maps |
@@ -163,7 +184,7 @@ Các ưu tiên/quyền trong bảng sau là **thông tin ghi trong spec ngày29/
 
 ## Dấu vết phiên bản nguồn
 
-SHA-256 của bốn file đã đọc. Nếu hash khác, bản ghi nhớ có thể đã cũ; đọc lại nguồn thay đổi trước khi làm việc liên quan. Các hash không phải khóa cấm sửa spec.
+SHA-256 của chín file đối chiếu ngày 04/11/2026. Nếu hash khác, đọc lại phần nguồn thay đổi trước khi làm việc liên quan; hash không phải khóa cấm sửa spec. Tên file kế hoạch giữ “12_tuan” để bảo toàn liên kết, không có nghĩa phạm vi/lịch 12 tuần vẫn hiện hành.
 
 ```text
 Tên_dự_án.md
@@ -173,8 +194,23 @@ Các_kỹ_thuật_làm_game.md
 DCDC858B431BD7D224E2CC16A39BD65BAEBB5A148A95C35195AA6499742CB1E5
 
 Ke_hoach_game_Son_Doong_12_tuan.md
-D54D7A0A5CA149163CEF21C35D1D08DF1FEBB4FED7A0F617F8B2CC67A1E0B36F  (01/11/2026, sau khi thêm phần 40–55 theo yêu cầu người dùng; bản gốc: 82EAB3AC...F050D)
+D11C98190091769EC7CDEFB0B4330B76FBCEB9799C54F621155A2833C662F4FF
 
 Danh_muc_asset_free_Son_Doong.md
 68FECE9A64467B3835701DAFFC1C30C2480A4AF237F4B198EF10B706D956B9B6
+
+chapters/00_Nen_tang_dung_chung.md
+BBF0E1CDCCC24A47059343B1178A2EB58596A70F4CCF049F4177C9336818D712
+
+chapters/C2_Chim_Lac.md
+50599857716D77F91F204A7AC9AA273FD2229FA770E1B080A45314BF8FA97C69
+
+chapters/C3_Son_Tinh.md
+DA3D0098255FDBD68E6DCDBD8E3E8F5F0FA646CB6001FBF925F766F8AF7334C8
+
+chapters/C4_Thuy_Tinh.md
+46656AD914CEEA7BD5C1D0FC8BFD7DB48C9C06EF9789AAD4231C37B107BA3FAA
+
+chapters/C5_Truc_Linh_Mach.md
+1D2C79A3ACEC134C8CDDC5CDF5D316858170A0389030894660491B1174A5D7B0
 ```

@@ -12,11 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 967e567dd881df54ea2610520bf952fc, type: 3}
   m_Name: SC_C2_Awaken
   m_EditorClassIdentifier: Assembly-CSharp::StoryCard
-  title: "Chim L\u1EA1c th\u1EE9c t\u1EC9nh"
-  body: "H\u1EAFc S\u01B0\u01A1ng tan kh\u1ECFi \u0111\xF4i c\xE1nh. Chim L\u1EA1c
-    bay v\xF2ng quanh m\u1EB7t tr\u1EDDi tr\xEAn \u0111\u1EC9nh gi\u1EBFng, gi\xF3
-    l\xE0nh th\u1ED5i qua l\xF2ng hang.\n\n\"Ba m\u1EA3nh M\u1EB7t Tr\u1EDDi L\xF4ng
-    Chim \u0111\xE3 v\u1EC1 ch\u1ED7 c\u0169. Khi g\u1EB7p tr\u1ED1ng b\u1ED1n v\xE0nh,
-    v\xE0nh c\u1EE7a ta \u0111\u1EE9ng th\u1EE9 nh\u1EA5t.\"\n\nC\u1ED5ng gi\xF3
-    ph\xEDa b\u1EAFc \u0111\xE3 m\u1EDF."
+  title: "L\u1EDDi Chim L\u1EA1c \u2014 M\u1EB7t Tr\u1EDDi L\xF4ng Chim"
+  body: "Ba m\u1EA3nh M\u1EB7t Tr\u1EDDi L\xF4ng Chim \u0111\xE3 h\u1EE3p nh\u1EA5t.
+    Chim L\u1EA1c th\u1EE9c t\u1EC9nh gi\u1EEFa \u0111\u1EC9nh t\u1ED5, nh\u01B0\u1EDDng
+    lu\u1ED3ng gi\xF3 cho An b\u01B0\u1EDBc ti\u1EBFp.\n\nChim L\u1EA1c d\u1EB7n:
+    \u201CV\xE0nh c\u1EE7a ta \u0111\u1EE9ng th\u1EE9 nh\u1EA5t\u201D. H\xE3y ghi
+    nh\u1EDB l\u1EDDi n\xE0y khi g\u1EB7p tr\u1ED1ng b\u1ED1n v\xE0nh.\n\nPh\xEDa
+    d\u01B0\u1EDBi gi\u1EBFng tr\u1EDDi, linh m\u1EA1ch d\u1EABn v\u1EC1 Th\xE0nh
+    \u0110\xE1 S\u01A1n Tinh. \u0110\xF3 l\xE0 ch\u1EB7ng ti\u1EBFp theo c\u1EE7a
+    h\xE0nh tr\xECnh ph\u1EE5c h\u1ED3i linh m\u1EA1ch.\n\n\u0110\xE2y l\xE0 l\u1EDDi
+    k\u1EC3 h\u01B0 c\u1EA5u c\u1EE7a game, kh\xF4ng ph\u1EA3i l\u1EDDi tr\xEDch
+    d\u1EABn l\u1ECBch s\u1EED."
   image: {fileID: 0}

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public enum EnemyState { Idle, Patrol, Chase, Attack, Search, Return, Dead }
+public enum EnemyState { Idle, Patrol, Chase, Attack, Search, Return, Dead, Stunned }
 
 // FSM Hắc Ảnh. NavMeshAgent là nguồn dịch chuyển duy nhất của địch.
 [RequireComponent(typeof(NavMeshAgent), typeof(EnemyHealth))]
@@ -16,6 +16,7 @@ public class EnemyBrain : MonoBehaviour
 
     private NavMeshAgent agent;
     private EnemyHealth health;
+    private EnemyLanternReceiver lanternReceiver;
     private PlayerVitals player;
     private Vector3 spawnPosition;
     private Vector3 lastSeenPosition;
@@ -27,11 +28,14 @@ public class EnemyBrain : MonoBehaviour
     private readonly Collider[] hits = new Collider[4];
 
     public EnemyState State { get; private set; } = EnemyState.Idle;
+    public EnemyDefinition Definition=>definition;
+    public float StateElapsed=>stateTime;
 
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         health = GetComponent<EnemyHealth>();
+        lanternReceiver=GetComponent<EnemyLanternReceiver>();
         spawnPosition = transform.position;
         if (definition == null)
         {
@@ -59,7 +63,7 @@ public class EnemyBrain : MonoBehaviour
     // Bị đánh từ phía sau vẫn quay lại đuổi An.
     private void OnDamaged()
     {
-        if (State == EnemyState.Dead || health.IsDead || player == null || player.IsDead) return;
+        if (State == EnemyState.Dead || health.IsDead || player == null || player.IsDead || (lanternReceiver&&lanternReceiver.IsStunned)) return;
         if (State == EnemyState.Chase || State == EnemyState.Attack) return;
 
         lastSeenPosition = player.transform.position;
@@ -73,6 +77,9 @@ public class EnemyBrain : MonoBehaviour
     private void Update()
     {
         if (State == EnemyState.Dead || !agent.isOnNavMesh) return;
+        if(lanternReceiver&&lanternReceiver.IsStunned)
+        {if(State!=EnemyState.Stunned)Enter(EnemyState.Stunned);agent.isStopped=true;agent.velocity=Vector3.zero;return;}
+        if(State==EnemyState.Stunned){nextAttackTime=Time.time+.35f;Enter(EnemyState.Chase);}
         stateTime += Time.deltaTime;
 
         // Ngoài lúc đang chơi hoặc An đã chết: đứng yên, không tấn công.
@@ -141,6 +148,11 @@ public class EnemyBrain : MonoBehaviour
 
         switch (next)
         {
+            case EnemyState.Stunned:
+                agent.ResetPath();
+                agent.isStopped=true;
+                agent.velocity=Vector3.zero;
+                break;
             case EnemyState.Idle:
                 agent.ResetPath();
                 break;
@@ -192,6 +204,7 @@ public class EnemyBrain : MonoBehaviour
 
     private void TryHitPlayer()
     {
+        if(lanternReceiver&&lanternReceiver.IsStunned)return;
         if (player == null || player.IsDead) return;
 
         Vector3 center = transform.position + transform.forward * (attackBoxSize.z * 0.5f + 0.3f) + Vector3.up * 0.9f;

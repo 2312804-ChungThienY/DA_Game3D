@@ -1,0 +1,7 @@
+{
+    "action": "refine-ui",
+    "checks": [
+        "Frame centers transparent; menu Sprite Single assigned; dropdown and guardian health palette matched."
+    ],
+    "failures": []
+}

@@ -15,10 +15,12 @@ MonoBehaviour:
   loreId: c2_lore_p5
   tag: 0
   title: "Chim L\u1EA1c"
-  body: "Chim L\u1EA1c \u2013 lo\xE0i chim m\u1ECF d\xE0i bay quanh m\u1EB7t tr\u1EDDi
-    tr\xEAn tr\u1ED1ng \u0111\u1ED3ng \u2013 th\u01B0\u1EDDng \u0111\u01B0\u1EE3c
-    coi l\xE0 bi\u1EC3u t\u01B0\u1EE3ng c\u1EE7a c\u01B0 d\xE2n L\u1EA1c Vi\u1EC7t."
-  sourceRef: "SGK L\u1ECBch s\u1EED v\xE0 \u0110\u1ECBa l\xED 6 (ph\u1EA7n V\u0103n
-    Lang \u2013 \xC2u L\u1EA1c); B\u1EA3o t\xE0ng L\u1ECBch s\u1EED Qu\u1ED1c gia:
-    tr\u1ED1ng \u0111\u1ED3ng Ng\u1ECDc L\u0169, v\u0103n h\xF3a \u0110\xF4ng S\u01A1n."
+  body: "Khi m\xF4 t\u1EA3 c\xE1c v\xE0nh hoa v\u0103n tr\u1ED1ng Ng\u1ECDc L\u0169,
+    B\u1EA3o t\xE0ng L\u1ECBch s\u1EED Qu\u1ED1c gia d\xF9ng t\xEAn chim L\u1EA1c
+    cho m\u1ED9t s\u1ED1 h\xECnh t\u01B0\u1EE3ng chim. \u0110\xE2y l\xE0 t\xEAn c\u1EE7a
+    h\xECnh t\u01B0\u1EE3ng trang tr\xED, kh\xF4ng ph\u1EA3i b\u1EB1ng ch\u1EE9ng
+    x\xE1c \u0111\u1ECBnh m\u1ED9t lo\xE0i chim hi\u1EC7n \u0111\u1EA1i. Linh Th\u1EA7n
+    Chim L\u1EA1c c\u1EE7a game l\xE0 h\u01B0 c\u1EA5u."
+  sourceRef: "https://baotanglichsu.vn/VI/Articles/1001/19707/bao-vat-quoc-gia-viet-nam-trong-djong-ngoc-lu.html
+    | \u0111\u1ED1i chi\u1EBFu 05/11/2026"
   verified: 1

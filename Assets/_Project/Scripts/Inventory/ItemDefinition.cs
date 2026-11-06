@@ -6,6 +6,7 @@ public enum ItemKind { Material, Consumable, Equipment, Fragment, Relic }
 [CreateAssetMenu(menuName = "Son Doong/Item Definition", fileName = "ID_NewItem")]
 public class ItemDefinition : ScriptableObject
 {
+    public Sprite icon;
     public string itemId;
     public string displayName;
     [TextArea] public string description;

@@ -33,6 +33,8 @@ public class RelicAltar : MonoBehaviour, IInteractable
         "Truyền thuyết: Kim Quy giúp An Dương Vương xây thành Cổ Loa.\n\n" +
         "Tiến trình đã được lưu tại bệ Kim Quy.";
     [SerializeField] private UnityEvent onRestored;
+    [SerializeField] private StoryCard restorationCard;
+    private bool restoring;
 
     public bool IsRestored => worldState != null && worldState.Has(StateSet.Puzzles, restoredId);
 
@@ -67,7 +69,8 @@ public class RelicAltar : MonoBehaviour, IInteractable
 
     private void Start() => Apply();
 
-    public bool CanInteract(GameObject interactor) => isActiveAndEnabled && !IsRestored;
+    public bool CanInteract(GameObject interactor) => isActiveAndEnabled && !IsRestored && !restoring &&
+        (AppRoot.Instance==null||AppRoot.Instance.Session.State==GameSession.SessionState.Playing);
 
     public void Interact(GameObject interactor)
     {
@@ -82,11 +85,26 @@ public class RelicAltar : MonoBehaviour, IInteractable
         }
 
         // Ghi trạng thái trước, rồi lưu ảnh chụp an toàn tại bệ, cuối cùng mới hiện màn kết.
-        worldState.TryAdd(StateSet.Puzzles, restoredId);
-        if (!string.IsNullOrEmpty(grantAbility)) worldState.TryAdd(StateSet.Abilities, grantAbility);
-        if (!string.IsNullOrEmpty(checkpointId)) saveService.SaveAt(checkpointId);
-        onRestored?.Invoke();
-        if (endsChapter) storyPanel.ShowChapterEnd(endTitle, endBody, nextScene, nextCheckpoint);
+        restoring=true;
+        try
+        {
+            WorldSnapshot before=worldState.Export();
+            var result=new List<StateRequirement>{new StateRequirement{set=StateSet.Puzzles,id=restoredId}};
+            if(!string.IsNullOrEmpty(grantAbility))result.Add(new StateRequirement{set=StateSet.Abilities,id=grantAbility});
+            if(!worldState.TryAddBatch(result,out bool changed))return;
+            if (!string.IsNullOrEmpty(checkpointId)&&!saveService.SaveAt(checkpointId))
+            {
+                worldState.Restore(before);
+                AppRoot.Instance?.UI?.ShowToast("Chưa lưu được phục dựng. Tiến trình giữ nguyên; hãy thử lại.",4);
+                return;
+            }
+            if(changed)worldState.PublishChange();
+            onRestored?.Invoke();
+            SoundscapeRuntime.Play(SoundCue.Success);
+            if (endsChapter) storyPanel.ShowChapterEnd(endTitle, endBody, nextScene, nextCheckpoint);
+            else if(restorationCard&&storyPanel)storyPanel.Show(restorationCard);
+        }
+        finally{restoring=false;}
     }
 
     private void Apply()

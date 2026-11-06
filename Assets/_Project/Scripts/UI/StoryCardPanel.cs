@@ -67,6 +67,9 @@ public class StoryCardPanel : MonoBehaviour, IUiPauseOwner
         TMP_Text label = continueButton.GetComponentInChildren<TMP_Text>();
         if (label != null) label.text = buttonLabel;
         panel.SetActive(true);
+        Canvas.ForceUpdateCanvases();
+        var scroll=bodyText.GetComponentInParent<ScrollRect>();
+        if(scroll){scroll.StopMovement();scroll.verticalNormalizedPosition=1;}
     }
 
     public void CloseFromBack()

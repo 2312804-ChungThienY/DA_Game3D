@@ -1,0 +1,16 @@
+{
+    "action": "validate",
+    "checks": [
+        "Assets/_Project/Scenes/02_HangLinhMach.unity: active renderers=1561, missing scripts=0, FBX crystal groups=48, lantern groups=2, junctions=8",
+        "NavMesh safe spawn: cp_trai",
+        "NavMesh safe spawn: cp_dien_trong",
+        "NavMesh safe spawn: cp_truoc_dan",
+        "NavMesh safe spawn: cp_kim_quy",
+        "Assets/_Project/Scenes/92_EnvironmentPreview.unity: active renderers=1561, missing scripts=0, FBX crystal groups=48, lantern groups=2, junctions=8",
+        "NavMesh safe spawn: cp_trai",
+        "NavMesh safe spawn: cp_dien_trong",
+        "NavMesh safe spawn: cp_truoc_dan",
+        "NavMesh safe spawn: cp_kim_quy"
+    ],
+    "failures": []
+}

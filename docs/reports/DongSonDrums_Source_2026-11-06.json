@@ -1,0 +1,55 @@
+{
+  "uid": "21e418a517a74b49a17ebbad94ba26c0",
+  "name": "Tr\u1ed1ng \u0111\u1ed3ng \u0110\u00f4ng S\u01a1n - Vi\u1ec7t Nam",
+  "viewerUrl": "https://sketchfab.com/3d-models/trong-ong-ong-son-viet-nam-21e418a517a74b49a17ebbad94ba26c0",
+  "user": {
+    "uid": "91f92b81766344b797a203571223888d",
+    "username": "ndnguyen3d",
+    "displayName": "ndnguyen3d",
+    "account": "basic",
+    "profileUrl": "https://sketchfab.com/ndnguyen3d",
+    "avatar": {
+      "uid": "b2b1940b69d34a9f84ade0520fdfaa2c",
+      "uri": "https://api.sketchfab.com/v3/avatars/b2b1940b69d34a9f84ade0520fdfaa2c",
+      "images": [
+        {
+          "width": 32,
+          "height": 32,
+          "size": 986,
+          "url": "https://media.sketchfab.com/avatars/b2b1940b69d34a9f84ade0520fdfaa2c/3bbe3f946a3f4a8a87de60301937846b.jpeg"
+        },
+        {
+          "width": 48,
+          "height": 48,
+          "size": 1363,
+          "url": "https://media.sketchfab.com/avatars/b2b1940b69d34a9f84ade0520fdfaa2c/ea8f02219cfe42ebb20a25cb181d2b30.jpeg"
+        },
+        {
+          "width": 90,
+          "height": 90,
+          "size": 2885,
+          "url": "https://media.sketchfab.com/avatars/b2b1940b69d34a9f84ade0520fdfaa2c/a789e724243a41d2b68523a95413bede.jpeg"
+        },
+        {
+          "width": 100,
+          "height": 100,
+          "size": 3317,
+          "url": "https://media.sketchfab.com/avatars/b2b1940b69d34a9f84ade0520fdfaa2c/98288b0df79548e19d2b24935c1bf985.jpeg"
+        }
+      ]
+    },
+    "uri": "https://api.sketchfab.com/v3/users/91f92b81766344b797a203571223888d"
+  },
+  "license": {
+    "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+    "label": "CC Attribution",
+    "fullName": "Creative Commons Attribution",
+    "requirements": "Author must be credited. Commercial use is allowed.",
+    "url": "http://creativecommons.org/licenses/by/4.0/",
+    "slug": "by"
+  },
+  "vertexCount": 5720,
+  "faceCount": 9892,
+  "description": "Vietnamese Description:\nM\u00f4 h\u00ecnh 3D Tr\u1ed1ng \u0111\u1ed3ng \u0110\u00f4ng S\u01a1n \u2013 bi\u1ec3u t\u01b0\u1ee3ng v\u0103n h\u00f3a ti\u00eau bi\u1ec3u c\u1ee7a n\u1ec1n v\u0103n minh L\u1ea1c Vi\u1ec7t. Thi\u1ebft k\u1ebf chi ti\u1ebft, t\u00e1i hi\u1ec7n hoa v\u0103n, h\u00ecnh kh\u1eafc v\u00e0 h\u00ecnh d\u00e1ng \u0111\u1eb7c tr\u01b0ng c\u1ee7a tr\u1ed1ng th\u1eddi k\u1ef3 \u0110\u00f4ng S\u01a1n (700 TCN \u2013 100 SCN). Ph\u00f9 h\u1ee3p cho m\u1ee5c \u0111\u00edch nghi\u00ean c\u1ee9u, tr\u01b0ng b\u00e0y s\u1ed1 h\u00f3a b\u1ea3o t\u00e0ng ho\u1eb7c d\u1ef1 \u00e1n t\u00e1i d\u1ef1ng v\u0103n h\u00f3a Vi\u1ec7t c\u1ed5.\n\nEnglish Description:\n3D model of a Dong Son bronze drum \u2013 an iconic artifact representing the ancient Lac Viet civilization of Vietnam. The model features intricate patterns and symbolic carvings, reflecting the original design from the Dong Son period (700 BC \u2013 100 AD). Ideal for cultural restoration, museum digitization, or academic use.",
+  "isDownloadable": true
+}

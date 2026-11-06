@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 967e567dd881df54ea2610520bf952fc, type: 3}
+  m_Name: SC_C2_RelicRestored
+  m_EditorClassIdentifier: Assembly-CSharp::StoryCard
+  title: "M\u1EB7t Tr\u1EDDi L\xF4ng Chim \u0111\xE3 ph\u1EE5c d\u1EF1ng"
+  body: "Ba m\u1EA3nh c\u1ED5 v\u1EADt kh\u1EDBp l\u1EA1i tr\xEAn b\u1EC7. Nh\u1EEFng
+    \u0111\u01B0\u1EDDng l\xF4ng chim \u0111\xF3n \xE1nh s\xE1ng, lu\u1ED3ng gi\xF3
+    tr\xEAn \u0111\u1EC9nh t\u1ED5 tr\u1EDF n\xEAn y\xEAn d\u1ECBu.\n\nChim L\u1EA1c
+    \u0111ang ch\u1EDD \u1EDF b\xEAn ph\u1EA3i b\u1EC7. H\xE3y tr\xF2 chuy\u1EC7n
+    \u0111\u1EC3 nghe l\u1EDDi d\u1EB7n tr\u01B0\u1EDBc ch\u1EB7ng \u0111\u01B0\u1EDDng
+    t\u1EDBi Th\xE0nh \u0110\xE1 S\u01A1n Tinh.\n\nTi\u1EBFn tr\xECnh \u0111\xE3
+    \u0111\u01B0\u1EE3c l\u01B0u t\u1EA1i \u0111\u1EC9nh t\u1ED5. L\u1EDDi d\u1EABn
+    n\xE0y l\xE0 h\u01B0 c\u1EA5u c\u1EE7a game."
+  image: {fileID: 0}

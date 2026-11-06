@@ -1,0 +1,684 @@
+{
+  "date": "2026-11-04",
+  "kind": "Static audit only; no Unity import, Play Mode or build executed",
+  "headShort": "ba58ff7",
+  "firstPartyCounts": {
+    ".anim": 7,
+    ".asmdef": 1,
+    ".asset": 41,
+    ".controller": 1,
+    ".cs": 103,
+    ".inputactions": 1,
+    ".mask": 2,
+    ".mat": 69,
+    ".mixer": 1,
+    ".prefab": 34,
+    ".unity": 10
+  },
+  "sourceFiles": [
+    {
+      "path": "Assets/_Project/Editor/AnAnimationBuilder.cs",
+      "bytes": 13828,
+      "sha256": "727ded4bc98498fbcb0f6fca1fa5f9ae366b435e89f7bc1fea86e4f8ae95c2c9"
+    },
+    {
+      "path": "Assets/_Project/Editor/AssetImportDiagnostics.cs",
+      "bytes": 5387,
+      "sha256": "5ac583db8397fe767f8d0e9096a31f01790f43a07c83375fb2c2d9cb7994d171"
+    },
+    {
+      "path": "Assets/_Project/Editor/BuilderUtil.cs",
+      "bytes": 10704,
+      "sha256": "5a441ce805d810b22064c6db6897629461a76ccf39955488b096407faf41dd47"
+    },
+    {
+      "path": "Assets/_Project/Editor/CampEnvironmentSetup.cs",
+      "bytes": 38950,
+      "sha256": "082ad00641d90ca2a5185e5dc5ca1d530c55c21ea751c3502b475867a1122c73"
+    },
+    {
+      "path": "Assets/_Project/Editor/ChapterBuilder.cs",
+      "bytes": 46231,
+      "sha256": "34d1cb911298c7fc85e6cbd67cf6cfa66e0fd815b9fd9fd202f98c358e794afc"
+    },
+    {
+      "path": "Assets/_Project/Editor/EnvironmentAssetTrials.cs",
+      "bytes": 29352,
+      "sha256": "71fd6ccebea558e6df8aab7ebc8f32c9744fd60b097639c39e290f4039ede0b3"
+    },
+    {
+      "path": "Assets/_Project/Editor/SharedPrefabBuilder.cs",
+      "bytes": 11968,
+      "sha256": "88ce80f0e35078ad11bd685b94ccac1474203edad9dfd23c9043ae70e545555f"
+    },
+    {
+      "path": "Assets/_Project/Input/PlayerControls.inputactions",
+      "bytes": 35058,
+      "sha256": "23b1b2b7a22692d829fea167a9deb8f22f926e6201b477ea6838fd05d9c7c642"
+    },
+    {
+      "path": "Assets/_Project/Tests/CampEnvironmentSmokeProbe.cs",
+      "bytes": 10812,
+      "sha256": "21a4cdc2bc85dd5c5c54d632b7e3c7f1f9d217e28a8d33e8dfc069ed3610291a"
+    },
+    {
+      "path": "Assets/_Project/Scripts/AI/BossBase.cs",
+      "bytes": 5889,
+      "sha256": "22f3a6ef9312a2756244361b50acd1e38e4d19a32f35eac892b971ff035b6893"
+    },
+    {
+      "path": "Assets/_Project/Scripts/AI/EnemyBrain.cs",
+      "bytes": 9515,
+      "sha256": "97f31d8879a9b41acc65b70e17ccfb82ffeb1cf189cb713c613aeda66383d8b2"
+    },
+    {
+      "path": "Assets/_Project/Scripts/AI/EnemyDefinition.cs",
+      "bytes": 908,
+      "sha256": "b583c206928067e8e503aa782dc8f968af45a74a16553e40e7d571fdc2941e60"
+    },
+    {
+      "path": "Assets/_Project/Scripts/AI/EnemyHealth.cs",
+      "bytes": 2262,
+      "sha256": "d0ab30b62d158028121cf9a38e643577530101423aad05defa3132a7ec211a11"
+    },
+    {
+      "path": "Assets/_Project/Scripts/AI/EnemyLanternReceiver.cs",
+      "bytes": 2238,
+      "sha256": "ee5199532b1ac9b3fed7da116cb60642981b55d82d9e14d36f538a6bb08ef38b"
+    },
+    {
+      "path": "Assets/_Project/Scripts/AI/EnemyProjectile.cs",
+      "bytes": 1607,
+      "sha256": "37faf30f4203caf569743be17eb6dab91ff00816687d3641b64d802db7cda0fb"
+    },
+    {
+      "path": "Assets/_Project/Scripts/AI/StoneGuardian.cs",
+      "bytes": 10669,
+      "sha256": "ead06c9b7ee810cb46df02053dc77d4fb0683973bb36a229b3625b4b25e3dfae"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Audio/RoutedAudio.cs",
+      "bytes": 1092,
+      "sha256": "010a291b82eb24bdfdcd6583fbc8aad4c5900ee30e90fe74e95a85362533236c"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Audio/SonDoong.Audio.asmdef",
+      "bytes": 100,
+      "sha256": "5acb0f9fae1a929f00f1b2acf949e79c19349a9b5c895caffbcdae815ca0a537"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Combat/ArenaGate.cs",
+      "bytes": 1866,
+      "sha256": "502bd9e45c42e7372b994548e1d75b8622b1cd768779ec0a23c15aa58140bf74"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Combat/CombatController.cs",
+      "bytes": 5846,
+      "sha256": "f2ac6ac31e67e74c8fc50f64fad0622838cd13e1ead5336d6dabf1c86960a3a5"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Combat/DamageInfo.cs",
+      "bytes": 428,
+      "sha256": "ddd8e47a18f836db6a12c53c833f956e56e6ab3b6aad16d8390a0661797f985d"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Combat/DamageZone.cs",
+      "bytes": 1084,
+      "sha256": "3a5ab28f3a56f93b55bd2e5a02a58b483f80251ef6cb548f826809069cd1df5f"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Combat/IDamageable.cs",
+      "bytes": 76,
+      "sha256": "5b04044e26f878dd0f92420fc35d42c9da594080a812bd4de9cbbfbea88f89d0"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Core/AppRoot.cs",
+      "bytes": 1773,
+      "sha256": "b952e222c5daff1d274c56280621f89a266138570f1fcea65a5735fe73b72c44"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Core/BootLoader.cs",
+      "bytes": 282,
+      "sha256": "27241c3bf42ad321b378a28a87dee38677a153fccae64f5dad1d60cd10cceeaf"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Core/GameSession.cs",
+      "bytes": 9890,
+      "sha256": "11f847413553986ed7dac2076555509fb6716eb1404fa976f1368b042a452855"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Core/InputReader.cs",
+      "bytes": 3496,
+      "sha256": "532d98ead5bd0ef512bbfb5b5a01c7389f36d9097610021c6f9a9b8e6975a7e9"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Core/KillZone.cs",
+      "bytes": 674,
+      "sha256": "cc22b180bef15de9984ebd1b7745a2100225ff0017fdf83d7bb221407aeeebe1"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Core/SettingsService.cs",
+      "bytes": 2082,
+      "sha256": "e16f310b3e4d4bb33dae72cf829600a366a6b12a75af34a1cf29c6601a355fd7"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Core/StateRequirement.cs",
+      "bytes": 317,
+      "sha256": "5485510dc2076958bd0f91f51c62389a71451ebdb85d3dc42ea6694362b26c93"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Core/StateSet.cs",
+      "bytes": 301,
+      "sha256": "81fd2f8114721e7f547eaf092096131463bd12db7bb5abd3397ed6dc43055c9d"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Core/WorldIds.cs",
+      "bytes": 3701,
+      "sha256": "7d3d67c0f8d2183341d4dd401a50ba04235cf97b5d3e6841e77d02e0a3b9e427"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Core/WorldStateStore.cs",
+      "bytes": 3019,
+      "sha256": "a0d4172619178ea6c0969fc6ef487be5a091b06c78e91cddd46fe77544f817f6"
+    },
+    {
+      "path": "Assets/_Project/Scripts/DevTools/PlaytestBot.Chapter1.cs",
+      "bytes": 13835,
+      "sha256": "67762f65938b7f35180624d767dce43c1e24894ab083e3b27ae87b00f45e96e6"
+    },
+    {
+      "path": "Assets/_Project/Scripts/DevTools/PlaytestBot.Chapter2.cs",
+      "bytes": 27459,
+      "sha256": "2cd1c49fea99cb79bd126bda662f615b767d743b887ad60d21b196c8212262aa"
+    },
+    {
+      "path": "Assets/_Project/Scripts/DevTools/PlaytestBot.cs",
+      "bytes": 13556,
+      "sha256": "5fde69ed5fdf7b8689579f2dc0c29072330072bfa8d1b90bbed07aa2d70b9552"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Interaction/AbilityPickup.cs",
+      "bytes": 1571,
+      "sha256": "0c8d12fca47da85ff14bdd1d5ded811d8eb50468d69683bae62be6fbfe93840c"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Interaction/CampCraftingTable.cs",
+      "bytes": 1615,
+      "sha256": "96a75ad68ad9278cf2daebc475774b899ca6f1d19f351541a757824e67c9ee55"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Interaction/ChapterExit.cs",
+      "bytes": 2286,
+      "sha256": "341e7af78c6e36326ccc2be3e44fc22680a5cf2e8a3c047db1c0dc5cd279dab2"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Interaction/IInteractable.cs",
+      "bytes": 298,
+      "sha256": "5137f535a3fa31a018f3a1fd36514fd2aa582574e3777c2daa233d3a1dd5b0b4"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Interaction/IInteractRange.cs",
+      "bytes": 160,
+      "sha256": "544e6b6f92d922212772304a319cb20712645584e477ccf3688a924b94f8ab3b"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Interaction/ILanternTarget.cs",
+      "bytes": 172,
+      "sha256": "c89c117244dbc96264582d3b18996b499ddb372c55aee1f331c1a9670befa084"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Interaction/InteractionScanner.cs",
+      "bytes": 3774,
+      "sha256": "47a538869872b2b0eef667cdc62990ed2cb185c329b6ac11a73a680ebd031e0b"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Interaction/ItemPickup.cs",
+      "bytes": 2257,
+      "sha256": "633d6d69330f8abaef578bf142dc39d4bd0383084ec997737c6c7e3cf640916d"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Interaction/LanternPickup.cs",
+      "bytes": 1114,
+      "sha256": "2138af4266ebdb50aa72966b7427c1658af15a46c5e494338aa5d9e8c191a65d"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Interaction/LanternRevealSurface.cs",
+      "bytes": 1880,
+      "sha256": "c53d2bec17db054d8276ae283eef25cb669ddd6bf32a61fbe66cc56803611e6e"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Interaction/RelicPickup.cs",
+      "bytes": 1815,
+      "sha256": "5bae9328507b4eaddacf34626f02aa324acde4b4d2cc44e5dfa7b5bcb2b4c17a"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Interaction/RequirementDoor.cs",
+      "bytes": 2890,
+      "sha256": "03c98889bd825ab50315569912d47237c5406c0ecda16ced1d36c5d987fdd5af"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Interaction/TestPickup.cs",
+      "bytes": 701,
+      "sha256": "c0870ecc03e30a031e9fc8f670b65c5c600f6400632f806e817078a8700d3ef3"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Inventory/InventoryService.cs",
+      "bytes": 6666,
+      "sha256": "52ed35d697ea5c496af699871ed62062494ce3762f998f96fb724fe2ce876771"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Inventory/ItemDefinition.cs",
+      "bytes": 575,
+      "sha256": "db12c5e80d95fc782e749eb9b41e622e445fcf9dbb8c3961a82fb8cc104ed5a3"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Knowledge/KnowledgeData.cs",
+      "bytes": 492,
+      "sha256": "a7340d60cdecfea06e21b6d0590e8e0e33235d81949b9ee735421f03fe8cf02a"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Knowledge/LoreDefinition.cs",
+      "bytes": 451,
+      "sha256": "27332029159a0cc11f76cd4f0b16113a3e929a9bd64fc6816c66a224ff0450ca"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Knowledge/LoreStele.cs",
+      "bytes": 1711,
+      "sha256": "cb73d44ae448519b5e581006da96288f3a782ae0ba7ed7a2ebca1c26f82a85ff"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Knowledge/QuizDefinition.cs",
+      "bytes": 772,
+      "sha256": "43612f9d21788f4836e8d43c7b77e3b16664a334a4bebbc232391ca0bdca8efc"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Knowledge/QuizPedestal.cs",
+      "bytes": 2887,
+      "sha256": "53aec0466abfd200ad5971b4bf4d9bda2f0eec8397432c66000718462ef0d57b"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Knowledge/QuizSequence.cs",
+      "bytes": 2804,
+      "sha256": "afa993235c51931dc1f19f8537f718c77df439bc6ad79bfd49f7189b9ade5970"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Knowledge/RewardService.cs",
+      "bytes": 3334,
+      "sha256": "4b9dfff79fec001ee2f293a3085423cadd56582430b278f526cbc9b0e49a816a"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Player/DodgeController.cs",
+      "bytes": 6286,
+      "sha256": "07222cf9b62331b21a1f89197bc64dd8f5a0fe34e800676372a9aa96dd6d0205"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Player/LanternController.cs",
+      "bytes": 6138,
+      "sha256": "21afa672936f40bbdba44ed9d275ecb5d23a71e190aa38143d98c29cc7425b44"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Player/LanternFocusScanner.cs",
+      "bytes": 4405,
+      "sha256": "22d40e9752b528a3ded4cbd20cbea3b5862527e17102bdf71beaf0bcbcd58a9a"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Player/LockOnController.cs",
+      "bytes": 5210,
+      "sha256": "dac35d4c00167e963eb7ab44a929d47e772863aa21b135b6f81e99cfba947afc"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Player/PlayerAbilities.cs",
+      "bytes": 931,
+      "sha256": "1557a3b9dabb8b0021023a89b61fda4cd59631b2db62fa3b2ab61525d657721f"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Player/PlayerAnimator.cs",
+      "bytes": 4723,
+      "sha256": "3339ebbaf9498af9f897fc361ec00ff45b0ae09a79c92eafc5288326c569a13b"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Player/PlayerCameraController.cs",
+      "bytes": 2025,
+      "sha256": "aefee4c896a40d32d624af8878b726f59f9a144daf5aeff4a83ae48ffb5733bb"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Player/PlayerMotor.cs",
+      "bytes": 13993,
+      "sha256": "78b113ed8da15a0968d01ab2939a954f1d4fae3fb25062bfaf7585a62ec54be6"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Player/PlayerStamina.cs",
+      "bytes": 2218,
+      "sha256": "10c39c4285e511b9304a98e9814290f5478766def6b66f3c90975d7350169b3f"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Player/PlayerVitals.cs",
+      "bytes": 2378,
+      "sha256": "1ef6cf478487562449fe7b767d2a844326fcca2aa4babd32722896e217f41851"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Player/PotionUser.cs",
+      "bytes": 2048,
+      "sha256": "8eb86c23b20bf257e6584c8028391278c9fa54f1057417a95444c6d8ea6f535e"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Puzzles/DrumInteractable.cs",
+      "bytes": 1498,
+      "sha256": "ea9bbca4eabedcc8efc7758a89f30f8cb6fe8493dc5edda789595a61b20f1850"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Puzzles/DrumPuzzleController.cs",
+      "bytes": 4491,
+      "sha256": "b0aaece48a19ca2ae6d10b9996f81386df46b411b197f5c3edb4fb6084939b2d"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Puzzles/DrumPuzzleDefinition.cs",
+      "bytes": 566,
+      "sha256": "86665dbc02445ec6f5563a45ddd31bdd68d44a0b0ef70ae4418529eb4d74a75b"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Puzzles/DrumPuzzleReset.cs",
+      "bytes": 504,
+      "sha256": "dca4da02a9ccf3a9d432ec85662d116402487e4c0381a59973caa048ed15aec5"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Puzzles/DrumVisualLabel.cs",
+      "bytes": 2383,
+      "sha256": "48a446ef3d7e8c8cbe16179c9e6e1140266a1a2d76844de4e0ee1fa9a91ccfed"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Puzzles/LightPuzzleReceiver.cs",
+      "bytes": 2629,
+      "sha256": "048b3cc2701ef9e995f45a0658626113300a6eb0661d9896a4c7bb8458223a71"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Puzzles/MirrorBeamEmitter.cs",
+      "bytes": 3065,
+      "sha256": "184dbe07a8dcc904c5f5027cd0cf34e8528a5a85a7dcc657d89480f9edca8b5f"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Puzzles/MirrorRotator.cs",
+      "bytes": 1430,
+      "sha256": "500d7c38b35ad636b407c8860ca0c7a7c9d50c6d37bddab3be1da15704e34723"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Puzzles/RelicAltar.cs",
+      "bytes": 5006,
+      "sha256": "c0a422755a11c67a6c535ddf12ee8e0f52e6a14152d95683843eccc90d29a2ce"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Puzzles/SealTarget.cs",
+      "bytes": 2637,
+      "sha256": "cbec76e150dfb7a284ad141bbea73afa90948d675f3ab2a2d6121b72543e3512"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Puzzles/SequenceInputNode.cs",
+      "bytes": 1324,
+      "sha256": "e57ec53a00ae5c4195b125607991eae59eb9dd46349b12c3f7f9dac50eb28203"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Puzzles/SequencePuzzle.cs",
+      "bytes": 2708,
+      "sha256": "0134fe226a8b48aa3d13b20ec690fc75681168733d181c915aea1aed80ec66d1"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Puzzles/SequencePuzzleDefinition.cs",
+      "bytes": 289,
+      "sha256": "686989f1b4ca5949bda94bcbec28e32f8ada567b44aa82680e2cea2f8e3d3243"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Quests/ChapterQuestTracker.cs",
+      "bytes": 1449,
+      "sha256": "8ac42eb866644a6095dfa53828e9839143943bfa117332965df70b80e319f489"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Quests/QuestTracker.cs",
+      "bytes": 2577,
+      "sha256": "e85eb333834ad0a13e925f1b7a9f7c3ba46373dab81451c9aaf47b562f3ba62d"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Save/CheckpointAltar.cs",
+      "bytes": 2074,
+      "sha256": "21e316a65a1546eb1a5fd18725c883327af9b3b52db86a3915b3cd7e6d225ed4"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Save/CheckpointTrigger.cs",
+      "bytes": 1399,
+      "sha256": "0ca31c5041db090f4a8107aa9dc0db9eb897a57f9e7e71ef9c0b7677e10f25fe"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Save/SaveData.cs",
+      "bytes": 2128,
+      "sha256": "c5bf0917731d27b6adb2783fc59d879aee14d41c5e2721dcedf4116b152c6c4b"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Save/SaveService.cs",
+      "bytes": 20122,
+      "sha256": "e2c66ab7889b59f37a6994c7fdeb6aea71638b19c6e94efdb3bb3ada9c8321ff"
+    },
+    {
+      "path": "Assets/_Project/Scripts/UI/AppRootUI.cs",
+      "bytes": 5857,
+      "sha256": "f79c407b782d5330c36a19a6b7dc9a1f90fc9dd2e09920ea499d8d1575fd668c"
+    },
+    {
+      "path": "Assets/_Project/Scripts/UI/CraftingPanel.cs",
+      "bytes": 3081,
+      "sha256": "7c11021418473bd08a342663e41051efcdb416df43d4bd4e425858ea0e9d0273"
+    },
+    {
+      "path": "Assets/_Project/Scripts/UI/FaceCameraBillboard.cs",
+      "bytes": 474,
+      "sha256": "dcb75636c02cb808a06188388c60eb19d91b760ccff3adf6d8aa95a711f63779"
+    },
+    {
+      "path": "Assets/_Project/Scripts/UI/HudBars.cs",
+      "bytes": 2473,
+      "sha256": "d99a4d84abc25f059773b26a11eb5da7aeed5f9fe03035a01d08fa66a539525d"
+    },
+    {
+      "path": "Assets/_Project/Scripts/UI/InventoryPanel.cs",
+      "bytes": 5172,
+      "sha256": "fad92a4c5e4cf0ca41220bb13776c7d000fc4ba557a5a2fbc11d68559f19979d"
+    },
+    {
+      "path": "Assets/_Project/Scripts/UI/JournalPanel.cs",
+      "bytes": 3207,
+      "sha256": "fb580eb6bd83d0f9ca79c4ed52d00d49d20c9fa6601dbd697850060b48348c8c"
+    },
+    {
+      "path": "Assets/_Project/Scripts/UI/MainMenuController.cs",
+      "bytes": 1452,
+      "sha256": "87abfe9c3f6df2988c3de965a811a9206fbd4370657c5aa211cd2f655dd0e34b"
+    },
+    {
+      "path": "Assets/_Project/Scripts/UI/PlayerHealthPresenter.cs",
+      "bytes": 916,
+      "sha256": "e57179608da03283421a3e5085d5e3f0a47ac74d78beeac12d92c943849a2f5f"
+    },
+    {
+      "path": "Assets/_Project/Scripts/UI/PlayerStaminaHUD.cs",
+      "bytes": 839,
+      "sha256": "7ddc648f7d12a514944babf97c1100d5daa4a559dad96e48b0d87243d484de6e"
+    },
+    {
+      "path": "Assets/_Project/Scripts/UI/ProximityVisibility.cs",
+      "bytes": 1356,
+      "sha256": "438a06d489803eb3a6228dc95f53a7789de3421ed147c7bc9ae86bd9ebec7d31"
+    },
+    {
+      "path": "Assets/_Project/Scripts/UI/QuizPanel.cs",
+      "bytes": 4279,
+      "sha256": "27c145986b485844759889a042ceaf15f2737400ef0ddef44966343e13e452d9"
+    },
+    {
+      "path": "Assets/_Project/Scripts/UI/StoryCard.cs",
+      "bytes": 329,
+      "sha256": "01e9802b278bcc86993740621d91a838064e0b3f2915e8ebd881accac00b8514"
+    },
+    {
+      "path": "Assets/_Project/Scripts/UI/StoryCardPanel.cs",
+      "bytes": 3146,
+      "sha256": "03b95c93dffcef3d4d0de3a06d0278cfb5c8a8b7b6bff6b2b4777950abcb464d"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Chapters/C2/BossChimLac.cs",
+      "bytes": 8274,
+      "sha256": "6debea756c8092552a943fb4ea5f2edad671537c87992edc54dba8e19af60592"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Chapters/C2/ChimLacFocusReceiver.cs",
+      "bytes": 1232,
+      "sha256": "99842141224e1f9869c9b9b0e7f3920bb53343e4aae21ce2689afe33bc30a909"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Chapters/C2/ThrowerBrain.cs",
+      "bytes": 5978,
+      "sha256": "db7c746b21b1753bc9e17818cd6d5fd05691aa51bfc2798715538b3ad5a8a609"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Chapters/C2/WindColumn.cs",
+      "bytes": 3134,
+      "sha256": "69374650cffbe433e3f146bd4f4e0e764d0cb2c3c76d8cff7c677f3a8592498b"
+    }
+  ],
+  "scenes": [
+    {
+      "path": "Assets/_Project/Scenes/00_Boot.unity",
+      "sha256": "c3a2668048f724677d7873db435fbc84927f906a20d367b8d70dab364cd9273b",
+      "gameObjects": 4
+    },
+    {
+      "path": "Assets/_Project/Scenes/01_MainMenu.unity",
+      "sha256": "b04ee2d09a8b47a0521b786a635cfe21bb1f10aab542132026c50a43903dad57",
+      "gameObjects": 14
+    },
+    {
+      "path": "Assets/_Project/Scenes/02_HangLinhMach.unity",
+      "sha256": "ab3efc8ab667fa0f54c462e466fe275e89e5e65ecc1696388e17ea191a1dbbe6",
+      "gameObjects": 292
+    },
+    {
+      "path": "Assets/_Project/Scenes/03_GiengTroiChimLac.unity",
+      "sha256": "c1fcd3b65f13d30904ad7215a71ba64ee207bdcf1d19a83e5bc0c5246f34797c",
+      "gameObjects": 279
+    },
+    {
+      "path": "Assets/_Project/Scenes/90_TestMechanics.unity",
+      "sha256": "705fb41e00e40382c1c7c8d0e734b5bd699cdf3fbc108f35ee9c61a99fad759a",
+      "gameObjects": 16
+    },
+    {
+      "path": "Assets/_Project/Scenes/91_TestCombat.unity",
+      "sha256": "aa9a4754e697ff0c3b006ca15d4c1e500f0b66db635b714d2d8ea319ec931875",
+      "gameObjects": 19
+    },
+    {
+      "path": "Assets/_Project/Scenes/92_EnvironmentPreview.unity",
+      "sha256": "3c3a7385fbc01bbb850de29781eae09ee2dfe32a67e95e23cd5a296518896f20",
+      "gameObjects": 370
+    },
+    {
+      "path": "Assets/_Project/Scenes/92_TestSave.unity",
+      "sha256": "07fce8b04804ddccb3026db5b43d8dc41ba138e49d50d36a5c24877081eacdca",
+      "gameObjects": 3
+    },
+    {
+      "path": "Assets/_Project/Scenes/93_TestEnvironment.unity",
+      "sha256": "b26ee45d04c95dfe7cc382812760eb4470cf55ad32d8d82cc0e37e3db4f6eae2",
+      "gameObjects": 26
+    },
+    {
+      "path": "Assets/_Project/Scenes/Template_Chapter.unity",
+      "sha256": "e35a5744404ffe66eabab16cd2b4b92265cfdd8ff26977ebb94eb5aa09813b9b",
+      "gameObjects": 109
+    }
+  ],
+  "unresolvedAssetGuids": [
+    {
+      "path": "Assets/_Project/Animations/AC_An.controller",
+      "guid": "d3b2083e086810047ab04d540db8afbc"
+    },
+    {
+      "path": "Assets/_Project/Data/Combat/ATK_Guardian_Slam.asset",
+      "guid": "bb9597fb43434c159888f25af8670826"
+    },
+    {
+      "path": "Assets/_Project/Data/Combat/ATK_Guardian_Sweep.asset",
+      "guid": "bb9597fb43434c159888f25af8670826"
+    },
+    {
+      "path": "Assets/_Project/Data/Items/IT_LaCam.asset",
+      "guid": "dd4ebb065764821459b1bcabd28a6903"
+    },
+    {
+      "path": "Assets/_Project/Data/Items/IT_LinhChi.asset",
+      "guid": "dd4ebb065764821459b1bcabd28a6903"
+    },
+    {
+      "path": "Assets/_Project/Data/Items/IT_ThuocMau.asset",
+      "guid": "dd4ebb065764821459b1bcabd28a6903"
+    }
+  ],
+  "unresolvedScriptGuids": [
+    {
+      "path": "Assets/_Project/Data/Combat/ATK_Guardian_Slam.asset",
+      "guid": "bb9597fb43434c159888f25af8670826"
+    },
+    {
+      "path": "Assets/_Project/Data/Combat/ATK_Guardian_Sweep.asset",
+      "guid": "bb9597fb43434c159888f25af8670826"
+    },
+    {
+      "path": "Assets/_Project/Data/Items/IT_LaCam.asset",
+      "guid": "dd4ebb065764821459b1bcabd28a6903"
+    },
+    {
+      "path": "Assets/_Project/Data/Items/IT_LinhChi.asset",
+      "guid": "dd4ebb065764821459b1bcabd28a6903"
+    },
+    {
+      "path": "Assets/_Project/Data/Items/IT_ThuocMau.asset",
+      "guid": "dd4ebb065764821459b1bcabd28a6903"
+    }
+  ],
+  "localReferenceIssues": [],
+  "duplicateAssetGuids": {},
+  "assetRootFolders": [
+    "A01 - First Person + Third Person  Character Controllers",
+    "A09 - Mines and Cave Set",
+    "A10 - Ultimate Modular Ruins Pack",
+    "A11 - Ultimate Stylized Nature Pack",
+    "A12 - Nature Kit",
+    "A14 - Mossy Rock",
+    "A16 - Survival Pack",
+    "A31 - Noto Sans",
+    "Settings",
+    "TextMesh Pro",
+    "TutorialInfo",
+    "_Project",
+    "_Recovery"
+  ],
+  "guidIndexCount": 24599,
+  "internalGuidsExcludedFromAssetReferenceCheck": [
+    {
+      "path": "Assets/_Project/Audio/Mixers/MainAudioMixer.mixer",
+      "guid": "2e724e644ea44914c8256b0b12497e2d"
+    },
+    {
+      "path": "Assets/_Project/Audio/Mixers/MainAudioMixer.mixer",
+      "guid": "51ed1ab3378ea8040bc9656f886962dd"
+    },
+    {
+      "path": "Assets/_Project/Audio/Mixers/MainAudioMixer.mixer",
+      "guid": "7cfec5a58bd5ab049b920365f85319bd"
+    }
+  ],
+  "referenceCheckMethod": "External Unity PPtr inline fileID+guid references; exclude built-in 0000000000000000 prefix and AudioMixer internal parameter GUIDs. Lookup includes Assets, Packages and Library/PackageCache metadata.",
+  "documentationValidation": {
+    "relativeLinksChecked": 141,
+    "brokenLinks": [],
+    "replacementCharacterFiles": [],
+    "sourceOrSceneChangedSinceAudit": []
+  }
+}

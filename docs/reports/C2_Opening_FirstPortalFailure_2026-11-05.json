@@ -1,0 +1,22 @@
+{
+    "mode": "Editor Play Mode; actual C1-to-C2 scene loads, native save/menu/Continue, API interactions with physics aim; C1 completion prerequisites are fixtures; no manual E or full traversal",
+    "checks": [
+        "Ready scene: 02_HangLinhMach",
+        "C1 exit stays locked before restoration",
+        "Saved protected pre-restoration C1 fixture using native SaveService",
+        "Actual C1 restoration opens chapter completion",
+        "Completion button targets same C2 entry as world portal",
+        "C1 ending introduces next destination without claiming Chim Lac restored",
+        "Ready scene: 01_MainMenu",
+        "Ready scene: 02_HangLinhMach",
+        "Restored at cp_kim_quy",
+        "Spawn has solid floor: cp_kim_quy",
+        "Spawn has clear player capsule: cp_kim_quy",
+        "Personal save/backup/temp restored byte-for-byte"
+    ],
+    "failures": [
+        "System.InvalidOperationException: Unobstructed interaction aim within reach: ChapterExit_C1\r\n  at Chapter02OpeningProbe.Check (System.Boolean ok, System.String message) [0x00047] in E:\\DoAnGame3D\\Doan_Game3D\\Assets\\_Project\\Tests\\Chapter02OpeningProbe.cs:49 \r\n  at Chapter02OpeningProbe.AimAt (UnityEngine.Component component, IInteractable target) [0x0020b] in E:\\DoAnGame3D\\Doan_Game3D\\Assets\\_Project\\Tests\\Chapter02OpeningProbe.cs:124 \r\n  at Chapter02OpeningProbe+<Run>d__28.MoveNext () [0x002f9] in E:\\DoAnGame3D\\Doan_Game3D\\Assets\\_Project\\Tests\\Chapter02OpeningProbe.cs:144 \r\n  at Chapter02OpeningProbe+<Start>d__18.MoveNext () [0x00049] in E:\\DoAnGame3D\\Doan_Game3D\\Assets\\_Project\\Tests\\Chapter02OpeningProbe.cs:57 "
+    ],
+    "errors": [],
+    "screenshots": []
+}

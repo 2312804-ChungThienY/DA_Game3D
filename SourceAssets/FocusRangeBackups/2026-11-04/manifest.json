@@ -1,0 +1,82 @@
+[
+  {
+    "path": "Assets/_Project/Editor/CharacterPolishSetup.cs",
+    "sha256": "4aa3cf7438ad9324c37ca83eefc37252d2104fdae1ad9f7e64b750853bca0dc7"
+  },
+  {
+    "path": "Assets/_Project/Editor/CharacterPolishSetup.cs.meta",
+    "sha256": "f31807a1d2cdbd1610cdc3ea7e4a595c20cad3a033dc454d010913a787a0a2fd"
+  },
+  {
+    "path": "Assets/_Project/Editor/MeleeVisualSetup.cs",
+    "sha256": "59fdc81a5ecd5eae5765119b247a7749e2410b627ce271efb6689e8fb5086c81"
+  },
+  {
+    "path": "Assets/_Project/Editor/MeleeVisualSetup.cs.meta",
+    "sha256": "c01ed6490fa0cf4aca1218bf001292df3ae915cfd835b4427f2885940c7dd3a5"
+  },
+  {
+    "path": "Assets/_Project/Prefabs/Player/PF_An_Prototype.prefab",
+    "sha256": "70ab4e8d434e49b6531a7f20b59f5c7056ddd9181e96f038d3632aaebc596d27"
+  },
+  {
+    "path": "Assets/_Project/Prefabs/Player/PF_An_Prototype.prefab.meta",
+    "sha256": "a46f9b8d5d25d79bb7c9d36fd43862bfae74b5cf588128243acd7da9e8e8cc0b"
+  },
+  {
+    "path": "Assets/_Project/Scripts/AI/EnemyLanternReceiver.cs",
+    "sha256": "ee5199532b1ac9b3fed7da116cb60642981b55d82d9e14d36f538a6bb08ef38b"
+  },
+  {
+    "path": "Assets/_Project/Scripts/AI/EnemyLanternReceiver.cs.meta",
+    "sha256": "d986c27953b7e5472774e4d479eb14807c9bfaaf20d279c4eff4d2adb115a5be"
+  },
+  {
+    "path": "Assets/_Project/Scripts/Chapters/C2/ChimLacFocusReceiver.cs",
+    "sha256": "99842141224e1f9869c9b9b0e7f3920bb53343e4aae21ce2689afe33bc30a909"
+  },
+  {
+    "path": "Assets/_Project/Scripts/Chapters/C2/ChimLacFocusReceiver.cs.meta",
+    "sha256": "6f0de2c348b6abf32ca88fc68c77f71e57b22f7d439deac0b9ba022a6286fe8d"
+  },
+  {
+    "path": "Assets/_Project/Scripts/Interaction/ILanternTarget.cs",
+    "sha256": "c89c117244dbc96264582d3b18996b499ddb372c55aee1f331c1a9670befa084"
+  },
+  {
+    "path": "Assets/_Project/Scripts/Interaction/ILanternTarget.cs.meta",
+    "sha256": "a16410648767965163c1e20b04dff0a2e723ecc40c1558f239e5152a0d1ee3df"
+  },
+  {
+    "path": "Assets/_Project/Scripts/Player/LanternController.cs",
+    "sha256": "551d80cadbc6984d91ad659acbaa18925d6274be7318ff44944378b4a23cbdc0"
+  },
+  {
+    "path": "Assets/_Project/Scripts/Player/LanternController.cs.meta",
+    "sha256": "dff8b6d01eaa6cf1efc7e9b4e512e1407f11b288898881d1a1a08bfe739cb9e3"
+  },
+  {
+    "path": "Assets/_Project/Scripts/Player/LanternFocusScanner.cs",
+    "sha256": "d4e649f8c0966d08e0e3cd805a323bcd0c7f5ab408486e2061b5a6f2bbb9e1af"
+  },
+  {
+    "path": "Assets/_Project/Scripts/Player/LanternFocusScanner.cs.meta",
+    "sha256": "273ef6456ab7f16e0b7dc79d636136c77d09356c3c9b81c0a8774f25713bb4b0"
+  },
+  {
+    "path": "Assets/_Project/Scripts/Player/PlayerMeleeVisual.cs",
+    "sha256": "d66063a30a6ca8a459313ae87f07bf1845e555b285ef59992febe0b0589e582c"
+  },
+  {
+    "path": "Assets/_Project/Scripts/Player/PlayerMeleeVisual.cs.meta",
+    "sha256": "66a5361d2a3541b969512d6cda8f351c3e42324ade275c977cfb7b25bffb5a5e"
+  },
+  {
+    "path": "Assets/_Project/Tests/CharacterPolishSmokeProbe.cs",
+    "sha256": "c22328868e1f928898213708be0c8a395bb28ff748f9ea5e2b471dd32dfadd5a"
+  },
+  {
+    "path": "Assets/_Project/Tests/CharacterPolishSmokeProbe.cs.meta",
+    "sha256": "f225d8bb19c3e0bfd9c0879b147eecf471601f2a9695684972f233a4b9584f1e"
+  }
+]

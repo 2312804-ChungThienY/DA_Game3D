@@ -24,6 +24,9 @@ public class AppRootUI : MonoBehaviour
 
     [Header("Settings")]
     [SerializeField] private Slider volumeSlider;
+    [SerializeField] private Slider musicSlider;
+    [SerializeField] private Slider sfxSlider;
+    [SerializeField] private TMP_Dropdown qualityDropdown;
     [SerializeField] private Slider sensitivitySlider;
     [SerializeField] private Toggle fullscreenToggle;
     [SerializeField] private Button settingsBackButton;
@@ -35,6 +38,7 @@ public class AppRootUI : MonoBehaviour
 
     [Header("Toast")]
     [SerializeField] private TMP_Text toastText;
+    [SerializeField] private GameObject toastGroup;
 
     private Action pendingConfirm;
     private Coroutine toastRoutine;
@@ -69,6 +73,9 @@ public class AppRootUI : MonoBehaviour
         sensitivitySlider.minValue = SettingsService.MinSensitivity;
         sensitivitySlider.maxValue = SettingsService.MaxSensitivity;
         volumeSlider.onValueChanged.AddListener(v => Settings?.SetMasterVolume(v));
+        if(musicSlider!=null){musicSlider.minValue=0;musicSlider.maxValue=1;musicSlider.onValueChanged.AddListener(v=>Settings?.SetMusicVolume(v));}
+        if(sfxSlider!=null){sfxSlider.minValue=0;sfxSlider.maxValue=1;sfxSlider.onValueChanged.AddListener(v=>Settings?.SetSfxVolume(v));}
+        if(qualityDropdown!=null)qualityDropdown.onValueChanged.AddListener(v=>Settings?.SetQuality(v));
         sensitivitySlider.onValueChanged.AddListener(v => Settings?.SetMouseSensitivity(v));
         fullscreenToggle.onValueChanged.AddListener(v => Settings?.SetFullscreen(v));
 
@@ -83,6 +90,7 @@ public class AppRootUI : MonoBehaviour
         deathPanel.SetActive(false);
         confirmPanel.SetActive(false);
         pendingConfirm = null;
+        if(toastGroup!=null)toastGroup.SetActive(false);
     }
 
     public void ShowPause(bool show)
@@ -107,6 +115,9 @@ public class AppRootUI : MonoBehaviour
         if (settings != null)
         {
             volumeSlider.SetValueWithoutNotify(settings.MasterVolume);
+            if(musicSlider!=null)musicSlider.SetValueWithoutNotify(settings.MusicVolume);
+            if(sfxSlider!=null)sfxSlider.SetValueWithoutNotify(settings.SfxVolume);
+            if(qualityDropdown!=null)qualityDropdown.SetValueWithoutNotify(settings.QualityLevel);
             sensitivitySlider.SetValueWithoutNotify(settings.MouseSensitivity);
             fullscreenToggle.SetIsOnWithoutNotify(settings.Fullscreen);
         }
@@ -116,6 +127,7 @@ public class AppRootUI : MonoBehaviour
     public void CloseSettings()
     {
         if (!enabled) return;
+        Settings?.Flush();
         settingsPanel.SetActive(false);
     }
 
@@ -155,8 +167,10 @@ public class AppRootUI : MonoBehaviour
     {
         toastText.text = message;
         toastText.gameObject.SetActive(true);
+        if(toastGroup!=null)toastGroup.SetActive(true);
         yield return new WaitForSecondsRealtime(seconds);
         toastText.gameObject.SetActive(false);
+        if(toastGroup!=null)toastGroup.SetActive(false);
         toastRoutine = null;
     }
 

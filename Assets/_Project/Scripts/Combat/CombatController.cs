@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Đòn dao của An: thời gian logic do script giữ, không phụ thuộc Animation Event.
+[DefaultExecutionOrder(-40)]
 [DisallowMultipleComponent]
 public class CombatController : MonoBehaviour
 {
@@ -35,11 +36,14 @@ public class CombatController : MonoBehaviour
     private float bufferedAttackTime = float.NegativeInfinity;
     private DodgeController dodge;
     private PlayerMotor motor;
+    private PlayerActionState actions;
+    private Vector3 attackForward;
+    private int inputRevision;
 
     public bool IsAttacking => attackTime >= 0f;
     // Bắt đầu một đòn (true nếu là đòn lộn + chém); Animator chỉ hiển thị.
     public event Action<bool> AttackStarted;
-    public bool IsInDamageWindow => IsAttacking && attackTime < activeEnd;
+    public bool IsInDamageWindow => IsAttacking && attackTime >= activeStart && attackTime < activeEnd;
     public bool LastAttackWasLunge { get; private set; }
     public int LungeCount { get; private set; }
 
@@ -49,6 +53,7 @@ public class CombatController : MonoBehaviour
         if (vitals == null) vitals = GetComponent<PlayerVitals>();
         dodge = GetComponent<DodgeController>();
         motor = GetComponent<PlayerMotor>();
+        actions = GetComponent<PlayerActionState>();
         if (slashVisual != null) slashVisual.SetActive(false);
     }
 
@@ -64,7 +69,12 @@ public class CombatController : MonoBehaviour
 
     private void Update()
     {
-        if (Time.deltaTime <= 0f) return;
+        if (inputRevision != input.Revision || !input.GameplayActive)
+        {
+            bufferedAttackTime = float.NegativeInfinity;
+            inputRevision = input.Revision;
+        }
+        if (Time.deltaTime <= 0f || !input.GameplayActive) return;
 
         if (vitals != null && vitals.IsDead)
         {
@@ -72,7 +82,8 @@ public class CombatController : MonoBehaviour
             return;
         }
 
-        bool pressed = input.GameplayEnabled && input.Attack.WasPressedThisFrame();
+        bool pressed = input.WasPressed(input.Attack);
+        if (pressed && IsAttacking && attackDuration - attackTime <= 0.16f) bufferedAttackTime = Time.time;
 
         // Đang lộn: ghi nhớ lần bấm để đâm tới ngay khi lộn xong.
         if (dodge != null && dodge.IsDodging)
@@ -84,10 +95,12 @@ public class CombatController : MonoBehaviour
         if (!IsAttacking)
         {
             bool afterRoll = dodge != null && Time.time - dodge.LastRollEndTime <= lungeWindow;
-            bool buffered = afterRoll && dodge.LastRollEndTime - bufferedAttackTime <= lungeWindow;
-            if ((pressed || buffered) && (stamina == null || stamina.TrySpend(staminaCost)))
+            bool buffered = Time.time - bufferedAttackTime <= (afterRoll ? lungeWindow : 0.16f);
+            if ((pressed || buffered) && actions.CanAttack && (stamina == null || stamina.TrySpend(staminaCost)))
             {
                 bufferedAttackTime = float.NegativeInfinity;
+                motor.FaceDirection(motor.ReadAttackDirection());
+                attackForward = transform.forward;
                 LastAttackWasLunge = afterRoll;
                 currentDamage = afterRoll ? damage * lungeMultiplier : damage;
                 if (afterRoll)
@@ -110,19 +123,28 @@ public class CombatController : MonoBehaviour
         if (slashVisual != null) slashVisual.SetActive(attackTime > activeStart && previous < activeEnd);
         if (overlapsWindow) ApplyHits();
 
-        if (attackTime >= attackDuration) CancelAttack();
+        if (attackTime >= attackDuration)
+        {
+            float queued = bufferedAttackTime;
+            CancelAttack();
+            bufferedAttackTime = queued;
+        }
     }
 
     private void ApplyHits()
     {
-        Vector3 start = transform.position + Vector3.up * 1f + transform.forward * 0.3f;
-        Vector3 end = start + transform.forward * (range - 0.3f);
+        Vector3 start = transform.position + Vector3.up * 1f + attackForward * 0.3f;
+        Vector3 end = start + attackForward * (range - 0.3f);
         int count = Physics.OverlapCapsuleNonAlloc(start, end, radius, overlap, targetMask, QueryTriggerInteraction.Ignore);
 
         for (int i = 0; i < count; i++)
         {
             IDamageable target = overlap[i].GetComponentInParent<IDamageable>();
-            if (target == null || ReferenceEquals(target, vitals) || !hitThisAttack.Add(target)) continue;
+            if (target == null || ReferenceEquals(target, vitals) || hitThisAttack.Contains(target)) continue;
+            Vector3 origin = transform.position + Vector3.up;
+            Vector3 point = overlap[i].ClosestPoint(origin);
+            if (Physics.Linecast(origin, point, (1 << 0) | (1 << 3), QueryTriggerInteraction.Ignore)) continue;
+            hitThisAttack.Add(target);
 
             // Một đòn chỉ trúng mỗi mục tiêu một lần dù có nhiều collider.
             target.TryTakeDamage(new DamageInfo(gameObject, currentDamage, DamageTeam.Player)
@@ -135,6 +157,7 @@ public class CombatController : MonoBehaviour
     public void CancelAttack()
     {
         attackTime = -1f;
+        bufferedAttackTime = float.NegativeInfinity;
         hitThisAttack.Clear();
         if (slashVisual != null) slashVisual.SetActive(false);
     }
@@ -144,8 +167,9 @@ public class CombatController : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = new Color(1f, 0.4f, 0f, 0.5f);
-        Vector3 start = transform.position + Vector3.up * 1f + transform.forward * 0.3f;
+        Vector3 forward = IsAttacking ? attackForward : transform.forward;
+        Vector3 start = transform.position + Vector3.up * 1f + forward * 0.3f;
         Gizmos.DrawWireSphere(start, radius);
-        Gizmos.DrawWireSphere(start + transform.forward * (range - 0.3f), radius);
+        Gizmos.DrawWireSphere(start + forward * (range - 0.3f), radius);
     }
 }

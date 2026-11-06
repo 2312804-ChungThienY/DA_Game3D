@@ -17,7 +17,7 @@ MonoBehaviour:
   damage: 12
   walkSpeed: 2
   chaseSpeed: 3.5
-  detectionRadius: 10
+  detectionRadius: 14
   viewAngle: 360
   attackRange: 1.7
   attackCooldown: 1.6

@@ -2,6 +2,7 @@ using UnityEngine;
 
 // Bộ lộn "Quà Kim Quy" (spec phần 43). Chỉ dùng được khi có movement_kit; chương 1 bấm Ctrl không lộn.
 // Mọi dịch chuyển đi qua PlayerMotor nên tường vẫn chặn.
+[DefaultExecutionOrder(-60)]
 [RequireComponent(typeof(PlayerMotor), typeof(PlayerVitals), typeof(PlayerStamina))]
 public class DodgeController : MonoBehaviour
 {
@@ -31,6 +32,7 @@ public class DodgeController : MonoBehaviour
     private CombatController combat;
     private Animator animator;
     private InputReader input;
+    private PlayerActionState actions;
 
     private float rollTime = -1f;
     private float lastStart = float.NegativeInfinity;
@@ -47,6 +49,7 @@ public class DodgeController : MonoBehaviour
     private void Awake()
     {
         motor = GetComponent<PlayerMotor>();
+        actions = GetComponent<PlayerActionState>();
         vitals = GetComponent<PlayerVitals>();
         stamina = GetComponent<PlayerStamina>();
         abilities = GetComponent<PlayerAbilities>();
@@ -61,12 +64,12 @@ public class DodgeController : MonoBehaviour
         }
     }
 
-    private void OnEnable() => vitals.DamageAvoided += OnDamageAvoided;
+    private void OnEnable() { if (vitals != null) vitals.DamageAvoided += OnDamageAvoided; }
 
     private void OnDisable()
     {
-        vitals.DamageAvoided -= OnDamageAvoided;
-        EndRoll();
+        if (vitals != null) vitals.DamageAvoided -= OnDamageAvoided;
+        CancelRoll();
     }
 
     private void Start()
@@ -85,7 +88,7 @@ public class DodgeController : MonoBehaviour
 
         if (vitals.IsDead)
         {
-            EndRoll();
+            CancelRoll();
             return;
         }
 
@@ -98,22 +101,24 @@ public class DodgeController : MonoBehaviour
         // Đã ra khỏi khe thì đứng dậy.
         if (motor.IsLow) motor.SetLow(false);
 
-        if (input.GameplayEnabled && input.Dodge.WasPressedThisFrame()) TryStartRoll();
+        if (input.WasPressed(input.Dodge)) TryStartRoll();
     }
 
     public bool TryStartRoll()
     {
-        if (!isActiveAndEnabled || IsDodging || vitals.IsDead || !abilities.Has(PlayerAbilities.MovementKit)) return false;
+        if (!actions.Active || actions.IsHurt || !isActiveAndEnabled || IsDodging || vitals.IsDead || !abilities.Has(PlayerAbilities.MovementKit)) return false;
         if (Time.time - lastStart < minInterval || !motor.IsGrounded) return false;
         if (combat != null && combat.IsInDamageWindow) return false;
         if (!stamina.TrySpend(staminaCost)) return false;
 
-        Vector3 direction = motor.DesiredMoveDirection;
+        Vector3 direction = motor.ReadMoveDirection();
+        bool hasMove = direction.sqrMagnitude >= 0.01f;
         if (direction.sqrMagnitude < 0.01f) direction = transform.forward;
         direction.y = 0f;
         rollDirection = direction.normalized;
 
-        bool sprintRoll = motor.IsSprinting;
+        bool sprintRoll = input.IsHeld(input.Sprint) && hasMove &&
+            (lantern == null || !lantern.IsFocusing);
         float speed = distance * (sprintRoll ? sprintMultiplier : 1f) / duration;
         // Một clip lộn: xoay thân theo hướng lộn (spec phần 43), sau lộn khóa mục tiêu quay mặt lại.
         motor.BeginDash(rollDirection * speed, duration);
@@ -145,13 +150,19 @@ public class DodgeController : MonoBehaviour
         EndRoll();
     }
 
-    private void EndRoll()
+    public void CancelRoll()
+    {
+        EndRoll(false);
+        LastRollEndTime = float.NegativeInfinity;
+    }
+
+    private void EndRoll(bool completed = true)
     {
         if (!IsDodging) return;
         rollTime = -1f;
         if (vitals != null) vitals.IsInvulnerable = false;
         if (motor != null) motor.CancelDash();
-        LastRollEndTime = Time.time;
+        if (completed) LastRollEndTime = Time.time;
     }
 
     // Đòn địch bị chặn trong 0,15 giây đầu của khoảng bất tử: né đúng lúc.

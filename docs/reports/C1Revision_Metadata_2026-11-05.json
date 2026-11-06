@@ -1,0 +1,66 @@
+{
+  "mode": "Static metadata continuity against pre-revision backup",
+  "checks": [
+    {
+      "path": "Assets\\_Project\\Scenes\\02_HangLinhMach.unity.meta",
+      "unchanged": true
+    },
+    {
+      "path": "Assets\\_Project\\Scenes\\92_EnvironmentPreview.unity.meta",
+      "unchanged": true
+    },
+    {
+      "path": "Assets\\_Project\\Resources\\PF_AppRootUI.prefab.meta",
+      "unchanged": true
+    },
+    {
+      "path": "Assets\\_Project\\Scenes\\01_MainMenu.unity.meta",
+      "unchanged": true
+    },
+    {
+      "path": "Assets\\_Project\\Scripts\\UI\\InventoryPanel.cs.meta",
+      "unchanged": true
+    },
+    {
+      "path": "Assets\\_Project\\Scripts\\UI\\JournalPanel.cs.meta",
+      "unchanged": true
+    },
+    {
+      "path": "Assets\\_Project\\Scripts\\Inventory\\InventoryService.cs.meta",
+      "unchanged": true
+    },
+    {
+      "path": "Assets\\_Project\\Scripts\\AI\\EnemyBrain.cs.meta",
+      "unchanged": true
+    },
+    {
+      "path": "Assets\\_Project\\Scripts\\AI\\StoneGuardian.cs.meta",
+      "unchanged": true
+    },
+    {
+      "path": "Assets\\_Project\\Scripts\\AI\\EnemyLanternReceiver.cs.meta",
+      "unchanged": true
+    },
+    {
+      "path": "Assets\\_Project\\Scripts\\Presentation\\EnemyPresentation.cs.meta",
+      "unchanged": true
+    },
+    {
+      "path": "Assets\\_Project\\Scripts\\Core\\WorldIds.cs.meta",
+      "unchanged": true
+    },
+    {
+      "path": "Assets\\_Project\\Scripts\\Puzzles\\DrumPuzzleController.cs.meta",
+      "unchanged": true
+    },
+    {
+      "path": "Assets\\_Project\\Scripts\\Puzzles\\DrumInteractable.cs.meta",
+      "unchanged": true
+    },
+    {
+      "path": "Assets\\_Project\\Scripts\\Quests\\QuestTracker.cs.meta",
+      "unchanged": true
+    }
+  ],
+  "failures": []
+}

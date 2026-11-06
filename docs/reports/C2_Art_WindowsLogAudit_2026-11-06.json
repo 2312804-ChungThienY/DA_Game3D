@@ -1,0 +1,48 @@
+{
+  "date": "2026-11-06",
+  "before": {
+    "path": "Logs/C2WindowsPlayer-before-cleanup.log",
+    "counts": {
+      "GarbageCollector disposing": 22,
+      "Leak Detected": 2,
+      "JobTempAlloc": 2,
+      "Exception": 0,
+      "GPU Resident Drawer disposed": 0
+    }
+  },
+  "after": {
+    "path": "Logs/C2WindowsPlayer.log",
+    "counts": {
+      "GarbageCollector disposing": 0,
+      "Leak Detected": 0,
+      "JobTempAlloc": 0,
+      "Exception": 0,
+      "GPU Resident Drawer disposed": 1
+    }
+  },
+  "afterWithStackTrace": {
+    "path": "Logs/C2WindowsPlayer-Leaks.log",
+    "counts": {
+      "GarbageCollector disposing": 0,
+      "Leak Detected": 0,
+      "JobTempAlloc": 0,
+      "Exception": 0,
+      "GPU Resident Drawer disposed": 1
+    }
+  },
+  "rootCauseEvidence": "Pre-fix native stack traces enter GPUResidentDrawer, RenderersBatchersContext and GPUInstanceDataBufferBuilder in the installed RP. No direct ComputeBuffer/GraphicsBuffer allocations found in Assets CS sources.",
+  "fix": "PlayerGraphicsShutdown registers Application.quitting in player only; public IGPUResidentRenderPipeline disabled -> ReinitializeGPUResidentDrawer releases resources before native shutdown; no serialized pipeline change.",
+  "checks": [
+    "No GarbageCollector disposing in final normal and trace shutdown logs",
+    "No Leak Detected in final normal and trace shutdown logs",
+    "No JobTempAlloc in final normal and trace shutdown logs",
+    "No Exception in final normal and trace shutdown logs",
+    "Explicit GPU Resident Drawer disposal logged in both final runs"
+  ],
+  "failures": [],
+  "notes": [
+    "Unity final ##utp MemoryLeaks telemetry reports engine allocation labels even without Leak Detected diagnostics; it is not counted as a leak diagnostic.",
+    "The custom in-game probe unsubscribes at Finish before quitting. This audit separately includes the complete shutdown log.",
+    "Final incremental build reports 0 errors/0 warnings; prior cold build reported 485 kernel compute warnings."
+  ]
+}

@@ -1,28 +1,30 @@
-# Cài đặt âm lượng
+﻿# Âm thanh và cài đặt — 05/11/2026
 
-Ghi chép bước âm lượng. Sau bước [túi đồ/thuốc](INVENTORY_POTIONS.md), SaveData đã lên v5; các tham chiếu v4 dưới đây ghi lại trạng thái khi làm âm lượng.
+Yêu cầu hiện hành giữ ba thanh **Âm lượng tổng / Nhạc / Hiệu ứng**. Bản hoàn thiện C1 đã nối đủ ba thanh trong `Resources/PF_AppRootUI.prefab`, cùng độ nhạy chuột, toàn màn hình và chất lượng Thấp/Vừa. Các báo cáo 02/11 là lịch sử trước merge.
 
-Triển khai ngày 02/11/2026 từ `Son_Doong_Audio_Settings.zip` theo yêu cầu. Dự án hiện ở `E:\DoAnGame3D\Doan_Game3D`, Unity 6000.4.8f1.
+C2 lượt7 ngày06/11 có `Resources/C2SoundPalette.asset`: loop khám phá/đấu trường, gió, chuông và tiếng chim tổng hợp của dự án; giữ cue UI/va chạm C1 và group Music/SFX/UI. Soundscape chọn palette theo scene, chuyển nhạc khi quái ném/Chim Lạc giao chiến; gió cột là nguồn3D, chuông có ba cao độ. Pause dừng SFX, nhạc/UI theo hợp đồng cũ. [Worklog](C2_ENVIRONMENT_WORKLOG.md), [nguồn](CHAPTER02_ASSET_CREDITS.md); chưa nghiệm thu nghe cân âm qua loa/tai nghe.
 
-- Menu chính và menu pause đều có nút Âm thanh, ba slider Tổng/Nhạc/Hiệu ứng, phần trăm, Mặc định và Đóng. Panel tắt trong Edit Mode, callback slider đăng ký trong script. Đóng panel trong pause vẫn giữ trò chơi dừng; Esc ưu tiên đóng cài đặt.
-- Hai `SceneAudio` hoạt động trong hai scene, dùng chung `Assets/_Project/Audio/Mixers/MainAudioMixer.mixer`. Master chứa Music/SFX; UI dưới SFX. Tên exposed parameter: `MasterVolume`, `MusicVolume`, `SFXVolume`.
-- Mặc định 1 / 0.7 / 1. PlayerPrefs chỉ dùng `sondoong.audio.master`, `sondoong.audio.music`, `sondoong.audio.sfx`. Áp mixer ngay; flush khi đóng, đổi scene, tạm dừng/thoát ứng dụng hoặc Mặc định. Không flush mỗi nhịp kéo, không DeleteAll, không đổi SaveData v4 hoặc checkpoint.
-- An kế thừa SfxOutput→SFX từ `PF_An_Prototype`; bước chân/tiếp đất dùng `RoutedAudio`. Assembly `SonDoong.Audio` cho phép StarterAssets gọi helper; chỉ sửa hai hàm âm thanh và thêm trường/using trong motor. Giữ GUID và fallback StarterAssetsInputs.
-- Hai scene chưa có nhạc nền hoặc AudioSource trống/cửa/địch đặt sẵn. Nguồn bổ sung cần route Music/SFX/UI. Nhạc: volume 1, 2D, Loop, tắt Play On Awake; thêm vào Start After Apply của service.
-- Font `UI/Fonts/AudioSettings_Vietnamese.asset` dựng từ Noto Sans có sẵn, atlas Static; giữ nguyên font nhập từ A31.
+## Cấu hình hiện hành
 
-## Kiểm chứng
+`SettingsService` tải **`Assets/_Project/Resources/Audio/MainAudioMixer.mixer`**. Mixer được di chuyển bằng AssetDatabase, giữ GUID/group; đường dẫn `Audio/Mixers/MainAudioMixer.mixer` trong báo cáo cũ là vị trí trước lượt này. Nguồn footsteps/RoutedAudio giữ tham chiếu bằng GUID.
 
-Windows x64 Development build đã thành công. Lần kiểm tra trước có 0 lỗi và 485 cảnh báo (chủ yếu compute shader ConvGeneric của AI Inference có sẵn). Một lần dựng lại ghi một lỗi AssetImportWorker5 crash dù trạng thái Succeeded; đã lưu [báo cáo](reports/20261102_AudioBuildWorkerCrash.json). Lần dựng lại sau đó đạt Succeeded, 0 lỗi và 0 cảnh báo mới ([báo cáo cuối](reports/20261102_AudioBuild.json)); đây là build tăng dần nên không có nghĩa mọi cảnh báo shader trước đó đã được sửa. Build ở `Builds/AudioSettingsValidation/SonDoong.exe`, không đưa vào Git.
+Ba tham số exposed: `MasterVolume`, `MusicVolume`, `SFXVolume`. Giá trị tuyến tính đổi sang dB bằng `20*log10(value)`, zero thành −80 dB. Khi có mixer, `AudioListener.volume=1` tránh nhân Master hai lần. Áp mixer ở Start/runtime, không giả định SetFloat trong Awake đã có hiệu lực.
 
-Hai lần mở ứng dụng độc lập đạt 35 + 5 kiểm tra: tham số mixer native/dB, slider/phần trăm/mặc định, không trùng listener, chuyển menu→game→menu, pause giữ timeScale=0, nguồn one-shot SFX, hash save tiến trình không đổi và lưu âm lượng qua mở lại ứng dụng. Đã sao lưu rồi khôi phục ba PlayerPrefs ban đầu. Báo cáo: [write](reports/20261102_AudioPlayerWrite.json), [read](reports/20261102_AudioPlayerRead.json).
+| Thiết lập | PlayerPrefs / mặc định |
+| --- | --- |
+| Tổng / Nhạc / Hiệu ứng | `settings.masterVolume` / `settings.musicVolume` / `settings.sfxVolume`; 1 / 0.7 / 1 |
+| Tương thích cũ | Đọc `sondoong.audio.master/music/sfx` nếu khóa mới chưa có; chỉ ghi khóa mới khi thay đổi |
+| Độ nhạy | `settings.mouseSensitivity.v2`; 0.03–0.6, mặc định 0.15 |
+| Toàn màn hình | `settings.fullscreen`; chỉ áp cửa sổ ngoài Editor |
+| Chất lượng | `settings.quality`; 0/1 ánh xạ hai quality hiện có |
+| Flush | Sau 0.4 giây unscaled, khi đóng cài đặt/pause/quit/destroy |
 
-Đã xem ảnh panel tiếng Việt ở mức 100%/70%/100%: [menu](images/AudioSettings_01_MainMenu.png), [pause](images/AudioSettings_02_HangLinhMach.png). Đây là ảnh panel riêng trong Editor.
+`SoundscapeRuntime` nằm trong `Scripts/Presentation`, không nằm trong assembly riêng `SonDoong.Audio`. AppRoot tạo nó sau GameSession. Palette `Resources/C1SoundPalette.asset` nối các group Music/SFX/UI và bản sao audio trong `_Project/Audio/C1`. Nhạc menu/khám phá/giao chiến chuyển chéo khoảng 0.95 giây; ambience chỉ phát ở scene có player. Âm thế giới dừng theo pause; UI và nhạc vẫn phản hồi trong menu, nhạc giảm mức khi pause.
 
-Còn thử trực tiếp: nghe Master=0/SFX=0, Music=0 khi có nhạc, nhấn Esc hai lần trong pause và kéo slider bằng chuột. Chạy nền không có luồng âm thanh để đo và không giả lập bàn phím có focus, nên chưa đánh dấu các mục này đạt.
+Phản hồi gồm hover/click, nhặt đồ/đèn, chế thuốc, mở phong ấn/cửa, giải đố, ba cao độ trống, xoay gương, quái đánh/trúng đòn/chết. Âm thanh không trao vật phẩm hoặc ghi save. Bind scene đợi khôi phục state trước khi nghe Changed để tránh phát tiếng thưởng hàng loạt khi Continue.
 
-## Tái kiểm tra
+## Kiểm chứng và giới hạn
 
-Editor tool `AudioSettingsSetup.cs` đọc `Library/SonDoongAudioSetup.request.json`, action `validate`, `preview` (menu), `preview-game` (pause), `build-player`; báo cáo ở `Logs/AudioSettingsSetup.json`. `install` thay UI riêng của công việc này; `finish` đặt lại giá trị serialized mặc định. Không chạy hai action này chỉ để kiểm tra.
+Công cụ hiện hành: `Chapter01CompletionProbe`, opt-in từ `Chapter01CompletionSetup` action `play-test`. Nó sao lưu/khôi phục file lưu cá nhân, các khóa PlayerPrefs bị thử và chất lượng ban đầu. Kết quả ở [C1Completion Play Mode](reports/C1Completion_PlayMode_2026-11-05.json); đọc failures/errors và ngày chạy, không suy đạt từ sự tồn tại của file.
 
-`AudioSettingsSmokeProbe` chỉ hoạt động khi Development build/Editor có `-audio-self-test`. Chạy `-audio-phase write` rồi `read`, cùng `-audio-backup <file mới>` và `-audio-report <path>`. Pha read khôi phục prefs; không bỏ qua pha read.
+Bài thử gồm callback ba slider, dB độc lập, mute SFX, quality, flush, pause/settings/back/resume và nguồn nhạc đang phát. Chưa thay cho nghe cân âm trên loa/tai nghe hoặc qua hai lần chạy bản Windows. A38 và ba tiếng trống từ A33 là âm thử theo danh mục, chưa thay bản thu nhạc cụ Việt/trống đồng. Nguồn ở [credit](CHAPTER01_ASSET_CREDITS.txt).

@@ -1,0 +1,61 @@
+{
+  "stage": "C2 traversal P1-P3 stage2",
+  "date": "2026-11-05",
+  "editorChecks": 20,
+  "playChecks": 150,
+  "actualInputSpaceAscents": 4,
+  "cameraAngles": 40,
+  "personalSaveRestored": true,
+  "c1ScenesUnchanged": true,
+  "metadata": [
+    {
+      "path": "Assets/_Project/Scenes/03_GiengTroiChimLac.unity.meta",
+      "preserved": true
+    },
+    {
+      "path": "Assets/_Project/Scenes/03_GiengTroiChimLac_NavMesh.asset.meta",
+      "preserved": true
+    },
+    {
+      "path": "Assets/_Project/Scripts/Player/PlayerMotor.cs.meta",
+      "preserved": true
+    },
+    {
+      "path": "Assets/_Project/Scripts/Chapters/C2/WindColumn.cs.meta",
+      "preserved": true
+    }
+  ],
+  "unchangedSinceBackup": [
+    "Assets/_Project/Scenes/03_GiengTroiChimLac_NavMesh.asset",
+    "Assets/_Project/Scripts/Player/PlayerMotor.cs",
+    "Assets/_Project/Scripts/Chapters/C2/WindColumn.cs"
+  ],
+  "files": [
+    {
+      "path": "Assets/_Project/Scenes/03_GiengTroiChimLac.unity",
+      "sha256": "bb1e73cd5b66624ea0ec6e63aad5353e0fb84f89924d627f72ac3ee2de502f5e"
+    },
+    {
+      "path": "Assets/_Project/Scenes/03_GiengTroiChimLac_NavMesh.asset",
+      "sha256": "57ec5ca0a560dceb1241ed2be326e3df97ee2df0d361393aca54f6ee23a9cf8f"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Player/PlayerMotor.cs",
+      "sha256": "c8251f3692842671b98709ccf0358cbe800357bcf292cc29cdcaeed55ad6648d"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Chapters/C2/WindColumn.cs",
+      "sha256": "b3434c7122bb2a8f77b7d23e5413eecf0a1d8ad38ebefddbc056cd917c7bed52"
+    },
+    {
+      "path": "Assets/_Project/Editor/Chapter02TraversalSetup.cs",
+      "sha256": "528c2650c06cb6cc217da29d3726c299caaa363de756d78bf192af03d78c0388"
+    },
+    {
+      "path": "Assets/_Project/Tests/Chapter02TraversalProbe.cs",
+      "sha256": "e1149435441f23af5b2663127bbb948ae98d311ee3c19481f5025e1eab120279"
+    }
+  ],
+  "windowsBuildUpdated": false,
+  "manualHumanPlayOrFullC2Verified": false
+}

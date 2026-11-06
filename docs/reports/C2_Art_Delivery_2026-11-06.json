@@ -1,0 +1,469 @@
+{
+  "date": "2026-11-06",
+  "backup": "SourceAssets/SceneBackups/2026-11-06_C2Art/011749",
+  "checks": [
+    "Preserved SHA256: Assets/_Project/Scenes/02_HangLinhMach.unity",
+    "Preserved SHA256: Assets/_Project/Scenes/92_EnvironmentPreview.unity",
+    "Preserved SHA256: Assets/_Project/Scripts/Player/PlayerMotor.cs",
+    "Preserved SHA256: Assets/_Project/Scenes/03_GiengTroiChimLac_NavMesh.asset",
+    "Preserved SHA256: Assets/_Project/Resources/C1SoundPalette.asset",
+    "Existing metadata preserved: Assets/_Project/Scenes/03_GiengTroiChimLac.unity",
+    "Existing metadata preserved: Assets/_Project/Scripts/Presentation/SoundscapeRuntime.cs",
+    "Existing metadata preserved: Assets/_Project/Scripts/Presentation/SoundPalette.cs",
+    "Existing metadata preserved: Assets/_Project/Scripts/Puzzles/SequenceInputNode.cs",
+    "Existing metadata preserved: Assets/_Project/Scripts/UI/InventoryPanel.cs",
+    "Existing metadata preserved: Assets/_Project/Tests/Chapter02BridgeProbe.cs",
+    "Existing metadata preserved: Assets/_Project/Tests/Chapter02ArenaProbe.cs",
+    "Asset and Unity GUID: Assets/_Project/Scripts/Presentation/Chapter02Atmosphere.cs",
+    "Asset and Unity GUID: Assets/_Project/Scripts/Presentation/PlayerGraphicsShutdown.cs",
+    "Asset and Unity GUID: Assets/_Project/Editor/Chapter02ArtSetup.cs",
+    "Asset and Unity GUID: Assets/_Project/Editor/Chapter02EnvironmentArt.cs",
+    "Asset and Unity GUID: Assets/_Project/Tests/Chapter02ArtProbe.cs",
+    "Asset and Unity GUID: Assets/_Project/Tests/Chapter02WindowsSmoke.cs",
+    "Asset and Unity GUID: Assets/_Project/Resources/C2SoundPalette.asset",
+    "Asset and Unity GUID: Assets/_Project/Art/Chapter02Environment/Materials/ChimLac_Jade.mat",
+    "Asset and Unity GUID: Assets/_Project/Art/Chapter02Environment/Materials/Feather_Bronze.mat",
+    "Asset and Unity GUID: Assets/_Project/Art/Chapter02Environment/Materials/Mushroom_Cap.mat",
+    "Asset and Unity GUID: Assets/_Project/Art/Chapter02Environment/Materials/Mushroom_Stem.mat",
+    "Asset and Unity GUID: Assets/_Project/Art/Chapter02Environment/Materials/Sunlit_Stone.mat",
+    "Asset and Unity GUID: Assets/_Project/Art/Chapter02Environment/Materials/Weathered_Stone.mat",
+    "Asset and Unity GUID: Assets/_Project/Art/Chapter02Environment/Materials/Wind_Readable.mat",
+    "Asset and Unity GUID: Assets/_Project/Art/Chapter02Environment/Meshes/Bronze_Wind_Bell.asset",
+    "Asset and Unity GUID: Assets/_Project/Art/Chapter02Environment/Meshes/Curved_House_Roof.asset",
+    "Asset and Unity GUID: Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Bridge_1_Room_P4_CauMay.asset",
+    "Asset and Unity GUID: Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Bridge_2_Room_P4_CauMay.asset",
+    "Asset and Unity GUID: Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Bridge_3_Room_P4_CauMay.asset",
+    "Asset and Unity GUID: Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Bridge_Cover_Stone_ART_C2_Bridge.asset",
+    "Asset and Unity GUID: Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Floor_P1_P2_Room_P1_DayGieng.asset",
+    "Asset and Unity GUID: Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Floor_P1_Room_P1_DayGieng.asset",
+    "Asset and Unity GUID: Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Floor_P2_P3_Room_P2_VachGio.asset",
+    "Asset and Unity GUID: Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Floor_P2_Room_P2_VachGio.asset",
+    "Asset and Unity GUID: Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Floor_P3_Room_P3_NhaSan.asset",
+    "Asset and Unity GUID: Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Floor_P4_Yard_Room_P4_CauMay.asset",
+    "Asset and Unity GUID: Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Ledge_P1_Room_P1_DayGieng.asset",
+    "Asset and Unity GUID: Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Ledge_P3_Room_P3_NhaSan.asset",
+    "Asset and Unity GUID: Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Ledge_P4_L_Room_P4_CauMay.asset",
+    "Asset and Unity GUID: Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Ledge_P4_R_Room_P4_CauMay.asset",
+    "Asset and Unity GUID: Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Plat_P2_A_Room_P2_VachGio.asset",
+    "Asset and Unity GUID: Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Plat_P2_B_Room_P2_VachGio.asset",
+    "Asset and Unity GUID: Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Wall_ArenaGate_L_Room_P4_CauMay.asset",
+    "Asset and Unity GUID: Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Wall_ArenaGate_R_Room_P4_CauMay.asset",
+    "Asset and Unity GUID: Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Wall_ArenaGate_Top_Room_P4_CauMay.asset",
+    "Asset and Unity GUID: Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Wall_P1_East_Room_P1_DayGieng.asset",
+    "Asset and Unity GUID: Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Wall_P1_NorthLeft_Room_P1_DayGieng.asset",
+    "Asset and Unity GUID: Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Wall_P1_NorthOver_Room_P1_DayGieng.asset",
+    "Asset and Unity GUID: Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Wall_P1_NorthRight_Room_P1_DayGieng.asset",
+    "Asset and Unity GUID: Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Wall_P1_NorthUnder_Room_P1_DayGieng.asset",
+    "Asset and Unity GUID: Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Wall_P1_South_Room_P1_DayGieng.asset",
+    "Asset and Unity GUID: Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Wall_P1_West_Room_P1_DayGieng.asset",
+    "Asset and Unity GUID: Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Wall_P2_East_Room_P2_VachGio.asset",
+    "Asset and Unity GUID: Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Wall_P2_NorthLeft_Room_P2_VachGio.asset",
+    "Asset and Unity GUID: Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Wall_P2_NorthOver_Room_P2_VachGio.asset",
+    "Asset and Unity GUID: Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Wall_P2_NorthRight_Room_P2_VachGio.asset",
+    "Asset and Unity GUID: Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Wall_P2_NorthUnder_Room_P2_VachGio.asset",
+    "Asset and Unity GUID: Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Wall_P2_SouthLeft_Room_P2_VachGio.asset",
+    "Asset and Unity GUID: Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Wall_P2_SouthOver_Room_P2_VachGio.asset",
+    "Asset and Unity GUID: Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Wall_P2_SouthRight_Room_P2_VachGio.asset",
+    "Asset and Unity GUID: Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Wall_P2_West_Room_P2_VachGio.asset",
+    "Asset and Unity GUID: Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Wall_P3_East_Room_P3_NhaSan.asset",
+    "Asset and Unity GUID: Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Wall_P3_NorthLeft_Room_P3_NhaSan.asset",
+    "Asset and Unity GUID: Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Wall_P3_NorthOver_Room_P3_NhaSan.asset",
+    "Asset and Unity GUID: Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Wall_P3_NorthRight_Room_P3_NhaSan.asset",
+    "Asset and Unity GUID: Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Wall_P3_NorthUnder_Room_P3_NhaSan.asset",
+    "Asset and Unity GUID: Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Wall_P3_SouthLeft_Room_P3_NhaSan.asset",
+    "Asset and Unity GUID: Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Wall_P3_SouthOver_Room_P3_NhaSan.asset",
+    "Asset and Unity GUID: Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Wall_P3_SouthRight_Room_P3_NhaSan.asset",
+    "Asset and Unity GUID: Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Wall_P3_West_Room_P3_NhaSan.asset",
+    "Asset and Unity GUID: Assets/_Project/Audio/C2/Bell_Bronze.wav",
+    "Asset and Unity GUID: Assets/_Project/Audio/C2/ChimLac_Call.wav",
+    "Asset and Unity GUID: Assets/_Project/Audio/C2/Music_Arena.wav",
+    "Asset and Unity GUID: Assets/_Project/Audio/C2/Music_Skylight.wav",
+    "Asset and Unity GUID: Assets/_Project/Audio/C2/Wind_Through_Well.wav",
+    "Final report passed: Editor",
+    "Final report passed: PlayMode",
+    "Final report passed: Traversal",
+    "Final report passed: Bridge",
+    "Final report passed: Arena",
+    "Final report passed: Ending",
+    "Final report passed: Windows",
+    "Final report passed: WindowsDiagnostics",
+    "Final report passed: WindowsLogAudit",
+    "Personal save restored: save_v1.json",
+    "Personal save restored: save_v1.json.bak",
+    "Personal save restored: save_v1.json.tmp",
+    "Native probe restored saves itself; emergency launcher restore was not needed",
+    "Historical report/images restored: Traversal",
+    "Historical report/images restored: Bridge",
+    "Historical report/images restored: Arena",
+    "Historical report/images restored: Ending",
+    "Editor stopped, compiled, C2 scene clean",
+    "Windows executable and final gameplay assembly exist"
+  ],
+  "failures": [],
+  "preserved": [
+    {
+      "path": "Assets/_Project/Scenes/02_HangLinhMach.unity",
+      "before": "c94343aac7d18aeff8d1370fcedfd6d693c9be2ea25b4173bcff5d97dab0f57e",
+      "after": "c94343aac7d18aeff8d1370fcedfd6d693c9be2ea25b4173bcff5d97dab0f57e"
+    },
+    {
+      "path": "Assets/_Project/Scenes/92_EnvironmentPreview.unity",
+      "before": "896e58e8e8ce083fc8ed39f49ce6a5e542ac3bfd4338ceffe85ad085a2c2c141",
+      "after": "896e58e8e8ce083fc8ed39f49ce6a5e542ac3bfd4338ceffe85ad085a2c2c141"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Player/PlayerMotor.cs",
+      "before": "c8251f3692842671b98709ccf0358cbe800357bcf292cc29cdcaeed55ad6648d",
+      "after": "c8251f3692842671b98709ccf0358cbe800357bcf292cc29cdcaeed55ad6648d"
+    },
+    {
+      "path": "Assets/_Project/Scenes/03_GiengTroiChimLac_NavMesh.asset",
+      "before": "c7bd794aa3e2ec91fd67ed6e30245af2c7183b3615e7020edfaae9318b7b221f",
+      "after": "c7bd794aa3e2ec91fd67ed6e30245af2c7183b3615e7020edfaae9318b7b221f"
+    },
+    {
+      "path": "Assets/_Project/Resources/C1SoundPalette.asset",
+      "before": "8b20f0999ff41e7a6d4700e6b18203901b8c5db4109d45297444de80916a6240",
+      "after": "8b20f0999ff41e7a6d4700e6b18203901b8c5db4109d45297444de80916a6240"
+    }
+  ],
+  "newAssets": [
+    {
+      "path": "Assets/_Project/Scripts/Presentation/Chapter02Atmosphere.cs",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Scripts/Presentation/PlayerGraphicsShutdown.cs",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Editor/Chapter02ArtSetup.cs",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Editor/Chapter02EnvironmentArt.cs",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Tests/Chapter02ArtProbe.cs",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Tests/Chapter02WindowsSmoke.cs",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Resources/C2SoundPalette.asset",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Environment/Materials/ChimLac_Jade.mat",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Environment/Materials/Feather_Bronze.mat",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Environment/Materials/Mushroom_Cap.mat",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Environment/Materials/Mushroom_Stem.mat",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Environment/Materials/Sunlit_Stone.mat",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Environment/Materials/Weathered_Stone.mat",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Environment/Materials/Wind_Readable.mat",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Environment/Meshes/Bronze_Wind_Bell.asset",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Environment/Meshes/Curved_House_Roof.asset",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Bridge_1_Room_P4_CauMay.asset",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Bridge_2_Room_P4_CauMay.asset",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Bridge_3_Room_P4_CauMay.asset",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Bridge_Cover_Stone_ART_C2_Bridge.asset",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Floor_P1_P2_Room_P1_DayGieng.asset",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Floor_P1_Room_P1_DayGieng.asset",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Floor_P2_P3_Room_P2_VachGio.asset",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Floor_P2_Room_P2_VachGio.asset",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Floor_P3_Room_P3_NhaSan.asset",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Floor_P4_Yard_Room_P4_CauMay.asset",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Ledge_P1_Room_P1_DayGieng.asset",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Ledge_P3_Room_P3_NhaSan.asset",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Ledge_P4_L_Room_P4_CauMay.asset",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Ledge_P4_R_Room_P4_CauMay.asset",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Plat_P2_A_Room_P2_VachGio.asset",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Plat_P2_B_Room_P2_VachGio.asset",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Wall_ArenaGate_L_Room_P4_CauMay.asset",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Wall_ArenaGate_R_Room_P4_CauMay.asset",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Wall_ArenaGate_Top_Room_P4_CauMay.asset",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Wall_P1_East_Room_P1_DayGieng.asset",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Wall_P1_NorthLeft_Room_P1_DayGieng.asset",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Wall_P1_NorthOver_Room_P1_DayGieng.asset",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Wall_P1_NorthRight_Room_P1_DayGieng.asset",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Wall_P1_NorthUnder_Room_P1_DayGieng.asset",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Wall_P1_South_Room_P1_DayGieng.asset",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Wall_P1_West_Room_P1_DayGieng.asset",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Wall_P2_East_Room_P2_VachGio.asset",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Wall_P2_NorthLeft_Room_P2_VachGio.asset",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Wall_P2_NorthOver_Room_P2_VachGio.asset",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Wall_P2_NorthRight_Room_P2_VachGio.asset",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Wall_P2_NorthUnder_Room_P2_VachGio.asset",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Wall_P2_SouthLeft_Room_P2_VachGio.asset",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Wall_P2_SouthOver_Room_P2_VachGio.asset",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Wall_P2_SouthRight_Room_P2_VachGio.asset",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Wall_P2_West_Room_P2_VachGio.asset",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Wall_P3_East_Room_P3_NhaSan.asset",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Wall_P3_NorthLeft_Room_P3_NhaSan.asset",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Wall_P3_NorthOver_Room_P3_NhaSan.asset",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Wall_P3_NorthRight_Room_P3_NhaSan.asset",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Wall_P3_NorthUnder_Room_P3_NhaSan.asset",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Wall_P3_SouthLeft_Room_P3_NhaSan.asset",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Wall_P3_SouthOver_Room_P3_NhaSan.asset",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Wall_P3_SouthRight_Room_P3_NhaSan.asset",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Environment/Meshes/RockSkin_Wall_P3_West_Room_P3_NhaSan.asset",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Audio/C2/Bell_Bronze.wav",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Audio/C2/ChimLac_Call.wav",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Audio/C2/Music_Arena.wav",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Audio/C2/Music_Skylight.wav",
+      "validMeta": true
+    },
+    {
+      "path": "Assets/_Project/Audio/C2/Wind_Through_Well.wav",
+      "validMeta": true
+    }
+  ],
+  "reports": [
+    {
+      "path": "docs/reports/C2_Art_Editor_2026-11-06.json",
+      "checks": 10,
+      "passed": true
+    },
+    {
+      "path": "docs/reports/C2_Art_PlayMode_2026-11-06.json",
+      "checks": 77,
+      "passed": true
+    },
+    {
+      "path": "docs/reports/C2_Art_Traversal_2026-11-06.json",
+      "checks": 140,
+      "passed": true
+    },
+    {
+      "path": "docs/reports/C2_Art_Bridge_2026-11-06.json",
+      "checks": 123,
+      "passed": true
+    },
+    {
+      "path": "docs/reports/C2_Art_Arena_2026-11-06.json",
+      "checks": 87,
+      "passed": true
+    },
+    {
+      "path": "docs/reports/C2_Art_Ending_2026-11-06.json",
+      "checks": 71,
+      "passed": true
+    },
+    {
+      "path": "docs/reports/C2_Art_Windows_2026-11-06.json",
+      "checks": 20,
+      "passed": true
+    },
+    {
+      "path": "docs/reports/C2_Art_WindowsDiagnostics_2026-11-06.json",
+      "checks": 20,
+      "passed": true
+    },
+    {
+      "path": "docs/reports/C2_Art_WindowsLogAudit_2026-11-06.json",
+      "checks": 5,
+      "passed": true
+    }
+  ],
+  "saveBackup": "E:\\DoAnGame3D\\Doan_Game3D\\Logs\\C2WindowsRecovery\\20261105_194716",
+  "saveChecks": [
+    {
+      "name": "save_v1.json",
+      "sameBytesOrAbsent": true
+    },
+    {
+      "name": "save_v1.json.bak",
+      "sameBytesOrAbsent": true
+    },
+    {
+      "name": "save_v1.json.tmp",
+      "sameBytesOrAbsent": true
+    }
+  ],
+  "buildFiles": [
+    {
+      "path": "Builds/Chapter02/Windows/SonDoong.exe",
+      "sha256": "2d86c48efa37b166a1fec64e06d74bf9de33040ed526b59ede03a5181f2f0216"
+    },
+    {
+      "path": "Builds/Chapter02/Windows/SonDoong_Data/Managed/Assembly-CSharp.dll",
+      "sha256": "8cb6af0abc65edc1fe2799fb3574e2a1985207c6be9e44126b6662c6f24ec5a9"
+    }
+  ],
+  "notes": [
+    "No new schema or WorldIds; C3 remains unavailable.",
+    "All evidence scopes and remaining manual/art/audio acceptance work are recorded in C2_ENVIRONMENT_WORKLOG.",
+    "Normal and native-stack-trace runs show explicit GPU Resident Drawer disposal and zero prior buffer/TempJob diagnostics."
+  ]
+}

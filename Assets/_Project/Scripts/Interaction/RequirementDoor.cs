@@ -12,6 +12,7 @@ public class RequirementDoor : MonoBehaviour, IInteractable
     [Tooltip("Lưu tại mốc trước đấu trường ngay khi mở, để thua trận không phải lấy lại đồ.")]
     [SerializeField] private SaveService saveService;
     [SerializeField] private string saveCheckpointId;
+    private bool opening;
 
     public bool IsOpen => worldState != null && worldState.Has(StateSet.Doors, doorId);
 
@@ -45,7 +46,7 @@ public class RequirementDoor : MonoBehaviour, IInteractable
 
     private void Start() => Apply();
 
-    public bool CanInteract(GameObject interactor) => isActiveAndEnabled && !IsOpen;
+    public bool CanInteract(GameObject interactor) => isActiveAndEnabled && !IsOpen && !opening;
 
     public void Interact(GameObject interactor)
     {
@@ -59,8 +60,20 @@ public class RequirementDoor : MonoBehaviour, IInteractable
             return;
         }
 
-        worldState.TryAdd(StateSet.Doors, doorId);
-        if (saveService != null && !string.IsNullOrEmpty(saveCheckpointId)) saveService.SaveAt(saveCheckpointId);
+        opening=true;
+        var before=worldState.Export();
+        try
+        {
+            if(!worldState.TryAddBatch(new[]{new StateRequirement{set=StateSet.Doors,id=doorId}},out bool changed))return;
+            if(saveService!=null&&!string.IsNullOrEmpty(saveCheckpointId)&&!saveService.SaveAt(saveCheckpointId))
+            {
+                worldState.Restore(before);
+                if(AppRoot.Instance?.UI!=null)AppRoot.Instance.UI.ShowToast("Chưa lưu được. Cổng vẫn đóng; hãy thử mở lại.");
+                return;
+            }
+            if(changed)worldState.PublishChange();
+        }
+        finally{opening=false;}
     }
 
     private void Apply()

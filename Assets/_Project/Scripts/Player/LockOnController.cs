@@ -12,7 +12,6 @@ public class LockOnController : MonoBehaviour
     [SerializeField] private LayerMask blockers = 1 << 3;
 
     private PlayerMotor motor;
-    private PlayerCameraController cameraController;
     private PlayerVitals vitals;
     private InputReader input;
     private RectTransform marker;
@@ -22,11 +21,13 @@ public class LockOnController : MonoBehaviour
 
     public bool HasTarget => target != null;
     public EnemyHealth Target => target;
+    public Transform Aim => aim;
+    public Vector3 AimPosition => target != null ? AimPositionOf(target) : Vector3.zero;
+    public float CameraTurnSpeed => cameraTurnSpeed;
 
     private void Awake()
     {
         motor = GetComponent<PlayerMotor>();
-        cameraController = GetComponent<PlayerCameraController>();
         vitals = GetComponent<PlayerVitals>();
     }
 
@@ -40,7 +41,10 @@ public class LockOnController : MonoBehaviour
             return;
         }
         // Dấu khóa nằm trên Canvas của scene (tùy chọn).
-        GameObject markerGo = GameObject.Find("LockOnMarker");
+        GameObject markerGo = null;
+        foreach (var canvas in gameObject.scene.GetRootGameObjects())
+            foreach (var rect in canvas.GetComponentsInChildren<RectTransform>(true))
+                if (rect.name == "LockOnMarker") { markerGo = rect.gameObject; break; }
         if (markerGo != null)
         {
             marker = markerGo.GetComponent<RectTransform>();
@@ -48,13 +52,14 @@ public class LockOnController : MonoBehaviour
         }
     }
 
-    private void OnDisable() => Unlock();
+    private void OnEnable() => Canvas.willRenderCanvases += UpdateMarker;
+    private void OnDisable() { Canvas.willRenderCanvases -= UpdateMarker; Unlock(); }
 
     private void Update()
     {
         if (vitals != null && vitals.IsDead) { Unlock(); return; }
 
-        if (input.GameplayEnabled && input.LockOn.WasPressedThisFrame())
+        if (input.WasPressed(input.LockOn))
         {
             if (HasTarget) Unlock();
             else TryLock();
@@ -69,24 +74,17 @@ public class LockOnController : MonoBehaviour
             return;
         }
 
-        occludedTime = IsOccluded(aim.position) ? occludedTime + Time.deltaTime : 0f;
+        occludedTime = IsOccluded(AimPosition) ? occludedTime + Time.deltaTime : 0f;
         if (occludedTime > occlusionTimeout) Unlock();
     }
 
-    private void LateUpdate()
+    private void UpdateMarker()
     {
         if (!HasTarget || Time.timeScale == 0f) return;
 
-        // Ghi đè góc camera sau PlayerCameraController (order 50).
-        Vector3 d = aim.position - (transform.position + Vector3.up * 1.6f);
-        float yaw = Mathf.Atan2(d.x, d.z) * Mathf.Rad2Deg;
-        float pitch = Mathf.Clamp(Mathf.Atan2(-d.y, new Vector2(d.x, d.z).magnitude) * Mathf.Rad2Deg + 10f, -10f, 35f);
-        float t = 1f - Mathf.Exp(-cameraTurnSpeed * Time.unscaledDeltaTime);
-        cameraController.SetAngles(Mathf.LerpAngle(cameraController.Yaw, yaw, t), Mathf.Lerp(cameraController.Pitch, pitch, t));
-
         if (marker != null && Camera.main != null)
         {
-            Vector3 screen = Camera.main.WorldToScreenPoint(aim.position);
+            Vector3 screen = Camera.main.WorldToScreenPoint(AimPosition);
             marker.gameObject.SetActive(screen.z > 0f);
             marker.position = screen;
         }
@@ -95,19 +93,19 @@ public class LockOnController : MonoBehaviour
     public bool TryLock()
     {
         Camera cam = Camera.main;
-        if (cam == null) return false;
+        if (cam == null || input == null || !input.GameplayActive || Time.timeScale <= 0f || vitals.IsDead) return false;
 
         EnemyHealth best = null;
         float bestScore = float.MaxValue;
         foreach (EnemyHealth enemy in EnemyHealth.Active)
         {
             if (enemy == null || enemy.IsDead) continue;
-            Transform point = AimOf(enemy);
-            float dist = FlatDistance(point.position);
+            Vector3 point = AimPositionOf(enemy);
+            float dist = FlatDistance(point);
             if (dist > maxDistance) continue;
-            Vector3 vp = cam.WorldToViewportPoint(point.position);
+            Vector3 vp = cam.WorldToViewportPoint(point);
             if (vp.z <= 0f || vp.x < 0f || vp.x > 1f || vp.y < 0f || vp.y > 1f) continue;
-            if (IsOccluded(point.position)) continue;
+            if (IsOccluded(point)) continue;
 
             float score = Vector2.Distance(new Vector2(vp.x, vp.y), new Vector2(0.5f, 0.5f)) * 20f + dist;
             if (score < bestScore) { bestScore = score; best = enemy; }
@@ -134,6 +132,12 @@ public class LockOnController : MonoBehaviour
     {
         EnemyLanternReceiver receiver = enemy.GetComponent<EnemyLanternReceiver>();
         return receiver != null && receiver.AimPoint != null ? receiver.AimPoint : enemy.transform;
+    }
+
+    private static Vector3 AimPositionOf(EnemyHealth enemy)
+    {
+        Transform point = AimOf(enemy);
+        return point != enemy.transform ? point.position : enemy.transform.position + Vector3.up * 1.2f;
     }
 
     private bool IsOccluded(Vector3 point) =>

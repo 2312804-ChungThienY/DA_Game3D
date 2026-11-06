@@ -10,6 +10,9 @@ public class InteractionScanner : MonoBehaviour
     [SerializeField] private TMP_Text promptText;
 
     private InputAction interactAction;
+    private InputReader input;
+    private PlayerActionState actions;
+    private IInteractable currentTarget;
 
     public event System.Action Interacted;
 
@@ -22,6 +25,7 @@ public class InteractionScanner : MonoBehaviour
 
     private void Awake()
     {
+        actions = GetComponent<PlayerActionState>();
         if (viewCamera == null ||
             interactionOrigin == null ||
             promptText == null)
@@ -38,7 +42,7 @@ public class InteractionScanner : MonoBehaviour
 
     private void Start()
     {
-        InputReader input = AppRoot.Instance != null ? AppRoot.Instance.Input : null;
+        input = AppRoot.Instance != null ? AppRoot.Instance.Input : null;
         interactAction = input != null && input.IsReady ? input.Interact : null;
 
         if (interactAction == null)
@@ -50,9 +54,16 @@ public class InteractionScanner : MonoBehaviour
 
     private void LateUpdate()
     {
-        ClearPrompt();
+        currentTarget = null;
+        Scan();
+        string text = currentTarget != null ? $"[E] {currentTarget.Prompt}" : string.Empty;
+        if (promptText != null && promptText.text != text) promptText.text = text;
+    }
 
-        if (!Application.isFocused ||
+    private void Scan()
+    {
+
+        if ((actions != null && !actions.CanInteract) || !Application.isFocused ||
             Time.timeScale == 0f ||
             interactAction == null ||
             !interactAction.enabled)
@@ -115,13 +126,13 @@ public class InteractionScanner : MonoBehaviour
             }
         }
 
-        promptText.text = $"[E] {target.Prompt}";
+        currentTarget = target;
 
-        if (interactAction.WasPressedThisFrame())
+        if (input.WasPressed(interactAction))
         {
             target.Interact(gameObject);
             Interacted?.Invoke();
-            ClearPrompt();
+            currentTarget = null;
         }
     }
 

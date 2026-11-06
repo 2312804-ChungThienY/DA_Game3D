@@ -1,0 +1,13 @@
+{
+  "checks": [
+    {
+      "path": "Assets\\_Project\\Scenes\\02_HangLinhMach.unity.meta",
+      "unchanged": true
+    },
+    {
+      "path": "Assets\\_Project\\Scenes\\92_EnvironmentPreview.unity.meta",
+      "unchanged": true
+    }
+  ],
+  "failures": []
+}

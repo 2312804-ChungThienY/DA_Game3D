@@ -6,7 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(EnemyHealth))]
 public class StoneGuardian : MonoBehaviour, IArenaBoss
 {
-    public enum GuardianState { Dormant, Chase, Sweep, Slam, Dead }
+    public enum GuardianState { Dormant, Chase, Sweep, Slam, Dead, Stunned }
 
     [SerializeField] private WorldStateStore worldState;
     [SerializeField] private string bossId = WorldIds.GuardianBoss;
@@ -47,6 +47,7 @@ public class StoneGuardian : MonoBehaviour, IArenaBoss
     [SerializeField] private LayerMask sightBlockers = 1 << 3;
 
     private EnemyHealth health;
+    private EnemyLanternReceiver lanternReceiver;
     private PlayerVitals player;
     private Vector3 slamCenter;
     private float stateTime;
@@ -56,10 +57,13 @@ public class StoneGuardian : MonoBehaviour, IArenaBoss
     private readonly Collider[] hits = new Collider[4];
 
     public GuardianState State { get; private set; } = GuardianState.Dormant;
+    public float StateElapsed=>stateTime;
+    public float AttackWindup=>State==GuardianState.Sweep?sweepTelegraphTime:slamTelegraphTime;
 
     private void Awake()
     {
         health = GetComponent<EnemyHealth>();
+        lanternReceiver=GetComponent<EnemyLanternReceiver>();
         if (worldState == null || sweepTelegraph == null || slamTelegraph == null || !WorldIds.IsKnown(StateSet.Bosses, bossId))
         {
             Debug.LogError($"{name}: StoneGuardian thiếu WorldState, telegraph hoặc ID trùm sai.", this);
@@ -116,6 +120,8 @@ public class StoneGuardian : MonoBehaviour, IArenaBoss
     private void Update()
     {
         if (State == GuardianState.Dormant || State == GuardianState.Dead) return;
+        if(lanternReceiver&&lanternReceiver.IsStunned){if(State!=GuardianState.Stunned)Enter(GuardianState.Stunned);return;}
+        if(State==GuardianState.Stunned){nextSlamTime=Mathf.Max(nextSlamTime,Time.time+.5f);Enter(GuardianState.Chase);}
 
         float dt = Time.deltaTime;
         if (dt <= 0f) return;
@@ -162,7 +168,14 @@ public class StoneGuardian : MonoBehaviour, IArenaBoss
         Vector3 next = transform.position + dir.normalized * moveSpeed * dt;
         next.x = Mathf.Clamp(next.x, arenaMin.x, arenaMax.x);
         next.z = Mathf.Clamp(next.z, arenaMin.z, arenaMax.z);
-        transform.position = next;
+        Vector3 move=next-transform.position;
+        // Environment collision for the existing transform motor; no competing agent/root motion.
+        if(move.sqrMagnitude>.000001f&&Physics.CapsuleCast(transform.position+Vector3.up*.65f,transform.position+Vector3.up*2.4f,.58f,move.normalized,out var obstruction,move.magnitude+.05f,sightBlockers,QueryTriggerInteraction.Ignore))
+        {
+            move=Vector3.ProjectOnPlane(move,obstruction.normal);move.y=0;
+            if(move.sqrMagnitude>.000001f&&Physics.CapsuleCast(transform.position+Vector3.up*.65f,transform.position+Vector3.up*2.4f,.58f,move.normalized,move.magnitude+.05f,sightBlockers,QueryTriggerInteraction.Ignore))move=Vector3.zero;
+        }
+        transform.position += move;
     }
 
     // Báo trước → cửa sổ sát thương (xét giao khoảng thời gian frame) → hồi thế.
@@ -224,6 +237,7 @@ public class StoneGuardian : MonoBehaviour, IArenaBoss
     // Một đòn trúng mỗi mục tiêu một lần; vật cản Environment chặn sát thương.
     private void TryDamage(int count, Vector3 origin, float damage, string attackName)
     {
+        if(lanternReceiver&&lanternReceiver.IsStunned)return;
         for (int i = 0; i < count; i++)
         {
             PlayerVitals target = hits[i].GetComponentInParent<PlayerVitals>();

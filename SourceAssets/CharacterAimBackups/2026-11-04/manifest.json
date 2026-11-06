@@ -1,0 +1,34 @@
+[
+  {
+    "path": "Assets/_Project/Scripts/Combat/CombatController.cs",
+    "sha256": "1ce796f82417b210a38f3666e26f22adecd222cd052796b9d416f5f5823df79d"
+  },
+  {
+    "path": "Assets/_Project/Scripts/Combat/CombatController.cs.meta",
+    "sha256": "c4dbe06abb786ede3a88faa75088ca2bd6521ce7ec8806e7db2c7524aeaf6009"
+  },
+  {
+    "path": "Assets/_Project/Scripts/Player/PlayerCameraController.cs",
+    "sha256": "4a92d533cebc132d838cc1c52df0afcd485b8ae960cc9d4b3eb68814751d9205"
+  },
+  {
+    "path": "Assets/_Project/Scripts/Player/PlayerCameraController.cs.meta",
+    "sha256": "f3be7257440779d0bc615af6d65d9dc542abe307c10f09af20d93b0b36272361"
+  },
+  {
+    "path": "Assets/_Project/Scripts/Player/PlayerMotor.cs",
+    "sha256": "015ae284bfc055e8a54a7ad51bb285105151cd2a7b4aabb5a871fee5b4297d83"
+  },
+  {
+    "path": "Assets/_Project/Scripts/Player/PlayerMotor.cs.meta",
+    "sha256": "dc9e5d45468889aa953edced18ceaa24bef7c0d716c8600b6ac312d5d73681a1"
+  },
+  {
+    "path": "Assets/_Project/Tests/CharacterPolishSmokeProbe.cs",
+    "sha256": "70fc02c9da5d3022cbe4d6f9766a32aa760e4a216768d307f7f7ae1b20754d22"
+  },
+  {
+    "path": "Assets/_Project/Tests/CharacterPolishSmokeProbe.cs.meta",
+    "sha256": "f225d8bb19c3e0bfd9c0879b147eecf471601f2a9695684972f233a4b9584f1e"
+  }
+]

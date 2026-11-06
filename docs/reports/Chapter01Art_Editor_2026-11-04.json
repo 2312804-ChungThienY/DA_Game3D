@@ -1,0 +1,34 @@
+{
+  "action": "integration + garden contact refinement + statue interaction ownership",
+  "scene": "Assets/_Project/Scenes/02_HangLinhMach.unity",
+  "backup": "SourceAssets/SceneBackups/2026-11-04_Chapter01Art/112044381",
+  "checks": [
+    "All existing gameplay MonoBehaviour fields/references and original colliders retained byte-identical in Editor serialization; navigation is rebuilt separately.",
+    "Camp moss conforms to source rock triangles; ground vegetation bounds seated at -0.02m; no bounding-box moss crowns.",
+    "Five connected visual areas, original floors and doors intact, no new actors or gameplay.",
+    "Navigation rebaked from physics colliders, including new edge boulders, tree trunks and statue; decorative leaves/grass excluded.",
+    "Checkpoint preserved on original floor: cp_trai at (0.00, 0.20, -5.00)",
+    "Checkpoint preserved on original floor: cp_dien_trong at (-3.00, 0.20, 48.00)",
+    "Checkpoint preserved on original floor: cp_truoc_dan at (-7.00, 0.20, 76.50)",
+    "Checkpoint preserved on original floor: cp_kim_quy at (2.50, 0.20, 102.50)",
+    "Supported materials across 720 new renderers including gameplay statue; 17 simple solid obstacles, source mesh colliders disabled, original collision retained.",
+    "Statue colliders resolve the original RelicAltar for E selection; no interaction proxy or new ID.",
+    "All five art areas present; original floor/wall/camera collision and gameplay IDs retained.",
+    "Bounds contact verified for 143 new ground vegetation clusters (bottom -0.055..0.035m).",
+    "Rock-conforming moss meshes: 23",
+    "Statue world transforms and collider geometry retained; only ownership moved under the existing relic altar for E selection."
+  ],
+  "failures": [],
+  "screenshots": [
+    "docs/images/c1-main-camp-2026-11-04.png",
+    "docs/images/c1-main-garden-2026-11-04.png",
+    "docs/images/c1-main-drums-2026-11-04.png",
+    "docs/images/c1-main-light-2026-11-04.png",
+    "docs/images/c1-main-kimquy-2026-11-04.png"
+  ],
+  "sourceReports": [
+    "Logs/Chapter01Art-integrate.json",
+    "Logs/Chapter01Art-refine-garden.json",
+    "Logs/Chapter01Art-attach-statue.json"
+  ]
+}

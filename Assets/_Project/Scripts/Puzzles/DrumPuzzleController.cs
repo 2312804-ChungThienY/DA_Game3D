@@ -56,6 +56,7 @@ public class DrumPuzzleController : MonoBehaviour
     public bool TryHit(DrumNote note)
     {
         if (!CanAcceptInput) return false;
+        SoundscapeRuntime.Play(SoundCue.Drum,transform.position,.8f,note==DrumNote.A?.85f:note==DrumNote.B?1f:1.18f);
 
         busy = true;
         State = DrumPuzzleState.Listening;
@@ -65,7 +66,7 @@ public class DrumPuzzleController : MonoBehaviour
 
     private IEnumerator EvaluateHit(DrumNote note)
     {
-        statusText.text = $"Vừa gõ: {note}";
+        statusText.text = $"Vừa gõ: {DrumInteractable.NoteName(note)}";
         yield return new WaitForSeconds(definition.InputDelay);
 
         if (note != definition.Sequence[currentIndex])

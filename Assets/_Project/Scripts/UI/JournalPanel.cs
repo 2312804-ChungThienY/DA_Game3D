@@ -51,6 +51,9 @@ public class JournalPanel : MonoBehaviour, IUiPauseOwner
         input.Journal.Enable();
         panel.SetActive(true);
         Refresh();
+        Canvas.ForceUpdateCanvases();
+        var scroll=knowledgeText.GetComponentInParent<ScrollRect>();
+        if(scroll){scroll.StopMovement();scroll.verticalNormalizedPosition=1;}
     }
 
     public void Close()
@@ -77,6 +80,12 @@ public class JournalPanel : MonoBehaviour, IUiPauseOwner
             text.Append($"\n<b>{lore.title}</b> <i>({ContentTagText.Label(lore.tag)})</i>\n{lore.body}\n");
         }
         if (read == 0) text.Append("\nChưa đọc bia nào. Bật đèn (F) và lại gần bia đá để đọc.");
+        text.Append("\n\n<b>Manh mối khám phá</b>\n");
+        int clues=0;
+        foreach(string id in PuzzleCluePickup.AllClueIds)if(worldState.Has(StateSet.Flags,id)){clues++;text.Append("\n<b>"+PuzzleCluePickup.Title(id)+"</b>\n"+PuzzleCluePickup.Body(id)+"\n");}
+        if(clues==0)text.Append("Tìm lời nhắn ở Trại Giếng Trời và các bản chép dọc hành trình.");
+        if(worldState.Has(StateSet.Puzzles,"c2_linhthan_done"))
+            text.Append("\n\n<b>"+ChapterMemoryNotes.ChimLacTitle+"</b> <i>(Hư cấu)</i>\n"+ChapterMemoryNotes.ChimLacBody+"\n");
         knowledgeText.text = text.ToString();
         pointsText.text = $"Bia đã đọc: {read}/{allLore.Length}    Điểm Tri Thức: {worldState.Count(StateSet.QuizFirstTry)}";
     }

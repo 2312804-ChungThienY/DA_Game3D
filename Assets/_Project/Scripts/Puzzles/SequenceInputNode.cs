@@ -26,6 +26,7 @@ public class SequenceInputNode : MonoBehaviour, IInteractable
     public void Interact(GameObject interactor)
     {
         if (!CanInteract(interactor) || !controller.TryInput(nodeId)) return;
+        if(gameObject.scene.name==GameSession.SecondChapterScene)SoundscapeRuntime.Play(SoundCue.Bell,transform.position,.65f,nodeId=="bell_1"?.85f:nodeId=="bell_2"?1:1.18f);
         if (hitIndicator != null)
         {
             StopAllCoroutines();

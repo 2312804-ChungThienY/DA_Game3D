@@ -1,0 +1,56 @@
+{
+    "mode": "Windows development player, automatic API fixture for C1 completion and C2 boss victory; actual Boot/menu/NewGame/transfer/restoration/quiz/native Continue. No manual input or full combat/performance certification.",
+    "unity": "6000.4.8f1",
+    "gpu": "NVIDIA GeForce RTX 3060 Laptop GPU",
+    "cpu": "12th Gen Intel(R) Core(TM) i5-12500H",
+    "quality": "PC",
+    "width": 1920,
+    "height": 1080,
+    "checks": [
+        "Ready 01_MainMenu",
+        "Ready 02_HangLinhMach",
+        "C1 altar completes and saves in player",
+        "Ready 03_GiengTroiChimLac",
+        "Native C1 to C2 transfer preserves inventory/kit",
+        "C2 art/audio present in standalone player",
+        "Captured 120 unthrottled static-view frames: P1",
+        "Captured 120 unthrottled static-view frames: P3",
+        "Captured 120 unthrottled static-view frames: P5",
+        "C2 restoration works and saves in player",
+        "Spirit question 0",
+        "Spirit question 1",
+        "Spirit question 2",
+        "Player quiz sequence persists completion",
+        "Unavailable C3 uses chapter-end fallback in player",
+        "Ready 01_MainMenu",
+        "Ready 03_GiengTroiChimLac",
+        "Standalone Continue preserves ending and inventory",
+        "Native player save at safe final C2 checkpoint",
+        "Original personal saves restored byte-for-byte"
+    ],
+    "failures": [],
+    "errors": [],
+    "staticViewTimings": [
+        {
+            "area": "P1",
+            "frames": 120,
+            "medianMs": 4.048901557922363,
+            "p95Ms": 6.106399059295654,
+            "medianFps": 246.98056030273438
+        },
+        {
+            "area": "P3",
+            "frames": 120,
+            "medianMs": 4.252196788787842,
+            "p95Ms": 6.0204010009765629,
+            "medianFps": 235.1725616455078
+        },
+        {
+            "area": "P5",
+            "frames": 120,
+            "medianMs": 3.5969033241271974,
+            "p95Ms": 4.913102149963379,
+            "medianFps": 278.0169372558594
+        }
+    ]
+}

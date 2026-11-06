@@ -14,6 +14,8 @@ public class WorldStateStore : MonoBehaviour
     private readonly Dictionary<StateSet, HashSet<string>> sets = new Dictionary<StateSet, HashSet<string>>();
 
     public event Action Changed;
+    // Replacing a snapshot differs from an unrelated addition during a puzzle attempt.
+    public uint RestoreVersion { get; private set; }
 
     public int RelicCount => Count(StateSet.Fragments);
 
@@ -35,6 +37,17 @@ public class WorldStateStore : MonoBehaviour
         return true;
     }
 
+    // Atomic rewards: validate the full batch before changing sets; notification is deferred
+    // until inventory and the unique pickup claim have also been committed.
+    internal bool TryAddBatch(IList<StateRequirement> additions,out bool changed)
+    {
+        changed=false;
+        foreach(var entry in additions)if(entry==null||!WorldIds.IsKnown(entry.set,entry.id))return false;
+        foreach(var entry in additions)changed|=GetSet(entry.set).Add(entry.id);
+        return true;
+    }
+    internal void PublishChange()=>Changed?.Invoke();
+
     public WorldSnapshot Export()
     {
         WorldSnapshot snapshot = new WorldSnapshot();
@@ -51,6 +64,7 @@ public class WorldStateStore : MonoBehaviour
     // Thay toàn bộ, không trộn; phát Changed đúng một lần.
     public void Restore(WorldSnapshot snapshot)
     {
+        unchecked { RestoreVersion++; }
         foreach (HashSet<string> set in sets.Values) set.Clear();
 
         if (snapshot != null && snapshot.sets != null)

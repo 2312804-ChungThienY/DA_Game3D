@@ -1,0 +1,112 @@
+SON DOONG - CHAPTER 01 ENVIRONMENT
+Expanded scene, 2026-11-05
+
+PLAYABLE PUZZLE DRUM REPLACEMENT - 2026-11-06
+Trống đồng Đông Sơn - Việt Nam
+Author: ndnguyen3d
+Source: https://sketchfab.com/3d-models/trong-ong-ong-son-viet-nam-21e418a517a74b49a17ebbad94ba26c0
+License: CC BY 4.0 - https://creativecommons.org/licenses/by/4.0/
+Verified with the public Sketchfab model API on 2026-11-06.
+Changes: project URP PBR material, linear metallic/inverted roughness packing,
+2K BC7/BC5 import settings, scale/placement/local lighting. Original FBX/PNG bytes retained.
+Used for the three playable puzzle drums in 02_HangLinhMach and 92_EnvironmentPreview.
+Separate Sun/Bird/Water gameplay signs do not modify the model's cultural patterns.
+This replacement is by ndnguyen3d; the older A20 by Aaannnn below remains in other uses.
+
+Dong Son bronze drum / Trong Dong Dong Son
+Author: Aaannnn
+Source: https://sketchfab.com/3d-models/trong-ong-ong-son-dong-son-bronze-drum-c91e55f6db8742f09ad2d5815ca6b749
+License displayed by source: CC Attribution
+Changes: URP material, copied base color and normal textures imported at up to 1024px, scale and
+orientation for a decorative relief and restored altar model.
+This asset is not CC0. The exact CC Attribution version was not returned
+by the source during the current verification; preserve the original
+download's license information with source distribution.
+
+Ultimate Modular Ruins Pack, Ultimate Stylized Nature Pack, Survival Pack
+Author: Quaternius
+https://quaternius.com/packs/ultimatemodularruins.html
+https://quaternius.com/packs/ultimatestylizednature.html
+https://quaternius.com/packs/survival.html
+License: CC0, according to the project's source catalog.
+
+Mossy Rock
+Source: Poly Haven - https://polyhaven.com/a/mossy_rock
+License: CC0, according to the project's source catalog.
+Changes: copied base color imported at up to 1024px, URP color tuning.
+
+Ground 037
+Source: ambientCG - https://ambientcg.com/view?id=Ground037
+License: CC0, according to the project's source catalog.
+Changes: copied base color imported at up to 1024px, URP color tuning.
+
+Mines and Cave Set
+Unity Asset Store package 305701
+https://assetstore.unity.com/packages/3d/environments/mines-and-cave-set-305701
+License: the Unity Asset Store license accompanying the imported package.
+This package is not represented as CC0.
+
+Additional cave meshes, route meshes, fern and crystal geometry:
+created within the Son Doong project. Imported source files were not edited.
+
+CHAPTER 01 PRESENTATION COMPLETION - 2026-11-05
+
+Giant Monster Model Golem - Kevin Iglesias
+https://assetstore.unity.com/packages/3d/characters/humanoids/fantasy/giant-monster-model-golem-278960
+License: Standard Unity Asset Store EULA accompanying the imported free package.
+Changes: project URP stone materials, scale and six project-authored generic bone clips.
+Those six clips are not supplied by the source model. This asset is not represented as CC0.
+
+Ultimate Monsters (Ghost), Ultimate RPG Pack (crystals, potions), Ultimate Crops Pack (mushrooms)
+Author: Quaternius
+https://quaternius.com/packs/ultimatemonsters.html
+https://quaternius.com/packs/ultimaterpg.html
+https://quaternius.com/packs/ultimatecrops.html
+License: CC0 per local package License.txt and project source catalog.
+Changes: copied clips/materials, Ghost palette, scale and attachment below gameplay roots.
+Herbs are stylized game representations, not botanical reference models.
+
+Fantasy UI Borders, UI Audio, Impact Sounds - Kenney
+https://kenney.nl/assets/fantasy-ui-borders
+https://kenney.nl/assets/ui-audio
+https://kenney.nl/assets/impact-sounds
+License: CC0 per the imported package License.txt files.
+Changes: copied/sliced/tinted frame; selected one-shots routed through the project mixer.
+Three pitched impacts serve as temporary puzzle notes, not authentic bronze-drum recordings.
+
+Loopable Dungeon Ambience - JaggedStone
+https://opengameart.org/content/loopable-dungeon-ambience
+Dark Cavern Ambient - Paul Wortmann
+https://opengameart.org/content/dark-cavern-ambient
+Deep Humidity - TinyWorlds
+https://opengameart.org/content/deep-humidity
+Ghost Monster Voice Moaning and Growling - qubodup
+https://opengameart.org/content/ghost-monster-voice-moaning-growling
+License: CC0 according to the project's dated source catalog; retain original provenance.
+Changes: selected copies, streaming/compression settings, gain/pitch/routing in the project.
+
+Noto Sans - Google / Noto project
+License: SIL Open Font License accompanying Assets/A31 - Noto Sans.
+Existing font assets retained for Vietnamese UI.
+
+Lotus petals/handle, bronze relic fragments, junction hulls and beveled paving:
+created within this project. Source FBX, textures, audio and license files were not edited.
+The three DungeonModularPack metadata files were reimported with existing GUIDs.
+
+Retain the licenses for all other project assets and packages when distributing the game.
+
+2026-11-05 Chapter 1 revision - user-supplied models:
+A22 - Cửa phong ấn/source/portal_COMPLETE.fbx
+A23 - Gương/source/Meshy_AI_antique_oval_wall_mir_0720021159_image-to-3d-texture.glb
+A24 - Bệ đàn/source/pillar_04.obj and supplied Albedo/Occlusion textures.
+Project owner confirms these three models were downloaded from Sketchfab's free
+models (2026-11-05). Individual model URLs, authors and licenses were not included
+in the imported folders and remain to be recorded. Do not describe these as CC0
+or assume a specific distribution license from the free-download label alone.
+Changes: project-owned optimized FBX copies (A22 22000 triangles, A23 11999,
+A24 324), fitted scale, URP material copies. Originals remain unchanged.
+Numbers refer to the owner's actual imported folders, not old candidate catalog IDs.
+
+Fog Particles - existing user-imported Whitish Fog prefab and bonus particle texture.
+Project copies converted to URP particles, reduced emission/alpha and world-time pause.
+Retain the source package's license/provenance with distribution.

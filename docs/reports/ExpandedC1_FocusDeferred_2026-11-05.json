@@ -1,0 +1,22 @@
+{
+    "mode": "Unity Editor Play Mode (API/controller probes, not manual keyboard play)",
+    "checks": [
+        "Boot reached main menu",
+        "New Game spawns on cp_trai safe floor",
+        "Separate crafting table present",
+        "Cinemachine 3 obstacle avoidance enabled",
+        "Recipe ingredients added for regression test",
+        "Walked without snagging to (1.10, 0.00, -3.00) (actual (1.10, 0.02, -3.00))",
+        "Safe floor at (1.10, 0.00, -3.00)",
+        "Walked without snagging to (1.10, 0.00, 4.00) (actual (1.10, 0.02, 4.00))",
+        "Safe floor at (1.10, 0.00, 4.00)",
+        "Walked without snagging to (-3.00, 0.00, 1.60) (actual (-3.00, 0.02, 1.60))",
+        "Safe floor at (-3.00, 0.00, 1.60)",
+        "Aim ray selects table separately from checkpoint",
+        "Original primary/backup/tmp saves restored byte-for-byte"
+    ],
+    "failures": [
+        "System.InvalidOperationException: Table is reachable\r\n  at CampEnvironmentSmokeProbe.Check (System.Boolean pass, System.String message) [0x00039] in E:\\DoAnGame3D\\Doan_Game3D\\Assets\\_Project\\Tests\\CampEnvironmentSmokeProbe.cs:40 \r\n  at CampEnvironmentSmokeProbe+<Run>d__27.MoveNext () [0x00323] in E:\\DoAnGame3D\\Doan_Game3D\\Assets\\_Project\\Tests\\CampEnvironmentSmokeProbe.cs:149 \r\n  at CampEnvironmentSmokeProbe+<Start>d__19.MoveNext () [0x00060] in E:\\DoAnGame3D\\Doan_Game3D\\Assets\\_Project\\Tests\\CampEnvironmentSmokeProbe.cs:69 "
+    ],
+    "errors": []
+}

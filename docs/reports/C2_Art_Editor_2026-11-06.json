@@ -1,0 +1,25 @@
+{
+    "action": "render",
+    "checks": [
+        "No missing scripts",
+        "Authored environment group exists",
+        "Environment decoration adds no enabled traversal colliders",
+        "Seven winds, four pedestals, five steles and three bells retained",
+        "One chapter atmosphere owner",
+        "Chapter-specific audio palette",
+        "Cinemachine collision guard retained",
+        "Safe checkpoint: c2_cp_start",
+        "Safe checkpoint: c2_cp_mid",
+        "Safe checkpoint: c2_cp_arena"
+    ],
+    "failures": [],
+    "notes": [
+        "Renderers=527; decoration contains no gameplay colliders. Existing floor/wall/bridge/gap collision retained, no NavMesh rebake.",
+        "Geometry: Floor_P1=Center: (0.00, -0.50, 0.00), Extents: (8.00, 0.50, 8.00);Wall_P1_West=Center: (-8.25, 10.00, 0.00), Extents: (0.25, 10.00, 8.50);Wall_P1_East=Center: (8.25, 10.00, 0.00), Extents: (0.25, 10.00, 8.50);Wall_P1_South=Center: (0.00, 10.00, -8.25), Extents: (8.50, 10.00, 0.25);Wall_P1_NorthLeft=Center: (-2.50, 10.00, 8.25), Extents: (6.00, 10.00, 0.25);Wall_P1_NorthRight=Center: (7.50, 10.00, 8.25), Extents: (1.00, 10.00, 0.25);Wall_P1_NorthUnder=Center: (5.00, 2.50, 8.25), Extents: (1.50, 2.50, 0.25);Wall_P1_NorthOver=Center: (5.00, 14.50, 8.25), Extents: (1.50, 5.50, 0.25);Ledge_P1=Center: (5.00, 2.50, 6.50), Extents: (3.00, 2.50, 1.50);Floor_P1_P2=Center: (5.00, 4.50, 9.00), Extents: (1.50, 0.50, 1.00);Floor_P2=Center: (5.00, 4.50, 16.00), Extents: (6.00, 0.50, 6.00);Wall_P2_West=Center: (-1.25, 11.50, 16.00), Extents: (0.25, 11.50, 6.50);Wall_P2_East=Center: (11.25, 11.50, 16.00), Extents: (0.25, 11.50, 6.50);Wall_P2_SouthLeft=Center: (1.00, 11.50, 9.75), Extents: (2.50, 11.50, 0.25);Wall_P2_SouthRight=Center: (9.00, 11.50, 9.75), Extents: (2.50, 11.50, 0.25);Wall_P2_SouthOver=Center: (5.00, 16.00, 9.75), Extents: (1.50, 7.00, 0.25);Wall_P2_NorthLeft=Center: (3.13, 11.50, 22.25), Extents: (4.63, 11.50, 0.25);Wall_P2_NorthRight=Center: (11.13, 11.50, 22.25), Extents: (0.38, 11.50, 0.25);Wall_P2_NorthUnder=Center: (9.25, 6.50, 22.25), Extents: (1.50, 6.50, 0.25);Wall_P2_NorthOver=Center: (9.25, 20.00, 22.25), Extents: (1.50, 3.00, 0.25);Plat_P2_A=Center: (3.50, 7.00, 14.50), Extents: (2.50, 2.00, 2.50);Plat_P2_B=Center: (9.00, 9.00, 17.00), Extents: (2.00, 4.00, 2.00);Floor_P2_P3=Center: (9.25, 12.50, 21.75), Extents: (1.50, 0.50, 2.75);Floor_P3=Center: (5.00, 12.50, 31.00), Extents: (7.00, 0.50, 7.00)",
+        "Editor render: docs/images/c2-art-editor-p1-2026-11-06.png",
+        "Editor render: docs/images/c2-art-editor-p2-2026-11-06.png",
+        "Editor render: docs/images/c2-art-editor-p3-2026-11-06.png",
+        "Editor render: docs/images/c2-art-editor-p4-2026-11-06.png",
+        "Editor render: docs/images/c2-art-editor-p5-2026-11-06.png"
+    ]
+}

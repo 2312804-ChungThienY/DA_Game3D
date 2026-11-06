@@ -1,0 +1,115 @@
+{
+  "stage": "C2 stage5 arena mechanics",
+  "date": "2026-11-06",
+  "backup": "SourceAssets/SceneBackups/2026-11-05_C2Arena/234952",
+  "editorChecks": 8,
+  "playChecks": 87,
+  "failures": [],
+  "runtimeErrors": [],
+  "personalSaveRestored": true,
+  "unchanged": [
+    {
+      "path": "Assets/_Project/Scenes/02_HangLinhMach.unity",
+      "preserved": true
+    },
+    {
+      "path": "Assets/_Project/Scenes/92_EnvironmentPreview.unity",
+      "preserved": true
+    },
+    {
+      "path": "Assets/_Project/Scripts/Player/PlayerMotor.cs",
+      "preserved": true
+    },
+    {
+      "path": "Assets/_Project/Scenes/03_GiengTroiChimLac_NavMesh.asset",
+      "preserved": true
+    }
+  ],
+  "metadata": [
+    {
+      "path": "Assets/_Project/Scenes/03_GiengTroiChimLac.unity.meta",
+      "preserved": true
+    },
+    {
+      "path": "Assets/_Project/Scripts/AI/BossBase.cs.meta",
+      "preserved": true
+    },
+    {
+      "path": "Assets/_Project/Scripts/Chapters/C2/BossChimLac.cs.meta",
+      "preserved": true
+    },
+    {
+      "path": "Assets/_Project/Scripts/Chapters/C2/ChimLacFocusReceiver.cs.meta",
+      "preserved": true
+    },
+    {
+      "path": "Assets/_Project/Scripts/Combat/ArenaGate.cs.meta",
+      "preserved": true
+    }
+  ],
+  "files": [
+    {
+      "path": "Assets/_Project/Scenes/03_GiengTroiChimLac.unity",
+      "sha256": "6029eccadc001677d65ba15dd2efdb0c784c95d3cab13f6122fa1806ba8d6c16"
+    },
+    {
+      "path": "Assets/_Project/Scripts/AI/BossBase.cs",
+      "sha256": "dd8ca774814d73e4f946a59a8ce49d2d75d5f7980868d8c16ab2e3dcda8b4cb2"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Chapters/C2/BossChimLac.cs",
+      "sha256": "cdde770795c2071c5bc94febd0d00364171955d1dabb227d07c25c5ad779f8ea"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Chapters/C2/ChimLacFocusReceiver.cs",
+      "sha256": "bdb54f8b1cfb1b0babb5602ac70b7a3b54b27034542d150ba3f8c62ce794e02d"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Combat/ArenaGate.cs",
+      "sha256": "16c437a24eca837ee9da8aece4b27f8d453c3911c687705e5b85d0fca4378bc8"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Presentation/ChimLacPresentation.cs",
+      "sha256": "4ca4f01d62881b6eab74869f617e83d14cd35d0e3ebbb93c93ba8f62ca785dc5"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Presentation/ChimLacArenaHUD.cs",
+      "sha256": "820d9c3b063943e688481b3ab7c5d39528254345520967798d38618bb13a73cf"
+    },
+    {
+      "path": "Assets/_Project/Editor/Chapter02ArenaSetup.cs",
+      "sha256": "40b042a8e948b990e78cd35ef0a91bfb3ff65600a11bf162ac139ee58c81b21d"
+    },
+    {
+      "path": "Assets/_Project/Tests/Chapter02ArenaProbe.cs",
+      "sha256": "bc9cebd4af4e78fe478e4dead77d9996e507c6f69b8da7dcde22ca0d272ba047"
+    },
+    {
+      "path": "SourceAssets/Tools/C2ArenaFocusGameView.ps1",
+      "sha256": "2b474dbe0835f82301c07502facfa660964cb7b71529c7c00697893aee24dc08"
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Arena/Bird_Bronze.mat",
+      "sha256": "f33150761abb8b7d5601ffa7494fc45150f6769e013cac2de76cbde6b53cb5c1"
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Arena/Bird_Ivory.mat",
+      "sha256": "b8ecd5ed9d66167d49dd8b2b9052543711ee4d6da11e408e276bd9cd9daccde9"
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Arena/Bird_Octa.asset",
+      "sha256": "7cfc7d690c64f56193dca615c6b1276e30891621645f5cf0ccf88de411d598a8"
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Arena/Bird_Teal.mat",
+      "sha256": "152d440bf66296fae645ea5bef3828ae38484213124db163f99d8dcd361d5e03"
+    },
+    {
+      "path": "Assets/_Project/Art/Chapter02Arena/Dive_Warning.mat",
+      "sha256": "3b4eba0978b6504dabf3aca7f3e0ab1c6df95121740c37f2b977a8595e3c0220"
+    }
+  ],
+  "windowsBuildUpdated": false,
+  "fullChapterOrHumanBalanceVerified": false,
+  "scope": "Isolated production attack coroutines and full phase2 AI, native death/retry-save/Continue; real synthetic W/RMB/Space/LMB via InputReader; progression/initial position/aim/win damage fixtures; authored combat proxy, final art in stage7"
+}

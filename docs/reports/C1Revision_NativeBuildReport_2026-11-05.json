@@ -1,0 +1,8 @@
+{
+    "action": "build-report",
+    "checks": [
+        "Latest Windows build: Succeeded, errors=0, warnings=0, bytes=292831876"
+    ],
+    "failures": [],
+    "warnings": []
+}

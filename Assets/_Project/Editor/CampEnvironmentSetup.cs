@@ -42,6 +42,22 @@ public static class CampEnvironmentSetup
             if (EditorApplication.isPlayingOrWillChangePlaymode) throw new InvalidOperationException("Stop Play Mode before environment editing.");
             if (report.action == "inspect") Inspect(report);
             else if (report.action == "stage") Stage(report);
+            else if (report.action == "refine") Refine(report);
+            else if (report.action == "integrate") Integrate(report);
+            else if (report.action == "capture-main") WithScene(MainPath,s=>Capture(s,report));
+            else if (report.action == "validate-main") WithScene(MainPath,s=>Validate(s,report));
+            else if (report.action == "play-test")
+            {
+                for(int i=0;i<SceneManager.sceneCount;i++)if(SceneManager.GetSceneAt(i).isDirty)throw new InvalidOperationException("Save open scene edits before Play Mode regression.");
+                SessionState.SetBool("SonDoong.CampEnvironmentTest",true);
+                EditorSceneManager.OpenScene("Assets/_Project/Scenes/00_Boot.unity");EditorApplication.EnterPlaymode();
+                report.checks.Add("Requested opt-in environment regression from Boot; original save files are backed up and restored by the probe.");
+            }
+            else if (report.action == "open-preview")
+            {
+                for(int i=0;i<SceneManager.sceneCount;i++)if(SceneManager.GetSceneAt(i).isDirty)throw new InvalidOperationException("Save open scene edits first.");
+                EditorSceneManager.OpenScene(PreviewPath);
+            }
             else if (report.action == "capture") WithScene(PreviewPath, s => Capture(s, report));
             else if (report.action == "validate") WithScene(PreviewPath, s => Validate(s, report));
             else throw new InvalidOperationException("Unknown action: " + report.action);
@@ -55,9 +71,20 @@ public static class CampEnvironmentSetup
             running = false;
         }
     }
+    static void Submit(string action)
+    {
+        if(File.Exists(RequestPath))throw new InvalidOperationException("An environment request is already pending.");
+        File.WriteAllText(RequestPath,JsonUtility.ToJson(new Request{action=action}));
+    }
+    [MenuItem("Tools/Son Doong/Camp Environment/Open Preview")]
+    public static void OpenPreview()=>Submit("open-preview");
+    [MenuItem("Tools/Son Doong/Camp Environment/Validate Preview")]
+    public static void ValidatePreview()=>Submit("validate");
+    [MenuItem("Tools/Son Doong/Camp Environment/Run Play Mode Regression")]
+    public static void PlayRegression()=>Submit("play-test");
     static IEnumerable<T> All<T>(Scene scene) where T : Component => scene.GetRootGameObjects().SelectMany(r => r.GetComponentsInChildren<T>(true));
     static Transform Find(Scene scene, string name) => All<Transform>(scene).FirstOrDefault(t => t.name == name);
-    static Bounds BoundsOf(GameObject go)
+    internal static Bounds BoundsOf(GameObject go)
     {
         var renderers = go.GetComponentsInChildren<Renderer>(true);
         if (renderers.Length == 0) throw new InvalidOperationException("No renderer: " + go.name);
@@ -96,7 +123,7 @@ public static class CampEnvironmentSetup
         }
     }
 
-    static Transform Group(string name, Transform parent = null)
+    internal static Transform Group(string name, Transform parent = null)
     {
         var go = new GameObject(name); go.transform.SetParent(parent, false); return go.transform;
     }
@@ -126,7 +153,7 @@ public static class CampEnvironmentSetup
                 var source = mats[i]; if (!source) throw new InvalidOperationException("Missing material " + visual.name);
                 string n = source.name;
                 Material m;
-                if (category == "Rock") m = Mat("M_Limestone_" + variation % 3, RockColor(variation));
+                if (category == "Rock") { m = Mat("M_Limestone_" + variation % 3, RockColor(variation)); m.SetFloat("_Cull",0); }
                 else if (category == "Nature")
                 {
                     bool bark = n.IndexOf("Bark", StringComparison.OrdinalIgnoreCase) >= 0;
@@ -160,20 +187,20 @@ public static class CampEnvironmentSetup
     }
     // A project wrapper retains the imported model as a nested prefab. The wrapper
     // fixes units/pivot, palette and simple collision without editing source assets.
-    static GameObject Place(string path, string name, Transform parent, Vector3 foot, Vector3 size, float yaw, string category, bool solid, int variation = 0)
+    internal static GameObject Place(string path, string name, Transform parent, Vector3 foot, Vector3 size, float yaw, string category, bool solid, int variation = 0)
     {
-        var wrapper = Group(name, parent).gameObject; wrapper.layer = 3;
+        var wrapper = Group(name, parent).gameObject; wrapper.layer = 3; wrapper.transform.position = Vector3.zero;
         var source = AssetDatabase.LoadAssetAtPath<GameObject>(path);
         if (!source) throw new InvalidOperationException("Missing asset: " + path);
-        var visual = (GameObject)PrefabUtility.InstantiatePrefab(source, wrapper.transform);
-        visual.transform.localRotation = Quaternion.Euler(0,yaw,0);
+        var fit = Group("ModelFit",wrapper.transform);
+        var visual = (GameObject)PrefabUtility.InstantiatePrefab(source, fit);
+        // Preserve the FBX import rotation (Blender models often have -90 X).
+        visual.transform.localRotation = Quaternion.Euler(0,yaw,0) * visual.transform.localRotation;
         var b = BoundsOf(visual);
-        visual.transform.localScale = Vector3.Scale(visual.transform.localScale, new Vector3(size.x/b.size.x,size.y/b.size.y,size.z/b.size.z));
+        fit.localScale = new Vector3(size.x/b.size.x,size.y/b.size.y,size.z/b.size.z);
         b = BoundsOf(visual);
-        visual.transform.position += foot - new Vector3(b.center.x,b.min.y,b.center.z);
-        // Keep the wrapper at its anchor; model corrections remain local.
+        fit.position -= new Vector3(b.center.x,b.min.y,b.center.z);
         wrapper.transform.position = foot;
-        visual.transform.position -= foot;
         foreach (var c in visual.GetComponentsInChildren<Collider>(true)) { c.enabled=false; PrefabUtility.RecordPrefabInstancePropertyModifications(c); }
         Palette(visual,category,variation);
         if (solid)
@@ -199,6 +226,18 @@ public static class CampEnvironmentSetup
     static void BuildArt(Transform root)
     {
         var cliffs=Group("01_LimestoneCliffs_A09",root);
+        // Continuous backing closes the open backs of the modular source meshes.
+        var backing=Mat("M_CliffBacking",new Color(.27f,.32f,.34f));
+        Block("RockBacking_West",cliffs,new Vector3(-12,8,0),new Vector3(2,18,23),backing);
+        Block("RockBacking_East",cliffs,new Vector3(12,8,0),new Vector3(2,18,23),backing);
+        Block("RockBacking_South",cliffs,new Vector3(0,8,-12),new Vector3(25,18,2),backing);
+        Block("RockBacking_NorthLeft",cliffs,new Vector3(-7,6,12),new Vector3(10,14,2),backing);
+        Block("RockBacking_NorthRight",cliffs,new Vector3(7,6,12),new Vector3(10,14,2),backing);
+        Block("RockBacking_AboveExit",cliffs,new Vector3(0,9.5f,12),new Vector3(4,7,2),backing);
+        Block("PassageBacking_Left",cliffs,new Vector3(-2.5f,2.1f,15),new Vector3(2,4.2f,10.5f),backing);
+        Block("PassageBacking_Right",cliffs,new Vector3(2.5f,2.1f,15),new Vector3(2,4.2f,10.5f),backing);
+        Block("PassageBacking_Roof",cliffs,new Vector3(0,4.5f,15),new Vector3(6,1,10.5f),backing);
+        Place(Cave+"Cave_Wall_Rocks_B.prefab","Cliff_AboveExit",cliffs,new Vector3(0,6.8f,11),new Vector3(6,6.2f,3),0,"Rock",true,1);
         // Walls remain outside the 20x20 blockout. Staggered masses leave an open
         // skylight, with a lower, darker canopy behind the spawn camera.
         for(int side=-1;side<=1;side+=2)
@@ -209,9 +248,9 @@ public static class CampEnvironmentSetup
         }
         for(int i=0;i<4;i++) Place(Cave+"Cave_Wall_Rocks_A.prefab","Rear_Cliff_"+i,cliffs,new Vector3(-8+i*5.3f,-.6f,-11.1f),new Vector3(6.4f,15.5f,3.8f),i*16,"Rock",true,i);
         for(int side=-1;side<=1;side+=2)
-            Place(Cave+"Cave_Wall_Rocks_C.prefab","Far_Cliff_"+side,cliffs,new Vector3(side*6.7f,-.4f,11.1f),new Vector3(9.5f,18,4),0,"Rock",true,side+2);
+            Place(Cave+"Cave_Wall_Rocks_C.prefab","Far_Cliff_"+side,cliffs,new Vector3(side*6.7f,-.4f,11.1f),new Vector3(9.5f,13.2f,4),0,"Rock",true,side+2);
         var canopy=Group("02_RearCanopy_SkylightRim",root);
-        Place(Cave+"Cave_Rocks_B.prefab","Rear_Overhang",canopy,new Vector3(0,6.7f,-9),new Vector3(22,4,7),0,"Rock",true,0);
+        Place(Cave+"Cave_Rocks_B.prefab","Rear_Overhang",canopy,new Vector3(0,6.7f,-9.3f),new Vector3(22,4,6),0,"Rock",true,0);
         for(int side=-1;side<=1;side+=2)
         {
             Place(Cave+"Cave_Rocks_A.prefab","Skylight_Rim_"+side,canopy,new Vector3(side*9,14.7f,1),new Vector3(5,4,17),0,"Rock",true,1);
@@ -225,6 +264,11 @@ public static class CampEnvironmentSetup
         Vector3[] rocks={new Vector3(-8,0,-5),new Vector3(7,0,-5),new Vector3(8,0,0),new Vector3(-8.1f,0,6),new Vector3(7.3f,0,6),new Vector3(-5,0,7.5f),new Vector3(5,0,8)};
         for(int i=0;i<rocks.Length;i++) Place(Cave+"Cave_Rocks_"+(i%2==0?"A":"B")+".prefab","Boulder_"+i,boulders,rocks[i],new Vector3(2.5f+i%2,1.6f+(i%3)*.6f,2.3f),i*41,"Rock",true,i);
         var green=Group("04_MossGardenClusters_A11",root);
+        for(int i=0;i<rocks.Length;i++)
+        {
+            Place(Nature+"Bush_Small.fbx","MossCrown_"+i,green,rocks[i]+new Vector3(0,1.4f+(i%3)*.6f,0),new Vector3(2.2f,.48f,1.8f),i*31,"Nature",false);
+            for(int j=0;j<3;j++)Place(Nature+"Bush_Small.fbx","RockFoot_Shrub_"+i+"_"+j,green,rocks[i]+new Vector3((j-1)*.8f,0,-1.1f),new Vector3(1.3f,.65f,1.25f),j*65,"Nature",false);
+        }
         Vector3[] trees={new Vector3(-7.9f,0,5),new Vector3(-5.8f,0,7.5f),new Vector3(7.6f,0,3),new Vector3(6.7f,0,8),new Vector3(-8.4f,0,-2)};
         for(int i=0;i<trees.Length;i++)
         {
@@ -273,8 +317,102 @@ public static class CampEnvironmentSetup
         var sun=Lamp("Light_Skylight_Pool",lights,new Vector3(-4,14,2),new Color(1,.83f,.55f),8,24,LightType.Spot);
         sun.spotAngle=65;sun.innerSpotAngle=35;sun.transform.rotation=Quaternion.Euler(79,-22,0);sun.shadows=LightShadows.Soft;
         var exit=Lamp("Light_Exit_Readability",lights,new Vector3(0,3.2f,12),new Color(.74f,.91f,.63f),2.4f,9);
+        Lamp("Light_Skylight_Bounce",lights,new Vector3(-2,5,3),new Color(1,.88f,.65f),2.3f,17);
         var probes=Group("LightProbes_Camp",lights).gameObject.AddComponent<LightProbeGroup>();
         var points=new List<Vector3>();for(int x=-1;x<=1;x++)for(int z=-1;z<=2;z++)foreach(float y in new[]{.6f,2.5f}) points.Add(new Vector3(x*5,y,z*5));probes.probePositions=points.ToArray();
+    }
+
+    static void Refine(Report report)
+    {
+        WithScene(PreviewPath,scene=>
+        {
+            if(scene.isDirty)throw new InvalidOperationException("Preview has unsaved edits.");
+            var previous=Find(scene,"ART_Camp");var parent=previous.parent;
+            UnityEngine.Object.DestroyImmediate(previous.gameObject);
+            var art=Group("ART_Camp",parent);BuildArt(art);
+            var ground=Mat("M_CampEarth",new Color(.43f,.38f,.27f));
+            Block("Camp_Floor_Visual",art,new Vector3(0,-.02f,0),new Vector3(20,.04f,20),ground);
+            Block("Passage_Floor_Visual",art,new Vector3(0,-.02f,15),new Vector3(4,.04f,10),ground);
+            // Flat stones add a readable trail without changing the collision floor.
+            var trail=Group("07_FlatTrail_NoCollision",art);
+            for(int i=0;i<17;i++)
+                Place(Nature+"Rock_"+(i%3+1)+".fbx","TrailSlab_"+i,trail,new Vector3((i%2==0?-.55f:.55f),-.025f,-5+i*1.35f),new Vector3(1.25f,.07f,1.55f),i*73,"Rock",false,i);
+            // An exit vista is a small visual cue only; the next playable area is unchanged.
+            var vista=Group("08_ExitVista_ReferenceOnly",art);
+            Block("Vista_Ground",vista,new Vector3(0,-.1f,24),new Vector3(20,.2f,8),ground);
+            Place(Cave+"Cave_Rocks_B.prefab","Vista_BackRock",vista,new Vector3(0,0,26),new Vector3(18,8,3),0,"Rock",false,1);
+            for(int i=0;i<5;i++)Place(Nature+"NormalTree_1.fbx","Vista_Tree_"+i,vista,new Vector3(-5+i*2.5f,0,23.5f+i%2),new Vector3(3.8f,5.5f,3.4f),i*42,"Nature",false);
+            PrefabUtility.SaveAsPrefabAsset(art.gameObject,ArtPath);
+            EditorSceneManager.SaveScene(scene);AssetDatabase.SaveAssets();Validate(scene,report);Capture(scene,report);
+        });
+    }
+
+    static void Set(UnityEngine.Object target,string field,UnityEngine.Object value)
+    {
+        var so=new SerializedObject(target);var p=so.FindProperty(field);
+        if(p==null)throw new InvalidOperationException("Missing field "+target.name+"."+field);
+        p.objectReferenceValue=value;so.ApplyModifiedPropertiesWithoutUndo();EditorUtility.SetDirty(target);
+    }
+    static void Integrate(Report report)
+    {
+        WithScene(PreviewPath,preview=>
+        {
+            Validate(preview,report);
+            foreach(string name in new[]{"VIS_Checkpoint_Fire","VIS_CraftingTable"})
+                PrefabUtility.SaveAsPrefabAsset(Find(preview,name).gameObject,"Assets/_Project/Prefabs/Environment/Camp/PF_"+name+".prefab");
+        });
+        WithScene(MainPath,scene=>
+        {
+            if(scene.isDirty)throw new InvalidOperationException("Main scene has unsaved edits.");
+            if(Find(scene,"ART_Camp"))throw new InvalidOperationException("ART_Camp already integrated. Preserve scene edits.");
+            string backup="SourceAssets/SceneBackups/2026-11-04_CampEnvironment/BeforeIntegration_"+DateTime.UtcNow.ToString("HHmmss");
+            Directory.CreateDirectory(backup);File.Copy(MainPath,backup+"/02_HangLinhMach.unity");File.Copy(MainPath+".meta",backup+"/02_HangLinhMach.unity.meta");report.checks.Add("Scene and GUID backup: "+backup);
+            var checkpoint=All<CheckpointAltar>(scene).Single(c=>c.CheckpointId=="cp_trai");var spawn=checkpoint.SpawnPoint;
+            var originalScripts=All<MonoBehaviour>(scene).Where(c=>c&&c!=checkpoint).ToDictionary(c=>c,c=>EditorJsonUtility.ToJson(c));
+            var env=Find(scene,"Area_Camp")??Find(scene,"ENV_01_Camp");if(!env)throw new InvalidOperationException("Camp group missing.");
+            env.name="ENV_01_Camp";
+            foreach(Transform child in env)
+            {
+                if(child.name=="Floor_Camp"||child.name.StartsWith("Wall_"))
+                {foreach(var r in child.GetComponentsInChildren<Renderer>(true))r.enabled=false;}
+                else child.gameObject.SetActive(false);
+            }
+            var passage=Find(scene,"Area_Passage");
+            foreach(var r in passage.GetComponentsInChildren<Renderer>(true))r.enabled=false;
+            var art=(GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath<GameObject>(ArtPath),env);
+            art.name="ART_Camp";art.transform.localPosition=Vector3.zero;art.transform.localRotation=Quaternion.identity;art.transform.localScale=Vector3.one;
+            var vista=art.transform.Find("08_ExitVista_ReferenceOnly");if(vista)vista.gameObject.SetActive(false);
+            foreach(var r in checkpoint.GetComponentsInChildren<Renderer>(true))r.enabled=false;
+            // Preserve the gameplay object/ID and replace only its visible child.
+            foreach(string visualName in new[]{"VIS_Checkpoint_Fire","VIS_CraftingTable"})
+            {
+                var source=art.GetComponentsInChildren<Transform>(true).Single(t=>t.name==visualName);
+                string path="Assets/_Project/Prefabs/Environment/Camp/PF_"+visualName+".prefab";
+                source.gameObject.SetActive(false);PrefabUtility.RecordPrefabInstancePropertyModifications(source.gameObject);
+                Transform parent;
+                if(visualName=="VIS_Checkpoint_Fire") parent=checkpoint.transform;
+                else
+                {
+                    parent=Group("Camp_CraftingStation",Find(scene,"Gameplay"));parent.position=TablePosition;parent.gameObject.layer=8;
+                    var table=parent.gameObject.AddComponent<CampCraftingTable>();Set(table,"inventory",All<InventoryService>(scene).Single());
+                    var box=parent.gameObject.AddComponent<BoxCollider>();box.center=new Vector3(0,.5f,0);box.size=new Vector3(1.65f,1,.9f);
+                }
+                var visual=(GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath<GameObject>(path),parent);
+                visual.name=visualName;visual.SetActive(true);visual.transform.localPosition=Vector3.zero;visual.transform.localRotation=Quaternion.identity;visual.transform.localScale=Vector3.one;
+            }
+            // E at the checkpoint saves; E at the separated table crafts.
+            Set(checkpoint,"craftingPanel",null);
+            foreach(string name in new[]{"Spawn_Marker","Lantern_YellowMarker","Lantern_AreaMarker"})
+            {var t=Find(scene,name);if(t)foreach(var r in t.GetComponentsInChildren<Renderer>(true))r.enabled=false;}
+            var oldLight=Find(scene,"Light_Campfire");if(oldLight)oldLight.GetComponent<Light>().enabled=false;
+            // The same sun direction as the staged sample; local pools handle camp accents.
+            var sun=Find(scene,"Directional Light").GetComponent<Light>();sun.color=new Color(1,.87f,.65f);sun.intensity=1.25f;sun.transform.rotation=Quaternion.Euler(65,-32,0);sun.shadows=LightShadows.Soft;
+            foreach(var pair in originalScripts)if(EditorJsonUtility.ToJson(pair.Key)!=pair.Value)throw new InvalidOperationException("Unexpected gameplay change: "+pair.Key.name+" "+pair.Key.GetType().Name);
+            if(checkpoint.CheckpointId!="cp_trai"||checkpoint.SpawnPoint!=spawn)throw new InvalidOperationException("Checkpoint identity changed.");
+            report.checks.Add("PASS: existing gameplay components unchanged; cp_trai ID/spawn retained. Only checkpoint crafting-panel link removed for separate E targets.");
+            Physics.SyncTransforms();Validate(scene,report);
+            EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);AssetDatabase.SaveAssets();Capture(scene,report);
+        });
     }
 
     static void Stage(Report report)
@@ -332,8 +470,8 @@ public static class CampEnvironmentSetup
         report.checks.Add("All art renderers have supported materials.");
         // Geometric sweep at walking height. Ignore the floor and decorations
         // without colliders; the path must fit a 0.3m controller with margin.
-        var colliders=All<Collider>(scene).Where(c=>c.enabled&&c.gameObject.activeInHierarchy&&!c.isTrigger).ToArray();
-        Vector3[] route={new Vector3(0,.2f,-5),new Vector3(1,.2f,-3),new Vector3(1,.2f,1),new Vector3(0,.2f,5),new Vector3(0,.2f,10),new Vector3(0,.2f,16)};
+        var colliders=All<Collider>(scene).Where(c=>c.enabled&&c.gameObject.activeInHierarchy&&!c.isTrigger&&c.GetComponentInParent<PlayerMotor>()==null).ToArray();
+        Vector3[] route={new Vector3(0,.2f,-5),new Vector3(1.1f,.2f,-3),new Vector3(1.1f,.2f,4),new Vector3(0,.2f,5),new Vector3(0,.2f,10),new Vector3(0,.2f,16)};
         int samples=0;
         for(int edge=0;edge<route.Length-1;edge++)
         {
@@ -354,7 +492,14 @@ public static class CampEnvironmentSetup
     }
     static void Capture(Scene scene,Report report)
     {
-        var camera=All<Camera>(scene).Single();var position=camera.transform.position;var rotation=camera.transform.rotation;
+        bool temporary=scene.path!=PreviewPath;
+        var camera=temporary?new GameObject("Temporary_CampReviewCamera").AddComponent<Camera>():All<Camera>(scene).Single();
+        if(temporary)
+        {
+            SceneManager.MoveGameObjectToScene(camera.gameObject,scene);camera.gameObject.AddComponent<UnityEngine.Rendering.Universal.UniversalAdditionalCameraData>();
+            camera.clearFlags=CameraClearFlags.SolidColor;camera.backgroundColor=new Color(.43f,.64f,.73f);camera.fieldOfView=62;camera.nearClipPlane=.1f;camera.farClipPlane=120;
+        }
+        camera.useOcclusionCulling=false;var position=camera.transform.position;var rotation=camera.transform.rotation;
         // Avoid additive scenes appearing in these diagnostic renders.
         var otherRenderers=Resources.FindObjectsOfTypeAll<Renderer>().Where(r=>r.gameObject.scene.IsValid()&&r.gameObject.scene!=scene&&r.enabled).ToArray();
         var otherLights=Resources.FindObjectsOfTypeAll<Light>().Where(l=>l.gameObject.scene.IsValid()&&l.gameObject.scene!=scene&&l.enabled).ToArray();
@@ -372,9 +517,11 @@ public static class CampEnvironmentSetup
                 var texture=new Texture2D(1600,900,TextureFormat.RGB24,false);
                 try
                 {
+                    foreach(var r in All<MeshRenderer>(scene)){bool enabled=r.enabled;r.enabled=false;r.enabled=enabled;}
+                    UnityEngine.Rendering.RenderPipeline.SubmitRenderRequest(camera,new UnityEngine.Rendering.Universal.UniversalRenderPipeline.SingleCameraRequest{destination=rt});
                     UnityEngine.Rendering.RenderPipeline.SubmitRenderRequest(camera,new UnityEngine.Rendering.Universal.UniversalRenderPipeline.SingleCameraRequest{destination=rt});
                     RenderTexture.active=rt;texture.ReadPixels(new Rect(0,0,1600,900),0,0);texture.Apply();
-                    string path="docs/images/camp-"+names[i]+"-2026-11-04.png";File.WriteAllBytes(path,texture.EncodeToPNG());report.screenshots.Add(path);
+                    string path="docs/images/camp-"+(temporary?"main-":"")+names[i]+"-2026-11-04.png";File.WriteAllBytes(path,texture.EncodeToPNG());report.screenshots.Add(path);
                 }
                 finally{RenderTexture.active=previous;rt.Release();UnityEngine.Object.DestroyImmediate(rt);UnityEngine.Object.DestroyImmediate(texture);}
             }
@@ -383,6 +530,7 @@ public static class CampEnvironmentSetup
         {
             camera.transform.SetPositionAndRotation(position,rotation);
             foreach(var r in otherRenderers)if(r)r.enabled=true;foreach(var l in otherLights)if(l)l.enabled=true;
+            if(temporary)UnityEngine.Object.DestroyImmediate(camera.gameObject);
         }
     }
 }

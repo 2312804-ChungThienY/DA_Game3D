@@ -1,0 +1,8 @@
+{
+    "action": "status",
+    "checks": [
+        "playing=False, compiling=False",
+        "Assets/_Project/Scenes/00_Boot.unity dirty=False"
+    ],
+    "failures": []
+}

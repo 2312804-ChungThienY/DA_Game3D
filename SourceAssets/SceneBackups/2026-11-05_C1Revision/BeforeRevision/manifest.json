@@ -1,0 +1,122 @@
+[
+  {
+    "path": "Assets\\_Project\\Scenes\\02_HangLinhMach.unity",
+    "sha256": "bfa219d9e1e251755e91fe3fa6d2bb7a0873c0434d7f8dee20c087f13481c04f"
+  },
+  {
+    "path": "Assets\\_Project\\Scenes\\02_HangLinhMach.unity.meta",
+    "sha256": "933d2ea4eb98cb5dc1703c63261904a5ee195933252a33ba64b912771013b397"
+  },
+  {
+    "path": "Assets\\_Project\\Scenes\\92_EnvironmentPreview.unity",
+    "sha256": "cb32e76ac09e78045b216c4055e42de65957b8506ad9480b87289fe851f0c026"
+  },
+  {
+    "path": "Assets\\_Project\\Scenes\\92_EnvironmentPreview.unity.meta",
+    "sha256": "d56036a2c18d7f323c24339581c4ee015ebded1d300de4a7ef5b7b1431381d42"
+  },
+  {
+    "path": "Assets\\_Project\\Resources\\PF_AppRootUI.prefab",
+    "sha256": "92835a0c26125d98ae9ebab22856cb02e335b9305c201de172c95b5e9f162065"
+  },
+  {
+    "path": "Assets\\_Project\\Resources\\PF_AppRootUI.prefab.meta",
+    "sha256": "08159fe90ec4004e2cfe9c3f333cfacadc8efb34dc5300289fda84ff0b9f3f10"
+  },
+  {
+    "path": "Assets\\_Project\\Scenes\\01_MainMenu.unity",
+    "sha256": "11ced24a242e02883a3ab27df3cbe93f0b227eaa28f30457979b14d15f6a4838"
+  },
+  {
+    "path": "Assets\\_Project\\Scenes\\01_MainMenu.unity.meta",
+    "sha256": "617df8fae3f64aa17fdb03e8ee1205580e3eaf2f0f6f324e9cb70cd09e118ef5"
+  },
+  {
+    "path": "Assets\\_Project\\Scripts\\UI\\InventoryPanel.cs",
+    "sha256": "fad92a4c5e4cf0ca41220bb13776c7d000fc4ba557a5a2fbc11d68559f19979d"
+  },
+  {
+    "path": "Assets\\_Project\\Scripts\\UI\\InventoryPanel.cs.meta",
+    "sha256": "d3e7577c58874a00e72a9843b5d19bb6b810676943174696dcac2a5f22762935"
+  },
+  {
+    "path": "Assets\\_Project\\Scripts\\UI\\JournalPanel.cs",
+    "sha256": "fb580eb6bd83d0f9ca79c4ed52d00d49d20c9fa6601dbd697850060b48348c8c"
+  },
+  {
+    "path": "Assets\\_Project\\Scripts\\UI\\JournalPanel.cs.meta",
+    "sha256": "831044fffe52118aaf3e6f4a513c77a531159ac0402232bdfa77125fbfc451cc"
+  },
+  {
+    "path": "Assets\\_Project\\Scripts\\Inventory\\InventoryService.cs",
+    "sha256": "52ed35d697ea5c496af699871ed62062494ce3762f998f96fb724fe2ce876771"
+  },
+  {
+    "path": "Assets\\_Project\\Scripts\\Inventory\\InventoryService.cs.meta",
+    "sha256": "81f09eb925dca27f71346e427f23a9c28579d95ba329c241ed5a6725d3ecc66b"
+  },
+  {
+    "path": "Assets\\_Project\\Scripts\\AI\\EnemyBrain.cs",
+    "sha256": "c981a65377fa0c45a83898e3cd9516c5956095a653834651de12716d1223e2bc"
+  },
+  {
+    "path": "Assets\\_Project\\Scripts\\AI\\EnemyBrain.cs.meta",
+    "sha256": "6c76f4141321ab67d180fffa305e4ced8dcc9bf8b7bc96e3cf9c2e8bea0ec684"
+  },
+  {
+    "path": "Assets\\_Project\\Scripts\\AI\\StoneGuardian.cs",
+    "sha256": "db0dc30e5804994c40e174e67ba23611c7cbb4ca14a227bc9d44047890d0f45a"
+  },
+  {
+    "path": "Assets\\_Project\\Scripts\\AI\\StoneGuardian.cs.meta",
+    "sha256": "89fb4f1c0d34490f7a9391698eed82047bfabfee0b060853b9bdd497b2c4e565"
+  },
+  {
+    "path": "Assets\\_Project\\Scripts\\AI\\EnemyLanternReceiver.cs",
+    "sha256": "3aebf9e36040c5754b523854d6dd5f0290e9c36007c85246a14db91521458a48"
+  },
+  {
+    "path": "Assets\\_Project\\Scripts\\AI\\EnemyLanternReceiver.cs.meta",
+    "sha256": "d986c27953b7e5472774e4d479eb14807c9bfaaf20d279c4eff4d2adb115a5be"
+  },
+  {
+    "path": "Assets\\_Project\\Scripts\\Presentation\\EnemyPresentation.cs",
+    "sha256": "324ffd03569d1ffd9871fbd725ef2d35f7c73cec5469956adaf7759f877613b0"
+  },
+  {
+    "path": "Assets\\_Project\\Scripts\\Presentation\\EnemyPresentation.cs.meta",
+    "sha256": "ed78dc4c89788fa850817a122b270bd55976abb55674023bb17ee599d7c80f42"
+  },
+  {
+    "path": "Assets\\_Project\\Scripts\\Core\\WorldIds.cs",
+    "sha256": "7d3d67c0f8d2183341d4dd401a50ba04235cf97b5d3e6841e77d02e0a3b9e427"
+  },
+  {
+    "path": "Assets\\_Project\\Scripts\\Core\\WorldIds.cs.meta",
+    "sha256": "2c95a79a8c23bac99a51aa9a05f0416e62a1a9b3843a5a02005519be61d185ba"
+  },
+  {
+    "path": "Assets\\_Project\\Scripts\\Puzzles\\DrumPuzzleController.cs",
+    "sha256": "3b10269fc4b53af2c0e5f8a7ecdfc35ae37074bdb4091b42271e86cc37a9eaff"
+  },
+  {
+    "path": "Assets\\_Project\\Scripts\\Puzzles\\DrumPuzzleController.cs.meta",
+    "sha256": "cda2ca8f3a2d9f05349055a75dc58d312474697c9875aa6a001e2489b075ddff"
+  },
+  {
+    "path": "Assets\\_Project\\Scripts\\Puzzles\\DrumInteractable.cs",
+    "sha256": "ea9bbca4eabedcc8efc7758a89f30f8cb6fe8493dc5edda789595a61b20f1850"
+  },
+  {
+    "path": "Assets\\_Project\\Scripts\\Puzzles\\DrumInteractable.cs.meta",
+    "sha256": "832131b700744652d85253007333caae4ff6055804ba581001be30728332edc3"
+  },
+  {
+    "path": "Assets\\_Project\\Scripts\\Quests\\QuestTracker.cs",
+    "sha256": "517dc6681ee47362fa1ed670a3578b445ad8b19ca749af3260f0db163e3dd0c1"
+  },
+  {
+    "path": "Assets\\_Project\\Scripts\\Quests\\QuestTracker.cs.meta",
+    "sha256": "0c3b09b70f7db4b085b0aecd0d8f6425cd7eadb61af5a6378e00a7bb493954ea"
+  }
+]

@@ -1,0 +1,12 @@
+{
+    "action": "inspect-entry",
+    "checks": [],
+    "failures": [],
+    "notes": [
+        "Portal: layer=8, active=True, bounds=Center: (-7.00, 1.50, 307.00), Extents: (0.80, 1.50, 0.20)",
+        "Approach (0.00, 0.00, -1.00): floor=True Walkable_NaturalFloor_4, point=(-7.00, 0.10, 305.20), blockers=Cliff_Buttress_30,Cliff_Buttress_29, aimHit=Continuous_Limestone_Cliffs_4, target=(-7.00, 1.50, 307.00)",
+        "Approach (-1.00, 0.00, 0.00): floor=True Collision_Backface, point=(-8.80, 0.16, 307.00), blockers=Continuous_Limestone_Cliffs_4,Collision_Backface,Cliff_Buttress_29, aimHit=Portal, target=(-7.00, 1.50, 307.00)",
+        "Approach (1.00, 0.00, 0.00): floor=True Walkable_NaturalFloor_4, point=(-5.20, 0.12, 307.00), blockers=Cliff_Buttress_30, aimHit=Cliff_Buttress_29, target=(-7.00, 1.50, 307.00)",
+        "Approach (0.00, 0.00, 1.00): floor=False , point=(0.00, 0.08, 0.00), blockers=, aimHit=, target=(-7.00, 1.50, 307.00)"
+    ]
+}

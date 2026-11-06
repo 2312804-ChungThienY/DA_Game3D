@@ -13,12 +13,21 @@ MonoBehaviour:
   m_Name: SC_C2_LongChimLac
   m_EditorClassIdentifier: Assembly-CSharp::StoryCard
   title: "L\xF4ng Chim L\u1EA1c"
-  body: "Chi\u1EBFc l\xF4ng v\xE0ng s\xE1ng l\xEAn trong tay An. T\u1EEB nay An b\u01B0\u1EDBc
-    v\xE0o c\u1ED9t gi\xF3 (v\u1EC7t xanh l\u01A1) s\u1EBD \u0111\u01B0\u1EE3c n\xE2ng
-    l\xEAn cao v\xE0 l\u01A1 l\u1EEDng \u1EDF \u0111\u1EC9nh c\u1ED9t; nh\u1EA5n
-    Space \u0111\u1EC3 nh\u1EA3y sang b\u1EC7.\n\nQu\xE0 Kim Quy: Ctrl + h\u01B0\u1EDBng
-    \u0111\u1EC3 l\u1ED9n n\xE9 (t\u1ED1n 25 th\u1EC3 l\u1EF1c), ch\xE9m ngay sau
-    khi l\u1ED9n \u0111\u1EC3 \u0111\xE2m t\u1EDBi, l\u1ED9n \u0111\xFAng l\xFAc
-    \u0111\xF2n s\u1EAFp tr\xFAng \u0111\u1EC3 ch\u1EADm th\u1EDDi gian. Chu\u1ED9t
-    gi\u1EEFa \u0111\u1EC3 kh\xF3a m\u1EE5c ti\xEAu."
+  body: "<b>L\xF4ng Chim L\u1EA1c \u2014 C\u1ED9t Gi\xF3</b>\n\nChi\u1EBFc l\xF4ng
+    v\xE0ng \u0111\xE1p l\u1EA1i \xE1nh s\xE1ng L\u1ED3ng \u0110\xE8n Sen. An \u0111\xE3
+    nh\u1EADn n\u0103ng l\u1EF1c gi\xF3; \u0111\xE2y l\xE0 b\u01B0\u1EDBc \u0111\u1EA7u
+    \u0111\u1EC3 l\xEAn \u0111\u1EC9nh gi\u1EBFng v\xE0 t\xECm ba m\u1EA3nh M\u1EB7t
+    Tr\u1EDDi L\xF4ng Chim, ch\u01B0a ph\u1EA3i l\xFAc Chim L\u1EA1c \u0111\u01B0\u1EE3c
+    gi\u1EA3i tho\xE1t.\n\n<b>Th\u1EED ngay \u1EDF c\u1ED9t gi\xF3 b\xEAn ph\u1EA3i</b>\nB\u01B0\u1EDBc
+    v\xE0o v\u1EC7t gi\xF3 xanh \u0111\u1EC3 \u0111\u01B0\u1EE3c n\xE2ng l\xEAn.
+    \u0110\u1EE3i l\u01A1 l\u1EEDng g\u1EA7n \u0111\u1EC9nh, d\xF9ng WASD v\xE0 nh\u1EA5n
+    Space \u0111\u1EC3 nh\u1EA3y sang g\u1EDD \u0111\xE1. Ra kh\u1ECFi lu\u1ED3ng
+    gi\xF3, An s\u1EBD r\u01A1i b\xECnh th\u01B0\u1EDDng.\n\nBia \u0111\xE1 \u1EDF
+    ph\xEDa tr\xE1i \u0111\xE1y gi\u1EBFng. B\u1EADt F v\xE0 \u0111\u1ECDc bia tr\u01B0\u1EDBc
+    khi l\xEAn g\u1EDD; B\u1EC7 V\u1EA5n \u0110\xE1p tr\xEAn g\u1EDD gi\u1EEF m\u1EA3nh
+    \u0111\u1EA7u ti\xEAn.\n\nPh\xFAc Kim Quy v\u1EABn c\xF2n: Ctrl tr\xE1i + h\u01B0\u1EDBng
+    \u0111\u1EC3 l\u1ED9n n\xE9, t\u1ED1n 25 th\u1EC3 l\u1EF1c. H\xE3y gh\xE9 l\u1EEDa
+    tr\u1EA1i b\xEAn tr\xE1i v\xE0 nh\u1EA5n E \u0111\u1EC3 l\u01B0u n\u0103ng l\u1EF1c
+    v\u1EEBa nh\u1EADn; gi\u1EA5y \u201CTheo lu\u1ED3ng gi\xF3\u201D c\xF3 th\u1EC3
+    \u0111\u1ECDc l\u1EA1i trong Nh\u1EADt k\xFD (J)."
   image: {fileID: 0}

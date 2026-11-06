@@ -1,0 +1,47 @@
+﻿{
+    "date":  "2026-11-04",
+    "editor":  "6000.4.8f1",
+    "preview":  {
+                    "action":  "refine",
+                    "checks":  [
+                                   "All art renderers have supported materials.",
+                                   "PASS: 115 route clearance samples, spawn to garden passage.",
+                                   "PASS: checkpoint respawn area clear; main floor collider retained.",
+                                   "Art: 175 renderers, 45 enabled colliders."
+                               ],
+                    "failures":  [
+
+                                 ],
+                    "screenshots":  [
+                                        "docs/images/camp-spawn-2026-11-04.png",
+                                        "docs/images/camp-crafting-2026-11-04.png",
+                                        "docs/images/camp-exit-2026-11-04.png",
+                                        "docs/images/camp-overview-2026-11-04.png"
+                                    ]
+                },
+    "integration":  {
+                        "action":  "integrate",
+                        "checks":  [
+                                       "All art renderers have supported materials.",
+                                       "PASS: 115 route clearance samples, spawn to garden passage.",
+                                       "PASS: checkpoint respawn area clear; main floor collider retained.",
+                                       "Art: 175 renderers, 45 enabled colliders.",
+                                       "Scene and GUID backup: SourceAssets/SceneBackups/2026-11-04_CampEnvironment/BeforeIntegration_001345",
+                                       "PASS: existing gameplay components unchanged; cp_trai ID/spawn retained. Only checkpoint crafting-panel link removed for separate E targets.",
+                                       "All art renderers have supported materials.",
+                                       "PASS: 115 route clearance samples, spawn to garden passage.",
+                                       "PASS: checkpoint respawn area clear; main floor collider retained.",
+                                       "Art: 147 renderers, 45 enabled colliders."
+                                   ],
+                        "failures":  [
+
+                                     ],
+                        "screenshots":  [
+                                            "docs/images/camp-main-spawn-2026-11-04.png",
+                                            "docs/images/camp-main-crafting-2026-11-04.png",
+                                            "docs/images/camp-main-exit-2026-11-04.png",
+                                            "docs/images/camp-main-overview-2026-11-04.png"
+                                        ]
+                    },
+    "limitation":  "Editor renders and automated Play Mode API/controller probes; manual keyboard play, baked GI, performance and Windows build pending."
+}

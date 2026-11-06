@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 208c6675d17f290489d6a8b4d900f1c3, type: 3}
   m_Name: ID_item_linh_chi
   m_EditorClassIdentifier: Assembly-CSharp::ItemDefinition
+  icon: {fileID: 21300000, guid: da833dc75aad6b149b7729211507e1cc, type: 3}
   itemId: item_linh_chi
   displayName: Linh chi
   description: "N\u1EA5m m\u1ECDc tr\xEAn g\u1ED7 m\u1EE5c. Nguy\xEAn li\u1EC7u ch\u1EBF

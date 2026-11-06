@@ -17,6 +17,7 @@ public class RewardService : MonoBehaviour
 {
     [SerializeField] private WorldStateStore worldState;
     [SerializeField] private InventoryService inventory;
+    private bool granting;
 
     private void Awake()
     {
@@ -27,32 +28,50 @@ public class RewardService : MonoBehaviour
         }
     }
 
-    public bool TryGrant(List<RewardEntry> rewards, out string failReason)
+    public bool TryGrant(List<RewardEntry> rewards, out string failReason, string pickupClaim = null)
     {
         failReason = null;
-        if (!enabled) { failReason = "Lỗi cấu hình"; return false; }
-
-        // Gộp các Item theo ID để kiểm tra chỗ chính xác.
-        Dictionary<string, int> items = new Dictionary<string, int>();
-        foreach (RewardEntry r in rewards)
-            if (r != null && r.type == RewardType.Item)
-                items[r.id] = (items.TryGetValue(r.id, out int q) ? q : 0) + Mathf.Max(1, r.quantity);
-        foreach (KeyValuePair<string, int> item in items)
-            if (!inventory.CanAdd(item.Key, item.Value)) { failReason = "Túi đầy"; return false; }
-
+        if (!isActiveAndEnabled || granting || worldState==null || inventory==null) { failReason = "Chưa thể nhận thưởng"; return false; }
+        if(rewards==null||rewards.Count==0){failReason="Phần thưởng không hợp lệ";return false;}
+        if(pickupClaim!=null&&(!WorldIds.IsKnown(StateSet.Pickups,pickupClaim)||worldState.Has(StateSet.Pickups,pickupClaim)))
+        {failReason="Bệ đã trao thưởng hoặc ID không hợp lệ";return false;}
+        var items=new Dictionary<string,int>(StringComparer.Ordinal);
+        var states=new List<StateRequirement>();
         foreach (RewardEntry r in rewards)
         {
-            if (r == null) continue;
+            if(r==null||string.IsNullOrEmpty(r.id)||r.quantity<=0){failReason="Phần thưởng không hợp lệ";return false;}
+            if(r.type==RewardType.Item)
+            {
+                long total=(items.TryGetValue(r.id,out int previous)?previous:0)+(long)r.quantity;
+                if(total>int.MaxValue){failReason="Số lượng không hợp lệ";return false;}
+                items[r.id]=(int)total;continue;
+            }
+            StateSet set;
             switch (r.type)
             {
-                case RewardType.Fragment: worldState.TryAdd(StateSet.Fragments, r.id); break;
-                case RewardType.BossTool: worldState.TryAdd(StateSet.BossTools, r.id); break;
-                case RewardType.Ability: worldState.TryAdd(StateSet.Abilities, r.id); break;
-                case RewardType.Flag: worldState.TryAdd(StateSet.Flags, r.id); break;
+                case RewardType.Fragment:set=StateSet.Fragments;break;
+                case RewardType.BossTool:set=StateSet.BossTools;break;
+                case RewardType.Ability:set=StateSet.Abilities;break;
+                case RewardType.Flag:set=StateSet.Flags;break;
+                default:failReason="Loại thưởng không hợp lệ";return false;
             }
+            if(r.quantity!=1||!WorldIds.IsKnown(set,r.id)){failReason="ID phần thưởng không hợp lệ";return false;}
+            states.Add(new StateRequirement{set=set,id=r.id});
         }
-        foreach (KeyValuePair<string, int> item in items) inventory.TryAdd(item.Key, item.Value);
-        return true;
+        var additions=new List<KeyValuePair<string,int>>(items);
+        if(!inventory.PrepareAdditions(additions,out var draft,out failReason))return false;
+        if(pickupClaim!=null)states.Add(new StateRequirement{set=StateSet.Pickups,id=pickupClaim});
+        granting=true;
+        try
+        {
+            if(!worldState.TryAddBatch(states,out bool changed)){failReason="ID phần thưởng không hợp lệ";return false;}
+            inventory.CommitAdditions(draft);
+            // Every observer now sees the complete reward, including its claim.
+            if(items.Count>0)inventory.PublishChange();
+            if(changed)worldState.PublishChange();
+            return true;
+        }
+        finally{granting=false;}
     }
 
     public static string Describe(List<RewardEntry> rewards, InventoryService inventory)

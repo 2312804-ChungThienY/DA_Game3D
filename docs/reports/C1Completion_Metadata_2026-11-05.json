@@ -1,0 +1,13 @@
+{
+    "action": "repair-import",
+    "checks": [
+        "Unity process can open metadata for writing: Assets/DungeonModularPack/Textures/T_Step_N.tga.meta",
+        "Reimport and metadata write succeeded, GUID retained 84bd4ba4d2afff84693b6db18f092e6e: Assets/DungeonModularPack/Textures/T_Step_N.tga",
+        "Unity process can open metadata for writing: Assets/DungeonModularPack/Textures/T_Tile_N.tga.meta",
+        "Reimport and metadata write succeeded, GUID retained 726e23f5c7f76e84baea9bcc8a882413: Assets/DungeonModularPack/Textures/T_Tile_N.tga",
+        "Unity process can open metadata for writing: Assets/DungeonModularPack/Prefabs/Torch_B.prefab.meta",
+        "Reimport and metadata write succeeded, GUID retained 3f24c80895a77fa4bba15f9bd599a41b: Assets/DungeonModularPack/Prefabs/Torch_B.prefab",
+        "Metadata backup: SourceAssets/SceneBackups/2026-11-05_Chapter01Completion/Metadata_210110047"
+    ],
+    "failures": []
+}

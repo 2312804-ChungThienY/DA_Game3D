@@ -68,6 +68,21 @@ public class InventoryService : MonoBehaviour
         return added;
     }
 
+    // RewardService prepares every item against one draft, then publishes after world/claim commit.
+    internal bool PrepareAdditions(IList<KeyValuePair<string,int>> additions,out Slot[] draft,out string reason)
+    {
+        draft=(Slot[])slots.Clone();reason=null;
+        foreach(var entry in additions)
+        {
+            var def=GetDefinition(entry.Key);
+            if(entry.Value<=0||def==null||!def.UsesSlot){reason="Vật phẩm không hợp lệ";return false;}
+            if(AddTo(draft,entry.Key,entry.Value)!=entry.Value){reason="Túi đầy";return false;}
+        }
+        return true;
+    }
+    internal void CommitAdditions(Slot[] draft)=>slots=draft;
+    internal void PublishChange()=>Changed?.Invoke();
+
     public bool TryRemove(string itemId, int quantity)
     {
         if (quantity <= 0 || Count(itemId) < quantity) return false;
@@ -80,11 +95,22 @@ public class InventoryService : MonoBehaviour
     // Giao dịch: thử trên bản sao (trừ nguyên liệu trước rồi thêm kết quả), chỉ commit khi mọi bước thành công.
     public bool TryCraft(IList<KeyValuePair<string, int>> inputs, string outputId, int outputQuantity, out string failReason)
     {
+        if(!BuildCraft(inputs,outputId,outputQuantity,out Slot[] working,out failReason))return false;
+        slots=working;Changed?.Invoke();return true;
+    }
+
+    public bool CanCraft(IList<KeyValuePair<string,int>> inputs,string outputId,int outputQuantity,out string failReason)=>
+        BuildCraft(inputs,outputId,outputQuantity,out _,out failReason);
+
+    private bool BuildCraft(IList<KeyValuePair<string,int>> inputs,string outputId,int outputQuantity,out Slot[] working,out string failReason)
+    {
         failReason = null;
-        Slot[] working = (Slot[])slots.Clone();
+        working = (Slot[])slots.Clone();
+        if(inputs==null||inputs.Count==0||outputQuantity<=0){failReason="Công thức không hợp lệ";return false;}
 
         foreach (KeyValuePair<string, int> input in inputs)
         {
+            if(input.Value<=0||GetDefinition(input.Key)==null){failReason="Công thức không hợp lệ";return false;}
             int have = CountIn(working, input.Key);
             if (have < input.Value)
             {
@@ -101,8 +127,6 @@ public class InventoryService : MonoBehaviour
             return false;
         }
 
-        slots = working;
-        Changed?.Invoke();
         return true;
     }
 

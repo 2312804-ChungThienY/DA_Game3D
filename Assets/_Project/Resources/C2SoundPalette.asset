@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a6401700ad3faf4e82bc44c5d298109, type: 3}
+  m_Name: C2SoundPalette
+  m_EditorClassIdentifier: Assembly-CSharp::SoundPalette
+  music: {fileID: 4574408588277517526, guid: 726221735cd1aea4ebfef182baf41ad5, type: 2}
+  sfx: {fileID: 2744993589211063108, guid: 726221735cd1aea4ebfef182baf41ad5, type: 2}
+  ui: {fileID: 8743344040687713046, guid: 726221735cd1aea4ebfef182baf41ad5, type: 2}
+  menuMusic: {fileID: 8300000, guid: 69c9077fe1c34214ab8c5ae601cc088f, type: 3}
+  explorationMusic: {fileID: 8300000, guid: 79b2dbb8b02c88540bfbc8c91413fefe, type: 3}
+  battleMusic: {fileID: 8300000, guid: c1166a3380def364ea2f40fc65c0ef30, type: 3}
+  ambience: {fileID: 8300000, guid: 788e93d544caaa843a66938d88d0b30b, type: 3}
+  click: {fileID: 8300000, guid: ac0bb90ddb6009a4291799bb2d99554e, type: 3}
+  hover: {fileID: 8300000, guid: c9e60d53a70be1a40bb83c6b395ad5b5, type: 3}
+  pickup: {fileID: 8300000, guid: b00c72163ea006f498e8b712598631a7, type: 3}
+  success: {fileID: 8300000, guid: 468d13cd35c8dd748b6ccd5c19603149, type: 3}
+  hit: {fileID: 8300000, guid: 8e7aee23432e9e04b9a6bb66cd841ef4, type: 3}
+  stone: {fileID: 8300000, guid: 4247737fc1d5ded499dba51a8db95275, type: 3}
+  door: {fileID: 8300000, guid: e7e6722c0efd40c419d0ab40878d5976, type: 3}
+  drum: {fileID: 8300000, guid: 786f55a26d08e2c42901292ad6eceb2f, type: 3}
+  ghost: {fileID: 8300000, guid: 1b44449404533354d912aae2020be326, type: 3}
+  wind: {fileID: 8300000, guid: 788e93d544caaa843a66938d88d0b30b, type: 3}
+  bell: {fileID: 8300000, guid: 8c3946af7b883184b935bdce7a03202c, type: 3}
+  bird: {fileID: 8300000, guid: 11e6aefef1cceed4195fd94fb9872594, type: 3}

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 // Đưa sự kiện gameplay vào Animator của An. Animator chỉ hiển thị: không quyết định sát thương hay dịch chuyển
@@ -27,7 +28,11 @@ public class PlayerAnimator : MonoBehaviour
     private DodgeController dodge;
     private LanternController lantern;
     private int lanternLayer = -1;
+    private int meleeLayer = -1;
     private float deathTilt;
+    private Vector3 skeletonPosition;
+    private Quaternion skeletonRotation;
+    private readonly Dictionary<int, AnimatorControllerParameterType> parameters = new Dictionary<int, AnimatorControllerParameterType>();
 
     private void Awake()
     {
@@ -40,22 +45,30 @@ public class PlayerAnimator : MonoBehaviour
         lantern = GetComponent<LanternController>();
         if (skeleton == null) skeleton = transform.Find("Skeleton");
         lanternLayer = animator.GetLayerIndex("LanternArm");
+        meleeLayer = animator.GetLayerIndex("Melee");
+        foreach (var parameter in animator.parameters) parameters[parameter.nameHash] = parameter.type;
+        if (skeleton != null) { skeletonPosition = skeleton.localPosition; skeletonRotation = skeleton.localRotation; }
     }
 
     // Phần thân xoay bằng code (chỉ hình ảnh, không ảnh hưởng collider/motor).
     private void LateUpdate()
     {
+        bool dead = vitals != null && vitals.IsDead;
+        animator.updateMode = dead ? AnimatorUpdateMode.UnscaledTime : AnimatorUpdateMode.Normal;
+        if (meleeLayer >= 0)
+            animator.SetLayerWeight(meleeLayer, Mathf.MoveTowards(animator.GetLayerWeight(meleeLayer),
+                !dead && combat != null && combat.IsAttacking ? 1f : 0f,
+                (dead ? Time.unscaledDeltaTime : Time.deltaTime) * 12f));
         if (lantern != null && lanternLayer >= 0)
             animator.SetLayerWeight(lanternLayer, Mathf.MoveTowards(animator.GetLayerWeight(lanternLayer),
-                lantern.IsLanternOn ? 1f : 0f, Time.deltaTime * 6f));
+                lantern.IsLanternOn && !dead && (dodge == null || !dodge.IsDodging) ? 1f : 0f, (dead ? Time.unscaledDeltaTime : Time.deltaTime) * 6f));
 
         if (skeleton == null) return;
-        bool dead = vitals != null && vitals.IsDead;
-        deathTilt = Mathf.MoveTowards(deathTilt, dead ? 1f : 0f, Time.deltaTime * (dead ? 1.5f : 10f));
+        deathTilt = Mathf.MoveTowards(deathTilt, dead ? 1f : 0f, (dead ? Time.unscaledDeltaTime : Time.deltaTime) * (dead ? 1.5f : 10f));
         float pitch = dodge != null && dodge.IsDodging ? dodge.RollProgress * 360f : deathTilt * deathTiltAngle;
         Quaternion r = Quaternion.Euler(pitch, 0f, 0f);
-        skeleton.localRotation = r;
-        skeleton.localPosition = bodyPivot - r * bodyPivot;
+        skeleton.localRotation = skeletonRotation * r;
+        skeleton.localPosition = skeletonPosition + bodyPivot - r * bodyPivot;
     }
 
     private void OnEnable()
@@ -72,11 +85,30 @@ public class PlayerAnimator : MonoBehaviour
         if (scanner != null) scanner.Interacted -= OnInteract;
     }
 
+    public void ResetPose()
+    {
+        deathTilt = 0f; lastAttackTime = float.NegativeInfinity;
+        animator.updateMode = AnimatorUpdateMode.Normal;
+        foreach (var parameter in parameters)
+            if (parameter.Value == AnimatorControllerParameterType.Trigger) animator.ResetTrigger(parameter.Key);
+        if (skeleton != null) { skeleton.localPosition = skeletonPosition; skeleton.localRotation = skeletonRotation; }
+        if (animator.runtimeAnimatorController != null) { animator.Rebind(); animator.Update(0f); }
+        GetComponent<PlayerMeleeVisual>()?.ResetTrail();
+        SetBool(DeadHash, vitals != null && vitals.IsDead);
+    }
+
     private void OnAttack(bool lunge)
     {
         // Chuỗi 2 nhát: bấm tiếp trong cửa sổ combo thì đổi clip.
         attackIndex = Time.time - lastAttackTime <= comboWindow ? 1 - attackIndex : 0;
         lastAttackTime = Time.time;
+        if (meleeLayer >= 0)
+        {
+            int state = Animator.StringToHash(lunge ? "Melee.Lunge" : attackIndex == 0 ? "Melee.Slash1" : "Melee.Slash2");
+            animator.SetLayerWeight(meleeLayer, 1f);
+            animator.CrossFadeInFixedTime(state, .035f, meleeLayer, 0f);
+            return;
+        }
         SetInt(AttackIndexHash, lunge ? 1 : attackIndex);
         SetTrigger(AttackHash);
     }
@@ -96,9 +128,7 @@ public class PlayerAnimator : MonoBehaviour
     private bool Has(int hash, AnimatorControllerParameterType type)
     {
         if (animator.runtimeAnimatorController == null) return false;
-        foreach (AnimatorControllerParameter p in animator.parameters)
-            if (p.nameHash == hash && p.type == type) return true;
-        return false;
+        return parameters.TryGetValue(hash, out var actual) && actual == type;
     }
 
     private void SetTrigger(int hash) { if (Has(hash, AnimatorControllerParameterType.Trigger)) animator.SetTrigger(hash); }

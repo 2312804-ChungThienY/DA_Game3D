@@ -5,15 +5,15 @@ using UnityEngine;
 [RequireComponent(typeof(EnemyHealth))]
 public class ThrowerBrain : MonoBehaviour
 {
-    public enum ThrowerState { Idle, Aim, Cooldown, Melee, Dead }
+    public enum ThrowerState { Idle, Aim, Cooldown, Melee, Dead, Stunned }
 
     [SerializeField] private Transform hand;
     [SerializeField] private EnemyProjectile projectilePrefab;
     [SerializeField] private Transform aimTelegraph;
     [SerializeField] private GameObject meleeTelegraph;
-    [SerializeField] private float detectRange = 10f; // spec 14 m; giảm sau thử nghiệm: hai gờ cách 11 m không bắn chéo
+    [SerializeField] private float detectRange = 14f;
     [SerializeField] private float aimTime = 0.6f;
-    [SerializeField] private float throwCooldown = 3f; // spec 2,5 s; giãn sau thử nghiệm
+    [SerializeField] private float throwCooldown = 2.5f;
     [SerializeField] private float projectileSpeed = 7f;
     [SerializeField] private float projectileDamage = 12f;
     [SerializeField] private float meleeRange = 2f;
@@ -23,17 +23,23 @@ public class ThrowerBrain : MonoBehaviour
     [SerializeField] private LayerMask sightBlockers = 1 << 3;
 
     private EnemyHealth health;
+    private EnemyLanternReceiver lanternReceiver;
     private PlayerVitals player;
     private float stateTime;
     private float nextMelee;
     private Vector3 lockedTarget;
     private int throws;
+    private int meleeAttacks;
+    private bool meleeFired;
 
     public ThrowerState State { get; private set; } = ThrowerState.Idle;
+    public float StateElapsed => stateTime;
+    public float AimDuration => aimTime;
 
     private void Awake()
     {
         health = GetComponent<EnemyHealth>();
+        lanternReceiver = GetComponent<EnemyLanternReceiver>();
         if (hand == null || projectilePrefab == null || aimTelegraph == null)
         {
             Debug.LogError($"{name}: ThrowerBrain thiếu Hand, Projectile hoặc Aim Telegraph.", this);
@@ -45,7 +51,14 @@ public class ThrowerBrain : MonoBehaviour
     }
 
     private void OnEnable() { if (health != null) health.Died += OnDied; }
-    private void OnDisable() { if (health != null) health.Died -= OnDied; }
+    private void OnDisable()
+    {
+        if (health != null) health.Died -= OnDied;
+        if (aimTelegraph != null) aimTelegraph.gameObject.SetActive(false);
+        if (meleeTelegraph != null) meleeTelegraph.SetActive(false);
+        if (State != ThrowerState.Dead) State = ThrowerState.Idle;
+        stateTime = 0f;
+    }
 
     private void Start() => player = FindAnyObjectByType<PlayerVitals>();
 
@@ -60,15 +73,27 @@ public class ThrowerBrain : MonoBehaviour
             return;
         }
 
+        if (lanternReceiver != null && lanternReceiver.IsStunned)
+        {
+            if (State != ThrowerState.Stunned) Enter(ThrowerState.Stunned);
+            return;
+        }
+        if (State == ThrowerState.Stunned)
+        {
+            nextMelee = Mathf.Max(nextMelee, Time.time + 0.35f);
+            Enter(ThrowerState.Cooldown);
+        }
+
         stateTime += Time.deltaTime;
         Vector3 toPlayer = player.transform.position - transform.position;
         Vector3 flat = new Vector3(toPlayer.x, 0f, toPlayer.z);
         if (flat.sqrMagnitude > 0.01f) transform.rotation = Quaternion.LookRotation(flat);
         bool sees = toPlayer.magnitude <= detectRange && HasLineOfSight();
 
-        if (flat.magnitude <= meleeRange && State != ThrowerState.Melee && Time.time >= nextMelee)
+        if (toPlayer.magnitude <= meleeRange && sees && State != ThrowerState.Melee)
         {
-            Enter(ThrowerState.Melee);
+            if(Time.time >= nextMelee) Enter(ThrowerState.Melee);
+            else if(State != ThrowerState.Cooldown) Enter(ThrowerState.Cooldown);
             return;
         }
 
@@ -87,11 +112,12 @@ public class ThrowerBrain : MonoBehaviour
                 if (stateTime >= throwCooldown) Enter(sees ? ThrowerState.Aim : ThrowerState.Idle);
                 break;
             case ThrowerState.Melee:
-                if (stateTime >= meleeTelegraphTime && meleeTelegraph != null && meleeTelegraph.activeSelf)
+                if (stateTime >= meleeTelegraphTime && !meleeFired)
                 {
-                    meleeTelegraph.SetActive(false);
-                    if (flat.magnitude <= meleeRange + 0.3f && HasLineOfSight())
-                        player.TryTakeDamage(new DamageInfo(gameObject, meleeDamage, DamageTeam.Enemy) { AttackId = $"{name}_melee" });
+                    meleeFired = true;
+                    if (meleeTelegraph != null) meleeTelegraph.SetActive(false);
+                    if (toPlayer.magnitude <= meleeRange + 0.3f && HasLineOfSight())
+                        player.TryTakeDamage(new DamageInfo(gameObject, meleeDamage, DamageTeam.Enemy) { AttackId = $"{name}_melee_{meleeAttacks}" });
                     nextMelee = Time.time + meleeCooldown;
                 }
                 if (stateTime >= meleeTelegraphTime + 0.3f) Enter(ThrowerState.Idle);
@@ -104,6 +130,7 @@ public class ThrowerBrain : MonoBehaviour
         if (State == next && next == ThrowerState.Idle) return;
         State = next;
         stateTime = 0f;
+        if (next == ThrowerState.Melee) { meleeFired = false; meleeAttacks++; }
         aimTelegraph.gameObject.SetActive(next == ThrowerState.Aim);
         if (meleeTelegraph != null) meleeTelegraph.SetActive(next == ThrowerState.Melee);
     }
@@ -112,6 +139,7 @@ public class ThrowerBrain : MonoBehaviour
     {
         Vector3 from = hand.position;
         Vector3 d = lockedTarget - from;
+        if(d.sqrMagnitude<.0001f)return;
         aimTelegraph.position = from + d * 0.5f;
         aimTelegraph.rotation = Quaternion.LookRotation(d);
         aimTelegraph.localScale = new Vector3(0.15f, 0.02f, d.magnitude);
@@ -127,7 +155,7 @@ public class ThrowerBrain : MonoBehaviour
     }
 
     private bool HasLineOfSight() =>
-        !Physics.Linecast(transform.position + Vector3.up * 1.5f, player.transform.position + Vector3.up * 1.2f, sightBlockers, QueryTriggerInteraction.Ignore);
+        !Physics.Linecast(hand.position, player.transform.position + Vector3.up * 1.2f, sightBlockers, QueryTriggerInteraction.Ignore);
 
     private void OnDied(EnemyHealth _)
     {

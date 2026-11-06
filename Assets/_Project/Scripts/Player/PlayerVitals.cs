@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+[DefaultExecutionOrder(-200)]
 [DisallowMultipleComponent]
 public class PlayerVitals : MonoBehaviour, IDamageable
 {

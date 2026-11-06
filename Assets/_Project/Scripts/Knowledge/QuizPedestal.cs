@@ -14,6 +14,7 @@ public class QuizPedestal : MonoBehaviour, IInteractable
     [SerializeField] private List<RewardEntry> rewards = new List<RewardEntry>();
     [SerializeField] private GameObject openedVisual;
     [SerializeField] private GameObject closedVisual;
+    [SerializeField] private string requiredPuzzleId;
 
     public bool IsOpened => worldState != null && worldState.Has(StateSet.Pickups, pedestalId);
     public string Prompt => worldState.Has(StateSet.QuizAnswered, quiz.quizId)
@@ -23,7 +24,8 @@ public class QuizPedestal : MonoBehaviour, IInteractable
     private void Awake()
     {
         if (worldState == null || inventory == null || rewardService == null || quizPanel == null || quiz == null ||
-            !WorldIds.IsKnown(StateSet.Pickups, pedestalId) || !WorldIds.IsKnown(StateSet.QuizAnswered, quiz.quizId))
+            !WorldIds.IsKnown(StateSet.Pickups, pedestalId) || !WorldIds.IsKnown(StateSet.QuizAnswered, quiz.quizId) ||
+            (!string.IsNullOrEmpty(requiredPuzzleId)&&!WorldIds.IsKnown(StateSet.Puzzles,requiredPuzzleId)))
         {
             Debug.LogError($"{name}: QuizPedestal thiếu tham chiếu hoặc ID sai.", this);
             enabled = false;
@@ -47,6 +49,8 @@ public class QuizPedestal : MonoBehaviour, IInteractable
     public void Interact(GameObject interactor)
     {
         if (!CanInteract(interactor)) return;
+        if(!string.IsNullOrEmpty(requiredPuzzleId)&&!worldState.Has(StateSet.Puzzles,requiredPuzzleId))
+        {Toast("Hãy giải chuông gió để đánh thức bệ trước.");return;}
         if (worldState.Has(StateSet.QuizAnswered, quiz.quizId)) Grant();
         else quizPanel.Ask(quiz, Grant);
     }
@@ -54,12 +58,11 @@ public class QuizPedestal : MonoBehaviour, IInteractable
     private void Grant()
     {
         if (IsOpened) return;
-        if (!rewardService.TryGrant(rewards, out string reason))
+        if (!rewardService.TryGrant(rewards, out string reason, pedestalId))
         {
             Toast($"{reason}: bệ vẫn giữ phần thưởng");
             return;
         }
-        worldState.TryAdd(StateSet.Pickups, pedestalId);
         Toast($"Nhận {RewardService.Describe(rewards, inventory)}");
     }
 

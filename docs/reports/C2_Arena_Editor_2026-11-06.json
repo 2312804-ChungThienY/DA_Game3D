@@ -1,0 +1,19 @@
+{
+    "action": "validate",
+    "checks": [
+        "No missing scripts",
+        "Chim Lac retains 200 HP",
+        "Project bird visual follows FSM without extra motor",
+        "Boss root movement remains owned by BossChimLac",
+        "Dive landing warning without collider",
+        "One arena HUD and victory-save retry owner",
+        "Arena trigger requires opened progression door",
+        "Arena wind hover remains 24.5m"
+    ],
+    "failures": [],
+    "notes": [
+        "Boss: {\"worldState\":{\"instanceID\":317710},\"bossId\":\"c2_boss_chim_lac\",\"displayName\":\"Chim Lạc\",\"saveOnDefeat\":{\"instanceID\":317724},\"defeatCheckpointId\":\"c2_cp_arena\",\"bossBar\":{\"instanceID\":316408},\"bossBarFill\":{\"instanceID\":315736},\"bossBarLabel\":{\"instanceID\":316322},\"perchTops\":[{\"instanceID\":315642},{\"instanceID\":317280},{\"instanceID\":317412}],\"arenaCenter\":{\"instanceID\":317030},\"floorY\":18.0,\"focus\":{\"instanceID\":315428},\"diveTelegraph\":{\"instanceID\":317688},\"gustTelegraph\":{\"instanceID\":315534},\"diveLandingMarker\":{\"instanceID\":317070},\"playerMask\":{\"serializedVersion\":\"2\",\"m_Bits\":64},\"perchTime\":3.5,\"perchTimeEnraged\":2.5,\"enrageHealth\":100.0,\"gustTelegraphTime\":0.800000011920929,\"gustTime\":2.0,\"gustPush\":4.0,\"diveTelegraphTime\":1.0,\"diveTime\":0.4000000059604645,\"diveDamage\":20.0,\"diveRadius\":1.0,\"landedTime\":1.5,\"stunTime\":4.0,\"stunDamageCap\":60.0,\"flyTime\":1.0}",
+        "Gate: {\"worldState\":{\"instanceID\":317710},\"boss\":{\"instanceID\":316280},\"gateBehind\":{\"instanceID\":316504},\"bossId\":\"c2_boss_chim_lac\",\"requiredDoorId\":\"c2_door_arena\"}",
+        "Combat proxy only; full C2 environment art remains stage7."
+    ]
+}

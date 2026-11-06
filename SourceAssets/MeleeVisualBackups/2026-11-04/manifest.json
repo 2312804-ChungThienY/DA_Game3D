@@ -1,0 +1,74 @@
+[
+  {
+    "path": "Assets/_Project/Animations/AC_An.controller",
+    "sha256": "c833aa4481bdbfcdf83ae3afd96a13a0897b183d2b606ccdacd288a20a6b88b3"
+  },
+  {
+    "path": "Assets/_Project/Animations/AC_An.controller.meta",
+    "sha256": "30cd08351bc32225f9bd722f2af4b621052d8c55a751d5eed5c28ecff466a1e6"
+  },
+  {
+    "path": "Assets/_Project/Animations/AN_Slash1.anim",
+    "sha256": "37cded582ab2675ab2328b0070b83668e983d952c00d65d76079de95d3fb8bcf"
+  },
+  {
+    "path": "Assets/_Project/Animations/AN_Slash1.anim.meta",
+    "sha256": "02496f4490b4dffb6bbfc8338ac42fe8491cfb2911d3ef7ad5dd7f4783347d85"
+  },
+  {
+    "path": "Assets/_Project/Animations/AN_Slash2.anim",
+    "sha256": "f2155734c34c4237b0c6ac176cc378343fca644169f08527152a17dca7cbaabb"
+  },
+  {
+    "path": "Assets/_Project/Animations/AN_Slash2.anim.meta",
+    "sha256": "b28a7e96fd33dd2dadff45975a5f2d13f6d7f0bca07ed54bb24a17a86d1adb9b"
+  },
+  {
+    "path": "Assets/_Project/Editor/AnAnimationBuilder.cs",
+    "sha256": "727ded4bc98498fbcb0f6fca1fa5f9ae366b435e89f7bc1fea86e4f8ae95c2c9"
+  },
+  {
+    "path": "Assets/_Project/Editor/AnAnimationBuilder.cs.meta",
+    "sha256": "c224a9fa23896ff3fb57bfb1ef1b68747c0e3e695fe3a57acd7f8f4ab5203aad"
+  },
+  {
+    "path": "Assets/_Project/Editor/CharacterPolishSetup.cs",
+    "sha256": "85d382cb1a0013e91519e744291a306a8b1551b58bfe55e65e7957cc21d9505b"
+  },
+  {
+    "path": "Assets/_Project/Editor/CharacterPolishSetup.cs.meta",
+    "sha256": "f31807a1d2cdbd1610cdc3ea7e4a595c20cad3a033dc454d010913a787a0a2fd"
+  },
+  {
+    "path": "Assets/_Project/Prefabs/Player/PF_An_Prototype.prefab",
+    "sha256": "8fcf5b44efc4a94abc6eeca08e91fcacf04c7570a3e704bb5b822cad9a708839"
+  },
+  {
+    "path": "Assets/_Project/Prefabs/Player/PF_An_Prototype.prefab.meta",
+    "sha256": "a46f9b8d5d25d79bb7c9d36fd43862bfae74b5cf588128243acd7da9e8e8cc0b"
+  },
+  {
+    "path": "Assets/_Project/Scripts/Combat/CombatController.cs",
+    "sha256": "20a3ad8627479d22dbe4ef6a6f42ac406b3788dc17bc01c90797bc708f45b154"
+  },
+  {
+    "path": "Assets/_Project/Scripts/Combat/CombatController.cs.meta",
+    "sha256": "c4dbe06abb786ede3a88faa75088ca2bd6521ce7ec8806e7db2c7524aeaf6009"
+  },
+  {
+    "path": "Assets/_Project/Scripts/Player/PlayerAnimator.cs",
+    "sha256": "5c6eb28372fec0441cc81cad86e9bacd764dfa08ea8eb3e6382874da87b88230"
+  },
+  {
+    "path": "Assets/_Project/Scripts/Player/PlayerAnimator.cs.meta",
+    "sha256": "1e751b31d73137b6dee8aef12c5b592af6f3395c8e7a01981f5a2ad6141f88bd"
+  },
+  {
+    "path": "Assets/_Project/Tests/CharacterPolishSmokeProbe.cs",
+    "sha256": "ecdd50d1f1bda4bc582fa69f1777746f5eb76378ab1617e01d7f00dd5e6489be"
+  },
+  {
+    "path": "Assets/_Project/Tests/CharacterPolishSmokeProbe.cs.meta",
+    "sha256": "f225d8bb19c3e0bfd9c0879b147eecf471601f2a9695684972f233a4b9584f1e"
+  }
+]

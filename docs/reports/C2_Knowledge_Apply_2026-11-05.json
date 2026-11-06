@@ -1,0 +1,33 @@
+{
+    "action": "apply",
+    "checks": [
+        "Five lore/seven quiz assets found",
+        "Verified/source present: c2_lore_p1",
+        "Verified/source present: c2_lore_p2",
+        "Verified/source present: c2_lore_p3",
+        "Verified/source present: c2_lore_p4",
+        "Verified/source present: c2_lore_p5",
+        "Quiz/options/lore/source valid: c2_qz_lt1",
+        "Quiz/options/lore/source valid: c2_qz_lt2",
+        "Quiz/options/lore/source valid: c2_qz_lt3",
+        "Quiz/options/lore/source valid: c2_qz_p1",
+        "Quiz/options/lore/source valid: c2_qz_p2",
+        "Quiz/options/lore/source valid: c2_qz_p3",
+        "Quiz/options/lore/source valid: c2_qz_p4",
+        "One optional bell clue paper",
+        "Quiz explanation scroll and separate buttons configured",
+        "Three matching bell glyphs"
+    ],
+    "failures": [],
+    "notes": [
+        "LORE c2_lore_p1 at (-7.40, 0.00, 2.00) | {\"loreId\":\"c2_lore_p1\",\"tag\":2,\"title\":\"Rừng trong lòng hang\",\"body\":\"Ở những nơi trần hang Sơn Đoòng sụt mở, nắng có thể xuống tới bên trong. Ánh sáng cùng độ ẩm giúp cây cối phát triển, tạo nên vùng rừng trong lòng hang.\",\"sourceRef\":\"https://oxalisadventure.com/cave/son-doong-cave/ | đối chiếu 05/11/2026\",\"verified\":true}",
+        "LORE c2_lore_p2 at (1.80, 9.00, 14.50) | {\"loreId\":\"c2_lore_p2\",\"tag\":0,\"title\":\"Mặt trời giữa mặt trống\",\"body\":\"Trên mặt trống Ngọc Lũ, họa tiết ở tâm có dạng ngôi sao nhiều tia. Bảo tàng Lịch sử Quốc gia giới thiệu hình này như biểu tượng mặt trời.\",\"sourceRef\":\"https://baotanglichsu.vn/DataFiles/2021/10/News/Ti%E1%BA%BFng%20Vi%E1%BB%87t/12.10.2021/Thong%20bao%20khoa%20hoc/Net%20dac%20sac%20cua%20nhom%20Bao%20vat%20Quoc%20gia...%20Nguyen%20Van%20Doan.pdf | đối chiếu 05/11/2026\",\"verified\":true}",
+        "LORE c2_lore_p3 at (11.40, 13.00, 31.00) | {\"loreId\":\"c2_lore_p3\",\"tag\":0,\"title\":\"Nhà sàn trên trống đồng\",\"body\":\"Hoa văn trống Ngọc Lũ có cảnh nhà sàn với mái uốn cong. Hình nhà cùng các sinh hoạt quanh nó là tư liệu để tìm hiểu cư dân Đông Sơn. Nhà sàn đá treo trong màn chơi là thiết kế hư cấu.\",\"sourceRef\":\"https://baotanglichsu.vn/vi/Articles/1001/13602/gioi-thieu-bao-vat-quoc-gia-1-trong-djong-ngoc-lu-hien-vat-tieu-bieu-nhat-cua-nen-van-hoa-djong-son.html | đối chiếu 05/11/2026\",\"verified\":true}",
+        "LORE c2_lore_p4 at (1.80, 18.00, 67.00) | {\"loreId\":\"c2_lore_p4\",\"tag\":0,\"title\":\"Đời sống trên mặt trống\",\"body\":\"Trên trống Ngọc Lũ có những cảnh người dùng chày giã gạo, người múa với trang phục lông chim và hình thuyền. Các cảnh này gợi những mặt sinh hoạt của cư dân xưa.\",\"sourceRef\":\"https://baotanglichsu.vn/vi/Articles/1001/13602/gioi-thieu-bao-vat-quoc-gia-1-trong-djong-ngoc-lu-hien-vat-tieu-bieu-nhat-cua-nen-van-hoa-djong-son.html | đối chiếu 05/11/2026\",\"verified\":true}",
+        "LORE c2_lore_p5 at (11.60, 18.00, 85.80) | {\"loreId\":\"c2_lore_p5\",\"tag\":0,\"title\":\"Chim Lạc\",\"body\":\"Khi mô tả các vành hoa văn trống Ngọc Lũ, Bảo tàng Lịch sử Quốc gia dùng tên chim Lạc cho một số hình tượng chim. Đây là tên của hình tượng trang trí, không phải bằng chứng xác định một loài chim hiện đại. Linh Thần Chim Lạc của game là hư cấu.\",\"sourceRef\":\"https://baotanglichsu.vn/VI/Articles/1001/19707/bao-vat-quoc-gia-viet-nam-trong-djong-ngoc-lu.html | đối chiếu 05/11/2026\",\"verified\":true}",
+        "PEDESTAL QuizPedestal_C2_P1 | {\"worldState\":{\"instanceID\":8937706},\"inventory\":{\"instanceID\":8937726},\"rewardService\":{\"instanceID\":8937728},\"quizPanel\":{\"instanceID\":8937312},\"pedestalId\":\"c2_ped_p1\",\"quiz\":{\"instanceID\":105250},\"rewards\":[{\"type\":0,\"id\":\"c2_frag_1\",\"quantity\":1}],\"openedVisual\":{\"instanceID\":-2724188},\"closedVisual\":{\"instanceID\":-2724180},\"requiredPuzzleId\":\"\"}",
+        "PEDESTAL QuizPedestal_C2_P2 | {\"worldState\":{\"instanceID\":8937706},\"inventory\":{\"instanceID\":8937726},\"rewardService\":{\"instanceID\":8937728},\"quizPanel\":{\"instanceID\":8937312},\"pedestalId\":\"c2_ped_p2\",\"quiz\":{\"instanceID\":106532},\"rewards\":[{\"type\":0,\"id\":\"c2_frag_2\",\"quantity\":1}],\"openedVisual\":{\"instanceID\":-2724748},\"closedVisual\":{\"instanceID\":-2724740},\"requiredPuzzleId\":\"\"}",
+        "PEDESTAL QuizPedestal_C2_P3 | {\"worldState\":{\"instanceID\":8937706},\"inventory\":{\"instanceID\":8937726},\"rewardService\":{\"instanceID\":8937728},\"quizPanel\":{\"instanceID\":8937312},\"pedestalId\":\"c2_ped_p3\",\"quiz\":{\"instanceID\":106110},\"rewards\":[{\"type\":0,\"id\":\"c2_frag_3\",\"quantity\":1}],\"openedVisual\":{\"instanceID\":-2724158},\"closedVisual\":{\"instanceID\":-2724150},\"requiredPuzzleId\":\"c2_pz_chuong_gio\"}",
+        "PEDESTAL QuizPedestal_C2_P4 | {\"worldState\":{\"instanceID\":8937706},\"inventory\":{\"instanceID\":8937726},\"rewardService\":{\"instanceID\":8937728},\"quizPanel\":{\"instanceID\":8937312},\"pedestalId\":\"c2_ped_p4\",\"quiz\":{\"instanceID\":106194},\"rewards\":[{\"type\":1,\"id\":\"c2_tool_long_gio_lon\",\"quantity\":1},{\"type\":2,\"id\":\"item_thuoc_mau\",\"quantity\":2}],\"openedVisual\":{\"instanceID\":-2725350},\"closedVisual\":{\"instanceID\":-2725342},\"requiredPuzzleId\":\"\"}"
+    ]
+}

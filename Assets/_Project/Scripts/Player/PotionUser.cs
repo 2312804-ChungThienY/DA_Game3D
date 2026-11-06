@@ -36,13 +36,14 @@ public class PotionUser : MonoBehaviour
 
     private void Update()
     {
-        if (Time.timeScale == 0f || !input.GameplayEnabled || !input.UsePotion.WasPressedThisFrame()) return;
+        if (Time.timeScale == 0f || !input.WasPressed(input.UsePotion)) return;
         TryUsePotion();
     }
 
     public bool TryUsePotion()
     {
-        if (!isActiveAndEnabled || vitals.IsDead || Time.timeScale == 0f) return false;
+        var actions = GetComponent<PlayerActionState>();
+        if ((actions != null && !actions.CanInteract) || !isActiveAndEnabled || vitals.IsDead || Time.timeScale == 0f) return false;
 
         if (inventory.Count(InventoryService.ThuocMau) <= 0) { Toast("Không còn thuốc máu"); return false; }
         if (vitals.CurrentHealth >= vitals.MaxHealth) { Toast("Máu đang đầy"); return false; }

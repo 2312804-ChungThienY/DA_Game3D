@@ -1,0 +1,109 @@
+{
+  "stage": "C2 stage4 bridge, throwers and arena entrance",
+  "date": "2026-11-05",
+  "backupFolder": "SourceAssets/SceneBackups/2026-11-05_C2Bridge/221934",
+  "editorChecks": 25,
+  "playChecks": 117,
+  "failures": [],
+  "unexpectedRuntimeErrors": [],
+  "expectedIODiagnostics": 1,
+  "personalSaveRestored": true,
+  "unchangedFiles": [
+    {
+      "path": "Assets/_Project/Scenes/02_HangLinhMach.unity",
+      "preserved": true
+    },
+    {
+      "path": "Assets/_Project/Scenes/92_EnvironmentPreview.unity",
+      "preserved": true
+    },
+    {
+      "path": "Assets/_Project/Scripts/Player/PlayerMotor.cs",
+      "preserved": true
+    },
+    {
+      "path": "Assets/_Project/Scripts/Presentation/EnemyPresentation.cs",
+      "preserved": true
+    }
+  ],
+  "metadata": [
+    {
+      "path": "Assets/_Project/Scenes/03_GiengTroiChimLac.unity.meta",
+      "preserved": true
+    },
+    {
+      "path": "Assets/_Project/Scenes/03_GiengTroiChimLac_NavMesh.asset.meta",
+      "preserved": true
+    },
+    {
+      "path": "Assets/_Project/Scripts/Chapters/C2/ThrowerBrain.cs.meta",
+      "preserved": true
+    },
+    {
+      "path": "Assets/_Project/Scripts/AI/EnemyProjectile.cs.meta",
+      "preserved": true
+    },
+    {
+      "path": "Assets/_Project/Scripts/AI/EnemyLanternReceiver.cs.meta",
+      "preserved": true
+    },
+    {
+      "path": "Assets/_Project/Scripts/Interaction/RequirementDoor.cs.meta",
+      "preserved": true
+    },
+    {
+      "path": "Assets/_Project/Data/Enemies/ED_HacAnhNem.asset.meta",
+      "preserved": true
+    }
+  ],
+  "windowsBuildUpdated": false,
+  "manualHumanPlayOrFullC2Verified": false,
+  "renderingFallback": "Unity DisallowGPUDrivenRendering only on C2 scene roots; global/C1 render pipeline unchanged",
+  "inputScope": "Synthetic E/RMB/W/Space through real InputReader/scanners/controller, production focus guard intact; AI disabled on traversal, positional/C1 progress fixtures",
+  "files": [
+    {
+      "path": "Assets/_Project/Scenes/03_GiengTroiChimLac.unity",
+      "sha256": "4f7fba2dd1f3d7a7159b455b7d616073158f0ec32dce1411d37db3b511c360a3"
+    },
+    {
+      "path": "Assets/_Project/Scenes/03_GiengTroiChimLac_NavMesh.asset",
+      "sha256": "c7bd794aa3e2ec91fd67ed6e30245af2c7183b3615e7020edfaae9318b7b221f"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Chapters/C2/ThrowerBrain.cs",
+      "sha256": "37cf6bcd240dce2d87f200d4d041f6e0a23b6df7bb34d59c8ab0b89f54e21be0"
+    },
+    {
+      "path": "Assets/_Project/Scripts/AI/EnemyProjectile.cs",
+      "sha256": "ad0b66259b80990adc8efe7d91a20cc57317e4422850cfd89e90112321a132dc"
+    },
+    {
+      "path": "Assets/_Project/Scripts/AI/EnemyLanternReceiver.cs",
+      "sha256": "66ff10ec61dce734d0d9c2dfc05eeccfb09eb426df3f5dcd4d2f0ee93b1f2235"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Interaction/RequirementDoor.cs",
+      "sha256": "839b424fa18cd3399e07a38da17516ac5bbb47feb657f0acd1dc76c0ea42ff63"
+    },
+    {
+      "path": "Assets/_Project/Data/Enemies/ED_HacAnhNem.asset",
+      "sha256": "a6134a10992d39a51344b5364375b5f2e998f99a7ee096e0812d148ba671cd23"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Presentation/ThrowerPresentation.cs",
+      "sha256": "0bcfbf080477fec92751cd830a08c189d731c8968279b759f1c45c61dcbfed56"
+    },
+    {
+      "path": "Assets/_Project/Editor/Chapter02BridgeSetup.cs",
+      "sha256": "55ad486154aa21d2027204556434e6000fcb89e11b3eac35a08074c70cf176e2"
+    },
+    {
+      "path": "Assets/_Project/Tests/Chapter02BridgeProbe.cs",
+      "sha256": "1a6927b600c34923897c3dfd110e818b1a0b60a688f357063f754fa99ebddb0b"
+    },
+    {
+      "path": "SourceAssets/Tools/C2BridgeFocusGameView.ps1",
+      "sha256": "ba5df5ee2071b88914f1ed6d04f40e1bd96e2132870ad1e54874ac4e54b6c379"
+    }
+  ]
+}

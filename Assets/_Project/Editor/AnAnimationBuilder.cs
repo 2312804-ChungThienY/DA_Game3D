@@ -26,6 +26,12 @@ public static class AnAnimationBuilder
     [MenuItem("Tools/Son Doong/Build An Animations")]
     public static void Build()
     {
+        // Preserve the configured controller GUID and tuned layers on subsequent rebuilds.
+        if (AssetDatabase.LoadAssetAtPath<AnimatorController>(ControllerPath) != null)
+        {
+            MeleeVisualSetup.Rebuild();
+            return;
+        }
         if (!AssetDatabase.IsValidFolder(Folder)) AssetDatabase.CreateFolder("Assets/_Project", "Animations");
 
         AnimationClip slash1 = Clip("AN_Slash1", 0.65f, false, new[]
@@ -73,7 +79,6 @@ public static class AnAnimationBuilder
         });
 
         // Controller: nhân bản bộ Starter Assets (locomotion, nhảy) rồi thêm layer.
-        AssetDatabase.DeleteAsset(ControllerPath);
         AssetDatabase.CopyAsset(SourceController, ControllerPath);
         AnimatorController controller = AssetDatabase.LoadAssetAtPath<AnimatorController>(ControllerPath);
         controller.AddParameter("Attack", AnimatorControllerParameterType.Trigger);
@@ -130,6 +135,7 @@ public static class AnAnimationBuilder
         PrefabUtility.SaveAsPrefabAsset(root, PrefabPath);
         PrefabUtility.UnloadPrefabContents(root);
         Debug.Log("AnAnimationBuilder: đã tạo AC_An và 7 clip, gán vào PF_An_Prototype.");
+        MeleeVisualSetup.Rebuild();
     }
 
     private struct Key { public float time; public KeyValuePair<string, float>[] values; }

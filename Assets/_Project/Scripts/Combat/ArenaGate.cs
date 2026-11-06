@@ -10,6 +10,7 @@ public class ArenaGate : MonoBehaviour
     [SerializeField] private MonoBehaviour boss;
     [SerializeField] private GameObject gateBehind;
     [SerializeField] private string bossId = WorldIds.GuardianBoss;
+    [SerializeField] private string requiredDoorId;
 
     public bool IsLocked => gateBehind != null && gateBehind.activeSelf;
 
@@ -37,6 +38,9 @@ public class ArenaGate : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (!isActiveAndEnabled || IsLocked || worldState.Has(StateSet.Bosses, bossId)) return;
+        if(Time.timeScale<=0f || (AppRoot.Instance!=null&&AppRoot.Instance.Session.State!=GameSession.SessionState.Playing))return;
+        if(!string.IsNullOrEmpty(requiredDoorId)&&!worldState.Has(StateSet.Doors,requiredDoorId))return;
+        if(boss==null||!boss.isActiveAndEnabled)return;
 
         PlayerVitals player = other.GetComponentInParent<PlayerVitals>();
         if (player == null || player.IsDead) return;

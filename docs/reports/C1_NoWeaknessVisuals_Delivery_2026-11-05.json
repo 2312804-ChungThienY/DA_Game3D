@@ -1,0 +1,37 @@
+{
+  "change": "Keep original stun stars, remove weakness body tint/emission; mechanics unchanged",
+  "files": [
+    {
+      "path": "Assets/_Project/Scripts/AI/EnemyLanternReceiver.cs",
+      "sha256": "d44e8cff736893ff7ed03d9e510c03bf6baf3f6d7c25abe7dfe4556202a1977a"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Presentation/EnemyPresentation.cs",
+      "sha256": "326af6720f9d038248ef6baea43627ae307cba33967c1c124f1ec0529d2d815c"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Presentation/EnemyStunIndicator.cs",
+      "sha256": "9f469ee67e36cb000b0c26e56b49bbceb182a389e2a6309e8de91150df655b16"
+    },
+    {
+      "path": "Assets/_Project/Scenes/02_HangLinhMach.unity",
+      "sha256": "1cf290238bd0e400a32d0b551b4f4dba83a73e89b8ed704263b5ec54a119dc2a"
+    },
+    {
+      "path": "Assets/_Project/Scenes/92_EnvironmentPreview.unity",
+      "sha256": "5c76035c3665d03b97dc824bd5951cf34fa3b8182a4182c8527063ecfc5a4fc6"
+    },
+    {
+      "path": "Builds/Chapter01Revision/Windows/SonDoong_Data/Managed/Assembly-CSharp.dll",
+      "sha256": "32b869e68c7191b1c7fac35211b1fc03122f46686c021d77b62fa182d58c34e8"
+    },
+    {
+      "path": "Builds/Chapter01Revision/Windows/SonDoong.exe",
+      "sha256": "e83058c236f35a720c27e465dc42d1549f13b25a8573dce464438b855764e7af"
+    }
+  ],
+  "personalSaveRestored": true,
+  "playModeReport": "C1_NoWeaknessVisuals_PlayMode_2026-11-05.json",
+  "buildReport": "C1_NoWeaknessVisuals_Build_2026-11-05.json",
+  "manualWindowsPlaytested": false
+}

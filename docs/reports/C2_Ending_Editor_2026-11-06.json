@@ -1,0 +1,18 @@
+{
+    "action": "apply",
+    "checks": [
+        "No missing scripts",
+        "Restoration requires three fragments and Chim Lac",
+        "Restoration leads to spirit, not chapter exit",
+        "Three spirit questions gated by restoration",
+        "Ending contains persistent C5 ring hint",
+        "Unavailable-next-chapter exit saves current inventory at safe C2 checkpoint",
+        "C3 remains unavailable; no fake destination registration"
+    ],
+    "failures": [],
+    "notes": [
+        "Altar: {\"worldState\":{\"instanceID\":324970},\"saveService\":{\"instanceID\":324984},\"storyPanel\":{\"instanceID\":324626},\"restoredVisual\":{\"instanceID\":-111742},\"readyGlow\":{\"instanceID\":-111750},\"fragmentIds\":[\"c2_frag_1\",\"c2_frag_2\",\"c2_frag_3\"],\"bossId\":\"c2_boss_chim_lac\",\"bossName\":\"Chim Lạc\",\"restoredId\":\"c2_relic_restored\",\"relicName\":\"Mặt Trời Lông Chim\",\"grantAbility\":\"\",\"checkpointId\":\"c2_cp_arena\",\"endsChapter\":false,\"nextScene\":\"03_GiengTroiChimLac\",\"nextCheckpoint\":\"c2_cp_start\",\"endTitle\":\"Chương 1 hoàn thành – Đàn Kim Quy\",\"endBody\":\"Ba mảnh Trống Đồng khớp lại trên bệ đá. Tiếng trống ngân dài qua lòng hang, linh mạch dưới Đàn Kim Quy sáng trở lại và Hắc Sương lùi xa.\\n\\nTừ mặt nước tối, bóng Rùa Vàng hiện lên và trao cho An Phúc Kim Quy: từ nay An lộn né được (Ctrl + hướng), lộn rồi chém, và né đúng lúc.\\nKim Quy dặn: \\\"Khi gặp trống bốn vành, vành của ta vang cuối cùng.\\\"\\n\\nTruyền thuyết: Kim Quy giúp An Dương Vương xây thành Cổ Loa.\\n\\nTiến trình đã được lưu tại bệ Kim Quy.\",\"onRestored\":{\"m_PersistentCalls\":{\"m_Calls\":[]}},\"restorationCard\":{\"instanceID\":-112696}}",
+        "Sequence: {\"worldState\":{\"instanceID\":324970},\"quizPanel\":{\"instanceID\":324512},\"storyPanel\":{\"instanceID\":324626},\"sequenceId\":\"c2_linhthan_done\",\"requiredPuzzleId\":\"c2_relic_restored\",\"speakerName\":\"Chim Lạc\",\"quizzes\":[{\"instanceID\":65366},{\"instanceID\":65368},{\"instanceID\":65370}],\"completionCard\":{\"instanceID\":65372},\"visual\":{\"instanceID\":323506},\"onCompleted\":{\"m_PersistentCalls\":{\"m_Calls\":[]}},\"saveService\":{\"instanceID\":324984},\"saveCheckpointId\":\"c2_cp_arena\"}",
+        "Exit: {\"worldState\":{\"instanceID\":324970},\"requiredPuzzleId\":\"c2_linhthan_done\",\"nextScene\":\"04_ThanhDaSonTinh\",\"nextCheckpointId\":\"c3_cp_start\",\"label\":\"Rời đỉnh tổ — kết thúc Chương 2\",\"portalVisual\":{\"instanceID\":-111466},\"storyPanel\":{\"instanceID\":324626},\"endTitle\":\"Chương 2 hoàn thành — Giếng Trời Chim Lạc\",\"endBody\":\"Mặt Trời Lông Chim đã được phục dựng và lời Chim Lạc đã được ghi trong Nhật ký.\\n\\nLinh mạch dẫn An tới Thành Đá Sơn Tinh. Chương 3 chưa có trong phiên bản hiện tại.\\n\\nTiến trình và túi đồ đã được lưu tại đỉnh tổ. Chọn Continue từ menu để trở lại đây.\",\"saveService\":{\"instanceID\":324984},\"exitCheckpointId\":\"c2_cp_arena\"}"
+    ]
+}

@@ -1,8 +1,27 @@
-# Xử lý cảnh báo Unity — 30/10/2026
+# Xử lý cảnh báo Unity — đối chiếu 04/11/2026
+
+## Sửa lỗi ghi metadata ngày 05/11/2026
+
+Ba file `DungeonModularPack/Textures/T_Step_N.tga.meta`, `T_Tile_N.tga.meta`, `Prefabs/Torch_B.prefab.meta` đã được Unity mở ReadWrite, ImportAsset và SaveAndReimport thành công, giữ GUID. Báo cáo `C1Completion_Metadata_2026-11-05.json` trong docs/reports; backup trong `SourceAssets/SceneBackups/2026-11-05_Chapter01Completion/Metadata_210110047`.
+
+Lỗi trước có thật trong Editor.log, nhưng khi kiểm tra các file không readonly và ACL cho phép sửa. Không kết luận nguyên nhân cũ là readonly; lỗi khóa file/import tạm thời chưa được tái hiện. Không xóa meta/Library, không đổi ACL cả cây. Sau reimport phải xét lỗi mới, không dùng các dòng Console cũ để kết luận vẫn lỗi.
+
+## Trạng thái đọc lại trên đĩa ngày 04/11
+
+- Unity vẫn là 6000.4.8f1. Manifest/lock không còn com.unity.ai.assistant; com.unity.ai.inference vẫn có. Đây là trạng thái package hiện tại, không khẳng định Console đang trống mọi cảnh báo.
+- Đã đối chiếu lại SHA-256 của **33/33 model** trong SourceAssets/ImportFixBackups/2026-10-30/repair_manifest.json: đều khớp after_sha256, không thiếu file. GUID .meta của **33/33 model** vẫn khớp bản backup. Đây là kiểm tra file, không chạy lại import/mesh validation trong Unity ở lượt tài liệu này.
+- Source A09 ở Assets/A09 - Mines and Cave Set/MInesAndCaveSet; MinesSet.fbx.meta tại thư mục fbx hiện có isReadable:1 theo lần xử lý Read/Write sau đó. Không suy từ bit này rằng NavMesh runtime hoặc Windows build đã được kiểm tra lại hôm nay.
+- AssetImportDiagnostics.cs và menu Tools → Son Doong → Validate Selected Imported Assets vẫn tồn tại, xem nguồn tại :59–120 và :123–137. Công cụ chỉ kiểm các file được yêu cầu; kết quả không đại diện toàn bộ dự án.
+- Logs/AssetImportValidation.json bị ghi đè mỗi lần dùng công cụ; phase hiện tại có thể là lần import công cụ khu trại, không phải after-repair của 30/10. Bảng tổng hợp dưới đây là **bằng chứng lịch sử**, không giả định file Logs còn giữ report cũ hoặc đã tái chạy trong lượt đồng bộ.
+- A09/A11 của khu mẫu mới dùng material riêng. Việc shader nguồn được hỗ trợ không bảo đảm hình ảnh trong camera đúng; xem [thử asset môi trường](ENVIRONMENT_ASSET_TRIALS.md) và [khu mẫu trại](CAMP_ENVIRONMENT.md) để biết các bước sửa hình đã làm sau lượt import.
+
+Chưa force reimport, kiểm tra Console mới, Play Mode hoặc build trong lượt đồng bộ tài liệu. Không cần chạy lại công cụ sửa mesh để đọc hiện trạng; giữ backup source và GUID, chỉ thực hiện công việc sửa mới khi được giao.
+
+## Hồ sơ công việc ngày 30/10 — giữ để truy nguyên
 
 Nguồn công việc: danh sách Console người dùng gửi trong `Pasted text.txt`, bắt đầu bằng `Error reason is 'NoSubscription'`. Người dùng xác nhận **không dùng Unity AI Assistant và đồng ý gỡ gói**. Công việc này xử lý package và asset import; không bổ sung cơ chế gameplay.
 
-## Kết quả
+## Kết quả kiểm tra import ngày 30/10
 
 Đã chạy kiểm tra trực tiếp trong Editor dự án chính, Unity **6000.4.8f1**, sau khi sửa và force reimport:
 

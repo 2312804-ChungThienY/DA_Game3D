@@ -1,298 +1,140 @@
-# Ghi nhớ thiết kế — Sơn Đoòng: Cõi Mộng Kỳ Thần
+# Ghi nhớ thiết kế hiện hành — Sơn Đoòng: Cõi Mộng Kỳ Thần
 
-Đọc toàn bộ 4 file nguồn ngày **30/10/2026**, múi giờ Asia/Bangkok. Bản kế hoạch nguồn: **v1.0, 29/10/2026**. Tài liệu này tổng hợp thiết kế, không khẳng định các chức năng đã tồn tại. Trạng thái triển khai nằm trong [PROJECT_STATUS.md](PROJECT_STATUS.md); chỉ mục và dấu vết nguồn ở [SPEC_INDEX.md](SPEC_INDEX.md).
+**Đồng bộ04/11, cập nhật06/11/2026, Asia/Bangkok.** Tài liệu này giữ quyết định/yêu cầu, không tự chứng nhận chức năng hoàn thành. Trạng thái thật ở [PROJECT_STATUS](PROJECT_STATUS.md); component/API/ID ở [CURRENT_ARCHITECTURE](CURRENT_ARCHITECTURE.md); khoảng thiếu ở [REQUIREMENTS_MATRIX](REQUIREMENTS_MATRIX.md); nguồn chi tiết ở [SPEC_INDEX](SPEC_INDEX.md).
 
-## 1. Game đang xây dựng
+## 1. Quyết định mới nhất và nguồn ưu tiên
 
-- Tên dự kiến: **Sơn Đoòng: Cõi Mộng Kỳ Thần**, tên tiếng Anh trong tài liệu ý tưởng: *Echoes of the Ancient Realm*.
-- Phiêu lưu hành động 3D, khám phá và giải đố, góc nhìn thứ ba; Windows x64, chơi đơn, ngoại tuyến, bàn phím/chuột, một ngôn ngữ tiếng Việt.
-- Đồ họa URP, bán thực tế với sắc thái huyền ảo Việt Nam. Cảm hứng Đông Sơn/Hồng Bàng, hang Sơn Đoòng–Phong Nha; không phải trò sinh tồn thế giới mở.
-- **An** là nhà khảo cổ trẻ rơi vào không gian rạn nứt thời gian dưới Sơn Đoòng. **Hắc Sương** suy thoái linh mạch, khiến hộ vệ cổ mất kiểm soát. An dùng **Lồng Đèn Sen** và những mảnh **Trống Đồng** để phục hồi liên hệ với các thực thể hộ mạch.
-- Kim Quy, Chim Lạc, Sơn Tinh, Thủy Tinh được gọi là **Linh Thần trong thế giới hư cấu của game**. Không trình bày cách nhóm này như một phân loại lịch sử.
-- Vòng chơi khái niệm: khám phá/di chuyển → giải đố cổ vật → thu thập → chiến đấu/thức tỉnh. Trong chương đầu, tiến trình cụ thể dùng ba mảnh trống A/B/C, hai puzzle và Hộ vệ Đá.
-- Ba trụ cột: ánh sáng giúp đọc đường và thay đổi gameplay; puzzle có gợi ý đủ rõ trong môi trường; combat ưu tiên đọc báo hiệu, né, chiếu đèn và phản công.
-- Kể chuyện qua môi trường, **ba văn tự ngắn**, dòng nhiệm vụ, mở đầu bằng ảnh tĩnh/camera ngắn và kết bằng ánh sáng/âm thanh/lời dẫn.
+**Ba trống giải đố06/11/2026:** người dùng gửi `trong-ong-ong-son-viet-nam.zip`, yêu cầu thay cả ba trống tại Điện Trống C1 và ưu tiên hoa văn văn hóa Việt rõ nét. Dùng model **ndnguyen3d**, Sketchfab `21e418a517a74b49a17ebbad94ba26c0`, CC BY4.0 đã đối chiếu API nguồn. Giữ mesh/texture nguồn2K; material URP PBR và ánh sáng cục bộ, ký hiệu gameplay Mặt Trời/Cánh Chim/Sóng Nước ở bảng riêng không che hoa văn. Giữ root/ref/ID/chuỗi A–C–B, giấy/Journal, schema4; model A20 Aaannnn vẫn ở các vị trí trang trí/đàn khác. [Chi tiết](DONGSON_DRUM_WORKLOG.md).
 
-Nguồn: Tên_dự_án; kế hoạch §1–4, §21, §33–34.
+**Chương2 ngày05–06/11/2026:** người dùng yêu cầu chia việc cơ chế Chim Lạc, kiểm tra/sửa phần đã có trước và làm từng lượt khi nói “thực hiện tiếp”. Hàng đợi [CHAPTER02_MECHANICS_PLAN](CHAPTER02_MECHANICS_PLAN.md), lượt0–7 có bằng chứng trong STATUS. Lượt6 giữ lời “Vành của ta đứng thứ nhất” trong thẻ/Journal và nhánh C3 chưa có. **Lượt7 đã dựng đồ họa năm khu, âm thanh/HUD/túi riêng C2 và development Windows**, có hồi quy input/native Continue và đo góc đứng yên; không coi đó là duyệt mỹ thuật/animation cuối, cân nhịp trận tay/nghe cân âm hoặc thời lượng người mới. Các khoảng thiếu này giữ trong STATUS. Chưa được giao triển khai C3–C5 hoặc thay model/rig An; không tự bắt đầu C3 chỉ vì xong bản dựng C2. Giữ mạch Kim Quy→Giếng Trời→Chim Lạc→gợi ý Thành Đá; fallback không phải chuyển C3 thành công.
 
-## 2. Phạm vi đồ án và phần chưa làm
+**Hướng dẫn và bệ05/11/2026:** thêm giấy giới thiệu game và hướng dẫn chơi tại Trại Giếng Trời, thêm giấy chuẩn bị trước cổng Đàn Kim Quy. Giữ cách nhặt E/đọc lại Nhật ký, giấy tùy chọn. Bỏ tấm vuông bổ sung trên bệ đá, căn mesh/vật phẩm theo mặt bệ; bệ đèn đầu game phải nhìn thấy và tồn tại cả sau khi nhận đèn. Giữ root/ID/ref gameplay, schema4 và save cũ.
 
-Kế hoạch cho **2–3 người / 12 tuần**, hoàn thành **một chương Kim Quy** có đầu, thử thách, kết; mục tiêu trải nghiệm **25–35 phút**. Không cần hoàn thành bốn vùng Linh Thần trong kỳ này.
+**Điều chỉnh mới nhất05/11/2026:** bỏ đổi màu/phát sáng trên thân quái khi suy yếu; **giữ các ngôi sao báo choáng** theo xác nhận tiếp theo của người dùng. Giữ suy yếu×1,5, choáng4s/2s, cúi đầu, ngừng tấn công và miễn choáng lặp. Không bỏ ngôi sao cùng hiệu ứng màu trên thân.
 
-| Bắt buộc | Giới hạn |
-| --- | --- |
-| Màn chơi | 1 chương, 5 không gian liên kết |
-| An | Đi, chạy, nhảy, né; điều khiển ổn định |
-| Lồng Đèn Sen | Hiện văn tự, xóa phong ấn, làm yếu địch; kiểm tra vật cản |
-| Puzzle | 1 Trống Đồng, 1 ánh sáng/gương; gợi ý, thử lại, lưu solved |
-| Combat | Dao găm, 1 loại Hắc Ảnh, 1 Hộ vệ Đá |
-| Tiến trình | 3 mảnh trống, 1 tuyến nhiệm vụ |
-| Vật phẩm | Túi 12 ô, 1 công thức thuốc, vật nhiệm vụ ngoài túi |
-| Hỗ trợ | Menu, HUD, pause, settings, save/load/respawn, âm thanh |
-| Bàn giao | Build Windows x64, source, tài liệu, nguồn asset, test và số liệu đo |
+**Phản hồi tiếp 05/11/2026:** bỏ bàn chế C1, thêm nút chế Bình máu trong túi; không tự lưu khi chế, E lửa chỉ lưu. Lửa/khói/tàn chuyển động và ghế gỗ đủ bề ngang. Ba trống dùng A20, ký hiệu Mặt Trời/Cánh Chim/Sóng Nước thay chữ A/B/C; enum A–C–B và ID save giữ nguyên. A22 cổng, A23 gương, A24 bệ theo file người dùng mới nhập (khác số trong catalog cũ). Hai giấy gợi ý là manh mối tùy chọn, nhặt bằng E và giữ trong Nhật ký; vẫn cho tự thử. Người dùng chốt **Hắc Ảnh choáng 4s, Hộ vệ 2s**, có khoảng miễn choáng lặp; cúi đầu, dấu sao và không đánh trong choáng. Sửa hướng model theo AI, mặt mảnh trống hướng về lối tới, khe phía trên cửa; sương mỏng URP/particle, UI rõ đẹp hơn. Vẫn loại trừ model/rig An.
 
-- Một ô lưu chính và một backup. Dùng model/animation có sẵn phù hợp, nhưng gameplay cần tự xây dựng theo hợp đồng của dự án.
-- **Nỏ thần, móc dây tại điểm cố định, nhánh phụ** chỉ được xét sau mốc tích hợp tuần 8, còn giờ kiểm thử và hết lỗi chặn tuyến. Với người thứ ba, kế hoạch ưu tiên tối đa **một** mở rộng phù hợp; không mặc định thêm cả ba.
-- Tuyến bắt buộc hoàn thành được khi các mở rộng tắt. Parry xuất hiện trong ý tưởng lớn nhưng chưa là yêu cầu triển khai bản bắt buộc của kế hoạch.
-- Không có cưỡi ngựa, chặt cây/đào khoáng, xây nhà, trồng trọt, câu cá, đói/khát/nhiệt độ, thời tiết động, chế tạo sinh tồn nhiều công thức, nhiều người chơi hay thế giới mở.
-- Chưa cần vứt đồ, độ bền dao, mua bán, kéo thả inventory, XP/skill tree. Không coi tài liệu kỹ thuật tổng quát là danh sách tính năng phải làm.
-- Chương sau: Chim Lạc (giếng trời, móc dây/leo/nỏ), Sơn Tinh (đá/trọng lực/địa hình), Thủy Tinh (thuyền/mực nước/cửa van), rồi phục hồi trục linh mạch. Ước lượng riêng sau chương 1.
+**Yêu cầu tiếp theo 05/11/2026:** sửa lỗi Unity `.meta` trước, sửa khe hở hang/cửa và camera theo ảnh chơi thật; hoàn thiện chương 1 gồm HUD/menu/UI, âm thanh, cửa phong ấn, đèn sen, Hắc Ảnh và Hộ vệ bằng asset đã nhập. **Đã cho phép làm quái**, thay giới hạn chờ yêu cầu trước đó; vẫn **không thay nhân vật An**. Chỉ dùng asset miễn phí, giữ hợp đồng input/state/save/ID. Được sửa phụ kiện đèn và camera liên quan lỗi ảnh.
 
-## 3. Tuyến chơi, bố cục và điều kiện tiến trình
+**Bổ sung 05/11/2026:** người dùng giao dựng lại và mở rộng toàn bộ cảnh chương 1 trong `02_HangLinhMach`, dùng asset miễn phí đã nhập, làm đường nối giữa các khu. Được thay địa hình/kích thước bản khối cũ; giữ thứ tự chơi, ID/ref và save. Spawn được căn lại theo checkpoint ID trong không gian mới. Không tạo actor/quái mới. Xem [CHAPTER01_EXPANDED](CHAPTER01_EXPANDED.md); kích thước/vị trí ngày 04/11 là mốc trước mở rộng nếu khác bảng mới.
 
-**Trại Giếng Trời → Vườn Rêu → Điện Trống → Hành Lang Quang → Đàn Kim Quy.**
+Người dùng xác nhận trong lượt đồng bộ ngày 04/11/2026:
 
-| Khu | Vai trò và mục tiêu | Thời lượng mục tiêu |
+- **Mục tiêu toàn game là 5 chương**, ưu tiên **môi trường chương 1 trước**.
+- **Chưa chốt hạn mới**. Lịch 7 ngày và lịch 12 tuần trong spec giữ làm dự kiến/tham chiếu cũ, không phải deadline hiện hành.
+- **3D hoạt hình low poly** thay định hướng Stylized Semi-Realistic/bán thực tế. Trại Giếng Trời là khu mẫu; nhân vật/quái mới chờ yêu cầu sau.
+- Giữ **ba thanh Tổng/Master, Nhạc/Music, Hiệu ứng/SFX**. Không giảm yêu cầu để khớp code thiếu sau merge; cấu hình mới xem AUDIO_SETTINGS và PROJECT_STATUS.
+- Giữ HUD C1 bắt đầu ở **Vườn Rêu**, tiến độ **3 mảnh/2 câu đố** theo lựa chọn 02/11. Mục tiêu suy từ world state, phân biệt giải đố và nhận thưởng B/C.
+- Trại C1 có **bàn E chế riêng và checkpoint E lưu riêng**; giữ ID, tham chiếu và điểm hồi sinh khi thay hình.
+
+Nguồn ưu tiên: **yêu cầu mới nhất của người dùng → đặc tả chương/§55 → kế hoạch §40–54 → §1–39 ở điểm chưa bị thay → ý tưởng/danh mục tham khảo**. Code/scene chứng minh hiện trạng; thiếu code không tự hủy yêu cầu. Tài liệu backlog không phải lệnh tự triển khai.
+
+Phản hồi người dùng 02/11 được giữ theo nhật ký: độ nhạy mặc định .15, khoảng .03–.6; Focus ngang 90°, dung sai dọc±45°, phong ấn giữ 1 giây. Không ép về nón 60°/1.5 giây của spec gốc.
+
+## 2. Game và phạm vi
+
+**Sơn Đoòng: Cõi Mộng Kỳ Thần** (*Echoes of the Ancient Realm* trong ý tưởng): phiêu lưu hành động 3D góc nhìn thứ ba, Windows x64, chơi đơn offline, bàn phím/chuột, tiếng Việt, một độ khó.
+
+An là nhà khảo cổ trẻ rơi vào không gian rạn nứt thời gian dưới Sơn Đoòng. Hắc Sương suy thoái linh mạch; An dùng Lồng Đèn Sen, khám phá, giải đố, thu thập cổ vật và thức tỉnh Linh Thần. Kim Quy, Chim Lạc, Sơn Tinh, Thủy Tinh là **Linh Thần trong thế giới hư cấu của game**, không phải cách phân loại lịch sử có thật.
+
+| Chương | Vai trò/cơ chế | Mục tiêu thời lượng |
 | --- | --- | --- |
-| Trại Giếng Trời | Học di chuyển/nhìn/nhảy/E, nhận đèn và dao một lần, kích hoạt mốc lưu | 3–4 phút |
-| Vườn Rêu | Rọi văn tự, giữ Focus xóa phong ấn, nhận mảnh A | 4–6 phút |
-| Điện Trống | Đọc ba ký hiệu, gõ trình tự, mở cửa/bệ nhận mảnh B; mở lối tắt về trại | 5–7 phút |
-| Hành Lang Quang | Giao chiến ngắn với Hắc Ảnh trước/sát đoạn này; xoay hai gương, nhận mảnh C; mốc trước đấu trường | 6–8 phút |
-| Đàn Kim Quy | Cổng kiểm tra 3 mảnh + 2 puzzle; Hộ vệ; tương tác phục dựng trống; kết | 7–10 phút |
+| 1 Kim Quy | Năm khu đã có, đèn/trống/gương/dao; trao Phúc Kim Quy khi kết | 15–25 phút |
+| 2 Chim Lạc — Giếng Trời | 5 phòng, **Cột Gió**, chuông, Hắc Ảnh Ném, Chim Lạc | 10–15 phút |
+| 3 Sơn Tinh — Thành Đá | 5 phòng, **Ấn Núi** mức 0/1/2 m, Rết Đá | 10–15 phút |
+| 4 Thủy Tinh — Sông Ngầm | 5 phòng, **Ngọc Nước**, van/nước, Thuồng Luồng | 10–15 phút |
+| 5 Trục Linh Mạch | 6 phòng, ghép năng lực cũ, Hắc Sương Vương, thoát hang, 2 kết | 20–25 phút |
 
-- Tổng 25–35 phút cần đo người chơi mới; không kéo dài bằng đi lạc hoặc lặp lại cố ý. Các khoảng từng khu là mục tiêu, không phải thời gian đã đo.
-- Một dấu sáng dẫn mục tiêu kế tiếp, vật tương tác gần tầm mắt, vùng an toàn trước luật mới. Dạy chiếu đèn lên Hắc Ảnh trước Hộ vệ.
-- Lối chính bắt đầu tối thiểu **2,5 m**; bậc thường ≤ **0,3 m**; phòng puzzle khoảng **12 × 12 m**; đấu trường khoảng **18 × 18 m**; hiệu chỉnh theo controller/NavMesh. Vực ngoài thử thách có rào/vách rõ.
-- Nền trại **20 × 20 m** là đề xuất dựng thử của người dùng trong chat, không phải kích thước khóa trong spec.
-- Các object gốc `World_Geometry`, `Gameplay`, `Lighting`, `Cameras`, `UI` có position/rotation 0 và scale 1 theo yêu cầu dựng scene của người dùng.
-- Quest suy ra từ dữ kiện WorldStateStore, **không lưu bộ đếm tăng theo số event**. Event có thể phát lại khi tải.
-- HUD tích hợp theo yêu cầu **02/11/2026** bắt đầu bằng Vườn Rêu/nhặt A, dùng ChapterObjectiveRules và ChapterQuestHUD; bước nhận đèn vẫn do gameplay hiện có đảm nhiệm, chưa có mục tiêu nhận đèn trong HUD này.
+Tổng mục tiêu **65–95 phút**, phải đo người chơi mới; thời gian bot không phải thời lượng trải nghiệm. “Chỉ C1, 25–35 phút, 12 tuần” là phạm vi cũ đã được thay.
 
-| Quest ID | Điều kiện |
+Không làm nỏ/móc dây/đu dây/cưỡi chim/bơi. Không thêm sinh tồn, xây nhà, chặt cây/đào khoáng, đói/khát/nhiệt độ, thời tiết động, multiplayer, open world hoặc nhiều công thức chỉ vì tài liệu tham khảo có liệt kê.
+
+## 3. Tuyến chơi và khuôn chương
+
+C1: **Trại Giếng Trời → Vườn Rêu → Điện Trống → Hành Lang Quang → Đàn Kim Quy**. Học đèn/E ở trại; mở phong ấn/nhận A; trống A→C→B/nhận B; hai gương/nhận C; đủ 3 mảnh+2 puzzle mở cổng; thắng Hộ vệ, phục dựng trống, trao movement_kit, chuyển C2. C1 có 3 bia kiến thức và **không Bệ Vấn Đáp**. HUD được chọn bắt đầu ở Vườn Rêu; hành vi nhận đèn vẫn có trong gameplay.
+
+C2–C4: P1 học năng lực+mảnh 1; P2 thử nhỏ+mảnh 2; P3 thử lớn+mảnh 3/mốc giữa; P4 giao chiến+công cụ trùm/thuốc/mốc trước trùm; P5 đấu trường+phục dựng+Linh Thần Vấn Đáp 3 câu. “P1–P3 lấy mảnh, P4 công cụ” là **phòng trong chương**. Vượt thử thách trước khi tới bệ; câu hỏi không thay thử thách môi trường.
+
+C5 ghép năng lực cũ, 6 phòng, Đại Vấn Đáp 5 câu, bốn vành, Hắc Sương Vương 4 pha có mốc theo pha, thoát hang 90 s. **Kết 1 Ánh Sáng Trở Lại** khi hoàn tất; **Kết 2 Ký Ức Không Tắt** khi có Vành Ký Ức từ cơ chế ẩn Bia Câm. Kết dùng ảnh tĩnh/camera ngắn/ánh sáng/âm thanh/lời dẫn; hiện vẫn là thiết kế chưa triển khai. Theo đặc tả C5, Continue sau kết về `c5_cp_altar`; EndingShrine cho xem lại và có thể tìm Vành Ký Ức để xem Kết 2 sau Kết 1.
+
+Lối chính khởi điểm ≥2.5 m, bậc thường ≤0.3 m, phòng puzzle khoảng 12×12 m, đấu trường khoảng 18×18 m; chỉnh theo controller/camera. Mỗi khu có hướng sáng/dấu dẫn và khoảng an toàn học luật. Không kéo dài bằng đi lạc/lặp vô nghĩa.
+
+## 4. An, di chuyển, input và camera
+
+**Yêu cầu mới 04/11/2026:** người dùng giao chỉnh toàn bộ cơ chế nhân vật và chọn cảm giác **nhanh, gọn, ít quán tính**. Yêu cầu này cho phép sửa điều khiển/animation hiện có sau giai đoạn ưu tiên môi trường; không đồng nghĩa yêu cầu tạo model nhân vật hoặc quái mới. Thông số hỗ trợ và kết quả thử nằm trong [CharacterPolish](reports/CharacterPolish_2026-11-04.md). Sau phản hồi xoay chuột/đánh không đúng, bản sửa mới đọc Look trước hành động, chuột dọc thuận chiều và chém theo camera khi không lock-on; xem [CharacterAim](reports/CharacterAim_2026-11-04.md), không coi các checks ban đầu là đã duyệt cảm giác tay.
+
+**Chương 1 không lộn né.** An đi/chạy/nhảy/dao/đèn/khóa mục tiêu; chạy khỏi báo trước để né đòn. Hoàn tất C1 nhận **Phúc Kim Quy**, mở `movement_kit` vĩnh viễn cho C2–C5.
+
+| Thông số khởi điểm | Giá trị |
 | --- | --- |
-| `q_get_lantern` | Đã cấp `equipment_lantern` |
-| `q_fragment_a` | Tập mảnh chứa `fragment_a` |
-| `q_drum` | `pz_trong_01` solved và có `fragment_b` |
-| `q_light` | `pz_guong_01` solved và có `fragment_c` |
-| `q_guardian` | `guardian_01` đã bị đánh bại |
-| `q_restore` | `relicRestored == true` |
+| Capsule/step/slope | Cao 1.8 m, radius 0.3 m, tâm Y 0.9 m; step 0.3 m; slope 45° |
+| Đi/chạy/Focus | 3.5/5.5/2 m/s |
+| Nhảy/gravity | 1.2 m/−20 m/s² |
+| Lộn | 25 stamina, 0.45 s, bất tử 0.10–0.30 s, khoảng bắt đầu ≥0.65 s |
+| Shift+lộn; lộn+chém | Xa khoảng×1.5; đâm tới×1.25, vẫn tiêu 10 stamina |
+| Né đúng lúc | .15 s đầu khoảng bất tử: chậm .3 s, hồi 15 năng lượng đèn |
+| Khe thấp | Capsule khoảng 0.9 m; không đứng dậy xuyên trần |
+| Camera | Cinemachine 3 Third Person Follow; pitch −35°..65°, radius tránh vật 0.2 m, near clip khoảng 0.1 m |
 
-Thắng: đủ 3 mảnh + 2 puzzle solved + Hộ vệ chết + đã kích hoạt bệ trống. Thua: HP 0 hoặc rơi vùng chết → phục hồi **toàn bộ snapshot** checkpoint, không giữ một phần đồ sau save.
+Một motor sở hữu dịch chuyển An; root motion không tranh quyền. Lộn có hướng tính theo camera, không hướng theo hướng An nhìn, vẫn va tường. Khóa mục tiêu chuột giữa từ C1, tầm 15 m, bỏ khi chết/xa/che>1 s. Animation làm một bộ dùng lại; clip tự tạo/model tạm không được gọi là chất lượng cuối khi chưa xem/chơi thử.
 
-Nguồn: kế hoạch §3–4, §16, §18, §23.
+Một asset `PlayerControls.inputactions`, map **Gameplay/UI**, đọc qua InputReader. WASD/chuột; Shift chạy; Space nhảy; Ctrl lộn sau mở khóa; LMB đánh; F đèn; RMB Focus; E tương tác; Q thuốc; MMB lock-on; I túi; J nhật ký; Esc pause/back; F9 debug Editor/Development. Khóa phiên/pause/dead không để input giữ hoặc clickUI biến thành lệnh gameplay. Giữ ưu tiên trạng thái; code thiếu guard được ghi vào MATRIX.
 
-## 4. Kiến trúc và vòng đời
+Người dùng xác nhận tiếp 04/11 lỗi gồm **cả hướng và động tác**. Đã bổ sung hai nhát chém, lunge riêng và dao gắn tay trên rig hiện có; xem [MeleeVisual](reports/MeleeVisual_2026-11-04.md). Việc này không chứng nhận model An cuối hoặc cảm giác chơi tay đã được duyệt.
 
-**Tách ba loại dữ liệu:** ScriptableObject chỉ dữ liệu thiết kế; runtime state là dữ liệu thay đổi; save DTO chỉ dữ liệu thuần và ID. Không ghi máu/số lượng/solved đang chơi trực tiếp vào asset SO.
+## 5. Tương tác, đèn, puzzle và chiến đấu
 
-| Thành phần | Trách nhiệm |
-| --- | --- |
-| GameBootstrap / AppRoot | Tạo dịch vụ chung đúng một lần, Boot → MainMenu |
-| GameSession | NewGame, Continue, Pause, Respawn, trạng thái phiên/checkpoint |
-| InputReader | Một cách đọc input, đổi map, xóa input khi khóa |
-| PlayerMotor | Nơi duy nhất dịch chuyển An: Move/Jump/Dodge |
-| PlayerVitals | Máu/thể lực, tiêu hao, hồi phục, nhận damage |
-| InteractionScanner | Một mục tiêu gần, hợp lệ, nhìn thấy |
-| LanternController | Năng lượng, thời gian chiếu, tác động ILanternTarget |
-| CombatController | Thời gian đòn, active window, tập đã trúng, hủy đòn |
-| EnemyBrain | FSM, mục tiêu, vùng sinh, NavMeshAgent |
-| InventoryService | TryAdd/TryRemove/CanAdd; không lượng âm |
-| CraftingService | Giao dịch TryCraft nguyên tử |
-| PuzzleController | TryInput/ResetAttempt/ApplySolvedState |
-| WorldStateStore | Tập ID/cờ, nhận và hoàn thành một lần |
-| QuestSystem | Suy bước nhiệm vụ từ trạng thái thế giới |
-| SaveService | Capture/Validate/Write/Restore snapshot nhất quán |
-| AudioService | AudioMixer, SFX/ambience/nhạc |
+E chọn collider hợp lệ đầu từ tâm camera, đo tầm tay từ An/InteractionOrigin≤3 m, kiểm LOS từ nhân vật và CanInteract lúc thực hiện. Một prompt; không vừa trigger tự nhặt vừa E cấp cùng vật. IInteractRange chỉ cho đối tượng có thiết kế tầm riêng.
 
-- UI gửi yêu cầu như TryCraft/TryUsePotion, không trực tiếp trừ vật phẩm/máu. Combat gọi IDamageable, lọc đội; quest không điều khiển hitbox.
-- `IInteractable`: CanInteract, lời nhắc, thực hiện. `IDamageable`: DamageInfo có nguồn, đội, damage, mã đòn. `ILanternTarget`: bắt đầu/tiếp nhận/kết thúc chiếu, tiến độ. `ISaveParticipant` chỉ khi thực sự cần nhiều nơi đóng góp dữ liệu.
-- Môi trường có PersistentId; đăng ký event OnEnable, hủy OnDisable. Đối tượng bị hủy không phát thưởng/gọi UI nữa.
-- Dùng State, Observer, cấu hình/Strategy đơn giản; factory giới hạn. Pool chỉ sau đo đạc, reset sạch. Chưa cần event bus tổng quát, DI lớn, nhiều Singleton, Addressables hoặc Resources tải hàng loạt.
-- NewGame: Boot tạo AppRoot → menu → xác nhận thay ô lưu cũ nếu có → state mặc định → scene → áp state → bật input.
-- Continue/Respawn: xác thực file → scene và ID registry sẵn sàng → thay toàn bộ runtime state → áp pickup/cửa/puzzle/địch độc nhất → đặt An tại checkpoint → HUD → bật AI/input. Không trộn hai phiên.
-- Phiên: MainMenu → Loading → Playing; Playing có Paused, Dead, ChapterComplete. Loading/Dead/Complete chặn Gameplay; pause dùng UI map; resume xóa lệnh giữ cũ.
+Đèn thường miễn năng lượng, reveal 5 m có LOS. Theo phản hồi 04/11 muốn chiếu quái xa hơn, hiện cấu hình **Focus quái 10 m**, puzzle/phong ấn vẫn **8 m**, ngang 90°/dọc±45° theo hướng camera để chiếu cao. Phong ấn giữ 1 s, mất chiếu>.25 s reset. Địch Focus 1 s→yếu×1.5 trong 4 s; chiếu tiếp làm mới, không cộng dồn/choáng vô hạn. Năng lượng 100, tiêu 12/s, nghỉ 1 s hồi 20/s. Pause không cộng tiến độ; logic độc lập Light/VFX/quality.
 
-Nguồn: kế hoạch §5–8, §18–19.
+Trống `pz_trong_01`: A→C→B, debounce.2 s, sai phản hồi/reset lượt, solved/apply lại an toàn, nhận B riêng. Không gọi chuỗi gõ hư cấu là nhạc cổ xác thực. Gương `pz_guong_01`: 2 gương×4 nấc, ngọc 1 s; ray chặn tường/mặt lưng, giới hạn 3 phản xạ/40 m, thử 16 tổhợp. SequencePuzzleController chung cho chuông C2/bốn vành C5, không thay trống C1 chỉ để đồng nhất tên.
 
-## 5. Controller, camera, input
+HP khởi điểm: An 100, Hắc Ảnh 60, Hộ vệ 180. Dao 20 damage/10 stamina/.65 s, active.15–.30, tầm khoảng 1.8 m; nhiều collider một actor chỉ trúng 1 lần. Phải lọc team/LOS/tường và xét giao cửa sổ active khi FPS thấp; đã bổ sung kiểm LOS/tường trong lượt điều khiển 04/11, có kiểm tra Play Mode; chưa thay bằng cân bằng chiến đấu toàn tuyến. Quái thường dùng NavMeshAgent/FSM/LOS/leash; checkpoint trùm an toàn; chết restore toàn snapshot, thắng ghi ID duy nhất và không sinh lại sau Continue. Số HP/nhịp đòn phải cân bằng bằng người thật.
 
-Prefab đích: Player có CharacterController, PlayerMotor, PlayerVitals, InputReader, CombatController, InteractionScanner; VisualRoot có model/Animator/socket; CameraPivot có yaw/pitch độc lập model. Prototype Starter Assets hiện tại chưa đồng nghĩa đã đạt kiến trúc này.
+**Phản hồi mới 04/11:** chuột trái không được trông như tia chiếu vào quái. Đã tắt ribbon dao, LMB ngắt Focus đang giữ và cần thả/giữ lại RMB để chiếu tiếp; xem [FocusCombat](reports/FocusCombat_2026-11-04.md). Các ảnh/report melee có vệt sáng bên dưới là phiên bản trước phản hồi này.
 
-| Giá trị khởi điểm theo spec | Giá trị |
-| --- | --- |
-| Capsule | Cao 1,8 m; radius 0,3; center Y 0,9 |
-| Bậc / dốc | Step Offset 0,3; Slope Limit 45° |
-| Đi / chạy | 3,5 / 5,5 m/s |
-| Nhảy / gravity | Cao 1,2 m; Y −20 m/s² |
-| Camera | Khoảng cách 3,5 m; pivot cao 1,5 m; pitch −35°..65° |
-| Camera collision | Radius ban đầu 0,2 m; near clip khoảng 0,1 m |
+## 6. Túi, chế thuốc và reward
 
-- Hướng camera chiếu XZ, chuẩn hóa di chuyển chéo, tự tính gravity và chạm trần/đất; một nơi gọi Controller.Move. Apply Root Motion tắt trong bản đầu. Animator nhận Speed/Grounded/VerticalSpeed và Attack/Dodge/Hurt/Dead.
-- Main Camera có CinemachineBrain; CinemachineCamera 3 theo pivot/PlayerCameraRoot bằng Third Person Follow. Mask tránh vật cản chứa Environment, loại Player/VFX. Kiểm tra target không None, ground mask chứa nền, Physics bật Player–Environment. Mask đúng nhưng `Avoid Obstacles` tắt vẫn chưa có tránh vật cản.
+Túi 12 ô, Lá cẩm/Linh chi stack 10, thuốc stack 5; dao/đèn/mảnh/cổ vật không chiếm ô. Q hồi 35, cooldown 2 s, không tiêu khi đầyHP/chết/thiếu thuốc. TryAdd báo lượng nhận, pickup chỉ mất khi nhận đủ. Craft thử bản nháp, trừ/thêm cùng giao dịch, thất bại giữ túi; ô vừa trống do tiêu nguyên liệu dùng được cho thuốc.
 
-| Phím | Action/hành vi |
-| --- | --- |
-| WASD / chuột | Move / Look |
-| Shift / Space | Sprint / Jump |
-| Ctrl trái | Dodge; hướng di chuyển hoặc hướng nhìn nếu đứng yên |
-| Chuột trái | Attack |
-| F / giữ chuột phải | ToggleLantern / Focus |
-| E / Q | Interact / UsePotion |
-| I / J | Inventory / Journal |
-| Esc | Pause hoặc Back lớp menu trên cùng |
+**Trại C1 — thay đổi 05/11:** bỏ bàn chế; mở túi I và dùng nút Chế bình máu, 1 Lá cẩm+1 Linh chi→1 Bình máu. Giao dịch InventoryService, không tự lưu; E lửa chỉ lưu. C2 hiện còn panel/altar có flow riêng; phải mô tả tách biệt. Reward/quiz/pickup/ability không trao lại khi replay/restore; reward nhiều item cũng phải nguyên tử, không suy mọi reward đạt chỉ từ TryCraft.
 
-- Thiết kế `PlayerControls.inputactions`: Gameplay và UI; Move/Look Vector2, còn lại Button. Không trộn input callback và polling cũ cho cùng action. Đổi map xóa Move/Focus/Attack.
-- Ưu tiên Dead > Loading/khóa phiên > Hurt > Dodge > Attack > Interact > Locomotion. Trên không điều hướng hạn chế, không mở puzzle interaction/né lặp.
-- Focus đi 2 m/s, không Sprint. Né: tốn 25 stamina, dài 0,45 s, bất tử 0,10–0,30 s, khoảng giữa hai lần bắt đầu ≥0,65 s, chốt hướng khi bắt đầu, vẫn va tường qua motor.
-- Túi/nhật ký/chế thuốc pause thế giới; UI dùng unscaled time, gameplay dùng simulation time. Resume không để click UI thành đòn đánh.
+## 7. State, ID, save và chuyển chương
 
-Nguồn: kế hoạch §9–10, §37. Thông số là khởi điểm cần cân bằng, không tự nhận đã áp dụng trong prefab.
+Tách SO design/runtime state/DTO thuần. Quest/Điểm Tri Thức suy từ dữ kiện, không tăng counter theo event có thể phát lại; subscribe/unsubscribe đúng vòng đời; apply state lặp an toàn.
 
-## 6. Tương tác và Lồng Đèn Sen
+Thiết kế cần catalogID/validator. Hiện dùng **WorldIds tĩnh**, StateSet/WorldStateStore theo tập; native **schema 4**, đọc **legacy version 1–5**. World/Inventory theo scene, chuyển bằng snapshot, chưa ở AppRoot; int-state C3–C5 còn thiếu. Không dùng API PlayerInventory/save v5 prototype làm hợp đồng hiện tại.
 
-- Ray/sphere cast từ tâm camera, mask gồm Environment và Interactable, lấy vật gần nhất. Kiểm tra **An đến vật ≤3 m** và LOS từ nhân vật, không lấy khoảng ray camera làm tầm tay.
-- Một lời nhắc; nhấn E kiểm tra lại CanInteract. Pickup đi qua đường tương tác này, không có trigger đồng thời tự cấp đồ.
-- Đèn thường: miễn năng lượng, reveal văn tự trong **5 m** và có LOS; lưu đã đọc nếu là lore nhiệm vụ.
-- Focus: **8 m**, góc toàn phần **60°**, kiểm tra vật cản bằng raycast Environment, nguồn/hướng hợp lý với tay cầm đèn.
-- Seal: giữ **1,5 s**; mất chiếu quá **0,25 s** reset tiến độ. Ghi cleared trước, rồi mở đường/VFX một lần.
-- Địch: chiếu liên tục **1 s** → nhận damage **×1,5** trong **4 s**; chiếu tiếp làm mới thời hạn, không choáng vô hạn. Hiệu ứng tạm không lưu.
-- Năng lượng tối đa **100**; Focus tiêu **12/s**; ngừng Focus **1 s** rồi hồi **20/s**, kể cả đèn tắt. Hết năng lượng dừng Focus/báo ngắn, luôn có thể đợi hồi để qua cửa; không nhiên liệu hiếm bắt buộc.
-- Gameplay LOS/cone/time độc lập Light/VFX và chất lượng đồ họa; có Gizmos để kiểm tra. Pause không cộng tiến độ.
+Mảnh C1 hiện `relic_drum_a/b/c`; yêu cầu C1-R11 chuẩn `fragment_*` chưa làm. Chỉ đổi cùng migration/catalog/ref, không đổi lẻ ID đang có save. Mốc C1: `cp_trai`, `cp_dien_trong`, `cp_truoc_dan`, `cp_kim_quy`; phục dựng Puzzles `c1_relic_restored`. Mốc C2: `c2_cp_start`, `c2_cp_mid`, `c2_cp_arena`; C3–C5 theo spec, chưa đăng ký runtime.
 
-Nguồn: kế hoạch §11, §24.
+Snapshot đầy đủ: chương/scene/mốc, túi, năng lực, mảnh/công cụ, puzzle/cửa/seal/pickup, lore/quiz, trùm, tiến trình/ending và int-state đất/nước khi triển khai. Tải thay toàn bộ, reset trạng thái tạm, đặt actor tại mốc an toàn, hồi đầy chỉ số, cuối cùng bật input/AI. Chết không giữ đồ kiếm sau save.
 
-## 7. Hai puzzle
+Một writer main thread: capture→tạm cùng thư mục→flush→đọc validate→replace/backup. Lỗi giữ bản cũ, chỉ báo lưu/hoàn thành khi ghi thành công. NewGame xác nhận khi có save và chỉ thay ô cũ sau khởi tạo mới an toàn. File hiện `save_v1.json`+`.bak`/`.tmp`; tên file không phải schema. Native validation, NewGame và RelicAltar còn gap bảo toàn dữ liệu, không tự gọi các hợp đồng này hoàn thành.
 
-**Trống Đồng — `pz_trong_01`:**
+## 8. Tri thức và nội dung
 
-- Ba ký hiệu khác hình A/B/C; lời giải mẫu **A → C → B** lộ qua đèn. Kiểm tra thứ tự, không chấm nhịp mili giây; không giới thiệu chuỗi gameplay là bản nhạc cổ xác thực.
-- Debounce **0,2 s**; Unsolved/Listening/Failed/Solved; giữ currentIndex của lượt hiện tại.
-- Đúng tăng index; đủ chuỗi ghi solved trước rồi mở cửa/bệ. Sai phản hồi rồi reset index về 0 sau khoảng ngắn; không mất nguyên liệu/khóa cửa.
-- Reset chỉ xóa lượt chưa xong. Solved bỏ input; ApplySolvedState gọi nhiều lần an toàn. **Nhận fragment_b là thao tác riêng**, kiểm tra chưa nhận.
-- Prefab dự kiến Puzzle_Drum_01 + PersistentId/controller; Drum_A/B/C có collider/interactable/noteId; gán cửa, bệ, renderer ký hiệu, AudioSource.
-- Test ACB, AB, ACA, giữ/spam, reset, rời phòng, chết/load; giải được khi tắt âm.
+Nhãn **Lịch sử/Truyền thuyết/Tự nhiên** trên từng bia/câu. Không hỏi Hắc Sương/Linh Thần/chuỗi gõ hư cấu như sự thật. C2 dễ, C3–C4 khó dần, C5 tổng hợp/sắp xếp; đáp án tìm được từ bia. Sai có giải thích/thử lại/đủ đồ. Điểm suy từ QuizFirstTry; luật đúng lần đầu phải giữ qua save/restart, không chỉ RAM.
 
-**Ánh sáng — `pz_guong_01`:**
+Nội dung đối chiếu nguồn tin cậy trước build, có hồ sơ/sourceRef và validator. `verified:1` hiện có không tự chứng minh KN01; nhật ký ghi nhiều mục chỉ đối chiếu kiến thức AI. Lượt đồng bộ này không xác minh web từng bia/câu.
 
-- Một nguồn cố định, tối đa **2 gương**, mỗi gương **4 nấc 90°**, ngọc nhận sáng; lưu cấu hình lời giải trong thiết kế. Không tách tia/đổi màu/quang học động phức tạp.
-- Ngọc nhận liên tục **1 s** → solved và mở bệ fragment_c. Trước solved mất tia reset; sau solved khóa kết quả/cửa, khóa xoay hoặc dựng lại hình solved khi load. Không cần lưu lượt xoay dang dở.
-- Raycast là logic; LineRenderer chỉ vẽ. Mask có cả vật cản/mục tiêu; tường chặn tia; đúng mặt phản xạ mới dùng Vector3.Reflect(direction, hit.normal), offset điểm bắt đầu tránh tự va.
-- Giới hạn **3 phản xạ**, tổng chiều dài **40 m**, mặt lưng không phản xạ.
-- Test tia thẳng → 1 gương → 2 gương; thử đủ **16 tổ hợp**, tường chắn, hai gương chiếu nhau. Chỉ nối thưởng sau khi logic ổn.
+## 9. Môi trường, UI/audio và asset
 
-Nguồn: kế hoạch §12–13, §24, §35.
+**Yêu cầu tiếp theo 04/11/2026:** dựng lại bối cảnh **toàn bộ năm khu C1** theo năm ảnh người dùng gửi; sửa đá/cỏ lệch tiếp xúc; chỉ dùng asset miễn phí, cần bộ nào thì tìm nguồn miễn phí và báo người dùng nhập. Vẫn theo low poly đã chọn. A09/A11/A16 và cột A10 có trên đĩa đủ cho lượt này; có thể dựng mesh trang trí riêng, không cần tải bộ trả phí. Không đổi tuyến/puzzle/ID/save hoặc làm model actor mới. Xem [CHAPTER01_ENVIRONMENT](CHAPTER01_ENVIRONMENT.md) và STATUS để phân biệt ảnh tham chiếu, art đã ghép và kiểm thử.
 
-## 8. Combat, AI và Hộ vệ
+Trại mẫu từ cửa tối ra vùng nắng: lửa trái, bàn giữa, lối Vườn Rêu phải. Dựng **92_EnvironmentPreview**, chuyển **ART_Camp** vào **02_HangLinhMach/World_Geometry/ENV_01_Camp** sau kiểm tra. Đá lớn→cây→đồ nhỏ; xem từ spawn/cạnh bàn/cửa bằng camera thấp. Giữ collider nền/tuyến 20×20 m và hành lang 4×10 m/lòng 3 m hiện có; đây không phải kích thước hang thật.
 
-| Chỉ số khởi điểm | An | Hắc Ảnh | Hộ vệ Đá |
-| --- | --- | --- | --- |
-| HP | 100 | 60 | 180 |
-| Damage | Dao 20 | 15 | Quét 20, nện 25 |
-| Stamina | 100 | Không mô phỏng | Không mô phỏng |
+Bộ chính A09 Mines and Cave Set, A11 Ultimate Stylized Nature Pack, A16 Survival Pack. A10 dành di tích sau, A12 thay thế, A14 chỉ dùng khi được chọn. Mẫu hư cấu lấy cảm hứng đá vôi/hố sụt/cây sâu trong hang. Dùng wrapper/variant/material dự án, không sửa source nếu tránh được; GUID/.meta đi cùng asset. Model dưới object chứa script, giữ ref/ID/spawn. Ghi nguồn/license/credit/khác biệt bản phân phối; bảng asset không chứng minh đã tải/đạt.
 
-- Sprint 8 stamina/s, dao 10/đòn, né 25; hồi 20/s sau 1 s không tiêu. Thuốc hồi 35, chặn ở max HP và không dùng khi đầy.
-- Đòn dao **0,65 s**: windup 0–0,15; active 0,15–0,30; recovery đến hết; tầm khoảng **1,8 m**. Hướng chốt đầu đòn, chỉ quay giới hạn lúc lấy đà.
-- OverlapCapsule/vùng quét phù hợp, tìm IDamageable gốc, lọc đội/LOS. Tập mục tiêu theo mã đòn: nhiều collider một địch chỉ nhận một lần.
-- CombatController nắm thời gian logic; Animation Events cho SFX/VFX, không làm nguồn damage duy nhất. FPS thấp phải kiểm tra giao nhau của khoảng frame với active window.
-- Hurt có thể ngắt windup theo luật; Dead luôn hủy đòn/hitbox. Reset invulnerability, speed, tập trúng khi thoát trạng thái. Không tranh quyền dịch chuyển với motor.
-- Hắc Ảnh: Idle/Patrol 2–3 điểm → Chase → Attack; nhận biết **10 m**, góc toàn phần **120°**, LOS; đánh gần **1,7 m**, cooldown **1,6 s**. Mất dấu >3 s → Search ngắn → Return; leash khoảng **18 m** từ điểm sinh.
-- Trước damage kiểm tra đích sống/tầm/tường; Animator Attack không đủ để gây damage. Dead dừng Agent và đánh, tan sương, loại khỏi phiên.
-- Agent là nguồn dịch chuyển địch; không thêm Rigidbody động/root motion tranh quyền. NavMeshSurface, Agent Type đúng, vùng nguy hiểm Not Walkable, cửa đóng chặn thống nhất (ví dụ obstacle carving).
-- Địch hữu hạn; tối đa **3 Hắc Ảnh hoạt động gần An**. Địch thường reset ở điểm sinh khi load; Hộ vệ độc nhất theo ID defeated.
-- Hộ vệ dùng chung EnemyBrain/damage/weaken, không framework boss riêng. Quét: báo **0,8 s**, active **0,2 s**, damage20, hồi **1,2 s**. Nện: báo **1,2 s**, radius khoảng **3 m**, active **0,25 s**, damage25, hồi **1,5 s**.
-- Gần → quét, trung bình → nện, xa → đuổi. Có báo hiệu đọc được, không vùng damage vô hình sau khi hiệu ứng hết.
-- Checkpoint ngoài cổng; vào trận khóa cổng. Chết phục hồi toàn snapshot ngoài cổng, không resume nửa trận. Thắng ghi `guardian_01`, mở cổng/bệ.
-- Focus 1 s làm yếu Hộ vệ 4 s theo luật chung; không đòi vật phẩm hiếm hay năng lượng đầy khi vào. Trận thắng mục tiêu **1–3 phút**, đo người mới trước chỉnh HP.
-- Phục dựng đủ điều kiện: `relicRestored=true`, checkpoint về `cp_kim_quy`, save an toàn, camera/ánh sáng/nhạc kết, khóa thưởng lại. Continue không sinh lại Hộ vệ/mảnh.
+UI Việt/TMP/fallback đủ dấu, một EventSystem/UI input, Esc theo lớp panel. Giữ HUD Vườn Rêu/progress 3/2 và 3 slider Master/Music/SFX; routing còn định hướng Ambience/UI, ambience 3D/UI2D, fade, bước chân theo animation/quãng đường. Code hiện thiếu nhiều phần audio/HUD sau merge, xem MATRIX.
 
-Nguồn: kế hoạch §14–16, §25.
+URP: vòm mesh ghép, không tạo cả hang bằng heightmap; baked light/probe cho tĩnh, ít đèn động sau đo, fog/particle kiểm overdraw. Không mặc nhiên có volumetric fog của HDRP. Trại mới chỉ cấu hình đèn/probe thử, chưa bake GI hoặc đo FPS.
 
-## 9. Inventory và chế thuốc
+## 10. Kiểm chứng và tiếp nối
 
-**Chín định nghĩa**: `item_la_cam`, `item_linh_chi`, `item_thuoc_mau`, `equipment_dao`, `equipment_lantern`, `fragment_a`, `fragment_b`, `fragment_c`, `relic_kim_quy`.
+- Mục tiêu 60 FPS ở 1080p trên máy tham chiếu chưa chốt; cần median/P95, scene cycles/memory/save-load, Low/Medium vẫn đọc gameplay. Không dùng ảnh Editor/bot làm benchmark.
+- Camp mới có 53 checks Play Mode API/controller và 115 mẫu khoảng trống; không thay chơi tay/toàn C1–C2/build. Report Windows 02/11 và bot nhánh cũ phải giữ nhãn phiên bản/phạm vi.
+- Đọc lại đĩa trước sửa, giữ thay đổi ngoài công việc. Đợt đồng bộ tài liệu ban đầu không sửa gameplay; các lượt điều khiển/art sau đó có phạm vi và kiểm chứng riêng trong STATUS. Không tự làm C3–C5/actor/quái/sửa backlog vì audit liệt kê thiếu.
+- Sau thay đổi đáng kể cập nhật STATUS bằng file/bằng chứng/ngày/việc còn lại; quyết định user mới cập nhật MEMORY/MATRIX. Không biến nhận xét audit thành yêu cầu mới.
 
-- Túi **12 ô**, nguyên liệu stack **10**, thuốc stack **5**. Chọn ô/xem số lượng; chưa cần drag/drop/trọng lượng.
-- Dao/đèn cấp một lần, không chiếm ô/không vứt. Ba mảnh ở tập ID riêng, không mất do đầy túi. Cổ vật hoàn chỉnh suy từ relicRestored, hiển thị nhật ký.
-- TryAdd trả lượng nhận và dư. Pickup chỉ đánh dấu collected khi hết lượng. Bản bắt buộc mỗi pickup đúng **1 đơn vị**; nếu mở rộng stack ngoài thế giới phải lưu phần còn lại.
-- Q: sống, chưa full HP, có thuốc, hết cooldown **2 s**; một lệnh trừ 1 thuốc + hồi35. Không tiêu hai lần cùng press. Dùng nhanh ngoài menu, túi chỉ xem.
-- Craft tại trại: **1 lá cẩm + 1 linh chi → 1 thuốc máu**. Kiểm tra inventory **sau giao dịch**: ô trống do tiêu nguyên liệu có thể dùng chứa kết quả.
-- Thử trên bản thay đổi tạm, commit toàn bộ khi trừ/thêm đều hợp lệ; thất bại trả lý do và giữ túi nguyên. UI không Remove/Add riêng.
-- Mỗi craft thành công tại trại yêu cầu save an toàn. Ở bước tích hợp **02/11/2026**, yêu cầu hiện hành dùng **E chế trực tiếp**, rồi người chơi **E tại checkpoint để lưu thủ công**; thông báo chế thành công chỉ xác nhận runtime inventory. Chưa có panel chế thuốc, không tự gọi SaveAtCamp sau mỗi lần chế.
-
-Nguồn: kế hoạch §17, §25.
-
-## 10. Save, load, checkpoint — các quy tắc phải giữ
-
-- Checkpoint ổn định: **`cp_trai`, `cp_dien_trong`, `cp_truoc_dan`, `cp_kim_quy`**.
-- Save tại trại, sau puzzle lúc an toàn, sau phục dựng. Vị trí respawn là Transform checkpoint đang kích hoạt, không vị trí giữa nhảy/trận. Tại mốc hồi đầy HP/stamina/lantern energy.
-- Snapshot: inventory, equipment, fragments, cửa/puzzle, seals, pickups, lore, unique enemies, relicRestored, thời gian chơi và checkpoint/scene. Reset buff tạm và puzzle dở khi load.
-- ID bền cho puzzle/pickup/seal/checkpoint/địch độc nhất; không tên object, hierarchy index, GetInstanceID. Công cụ Editor/build phát hiện ID rỗng/trùng sau duplicate.
-- Header `schemaVersion`, `buildVersion`, `timestamp`; DTO Serializable List/array, runtime HashSet chuyển list; JsonUtility không lưu Dictionary trực tiếp. Không serialize GameObject/SO thành state.
-- Ví dụ nguồn: sceneId logic `HangLinhMach` (cần catalog ánh xạ scene file), schema1, build0.1.0; solvedPuzzles, clearedSeals, collectedPickups, readLoreIds, fragments, defeatedUniqueEnemies, equipmentGranted, relicRestored, elapsedPlaySeconds. Header có timestamp dù ví dụ JSON minh họa không đưa trường này.
-- Capture main thread sau giao dịch. Một writer; ghi `save.tmp` cùng thư mục `save.json`, flush/close, đọc lại validate, thay chính có backup (Windows) hoặc rename lần đầu. Dùng `Application.persistentDataPath`.
-- Ghi lỗi giữ file cũ, chỉ báo đã lưu sau thành công. Load ưu tiên chính, hỏng thử backup hợp lệ. Schema mới hơn không hỗ trợ: từ chối có kiểm soát, giữ file gốc; ID lạ xử lý rõ.
-- Restore đợi scene/registry, thay toàn state, apply thế giới, đặt An, HUD, cuối cùng AI/input. Sau save nhặt/dùng rồi chết phải rollback cả đồ trong túi lẫn đồ thế giới; không trộn phiên gây nhân đôi.
-- Không cần mã hóa offline. Checksum kiểm tra hỏng, không chống sửa save; không BinaryFormatter hoặc coi Base64 là bảo vệ.
-- Settings dùng PlayerPrefs riêng: volume, sensitivity, window/fullscreen, quality. Save tối thiểu từ tuần2, không đợi cuối kỳ.
-
-Nguồn: kế hoạch §7, §18–19, §26, §36.
-
-## 11. UI, art, audio và hiệu năng
-
-- UI: MainMenu (New/Continue/Settings/Exit), HUD HP/stamina/đèn/thuốc/objective, một prompt E, túi12 ô, nhật ký mục tiêu/3 lore, crafting và lý do thất bại, pause, chết, kết. Continue chỉ khi save hợp lệ.
-- Font TMP có đủ dấu Việt, icon kèm nhãn; puzzle khác hình chứ không chỉ màu/âm. Canvas reference1920×1080, test1280×720/1080p/16:10; HUD + panel menu có thứ tự; **một EventSystem + InputSystemUIInputModule**.
-- Pause/menu đổi map/cursor đúng trạng thái phiên, không bật Gameplay khi đang Dead/Loading. Master/Music/SFX volume, mouse sensitivity, cửa sổ/toàn màn hình, Low/Medium.
-- Vòm hang bằng mesh ghép; Terrain cho nền/giếng trời, không dùng heightmap để tạo toàn hang rỗng. Phòng/đường nối kiểm soát ánh sáng/camera/AI.
-- Tầng giếng trời xanh/nắng xuyên sương; di tích đá, Chim Lạc/hoa văn Việt; tầng sâu tinh thể tím/đỏ. Phong cách cần thống nhất dù asset từ nhiều nguồn.
-- Baked light cho tĩnh, ít dynamic light và probe nhân vật; nước đơn giản. URP không mặc định có volumetric fog tương đương HDRP; fog nền/particle/mesh mờ có đo chi phí.
-- An cần Idle/Walk/Run/Jump/Fall/Land/Attack/Dodge/Hurt/Death/Interact. Hắc Ảnh Idle/Walk/Attack/Hurt/Death; Hộ vệ thêm 2 đòn báo trước. Socket trước IK; root motion không tranh motor.
-- AudioMixer Master/Music/SFX/Ambience/UI; ambience nước/gió 3D, UI2D; fade khám phá/combat/kết. Bước chân event/quãng đường, không mỗi frame; pause giữ âm UI.
-- Nhạc cụ Việt là định hướng bản sắc; âm phép/kim loại/ambient tạm không được gọi là bản thu trống đồng hoặc nhạc cụ Việt xác thực.
-- Mục tiêu **60 FPS ở1080p Medium trên máy tham chiếu nhóm chọn tuần1**, không cam kết mọi máy. Chưa có kết quả đo thì ghi chưa đo.
-- Đo build tuyến3 phút ×3 lượt, median/P95 frame time (60FPS≈16,7ms), tránh giật lặp >33ms; vòng game→menu3 lần kiểm tra bộ nhớ; save/load10 lần; 3 địch ở cảnh nặng; low/medium luôn đọc báo hiệu.
-- Profile CPU/GPU Development Build, Deep Profile chỉ truy vết hẹp; sửa đèn/bóng/transparency/VFX/renderers/alloc theo bằng chứng; đo lại Release. Cache, không FindObjectOfType/Resources trong Update; LOD/culling/collider đơn giản.
-- Quality chỉ đổi hiển thị, không đổi beam ray, lantern detection, damage hay thời gian AI.
-
-Nguồn: kế hoạch §20–22, §34–39; tài liệu ý tưởng phần art/audio.
-
-## 12. Lộ trình 12 tuần và điều kiện nghiệm thu
-
-Giả định 2×15 giờ/tuần×12 = **360 giờ**: 300 thực hiện +60 dự phòng. Ba người cùng giờ =540, phần thêm180 không tự thành tính năng bắt buộc. A chủ trì điều khiển/đèn/combat; B môi trường/puzzle/inventory/quest/save/UI; C nếu có nhận art/UI/audio/test. Cả nhóm cùng hiểu build/save.
-
-| Tuần | Nội dung/mốc | Giờ cơ sở + dự phòng |
-| --- | --- | --- |
-| 1 | Scope, project/repo, input, capsule, sơ đồ/ID/asset, máy đo; build2 máy | 20+10 |
-| 2 | Controller/camera, Animator nền, GameSession/checkpoint/DTO/save tối thiểu | 26+4 |
-| 3 | Interaction/lantern, Vườn Rêu/lore/inventory, mảnhA có save | 30+0 |
-| 4 | Hai puzzle thử, trại→Điện Trống 8–12 phút; người mới thử | 30+0 |
-| 5 | Damage/stamina/dodge/AI, một trận nhỏ; gương vào Hành Lang Quang | 28+2 |
-| 6 | Hộ vệ, chết/đánh lại, thuốc/crafting nguyên tử | 28+2 |
-| 7 | Full tuyến tạm, world state/save/quest/respawn/kết | 28+2 |
-| 8 | Tích hợp0.8, toàn chương/Continue/respawn; gate xét mở rộng | 26+4 |
-| 9 | Polish dựa playtest, art/light/audio; mở rộng chỉ nếu đã chọn | 26+4 |
-| 10 | Đo/tối ưu, **khóa nội dung**, tắt mở rộng chưa qua test | 22+8 |
-| 11 | Regression/backup/schema/scene cycles; RC1 có commit/Editor/packages | 20+10 |
-| 12 | Release máy khác, hồ sơ/video/demo8–10 phút, tag v1.0-demo | 16+14 |
-
-Gói công 300h: công cụ18, controller32, đèn28, puzzle32, combat/AI42, item18, quest/save28, level/art36, UI/audio22, test/build/docs44. Thẻ có ID/kết quả/người/giờ/phụ thuộc/test; trạng thái Chưa làm→Đang làm→Chờ tích hợp→Chờ kiểm tra→Hoàn thành. Tích hợp giữa tuần, build nghiệm thu cuối tuần.
-
-- Triển khai theo phụ thuộc: nền project/blockout/controller/session → catalog/interaction/đèn/puzzles/đoạn đầu → damage/AI/Hộ vệ/inventory/quest → full save/art/UI/audio/đo/build. Save tối thiểu chạy song song sớm.
-- Tuần4 trễ: dừng trang trí, sửa interaction/puzzle. Tuần8 trễ: bỏ nỏ/móc dây, giảm địch/cutscene, giữ save/gợi ý/test. Tuần10 còn blocker: chỉ sửa và giữ build dự phòng.
-- CT01/02 movement/camera; IN01/02 LOS/range/reward; LT01/02 seal/energy; PZ01/02 trống/16 gương; CB01/02 single-hit/i-frame; AI01/02 LOS/leash/path; IT01/02 craft/Q; QS01 event replay; BS01 boss retry.
-- SV01–07: trước puzzle, sau puzzle, rollback sau chết, backup hỏng chính, schema/ID lạ, kết chương, ID trùng. UI01/02 input qua menu/độ phân giải/tắt âm; PF01 đo build; RL01 full game máy không Unity.
-- Ghi từng ca build/máy/bước/kết quả/người/bằng chứng. Không gọi “đã test build” nếu mới Editor; không gọi chức năng xong chỉ vì placeholder/static check.
-- Bàn giao không crash/mất save/nhân đôi/blocker; known issues không thay được tính năng bắt buộc. Gói đủ thư mục build (không chỉ exe), source Assets/Packages/ProjectSettings/.meta, README/phím/save/hardware, design/phân công/scope log, test/perf evidence, Asset_Sources, video dự phòng.
-- Demo8–10 phút: bối cảnh→đèn/seal→trống/gương→combat→save/Continue→kiến trúc/kết quả. Snapshot demo riêng đúng build, không ghi đè save cá nhân; vẫn cần bằng chứng chơi từ đầu đến cuối.
-
-## 13a. Nguyên tắc người dùng chốt ngày 01/11/2026 (toàn game)
-
-- **Cơ chế trước, đồ họa sau:** mỗi chương phải chơi được từ đầu đến cuối bằng khối cơ bản (logic, tương tác, UI blockout, save/load, flow) trước khi làm đồ họa cuối.
-- **Concept đồ họa cố định:** Stylized Semi-Realistic, huyền ảo cổ tích Việt, Đông Sơn/Hồng Bàng. Trước khi import phải trình concept + danh sách asset để người dùng duyệt; không tải/dựng asset tràn lan.
-- **Cơ chế tinh gọn, có ý nghĩa cốt truyện;** không thêm cơ chế hoành tráng trên giấy nhưng vô dụng hoặc kéo dài sản xuất.
-- **Hỏi người dùng ở điểm then chốt:** góc nhìn, biến đổi môi trường, cách di chuyển mới, diễn biến cốt truyện.
-- **Cơ chế mới mỗi chương lấy từ Linh Thần/chủ đề của chương** (Chim Lạc, Sơn Tinh, Thủy Tinh...); không bắt buộc phải xoay quanh Lồng Đèn Sen và Trống Đồng, hai thứ này vẫn là công cụ nền xuyên suốt.
-- **Mỗi chương có các khu được định hình rõ.** Chương cuối gọi là **Chương 5**, là màn kết game, **khó hơn các chương trước một chút**.
-- **Ưu tiên cơ chế rẻ về đồ họa:** tránh đu dây, cưỡi chim, bơi... vì cần nhiều animation/model. Ưu tiên biến thể của bộ di chuyển sẵn có (chạy, nhảy, lộn né theo hướng, tổ hợp phím) và đặt độ phức tạp vào vật thể môi trường thay vì nhân vật.
-- **Game mang tính lịch sử – giáo dục:** mỗi chương có nội dung kiến thức (bia văn tự) và câu hỏi đi kèm. Mỗi mục ghi rõ loại **Lịch sử / Truyền thuyết / Tự nhiên**; không bao giờ hỏi phần hư cấu của game như sự thật. Nội dung phải đối chiếu nguồn tin cậy (SGK Lịch sử, bảo tàng, UNESCO...) trước khi đưa vào build.
-- **Khuôn mỗi chương giữ như chương 1:** khu học → câu đố → mảnh cổ vật → đánh quái → đấu trùm → thức tỉnh Linh Thần; thêm **câu hỏi kiến thức có cơ chế trả lời để nhận vật phẩm**.
-- **Chương 5 (màn cuối) dài hơn, khó hơn, nhiều cơ chế hơn** các chương trước để kết game trọn vẹn.
-- **Bộ di chuyển (lộn theo hướng, tổ hợp phím) có animation mượt, làm một lần ở chương 1, dùng lại cho mọi chương. Chương 1 không có lộn né; Kim Quy trao toàn bộ bộ di chuyển khi hoàn thành chương 1.**
-- **Kế hoạch đã chốt ngày 01/11/2026** và ghi vào phần 40–54 của `spec/Ke_hoach_game_Son_Doong_12_tuan.md`, ưu tiên hơn phần 1–39 khi mâu thuẫn. Tóm tắt: 5 chương ngắn (chương 2–4 mỗi chương 5 phòng, 1 cơ chế mới: Cột Gió, Ấn Núi, Ngọc Nước; chương 5 có 6 phòng, dài và khó nhất); khóa mục tiêu có; Ctrl không hướng thì lộn theo hướng nhìn; Bệ Vấn Đáp trả lời sai vẫn nhận đủ đồ; tri thức từ chương 2, mọi lứa tuổi khó dần; trùm là sinh vật có animation, tìm asset miễn phí trước rồi mới tự làm; 2 kết (Kết 2 cần cơ chế ẩn Vành Ký Ức ở chương 5); một mức độ khó; lịch sản xuất thực tế 7 ngày.
-
-## 13. Mở rộng — lưu để hiểu, không tự triển khai
-
-- Nỏ: damage15, cooldown1s, tốn20 năng lượng/phát; phím1 dao/2 nỏ; RMB dao=Focus, nỏ=aim (Focus tạm tắt), HUD đúng. Projectile sinh muzzle theo aim có kiểm tra vật cản, sweep/Rigidbody, bỏ chủ thể, damage một lần. Không yêu cầu nỏ để qua tuyến.
-- Móc dây: anchor cố định, đường định sẵn, tầm khởi điểm12m; Traversal chặn Attack/Jump, capsule kiểm tra, hủy an toàn khi bị cản/điểm đến sai/chết/scene. Không bất tử mặc định, không save giữa đường; chỉ lối tắt/nhánh phụ.
-- Leo/thuyền/XP/skill/NPC/recipe mới cho giai đoạn sau; một nguồn movement/input khi đổi chế độ; save schema migrate khi mở rộng vùng/phương tiện.
-
-Nguồn: kế hoạch §32–33. Danh mục asset và phần tự làm xem SPEC_INDEX; không nhập thêm asset chỉ vì nó có trong bảng.
+Bản trước đồng bộ ở [history](history/PROJECT_MEMORY_before_sync_2026-11-04.md). Spec giữ nguồn theo ngày để truy nguyên, ưu tiên mới ghi tại đây và SPEC_INDEX.

@@ -1,0 +1,154 @@
+[
+  {
+    "path": "Assets/_Project/Scripts/Player/DodgeController.cs",
+    "sha256": "07222cf9b62331b21a1f89197bc64dd8f5a0fe34e800676372a9aa96dd6d0205"
+  },
+  {
+    "path": "Assets/_Project/Scripts/Player/DodgeController.cs.meta",
+    "sha256": "75ef38a8556172f45c0b2ff631fa3817950d9e1e6b5812e0cf859197978f76e1"
+  },
+  {
+    "path": "Assets/_Project/Scripts/Player/LanternController.cs",
+    "sha256": "21afa672936f40bbdba44ed9d275ecb5d23a71e190aa38143d98c29cc7425b44"
+  },
+  {
+    "path": "Assets/_Project/Scripts/Player/LanternController.cs.meta",
+    "sha256": "dff8b6d01eaa6cf1efc7e9b4e512e1407f11b288898881d1a1a08bfe739cb9e3"
+  },
+  {
+    "path": "Assets/_Project/Scripts/Player/LanternFocusScanner.cs",
+    "sha256": "22d40e9752b528a3ded4cbd20cbea3b5862527e17102bdf71beaf0bcbcd58a9a"
+  },
+  {
+    "path": "Assets/_Project/Scripts/Player/LanternFocusScanner.cs.meta",
+    "sha256": "273ef6456ab7f16e0b7dc79d636136c77d09356c3c9b81c0a8774f25713bb4b0"
+  },
+  {
+    "path": "Assets/_Project/Scripts/Player/LockOnController.cs",
+    "sha256": "dac35d4c00167e963eb7ab44a929d47e772863aa21b135b6f81e99cfba947afc"
+  },
+  {
+    "path": "Assets/_Project/Scripts/Player/LockOnController.cs.meta",
+    "sha256": "bd64cb4f6a0d56c0d0a8949a1b9ab2d39edb6af6d7911e5b2f53afe27089d752"
+  },
+  {
+    "path": "Assets/_Project/Scripts/Player/PlayerAbilities.cs",
+    "sha256": "1557a3b9dabb8b0021023a89b61fda4cd59631b2db62fa3b2ab61525d657721f"
+  },
+  {
+    "path": "Assets/_Project/Scripts/Player/PlayerAbilities.cs.meta",
+    "sha256": "a4ac8e2f7d1613031b93747d02ee376b864d95ada0cee54b14bdd5e695575b8d"
+  },
+  {
+    "path": "Assets/_Project/Scripts/Player/PlayerAnimator.cs",
+    "sha256": "3339ebbaf9498af9f897fc361ec00ff45b0ae09a79c92eafc5288326c569a13b"
+  },
+  {
+    "path": "Assets/_Project/Scripts/Player/PlayerAnimator.cs.meta",
+    "sha256": "1e751b31d73137b6dee8aef12c5b592af6f3395c8e7a01981f5a2ad6141f88bd"
+  },
+  {
+    "path": "Assets/_Project/Scripts/Player/PlayerCameraController.cs",
+    "sha256": "aefee4c896a40d32d624af8878b726f59f9a144daf5aeff4a83ae48ffb5733bb"
+  },
+  {
+    "path": "Assets/_Project/Scripts/Player/PlayerCameraController.cs.meta",
+    "sha256": "f3be7257440779d0bc615af6d65d9dc542abe307c10f09af20d93b0b36272361"
+  },
+  {
+    "path": "Assets/_Project/Scripts/Player/PlayerMotor.cs",
+    "sha256": "78b113ed8da15a0968d01ab2939a954f1d4fae3fb25062bfaf7585a62ec54be6"
+  },
+  {
+    "path": "Assets/_Project/Scripts/Player/PlayerMotor.cs.meta",
+    "sha256": "dc9e5d45468889aa953edced18ceaa24bef7c0d716c8600b6ac312d5d73681a1"
+  },
+  {
+    "path": "Assets/_Project/Scripts/Player/PlayerStamina.cs",
+    "sha256": "10c39c4285e511b9304a98e9814290f5478766def6b66f3c90975d7350169b3f"
+  },
+  {
+    "path": "Assets/_Project/Scripts/Player/PlayerStamina.cs.meta",
+    "sha256": "0b8a14f2e709538b9d6e42def992f1a23c4e7a3db7fdd58e4e3ad6190a95d07c"
+  },
+  {
+    "path": "Assets/_Project/Scripts/Player/PlayerVitals.cs",
+    "sha256": "1ef6cf478487562449fe7b767d2a844326fcca2aa4babd32722896e217f41851"
+  },
+  {
+    "path": "Assets/_Project/Scripts/Player/PlayerVitals.cs.meta",
+    "sha256": "b778eeebef07d7e6178b88fe695e482705552ed85891dcfa88204e8f49cea8b8"
+  },
+  {
+    "path": "Assets/_Project/Scripts/Player/PotionUser.cs",
+    "sha256": "8eb86c23b20bf257e6584c8028391278c9fa54f1057417a95444c6d8ea6f535e"
+  },
+  {
+    "path": "Assets/_Project/Scripts/Player/PotionUser.cs.meta",
+    "sha256": "2e2dbe897886479ee24bcf608a0597aa4a30ebda544ca0d22b3c86cf88a86aac"
+  },
+  {
+    "path": "Assets/_Project/Scripts/Combat/CombatController.cs",
+    "sha256": "f2ac6ac31e67e74c8fc50f64fad0622838cd13e1ead5336d6dabf1c86960a3a5"
+  },
+  {
+    "path": "Assets/_Project/Scripts/Combat/CombatController.cs.meta",
+    "sha256": "c4dbe06abb786ede3a88faa75088ca2bd6521ce7ec8806e7db2c7524aeaf6009"
+  },
+  {
+    "path": "Assets/_Project/Scripts/Core/InputReader.cs",
+    "sha256": "532d98ead5bd0ef512bbfb5b5a01c7389f36d9097610021c6f9a9b8e6975a7e9"
+  },
+  {
+    "path": "Assets/_Project/Scripts/Core/InputReader.cs.meta",
+    "sha256": "13fe9366ddb2390e65c75055826da63bacc937a7e286936cef5865cb371b804e"
+  },
+  {
+    "path": "Assets/_Project/Scripts/Core/GameSession.cs",
+    "sha256": "11f847413553986ed7dac2076555509fb6716eb1404fa976f1368b042a452855"
+  },
+  {
+    "path": "Assets/_Project/Scripts/Core/GameSession.cs.meta",
+    "sha256": "d4cc6dc9d242bb84faad92419c70114fad8bf7f0cc93358a7168044f84506dbc"
+  },
+  {
+    "path": "Assets/_Project/Scripts/Interaction/InteractionScanner.cs",
+    "sha256": "47a538869872b2b0eef667cdc62990ed2cb185c329b6ac11a73a680ebd031e0b"
+  },
+  {
+    "path": "Assets/_Project/Scripts/Interaction/InteractionScanner.cs.meta",
+    "sha256": "2b01d44c0a562edd3148ec85479562eb10e97397f23b2c874809d1d1e28427dd"
+  },
+  {
+    "path": "Assets/_Project/Scripts/Interaction/CampCraftingTable.cs",
+    "sha256": "96a75ad68ad9278cf2daebc475774b899ca6f1d19f351541a757824e67c9ee55"
+  },
+  {
+    "path": "Assets/_Project/Scripts/Interaction/CampCraftingTable.cs.meta",
+    "sha256": "781a27499631115183203f43591d15ef187e74bb47ee95d8af5f01101af4895e"
+  },
+  {
+    "path": "Assets/_Project/Prefabs/Player/PF_An_Prototype.prefab",
+    "sha256": "7c5f1ee66b2a96df3a349ad5249d1fcd65eb276d54f771e46956123f0007f1be"
+  },
+  {
+    "path": "Assets/_Project/Prefabs/Player/PF_An_Prototype.prefab.meta",
+    "sha256": "a46f9b8d5d25d79bb7c9d36fd43862bfae74b5cf588128243acd7da9e8e8cc0b"
+  },
+  {
+    "path": "Assets/_Project/Animations/AC_An.controller",
+    "sha256": "a8b9e202206ab3c97568304ff22bc47a8e8d751c087753ce85d2584490b41501"
+  },
+  {
+    "path": "Assets/_Project/Animations/AC_An.controller.meta",
+    "sha256": "30cd08351bc32225f9bd722f2af4b621052d8c55a751d5eed5c28ecff466a1e6"
+  },
+  {
+    "path": "Assets/_Project/Editor/AnAnimationBuilder.cs",
+    "sha256": "727ded4bc98498fbcb0f6fca1fa5f9ae366b435e89f7bc1fea86e4f8ae95c2c9"
+  },
+  {
+    "path": "Assets/_Project/Editor/AnAnimationBuilder.cs.meta",
+    "sha256": "c224a9fa23896ff3fb57bfb1ef1b68747c0e3e695fe3a57acd7f8f4ab5203aad"
+  }
+]

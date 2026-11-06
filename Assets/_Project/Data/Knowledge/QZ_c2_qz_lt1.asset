@@ -14,18 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::QuizDefinition
   quizId: c2_qz_lt1
   tag: 0
-  question: "Ng\xF4i sao \u1EDF gi\u1EEFa m\u1EB7t tr\u1ED1ng \u0111\u1ED3ng th\u01B0\u1EDDng
-    \u0111\u01B0\u1EE3c hi\u1EC3u l\xE0 g\xEC?"
+  question: "H\xECnh nhi\u1EC1u tia \u1EDF t\xE2m tr\u1ED1ng trong bia \u0111\u01B0\u1EE3c
+    gi\u1EDBi thi\u1EC7u nh\u01B0 bi\u1EC3u t\u01B0\u1EE3ng g\xEC?"
   options:
   - "M\u1EB7t tr\u0103ng"
   - "M\u1EB7t tr\u1EDDi"
   - "B\xF4ng l\xFAa"
   - "Con m\u1EAFt"
   correctIndex: 1
-  explanation: "Ng\xF4i sao nhi\u1EC1u c\xE1nh gi\u1EEFa m\u1EB7t tr\u1ED1ng th\u01B0\u1EDDng
-    \u0111\u01B0\u1EE3c hi\u1EC3u l\xE0 m\u1EB7t tr\u1EDDi."
+  explanation: "Bia nh\u1EAFc c\xE1ch b\u1EA3o t\xE0ng gi\u1EDBi thi\u1EC7u h\xECnh
+    t\u01B0\u1EE3ng m\u1EB7t tr\u1EDDi."
   relatedLore: {fileID: 11400000, guid: a83df9a73a6e9af43b9d6050b5a3a63f, type: 2}
-  sourceRef: "SGK L\u1ECBch s\u1EED v\xE0 \u0110\u1ECBa l\xED 6 (ph\u1EA7n V\u0103n
-    Lang \u2013 \xC2u L\u1EA1c); B\u1EA3o t\xE0ng L\u1ECBch s\u1EED Qu\u1ED1c gia:
-    tr\u1ED1ng \u0111\u1ED3ng Ng\u1ECDc L\u0169, v\u0103n h\xF3a \u0110\xF4ng S\u01A1n."
+  sourceRef: "https://baotanglichsu.vn/DataFiles/2021/10/News/Ti%E1%BA%BFng%20Vi%E1%BB%87t/12.10.2021/Thong%20bao%20khoa%20hoc/Net%20dac%20sac%20cua%20nhom%20Bao%20vat%20Quoc%20gia...%20Nguyen%20Van%20Doan.pdf
+    | \u0111\u1ED1i chi\u1EBFu 05/11/2026"
   verified: 1

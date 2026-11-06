@@ -1,0 +1,28 @@
+{
+    "action": "apply",
+    "checks": [
+        "02_HangLinhMach: No missing scripts",
+        "02_HangLinhMach: Exit keeps world reference",
+        "02_HangLinhMach: Exit targets C2 start",
+        "02_HangLinhMach: C1 keeps five papers",
+        "02_HangLinhMach: Exit court approach has capsule clearance",
+        "02_HangLinhMach: Exit court approach has unobstructed interaction ray",
+        "02_HangLinhMach: Final checkpoint connects to exit court on existing NavMesh",
+        "92_EnvironmentPreview: No missing scripts",
+        "92_EnvironmentPreview: Exit keeps world reference",
+        "92_EnvironmentPreview: Exit targets C2 start",
+        "92_EnvironmentPreview: C1 keeps five papers",
+        "92_EnvironmentPreview: Exit court approach has capsule clearance",
+        "92_EnvironmentPreview: Exit court approach has unobstructed interaction ray",
+        "92_EnvironmentPreview: Final checkpoint connects to exit court on existing NavMesh",
+        "03_GiengTroiChimLac: No missing scripts",
+        "03_GiengTroiChimLac: One optional arrival guide",
+        "03_GiengTroiChimLac: Feather visual keeps original ability root",
+        "03_GiengTroiChimLac: Original blockout feather renderers are hidden",
+        "03_GiengTroiChimLac: C2 start spawn has floor",
+        "03_GiengTroiChimLac: C2 NavMesh retains its own asset",
+        "03_GiengTroiChimLac: Opening HUD points to feather"
+    ],
+    "failures": [],
+    "notes": []
+}

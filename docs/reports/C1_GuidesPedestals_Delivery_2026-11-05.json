@@ -1,0 +1,56 @@
+{
+  "date": "2026-11-05",
+  "files": [
+    {
+      "path": "Assets/_Project/Scenes/02_HangLinhMach.unity",
+      "sha256": "5c54a2b9aaf4ebbad7a9196ca04590b110b7c7a0331902a04dde3b7f698500cd"
+    },
+    {
+      "path": "Assets/_Project/Scenes/92_EnvironmentPreview.unity",
+      "sha256": "e32f3e842fd56510474f35c9aa512e34b9daeb1b43407ddfaec40d52238fe47d"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Core/WorldIds.cs",
+      "sha256": "a8a090797f8f309c1888ee9f5e3b60447f665c640918df4162642e1439b3f5ec"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Puzzles/PuzzleCluePickup.cs",
+      "sha256": "4733b1d0edb0448ed64e55a9d2a30f27b486430aec1114b7f98d437977375dd6"
+    },
+    {
+      "path": "Assets/_Project/Scripts/UI/JournalPanel.cs",
+      "sha256": "5fdc0b223033a8a11101060c05965c795b6f33940128a4c746a4970eca192848"
+    },
+    {
+      "path": "Assets/_Project/Scripts/UI/StoryCardPanel.cs",
+      "sha256": "7703eebc1c462435e5896adb20ec91e67e727ca4bfa3fa70597afc9ef8289118"
+    },
+    {
+      "path": "Builds/Chapter01Revision/Windows/SonDoong.exe",
+      "sha256": "e83058c236f35a720c27e465dc42d1549f13b25a8573dce464438b855764e7af"
+    },
+    {
+      "path": "Builds/Chapter01Revision/Windows/SonDoong_Data/Managed/Assembly-CSharp.dll",
+      "sha256": "08f7f7e9676ced3679338adb3274b2b117f8346809dfd15a380df160d897af2b"
+    }
+  ],
+  "personalSaveRestored": true,
+  "saveChecks": [
+    {
+      "file": "save_v1.json",
+      "restored": true
+    },
+    {
+      "file": "save_v1.json.bak",
+      "restored": true
+    },
+    {
+      "file": "save_v1.json.tmp",
+      "restored": true
+    }
+  ],
+  "creditsMatch": true,
+  "runtimeCluePresent": true,
+  "editorProbesExcluded": true,
+  "manualWindowsPlayVerified": false
+}

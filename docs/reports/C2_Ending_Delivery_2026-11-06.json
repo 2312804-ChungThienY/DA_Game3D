@@ -1,0 +1,99 @@
+{
+  "date": "2026-11-06",
+  "backup": "SourceAssets/SceneBackups/2026-11-06_C2Ending/004128",
+  "checks": [
+    "Unchanged SHA256: Assets/_Project/Scenes/02_HangLinhMach.unity",
+    "Unchanged SHA256: Assets/_Project/Scenes/92_EnvironmentPreview.unity",
+    "Unchanged SHA256: Assets/_Project/Scripts/Player/PlayerMotor.cs",
+    "Unchanged SHA256: Assets/_Project/Scenes/03_GiengTroiChimLac_NavMesh.asset",
+    "Preserved metadata: Assets/_Project/Scenes/03_GiengTroiChimLac.unity",
+    "Preserved metadata: Assets/_Project/Scripts/Knowledge/QuizSequence.cs",
+    "Preserved metadata: Assets/_Project/Scripts/UI/QuizPanel.cs",
+    "Preserved metadata: Assets/_Project/Scripts/Puzzles/RelicAltar.cs",
+    "Preserved metadata: Assets/_Project/Scripts/Interaction/ChapterExit.cs",
+    "Preserved metadata: Assets/_Project/Scripts/UI/JournalPanel.cs",
+    "Preserved metadata: Assets/_Project/Data/Chapters/C2/SC_C2_Awaken.asset",
+    "New asset and Unity metadata: Assets/_Project/Scripts/Knowledge/ChapterMemoryNotes.cs",
+    "New asset and Unity metadata: Assets/_Project/Editor/Chapter02EndingSetup.cs",
+    "New asset and Unity metadata: Assets/_Project/Tests/Chapter02EndingProbe.cs",
+    "New asset and Unity metadata: Assets/_Project/Data/Chapters/C2/SC_C2_RelicRestored.asset",
+    "Personal save restored: save_v1.json",
+    "Personal save restored: save_v1.json.bak",
+    "Personal save restored: save_v1.json.tmp",
+    "Final Play Mode report passed with expected scope"
+  ],
+  "failures": [],
+  "unchanged": [
+    {
+      "path": "Assets/_Project/Scenes/02_HangLinhMach.unity",
+      "before": "c94343aac7d18aeff8d1370fcedfd6d693c9be2ea25b4173bcff5d97dab0f57e",
+      "after": "c94343aac7d18aeff8d1370fcedfd6d693c9be2ea25b4173bcff5d97dab0f57e"
+    },
+    {
+      "path": "Assets/_Project/Scenes/92_EnvironmentPreview.unity",
+      "before": "896e58e8e8ce083fc8ed39f49ce6a5e542ac3bfd4338ceffe85ad085a2c2c141",
+      "after": "896e58e8e8ce083fc8ed39f49ce6a5e542ac3bfd4338ceffe85ad085a2c2c141"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Player/PlayerMotor.cs",
+      "before": "c8251f3692842671b98709ccf0358cbe800357bcf292cc29cdcaeed55ad6648d",
+      "after": "c8251f3692842671b98709ccf0358cbe800357bcf292cc29cdcaeed55ad6648d"
+    },
+    {
+      "path": "Assets/_Project/Scenes/03_GiengTroiChimLac_NavMesh.asset",
+      "before": "c7bd794aa3e2ec91fd67ed6e30245af2c7183b3615e7020edfaae9318b7b221f",
+      "after": "c7bd794aa3e2ec91fd67ed6e30245af2c7183b3615e7020edfaae9318b7b221f"
+    }
+  ],
+  "meta": [
+    {
+      "path": "Assets\\_Project\\Scenes\\03_GiengTroiChimLac.unity.meta",
+      "unchanged": true
+    },
+    {
+      "path": "Assets\\_Project\\Scripts\\Knowledge\\QuizSequence.cs.meta",
+      "unchanged": true
+    },
+    {
+      "path": "Assets\\_Project\\Scripts\\UI\\QuizPanel.cs.meta",
+      "unchanged": true
+    },
+    {
+      "path": "Assets\\_Project\\Scripts\\Puzzles\\RelicAltar.cs.meta",
+      "unchanged": true
+    },
+    {
+      "path": "Assets\\_Project\\Scripts\\Interaction\\ChapterExit.cs.meta",
+      "unchanged": true
+    },
+    {
+      "path": "Assets\\_Project\\Scripts\\UI\\JournalPanel.cs.meta",
+      "unchanged": true
+    },
+    {
+      "path": "Assets\\_Project\\Data\\Chapters\\C2\\SC_C2_Awaken.asset.meta",
+      "unchanged": true
+    }
+  ],
+  "notes": [
+    "7 Editor checks and 71 Play Mode checks; 0 unexpected runtime errors, 2 expected locked-temp-file diagnostics. No new Windows build/full-chapter claim."
+  ],
+  "saveBackupManifest": "Temp\\C2EndingBackup_20261105_175511045\\manifest.json",
+  "saves": [
+    {
+      "name": "save_v1.json",
+      "existedBefore": true,
+      "sameBytesOrAbsent": true
+    },
+    {
+      "name": "save_v1.json.bak",
+      "existedBefore": true,
+      "sameBytesOrAbsent": true
+    },
+    {
+      "name": "save_v1.json.tmp",
+      "existedBefore": false,
+      "sameBytesOrAbsent": true
+    }
+  ]
+}

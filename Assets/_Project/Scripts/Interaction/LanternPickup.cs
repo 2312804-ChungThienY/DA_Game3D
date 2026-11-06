@@ -38,6 +38,7 @@ public class LanternPickup : MonoBehaviour, IInteractable
         }
 
         collected = true;
+        SoundscapeRuntime.Play(SoundCue.Pickup,transform.position,.65f);
         gameObject.SetActive(false);
     }
 

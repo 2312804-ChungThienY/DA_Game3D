@@ -30,6 +30,7 @@ public abstract class BossBase : MonoBehaviour, IArenaBoss
     private bool dead;
 
     public bool IsActive { get; private set; }
+    public bool DefeatSavePending { get; private set; }
     protected bool Invulnerable { get; set; }
     protected bool InStunWindow => Time.time < stunUntil;
     protected float StunDamageMultiplier { get; set; } = 1f;
@@ -57,6 +58,9 @@ public abstract class BossBase : MonoBehaviour, IArenaBoss
 
     protected virtual void OnDisable()
     {
+        if (ai != null) StopCoroutine(ai);
+        ai = null;
+        IsActive = false;
         health.Died -= OnDied;
         health.Changed -= RefreshBar;
         if (worldState != null) worldState.Changed -= ApplyWorldState;
@@ -86,15 +90,22 @@ public abstract class BossBase : MonoBehaviour, IArenaBoss
 
     public void ResetBoss()
     {
+        // A defeated boss stays defeated; reload restores this from world state.
+        if (dead || (worldState != null && worldState.Has(StateSet.Bosses, bossId))) return;
         if (ai != null) StopCoroutine(ai);
         ai = null;
         IsActive = false;
+        Invulnerable = false;
+        stunUntil = float.NegativeInfinity;
+        stunCapRemaining = 0f;
+        OnReset();
         transform.SetPositionAndRotation(startPosition, startRotation);
         health.ResetToFull();
         if (bossBar != null) bossBar.SetActive(false);
     }
 
     protected abstract IEnumerator RunAI();
+    protected virtual void OnReset() { }
 
     // Trong cửa sổ choáng, tổng sát thương nhận không vượt damageCap.
     protected void BeginStunWindow(float duration, float damageCap)
@@ -105,7 +116,7 @@ public abstract class BossBase : MonoBehaviour, IArenaBoss
 
     private float FilterDamage(float amount)
     {
-        if (Invulnerable) return 0f;
+        if (!IsActive || dead || Invulnerable) return 0f;
         if (InStunWindow)
         {
             amount = Mathf.Min(amount * StunDamageMultiplier, stunCapRemaining);
@@ -120,7 +131,7 @@ public abstract class BossBase : MonoBehaviour, IArenaBoss
         get
         {
             GameSession session = AppRoot.Instance != null ? AppRoot.Instance.Session : null;
-            return player != null && !player.IsDead && (session == null || session.State == GameSession.SessionState.Playing);
+            return Time.timeScale>0f && player != null && !player.IsDead && (session == null || session.State == GameSession.SessionState.Playing);
         }
     }
 
@@ -128,7 +139,7 @@ public abstract class BossBase : MonoBehaviour, IArenaBoss
     protected IEnumerator Wait(float seconds)
     {
         float t = 0f;
-        while (t < seconds)
+        while (t < seconds || !CanAct)
         {
             if (CanAct) t += Time.deltaTime;
             yield return null;
@@ -140,19 +151,27 @@ public abstract class BossBase : MonoBehaviour, IArenaBoss
     private void OnDied(EnemyHealth _)
     {
         dead = true;
+        IsActive = false;
         if (ai != null) StopCoroutine(ai);
         ai = null;
         OnDefeated();
         foreach (Collider c in GetComponentsInChildren<Collider>()) c.enabled = false;
         if (bossBar != null) bossBar.SetActive(false);
         worldState.TryAdd(StateSet.Bosses, bossId);
-        if (saveOnDefeat != null && !string.IsNullOrEmpty(defeatCheckpointId)) saveOnDefeat.SaveAt(defeatCheckpointId);
+        TrySaveDefeat();
         if (AppRoot.Instance != null && AppRoot.Instance.UI != null)
-            AppRoot.Instance.UI.ShowToast($"{displayName} đã được giải thoát");
+            AppRoot.Instance.UI.ShowToast(DefeatSavePending?$"{displayName} đã được giải thoát, nhưng chưa lưu được chiến thắng":$"{displayName} đã được giải thoát");
         Invoke(nameof(Hide), 1f);
     }
 
     protected virtual void OnDefeated() { }
+
+    public bool TrySaveDefeat()
+    {
+        if(!dead)return false;
+        DefeatSavePending=saveOnDefeat!=null&&!string.IsNullOrEmpty(defeatCheckpointId)&&!saveOnDefeat.SaveAt(defeatCheckpointId);
+        return !DefeatSavePending;
+    }
 
     private void Hide() => gameObject.SetActive(false);
 

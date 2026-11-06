@@ -1,0 +1,38 @@
+{
+    "action": "apply",
+    "checks": [
+        "92_EnvironmentPreview: replaced only FBX visual under Drum_A; root position/rotation/scale, note, puzzle/audio/indicator refs and collider preserved.",
+        "92_EnvironmentPreview: replaced only FBX visual under Drum_B; root position/rotation/scale, note, puzzle/audio/indicator refs and collider preserved.",
+        "92_EnvironmentPreview: replaced only FBX visual under Drum_C; root position/rotation/scale, note, puzzle/audio/indicator refs and collider preserved.",
+        "92_EnvironmentPreview: Drum_A uses supplied FBX/URP PBR; no visual collider; existing puzzle and interaction collider valid.",
+        "92_EnvironmentPreview: Drum_B uses supplied FBX/URP PBR; no visual collider; existing puzzle and interaction collider valid.",
+        "92_EnvironmentPreview: Drum_C uses supplied FBX/URP PBR; no visual collider; existing puzzle and interaction collider valid.",
+        "02_HangLinhMach: replaced only FBX visual under Drum_A; root position/rotation/scale, note, puzzle/audio/indicator refs and collider preserved.",
+        "02_HangLinhMach: replaced only FBX visual under Drum_B; root position/rotation/scale, note, puzzle/audio/indicator refs and collider preserved.",
+        "02_HangLinhMach: replaced only FBX visual under Drum_C; root position/rotation/scale, note, puzzle/audio/indicator refs and collider preserved.",
+        "02_HangLinhMach: Drum_A uses supplied FBX/URP PBR; no visual collider; existing puzzle and interaction collider valid.",
+        "02_HangLinhMach: Drum_B uses supplied FBX/URP PBR; no visual collider; existing puzzle and interaction collider valid.",
+        "02_HangLinhMach: Drum_C uses supplied FBX/URP PBR; no visual collider; existing puzzle and interaction collider valid."
+    ],
+    "failures": [],
+    "notes": [
+        "Original scene/metadata backup: SourceAssets/SceneBackups/2026-11-06_DongSonDrums/92_EnvironmentPreview.unity",
+        "92_EnvironmentPreview: drums=3",
+        "Drum_A pos=(-17.00, 0.40, 144.00) rotation=(0.00, 0.00, 0.00) scale=(1.00, 0.40, 1.00) note=0 visual=Center: (-17.00, 0.68, 144.00), Extents: (0.70, 0.56, 0.70)",
+        "  collider BoxCollider Center: (-17.00, 0.63, 144.00), Extents: (0.56, 0.51, 0.56)",
+        "Drum_B pos=(-14.00, 0.40, 144.00) rotation=(0.00, 0.00, 0.00) scale=(1.00, 0.40, 1.00) note=1 visual=Center: (-14.00, 0.68, 144.00), Extents: (0.70, 0.56, 0.70)",
+        "  collider BoxCollider Center: (-14.00, 0.63, 144.00), Extents: (0.56, 0.51, 0.56)",
+        "Drum_C pos=(-11.00, 0.40, 144.00) rotation=(0.00, 0.00, 0.00) scale=(1.00, 0.40, 1.00) note=2 visual=Center: (-11.00, 0.68, 144.00), Extents: (0.70, 0.56, 0.70)",
+        "  collider BoxCollider Center: (-11.00, 0.63, 144.00), Extents: (0.56, 0.51, 0.56)",
+        "Rendered approach and engraved-face detail: docs/images/dongson-92_EnvironmentPreview-",
+        "Original scene/metadata backup: SourceAssets/SceneBackups/2026-11-06_DongSonDrums/02_HangLinhMach.unity",
+        "02_HangLinhMach: drums=3",
+        "Drum_A pos=(-17.00, 0.40, 144.00) rotation=(0.00, 0.00, 0.00) scale=(1.00, 0.40, 1.00) note=0 visual=Center: (-17.00, 0.68, 144.00), Extents: (0.70, 0.56, 0.70)",
+        "  collider BoxCollider Center: (-17.00, 0.63, 144.00), Extents: (0.56, 0.51, 0.56)",
+        "Drum_B pos=(-14.00, 0.40, 144.00) rotation=(0.00, 0.00, 0.00) scale=(1.00, 0.40, 1.00) note=1 visual=Center: (-14.00, 0.68, 144.00), Extents: (0.70, 0.56, 0.70)",
+        "  collider BoxCollider Center: (-14.00, 0.63, 144.00), Extents: (0.56, 0.51, 0.56)",
+        "Drum_C pos=(-11.00, 0.40, 144.00) rotation=(0.00, 0.00, 0.00) scale=(1.00, 0.40, 1.00) note=2 visual=Center: (-11.00, 0.68, 144.00), Extents: (0.70, 0.56, 0.70)",
+        "  collider BoxCollider Center: (-11.00, 0.63, 144.00), Extents: (0.56, 0.51, 0.56)",
+        "Rendered approach and engraved-face detail: docs/images/dongson-02_HangLinhMach-"
+    ]
+}

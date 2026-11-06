@@ -10,6 +10,7 @@ public class LanternFocusScanner : MonoBehaviour
 
     [Header("Rules")]
     [SerializeField] private float range = 8f;
+    [SerializeField, Min(0.5f)] private float enemyRange = 10f;
     [SerializeField, Range(1f, 180f)]
     private float fullConeAngle = 90f;
 
@@ -23,6 +24,7 @@ public class LanternFocusScanner : MonoBehaviour
 
     // Hướng chiếu theo camera (có góc ngẩng), gốc chiếu ở đèn.
     private Transform aimTransform;
+    private Collider[] overlap = new Collider[64];
 
     private readonly HashSet<ILanternTarget> checkedTargets =
         new HashSet<ILanternTarget>();
@@ -60,14 +62,15 @@ public class LanternFocusScanner : MonoBehaviour
 
         checkedTargets.Clear();
 
-        Collider[] colliders = Physics.OverlapSphere(
-            focusSource.position,
-            range,
-            targetMask,
-            QueryTriggerInteraction.Ignore);
+        int count;
+        // Grow only for unusually crowded scenes; never silently lose targets.
+        while ((count = Physics.OverlapSphereNonAlloc(focusSource.position, Mathf.Max(range, enemyRange), overlap,
+                   targetMask, QueryTriggerInteraction.Ignore)) == overlap.Length)
+            System.Array.Resize(ref overlap, overlap.Length * 2);
 
-        foreach (Collider candidate in colliders)
+        for (int i = 0; i < count; i++)
         {
+            Collider candidate = overlap[i];
             ILanternTarget target =
                 candidate.GetComponentInParent<ILanternTarget>();
 
@@ -84,7 +87,8 @@ public class LanternFocusScanner : MonoBehaviour
 
             float distance = offset.magnitude;
 
-            if (distance < 0.001f || distance > range)
+            float targetRange = target is IEnemyLanternTarget ? enemyRange : range;
+            if (distance < 0.001f || distance > targetRange)
             {
                 continue;
             }
@@ -149,6 +153,6 @@ public class LanternFocusScanner : MonoBehaviour
 
         Gizmos.DrawRay(
             focusSource.position,
-            AimForward * range);
+            AimForward * Mathf.Max(range, enemyRange));
     }
 }

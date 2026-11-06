@@ -1,0 +1,22 @@
+{
+    "action": "validate",
+    "checks": [
+        "Assets/_Project/Scenes/02_HangLinhMach.unity: safe NavMesh spawn cp_trai",
+        "Assets/_Project/Scenes/02_HangLinhMach.unity: safe NavMesh spawn cp_dien_trong",
+        "Assets/_Project/Scenes/02_HangLinhMach.unity: safe NavMesh spawn cp_truoc_dan",
+        "Assets/_Project/Scenes/02_HangLinhMach.unity: safe NavMesh spawn cp_kim_quy",
+        "Assets/_Project/Scenes/02_HangLinhMach.unity: VIS_Portal_A22 instances=5",
+        "Assets/_Project/Scenes/02_HangLinhMach.unity: VIS_A23_Mirror instances=2",
+        "Assets/_Project/Scenes/02_HangLinhMach.unity: VIS_DongSon_Playable instances=3",
+        "Assets/_Project/Scenes/02_HangLinhMach.unity: materials supported, missing scripts=0, 5 papers, three stun indicators, table absent, crown collision closed.",
+        "Assets/_Project/Scenes/92_EnvironmentPreview.unity: safe NavMesh spawn cp_trai",
+        "Assets/_Project/Scenes/92_EnvironmentPreview.unity: safe NavMesh spawn cp_dien_trong",
+        "Assets/_Project/Scenes/92_EnvironmentPreview.unity: safe NavMesh spawn cp_truoc_dan",
+        "Assets/_Project/Scenes/92_EnvironmentPreview.unity: safe NavMesh spawn cp_kim_quy",
+        "Assets/_Project/Scenes/92_EnvironmentPreview.unity: VIS_Portal_A22 instances=5",
+        "Assets/_Project/Scenes/92_EnvironmentPreview.unity: VIS_A23_Mirror instances=2",
+        "Assets/_Project/Scenes/92_EnvironmentPreview.unity: VIS_DongSon_Playable instances=3",
+        "Assets/_Project/Scenes/92_EnvironmentPreview.unity: materials supported, missing scripts=0, 5 papers, three stun indicators, table absent, crown collision closed."
+    ],
+    "failures": []
+}

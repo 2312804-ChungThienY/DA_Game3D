@@ -58,7 +58,10 @@ public class ItemPickup : MonoBehaviour, IInteractable
         }
 
         if (inventory.TryAdd(itemId, 1) == 1 && worldState.TryAdd(StateSet.Pickups, pickupId))
+        {
+            SoundscapeRuntime.Play(SoundCue.Pickup,transform.position,.55f);
             Toast($"Nhận {displayName}");
+        }
     }
 
     private void RefreshFromState()

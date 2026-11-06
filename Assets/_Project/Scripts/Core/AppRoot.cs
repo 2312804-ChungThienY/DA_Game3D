@@ -52,5 +52,6 @@ public class AppRoot : MonoBehaviour
         }
 
         Session = gameObject.AddComponent<GameSession>();
+        gameObject.AddComponent<SoundscapeRuntime>();
     }
 }

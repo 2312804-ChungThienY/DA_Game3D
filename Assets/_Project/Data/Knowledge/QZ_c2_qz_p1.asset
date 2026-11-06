@@ -14,18 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::QuizDefinition
   quizId: c2_qz_p1
   tag: 2
-  question: "V\xEC sao trong hang S\u01A1n \u0110o\xF2ng l\u1EA1i c\xF3 r\u1EEBng
-    c\xE2y m\u1ECDc?"
+  question: "\u0110i\u1EC1u g\xEC gi\xFAp c\xE2y nh\u1EADn \xE1nh s\xE1ng \u1EDF
+    b\xEAn trong S\u01A1n \u0110o\xF2ng?"
   options:
   - "V\xEC c\xF3 h\u1ED1 s\u1EE5t cho \xE1nh s\xE1ng l\u1ECDt xu\u1ED1ng"
   - "V\xEC ng\u01B0\u1EDDi ta mang c\xE2y v\xE0o tr\u1ED3ng"
   - "V\xEC hang n\u1EB1m d\u01B0\u1EDBi \u0111\xE1y bi\u1EC3n"
   - "V\xEC c\xE2y trong hang kh\xF4ng c\u1EA7n \xE1nh s\xE1ng"
   correctIndex: 0
-  explanation: "C\xE1c h\u1ED1 s\u1EE5t tr\xEAn tr\u1EA7n hang cho \xE1nh s\xE1ng
-    m\u1EB7t tr\u1EDDi chi\u1EBFu xu\u1ED1ng, nh\u1EDD \u0111\xF3 c\xE2y xanh m\u1ECDc
-    \u0111\u01B0\u1EE3c."
+  explanation: "C\xE1c kho\u1EA3ng tr\u1EA7n hang s\u1EE5t m\u1EDF \u0111\u01B0a
+    \xE1nh s\xE1ng v\xE0o, gi\xFAp c\xE2y ph\xE1t tri\u1EC3n c\xF9ng \u0111i\u1EC1u
+    ki\u1EC7n \u1EA9m."
   relatedLore: {fileID: 11400000, guid: ac086b06e542274408bb1cc4c7723236, type: 2}
-  sourceRef: "VQG Phong Nha \u2013 K\u1EBB B\xE0ng (phongnhakebang.vn); UNESCO World
-    Heritage List: Phong Nha-Ke Bang National Park."
+  sourceRef: "https://oxalisadventure.com/cave/son-doong-cave/ | \u0111\u1ED1i chi\u1EBFu
+    05/11/2026"
   verified: 1

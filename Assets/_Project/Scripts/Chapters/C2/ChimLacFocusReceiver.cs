@@ -1,7 +1,7 @@
 using UnityEngine;
 
 // Nhận chiếu đèn cho trùm Chim Lạc: chỉ khi đang đậu; đủ 1,5 s (mất chiếu quá 0,25 s thì về 0) thì báo choáng.
-public class ChimLacFocusReceiver : MonoBehaviour, ILanternTarget
+public class ChimLacFocusReceiver : MonoBehaviour, IEnemyLanternTarget
 {
     [SerializeField] private BossChimLac boss;
     [SerializeField] private Transform aimPoint;
@@ -10,11 +10,38 @@ public class ChimLacFocusReceiver : MonoBehaviour, ILanternTarget
 
     private float progress;
     private float lastFocusTime = float.NegativeInfinity;
+    private PlayerMotor playerMotor;
+    private Collider focusCollider;
+    private CharacterController playerCollider;
 
     public Transform AimPoint => aimPoint;
-    public bool CanReceiveFocus => isActiveAndEnabled && boss != null && boss.State == BossChimLac.ChimState.Perched;
+    public bool CanReceiveFocus => isActiveAndEnabled && aimPoint != null && boss != null && boss.IsActive &&
+        boss.State == BossChimLac.ChimState.Perched && playerMotor != null && playerMotor.IsHovering &&
+        WindColumn.PlayerInActiveColumn;
     public bool StunTriggered { get; private set; }
     public float Progress => progress;
+
+    private void Awake()
+    {
+        if (boss != null && aimPoint != null && requiredTime > 0f) return;
+        Debug.LogError($"{name}: ChimLacFocusReceiver thiếu Boss, AimPoint hoặc thời gian hợp lệ.", this);
+        enabled = false;
+    }
+
+    private void OnDisable() => ResetProgress();
+    private void Start()
+    {
+        playerMotor=FindAnyObjectByType<PlayerMotor>();focusCollider=GetComponent<Collider>();
+        playerCollider=playerMotor?playerMotor.GetComponent<CharacterController>():null;
+        IgnorePlayerCollision();
+    }
+    private void FixedUpdate()=>IgnorePlayerCollision();
+    private void IgnorePlayerCollision()
+    {
+        // Target volume stays raycastable but must not become a floor under An.
+        if(focusCollider&&playerCollider&&focusCollider.enabled&&playerCollider.enabled&&!Physics.GetIgnoreCollision(playerCollider,focusCollider))
+            Physics.IgnoreCollision(playerCollider,focusCollider,true);
+    }
 
     public void ResetProgress()
     {
@@ -25,7 +52,7 @@ public class ChimLacFocusReceiver : MonoBehaviour, ILanternTarget
 
     public void ReceiveFocus(float deltaTime)
     {
-        if (!CanReceiveFocus || deltaTime <= 0f) return;
+        if (!CanReceiveFocus || Time.timeScale <= 0f || deltaTime <= 0f || float.IsNaN(deltaTime) || float.IsInfinity(deltaTime)) return;
         if (Time.time - lastFocusTime > graceTime) progress = 0f;
         lastFocusTime = Time.time;
         progress += deltaTime;

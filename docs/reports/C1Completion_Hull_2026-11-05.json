@@ -1,0 +1,25 @@
+{
+    "action": "repair-hull",
+    "checks": [
+        "Closed full-height vestibule 0_0 at (0.00, 0.00, 13.50); overlapping vault/floor, 8.6m opening, FBX rock feet.",
+        "Closed full-height vestibule 0_1 at (18.00, 0.00, 50.50); overlapping vault/floor, 8.6m opening, FBX rock feet.",
+        "Closed full-height vestibule 1_0 at (18.00, 0.00, 89.50); overlapping vault/floor, 8.6m opening, FBX rock feet.",
+        "Closed full-height vestibule 1_1 at (-14.00, 0.00, 130.50); overlapping vault/floor, 8.6m opening, FBX rock feet.",
+        "Closed full-height vestibule 2_0 at (-14.00, 0.00, 159.50); overlapping vault/floor, 8.6m opening, FBX rock feet.",
+        "Closed full-height vestibule 2_1 at (25.00, 0.00, 198.50); overlapping vault/floor, 8.6m opening, FBX rock feet.",
+        "Closed full-height vestibule 3_0 at (25.00, 0.00, 231.50); overlapping vault/floor, 8.6m opening, FBX rock feet.",
+        "Closed full-height vestibule 3_1 at (0.00, 0.00, 272.50); overlapping vault/floor, 8.6m opening, FBX rock feet.",
+        "Eight sealed room/link junctions; skylights inside rooms retained; original gameplay roots/IDs/spawns untouched.",
+        "Closed full-height vestibule 0_0 at (0.00, 0.00, 13.50); overlapping vault/floor, 8.6m opening, FBX rock feet.",
+        "Closed full-height vestibule 0_1 at (18.00, 0.00, 50.50); overlapping vault/floor, 8.6m opening, FBX rock feet.",
+        "Closed full-height vestibule 1_0 at (18.00, 0.00, 89.50); overlapping vault/floor, 8.6m opening, FBX rock feet.",
+        "Closed full-height vestibule 1_1 at (-14.00, 0.00, 130.50); overlapping vault/floor, 8.6m opening, FBX rock feet.",
+        "Closed full-height vestibule 2_0 at (-14.00, 0.00, 159.50); overlapping vault/floor, 8.6m opening, FBX rock feet.",
+        "Closed full-height vestibule 2_1 at (25.00, 0.00, 198.50); overlapping vault/floor, 8.6m opening, FBX rock feet.",
+        "Closed full-height vestibule 3_0 at (25.00, 0.00, 231.50); overlapping vault/floor, 8.6m opening, FBX rock feet.",
+        "Closed full-height vestibule 3_1 at (0.00, 0.00, 272.50); overlapping vault/floor, 8.6m opening, FBX rock feet.",
+        "Eight sealed room/link junctions; skylights inside rooms retained; original gameplay roots/IDs/spawns untouched.",
+        "Scene and metadata backup: SourceAssets/SceneBackups/2026-11-05_Chapter01Completion/Hull_211242522"
+    ],
+    "failures": []
+}

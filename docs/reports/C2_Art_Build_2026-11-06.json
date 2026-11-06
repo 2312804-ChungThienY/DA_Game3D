@@ -1,0 +1,10 @@
+{
+    "action": "build",
+    "checks": [
+        "Windows x64 build succeeded"
+    ],
+    "failures": [],
+    "notes": [
+        "Build result=Succeeded, errors=0, warnings=0, bytes=370551689"
+    ]
+}

@@ -1,0 +1,15 @@
+{
+  "first_backup": "SourceAssets\\SceneBackups\\2026-11-05_ExpandedC1\\191322207",
+  "checks": [
+    {
+      "scene": "02_HangLinhMach.unity",
+      "guid_metadata_identical_to_first_backup": true,
+      "sha256": "933d2ea4eb98cb5dc1703c63261904a5ee195933252a33ba64b912771013b397"
+    },
+    {
+      "scene": "92_EnvironmentPreview.unity",
+      "guid_metadata_identical_to_first_backup": true,
+      "sha256": "d56036a2c18d7f323c24339581c4ee015ebded1d300de4a7ef5b7b1431381d42"
+    }
+  ]
+}

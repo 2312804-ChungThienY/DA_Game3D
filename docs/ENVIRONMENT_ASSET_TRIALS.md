@@ -1,63 +1,55 @@
-# Nhập và thử môi trường theo đợt — 30/10/2026
+# Thử asset môi trường — đồng bộ 04/11/2026
 
-Khu thử: `Assets/_Project/Scenes/93_TestEnvironment.unity`. Đây là scene kiểm tra riêng, chưa đưa vào danh sách build chính hoặc thay khối ở Trại Giếng Trời.
+Khu mẫu đang dùng là **92_EnvironmentPreview**, đã ghép ART_Camp vào 02_HangLinhMach theo yêu cầu 04/11. Chi tiết và cách thử hiện hành ở [CAMP_ENVIRONMENT.md](CAMP_ENVIRONMENT.md). Scene **93_TestEnvironment** và dữ liệu 30/10 dưới đây là khu thử sáu mẫu trước merge, không phải bản khu trại mới hoặc bằng chứng mọi asset đã nghiệm thu.
 
-## Lựa chọn gói
+## Lựa chọn và nguồn hiện hành
 
-| Mã nguồn | Trạng thái và vai trò |
+| Bộ | Trạng thái và vai trò |
 | --- | --- |
-| A09 — Mines and Cave Set | Đã có trong dự án; thử 3 prefab nền/đá/vách trong đợt 1 |
-| A11 — Ultimate Stylized Nature Pack | Bộ thiên nhiên chủ đạo đang thử; 1 cây NormalTree, 1 bụi, 1 cỏ trong đợt 2 |
-| A10 — Ultimate Modular Ruins Pack | Đã nhập và đã xử lý polygon ở lượt trước; dành cho Điện Trống/di tích, chưa đặt vào khu thử trại |
-| A12 — Nature Kit | Đã có trên đĩa, giữ làm phương án thay A11; chưa trộn vào phong cách hiện tại |
+| A09 Mines and Cave Set | Đã có; ghép vách/vòm/đá/cửa trại. Source tại Assets/A09 - Mines and Cave Set/MInesAndCaveSet |
+| A11 Ultimate Stylized Nature Pack | Đã có; bộ cây/bụi/cỏ chủ đạo của khu mẫu low poly hiện tại |
+| A16 Survival Pack | Đã có sau lượt nhập của người dùng 04/11; dùng lều/lửa/ghế gỗ/nồi/bình trong trại |
+| A10 Ultimate Modular Ruins Pack | Đã có và sửa import 30/10; ứng viên di tích/phong ấn sau bố cục, chưa dùng trong ART_Camp hiện tại |
+| A12 Nature Kit | Đã có; phương án thay A11, không trộn vào ART_Camp |
+| A14 Mossy Rock | Đã có sau lượt nhập 04/11; chưa dùng trong ART_Camp, chưa là bằng chứng đã thử vật liệu/collider |
 
-Không nhập lại hoặc tải thêm vì cả bốn gói đã tồn tại. Các mã, tác giả, URL và giấy phép tham chiếu theo `spec/Danh_muc_asset_free_Son_Doong.md`: A09 từ Loafbrr/Unity Asset Store EULA; A10/A11 từ Quaternius/CC0; A12 từ Kenney/CC0. Giữ giấy phép nguồn trong từng gói.
+Không tải lại bộ đã có chỉ vì danh mục spec còn ghi Chưa tải. Cột ứng viên trong spec không tự là trạng thái import/nghiệm thu. Giữ source và .meta; chỉnh bằng material/prefab riêng của dự án.
 
-Đường dẫn hiện tại khác các ghi chú cũ: A09 ở `Assets/A09 - Mines and Cave Set/MInesAndCaveSet/`; Starter Assets đang ở `Assets/A01 - First Person + Third Person  Character Controllers/`. Camera được tìm bằng GUID để không hỏng khi thư mục nguồn đổi tên.
+Nguồn giấy phép cần ghi đúng sự khác nhau:
 
-## Mẫu đã cấu hình
+- A09: README.txt trong bộ nhập ghi trực tiếp **Creative Commons 0/CC0** tại dòng 1. Danh mục spec và ghi chú 30/10 từng ghi Asset Store EULA theo kênh tải. Đây là khác biệt nguồn cần đối chiếu đúng release/kênh phân phối; không tự kết luận pháp lý rằng hai ghi chú tương đương.
+- A11: License.txt ghi CC0 1.0 nhưng tiêu đề là **Ultimate Platformer Pack**, không khớp tên bộ thiên nhiên. Giữ file gốc và ghi nhận provenance cần đối chiếu release; không sửa tên giấy phép để che khác biệt.
+- A16: License.txt ghi Quaternius, CC0 1.0. A10/A12 và các nguồn còn lại tra file giấy phép trong từng bộ cùng danh mục nguồn; không suy giấy phép từ tên gói.
 
-Prefab thử nằm trong `_Project/Prefabs/Environment/A09_Trials` và `A11_Trials`. Chúng chứa prefab/model nguồn dưới dạng nested prefab, có cấu hình riêng; không sửa model hay material gốc.
+## Scene, prefab và kiểm tra hiện hành
 
-| Mẫu | Tỷ lệ sau cấu hình | Collider |
+92_EnvironmentPreview giữ nền/collider blockout và camera tham chiếu sau spawn, không tạo nhân vật/quái mới. Các Cube mốc ở Layout_Markers_EditorOnly mặc định tắt. Main dùng World_Geometry/ENV_01_Camp/ART_Camp, giữ cp_trai, pickup và đường đi gameplay. Prefab mới ở Prefabs/Environment/Camp, material riêng ở Materials/Camp; không dùng chính sách MeshCollider của thử nghiệm cũ cho tất cả đá mới.
+
+Khu trại hiện dùng hộp collider đơn giản cho đá/vách/lều, capsule thân cây; bụi/cỏ không collider. Các collider source mesh được tắt bằng override trên mẫu dự án. Tách model lửa/bàn xuống dưới object gameplay; bước này có CampCraftingTable riêng và checkpoint cũ. Bảng màu đã được người dùng chọn là đá xám lạnh/cây xanh rêu/nắng vàng ấm theo phong cách 3D hoạt hình low poly.
+
+[Báo cáo Editor 04/11](reports/CampEnvironment_Editor_2026-11-04.json) ghi 115 mẫu kiểm tra khoảng trống tuyến đi; [báo cáo Play Mode](reports/CampEnvironment_PlayMode_2026-11-04.json) ghi 53 ca tổng hợp, có di chuyển bằng controller, ray chọn tương tác, camera và save/Continue. Đây là API/controller tự động, chưa phải chuột/phím thực tế, bake GI, đo FPS hoặc Windows build. Lượt đồng bộ tài liệu này không chạy lại Unity.
+
+Công cụ còn phù hợp cho khu mẫu là [CampEnvironmentSetup.cs](../Assets/_Project/Editor/CampEnvironmentSetup.cs):83–88, menu Tools → Son Doong → Camp Environment. Không dựng lại scene chỉ để đọc trạng thái; đọc scene hiện hành và giữ thay đổi người dùng trước.
+
+## Khu thử 93 — cấu hình và bằng chứng lịch sử 30/10
+
+93_TestEnvironment.unity còn trên đĩa, không nằm trong danh sách build bật hiện tại. Prefab mẫu dưới Prefabs/Environment/A09_Trials và A11_Trials, material ở Materials/EnvironmentTrials. Sáu mẫu khi tạo ngày 30/10:
+
+| Mẫu | Kích thước thử khi tạo | Collider khi tạo |
 | --- | --- | --- |
-| A09 Ground_Mines_A | Rộng 6 m, sâu khoảng 5,97 m, dày khoảng 0,114 m | MeshCollider nguồn; mặt trên đặt cao hơn nền an toàn khoảng 0,08 m |
-| A09 Cave_Rocks_A | Rộng 2,2 m, cao khoảng 3,24 m | MeshCollider nguồn |
-| A09 Cave_Wall_Rocks_A | Cao 3,8 m, rộng khoảng 1,73 m | MeshCollider nguồn |
-| A11 NormalTree_1 | Cao 4,8 m | Capsule thân cây, cao 2,2 m/radius 0,18 m; tán không cản |
-| A11 Bush_Small | Cao 0,8 m | Không collider, cho phép đi xuyên |
-| A11 Grass_Small | Cao 0,35 m | Không collider, cho phép đi xuyên |
+| Ground_Mines_A | Rộng 6 m, sâu khoảng 5.97 m, dày khoảng 0.114 m | MeshCollider source, mặt trên cao hơn nền an toàn khoảng 0.08 m |
+| Cave_Rocks_A | Rộng 2.2 m, cao khoảng 3.24 m | MeshCollider source |
+| Cave_Wall_Rocks_A | Cao 3.8 m, rộng khoảng 1.73 m | MeshCollider source |
+| NormalTree_1 | Cao 4.8 m | Capsule thân cao 2.2 m/radius 0.18 m, tán không chặn |
+| Bush_Small | Cao 0.8 m | Không collider |
+| Grass_Small | Cao 0.35 m | Không collider |
 
-Tất cả phần môi trường dùng layer Environment. Có nền thử 32 × 28 m, đường giữa rộng 3 m, vách an toàn, mốc capsule cao 1,8 m và nhãn A09/A11 để so tỷ lệ. An xuất hiện ở `(0, 0.2, -10)`. Camera đi theo PlayerCameraRoot, bật tránh vật cản Environment; GroundLayers nhận Environment.
+Lúc tạo có nền 32×28 m, đường giữa 3 m, vách bao, mốc 1.8 m; An xuất hiện (0,0.2,-10), camera theo PlayerCameraRoot/tránh Environment. A09 dùng URP/Lit riêng lấy texture _ColorTexture; A11 lấy texture đúng tên, lá/cỏ alpha clip hai mặt. Không nối ORM tùy tiện vào metallic/smoothness của URP.
 
-## Vật liệu và phong cách
+Unity 6000.4.8f1 khi đó đã đọc bounds/material/collider, kiểm controller đi vòng **6/6** và chính sách va chạm **6/6**, xem ảnh không hồng. Bằng chứng: [báo cáo 30/10](reports/EnvironmentAssetTrials_2026-10-30.json), [ảnh 30/10](images/environment-trials-2026-10-30.png). Đây là phép thử Editor, không phải Play Mode bàn phím hoặc build.
 
-- Vật liệu riêng đặt trong `_Project/Materials/EnvironmentTrials`.
-- A09: shader nguồn được Unity báo hỗ trợ, nhưng ảnh kiểm tra thực tế chưa hiển thị các mẫu như mong đợi. Đã tạo hai material URP/Lit riêng, lấy texture từ `_ColorTexture` nguồn, opaque và hai mặt; không đổi ORM Shader Graph hoặc material nguồn.
-- Không gán ORM đóng gói của nguồn trực tiếp vào metallic/smoothness của URP vì cách đóng kênh khác nhau. Bản thử dùng smoothness thấp; chưa coi đây là vật liệu cuối.
-- A11: bốn material bark/leaves/bush/grass dùng URP/Lit, gán texture đúng tên trong thư mục Textures. Lá/cỏ dùng alpha clip và hai mặt. Sắc xanh được giảm độ chói, giữ bảng xanh lá–nâu đất–xám đá.
-- Giữ một loại cây chủ đạo, một loại bụi và một loại cỏ để đánh giá trước khi nhân rộng. A12 không tham gia bộ vật liệu hiện tại.
+Sau merge, PF_An_Prototype đã đổi sang PlayerMotor/InputReader chung. [EnvironmentAssetTrials.cs](../Assets/_Project/Editor/EnvironmentAssetTrials.cs):236–243 vẫn có nhánh tìm PlayerInput và tên GroundLayers cũ; **chưa xác nhận scene 93 chơi được nguyên trạng trên runtime mới**. Công cụ vẫn tồn tại với action inspect/refine/build; Build tại :100–101 từ chối nếu scene đã có. Không tự xóa scene để chạy lại builder, hoặc lấy các số 6/6 cũ làm chứng cứ tương thích sau merge.
 
-## Kiểm tra đã thực hiện
+## Kiểm tra trực tiếp còn cần
 
-Unity Editor **6000.4.8f1** đã tạo và lưu scene/prefab/material bằng API của Editor. Công cụ ở `Assets/_Project/Editor/EnvironmentAssetTrials.cs`.
-
-1. Đọc bounds/collider/material của 6 nguồn trước khi cấu hình.
-2. Dùng đúng CharacterController của prefab An, tắt component nhận input trong lúc thử và dịch khu thử tạm ra xa các scene khác để tránh ảnh hưởng va chạm.
-3. Cho controller đi hết một vòng quanh bounds của từng mẫu với khoảng hở tính theo bán kính nhân vật: **6/6 đạt**.
-4. Kiểm tra chặn trực tiếp bởi đá/vách/thân cây, raycast mặt nền, đi xuyên bụi/cỏ theo chính sách: **6/6 đạt**.
-5. Kiểm tra vật liệu được gán; cả 6 mẫu dùng URP/Lit sau tinh chỉnh. Chụp và xem lại ảnh tổng quan, thấy đủ mẫu A09/A11 và không có vật liệu hồng.
-
-Báo cáo giữ trong [EnvironmentAssetTrials_2026-10-30.json](reports/EnvironmentAssetTrials_2026-10-30.json); ảnh tại [environment-trials-2026-10-30.png](images/environment-trials-2026-10-30.png). Kiểm tra này chạy trong Editor, **chưa phải Play Mode với thao tác chuột/phím của người chơi**, chưa đo hiệu năng hoặc build.
-
-## Thử bằng tay trước khi đưa vào màn chính
-
-Mở `93_TestEnvironment`, nhấn Play. Đi bằng WASD, xoay chuột, chạy Shift, nhảy Space:
-
-- Đi vòng và áp sát đá/vách; không xuyên mặt hoặc bị mắc ở chân.
-- Đi qua nền A09, kiểm tra chân, nhảy và nhận mặt đất.
-- Đi quanh thân cây, đưa camera sát tán và vách; thân chặn, tán không gây khối va chạm vô hình.
-- Đi xuyên bụi/cỏ; kiểm tra alpha lá từ cả hai phía, bóng, màu và tỷ lệ so với An.
-- Quan sát ở chất lượng đang dùng, đặc biệt camera tránh vật cản và độ dễ đọc đường đi.
-
-Chỉ sau khi lượt Play Mode này ổn mới chọn vài mẫu đưa vào `02_HangLinhMach`; giữ collider/đường đi của blockout đã kiểm tra. Chưa mở rộng Điện Trống hoặc thay hàng loạt môi trường trong công việc này.
+Ưu tiên mở 00_Boot → Chơi mới để thử bản khu trại đang dùng: đi vòng mép bàn/đá, áp sát vách, xoay camera sau spawn và miệng cửa; chọn E riêng cho bàn và checkpoint, về menu/Continue. Xem Low/Medium, alpha lá từ hai phía và đo build khi có cấu hình tham chiếu. Việc đưa ART_Camp vào main ngày 04/11 là trạng thái đã làm theo yêu cầu mới; không còn coi câu lịch sử “chưa đưa mẫu nào vào main” là lệnh hoặc trạng thái hiện hành.

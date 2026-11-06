@@ -47,7 +47,7 @@ public class GameSession : MonoBehaviour
         InputReader input = root.Input;
         if (input == null || !input.IsReady) return;
 
-        if (State == SessionState.Playing && input.Pause.WasPressedThisFrame())
+        if (State == SessionState.Playing && input.WasPressed(input.Pause))
         {
             Pause();
         }
@@ -91,6 +91,7 @@ public class GameSession : MonoBehaviour
     // đặt An ở mốc đầu chương rồi lưu một ảnh chụp tại đó (spec phần 50).
     public void LoadChapter(string sceneName, string checkpointId)
     {
+        if (State != SessionState.Playing && State != SessionState.ChapterComplete) return;
         if (!CanLoadScene(sceneName) || WorldIds.SceneOfCheckpoint(checkpointId) != sceneName) return;
 
         SaveService current = FindAnyObjectByType<SaveService>();
@@ -101,8 +102,7 @@ public class GameSession : MonoBehaviour
         }
 
         SaveData transfer = current.Capture(checkpointId, sceneName);
-        LoadScene(sceneName, false);
-        pendingTransfer = transfer;
+        LoadScene(sceneName, false, transfer);
     }
 
     public static bool CanLoadScene(string sceneName) =>
@@ -193,9 +193,10 @@ public class GameSession : MonoBehaviour
         SetState(SessionState.ChapterComplete);
     }
 
-    private void LoadScene(string sceneName, bool restoreSave)
+    private void LoadScene(string sceneName, bool restoreSave, SaveData transfer = null)
     {
-        pendingTransfer = null;
+        // Install the snapshot before sceneLoaded can start EnterGameplay.
+        pendingTransfer = transfer;
         StopSlowMotion();
         uiOwners.Clear();
         Time.timeScale = 1f;

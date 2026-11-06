@@ -1,0 +1,30 @@
+{
+  "date": "2026-11-05 Asia/Bangkok",
+  "mode": "Delivery file/build audit; not manual Windows play",
+  "checks": {
+    "no_editor_probe_Chapter01CompletionProbe": true,
+    "no_editor_probe_CampEnvironmentSmokeProbe": true,
+    "no_editor_probe_CharacterPolishSmokeProbe": true,
+    "runtime_type_SoundscapeRuntime": true,
+    "runtime_type_EnemyPresentation": true,
+    "runtime_type_CaveCameraCollisionGuard": true,
+    "runtime_type_LotusLanternVisual": true,
+    "credits_match": true,
+    "PlayMode_passed": true,
+    "Traversal_passed": true
+  },
+  "failures": [],
+  "sha256": {
+    "Assets/_Project/Scenes/02_HangLinhMach.unity": "bfa219d9e1e251755e91fe3fa6d2bb7a0873c0434d7f8dee20c087f13481c04f",
+    "Assets/_Project/Scenes/02_HangLinhMach.unity.meta": "933d2ea4eb98cb5dc1703c63261904a5ee195933252a33ba64b912771013b397",
+    "Assets/_Project/Scenes/92_EnvironmentPreview.unity": "cb32e76ac09e78045b216c4055e42de65957b8506ad9480b87289fe851f0c026",
+    "Assets/_Project/Scenes/92_EnvironmentPreview.unity.meta": "d56036a2c18d7f323c24339581c4ee015ebded1d300de4a7ef5b7b1431381d42",
+    "Assets/_Project/Resources/PF_AppRootUI.prefab": "92835a0c26125d98ae9ebab22856cb02e335b9305c201de172c95b5e9f162065",
+    "Builds/Chapter01Complete/Windows/SonDoong.exe": "e83058c236f35a720c27e465dc42d1549f13b25a8573dce464438b855764e7af",
+    "Builds/Chapter01Complete/Windows/SonDoong_Data/Managed/Assembly-CSharp.dll": "33b9b6538c5abeec700f59de1714e547725ac316ebc4f387b6049280c896ff3f",
+    "Builds/Chapter01Complete/Windows/CREDITS.txt": "c0b425be023f814610271c5276bb4349c54d9da498fb4243b978a8522bcf672d",
+    "docs/reports/C1Completion_PlayMode_2026-11-05.json": "4c3d82828ad8b7a13c7797cd969100a7e9bdad8abc31d13b3b858d68a22c5b4e",
+    "docs/reports/C1Completion_Traversal_2026-11-05.json": "4c93086970dd597edc7150c6dfa8dc4dfe6e90f1b22832cfd02fde3ebc925c91",
+    "docs/reports/C1Completion_Build_2026-11-05.json": "a5d3f29d25e921e1004aa8170e6bd8b0c84ef2a096a6f790309b362e78da9eb4"
+  }
+}

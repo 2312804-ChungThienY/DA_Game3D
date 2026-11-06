@@ -13,6 +13,7 @@ public class BossChimLac : BossBase
     [SerializeField] private ChimLacFocusReceiver focus;
     [SerializeField] private Transform diveTelegraph;
     [SerializeField] private GameObject gustTelegraph;
+    [SerializeField] private Transform diveLandingMarker;
     [SerializeField] private LayerMask playerMask = 1 << 6;
 
     [Header("Nhịp đòn")]
@@ -38,11 +39,12 @@ public class BossChimLac : BossBase
     public ChimState State { get; private set; } = ChimState.Waiting;
     public int PerchIndex => perchIndex;
     public bool Enraged => health.Current <= enrageHealth;
+    public bool GustIsActive { get; private set; }
 
     protected override void Awake()
     {
         base.Awake();
-        if (perchTops == null || perchTops.Length < 2 || arenaCenter == null || focus == null || diveTelegraph == null)
+        if (perchTops == null || perchTops.Length < 2 || System.Array.Exists(perchTops, p => p == null) || arenaCenter == null || focus == null || diveTelegraph == null)
         {
             Debug.LogError($"{name}: BossChimLac thiếu cột đậu, tâm đấu trường, Focus hoặc telegraph.", this);
             enabled = false;
@@ -63,15 +65,18 @@ public class BossChimLac : BossBase
             // Đậu: nhận Focus; đủ 1,5 s thì choáng.
             State = ChimState.Perched;
             focus.ResetProgress();
-            float t = 0f, dur = Enraged ? perchTimeEnraged : perchTime;
+            float t = 0f;
             bool stunned = false;
-            while (t < dur)
+            while (t < (Enraged ? perchTimeEnraged : perchTime))
             {
+                if(!CanAct){yield return null;continue;}
+                FaceTowards(PlayerPosition-transform.position);
                 if (focus.StunTriggered) { stunned = true; break; }
                 if (CanAct) t += Time.deltaTime;
                 yield return null;
             }
 
+            while(!CanAct)yield return null;
             if (stunned)
             {
                 yield return Stun();
@@ -80,7 +85,12 @@ public class BossChimLac : BossBase
 
             if (Random.value < 0.5f) yield return Gust();
             yield return DiveAt();
-            if (Enraged) yield return DiveAt();
+            if (Enraged)
+            {
+                // Take height again so the second attack is a real, readable dive.
+                yield return FlyTo(PerchPoint(perchIndex),flyTime);
+                yield return DiveAt();
+            }
 
             State = ChimState.Landed;
             yield return Wait(landedTime);
@@ -93,10 +103,13 @@ public class BossChimLac : BossBase
     private IEnumerator Gust()
     {
         State = ChimState.Gust;
+        FaceTowards(PlayerPosition-transform.position);
+        GustIsActive=false;
         if (gustTelegraph != null) gustTelegraph.SetActive(true);
         yield return Wait(gustTelegraphTime);
+        GustIsActive=true;
         float t = 0f;
-        while (t < gustTime)
+        while (t < gustTime || !CanAct)
         {
             if (CanAct)
             {
@@ -112,6 +125,7 @@ public class BossChimLac : BossBase
             yield return null;
         }
         if (gustTelegraph != null) gustTelegraph.SetActive(false);
+        GustIsActive=false;
     }
 
     private IEnumerator DiveAt()
@@ -119,8 +133,9 @@ public class BossChimLac : BossBase
         State = ChimState.DiveTelegraph;
         Vector3 start = transform.position;
         Vector3 target = PlayerPosition;
-        target.y = floorY + 1f;
+        target.y = floorY;
         ShowDiveLine(start, target);
+        if(diveLandingMarker){diveLandingMarker.position=target+Vector3.up*.04f;diveLandingMarker.gameObject.SetActive(true);}
         yield return Wait(diveTelegraphTime);
         diveTelegraph.gameObject.SetActive(false);
 
@@ -130,12 +145,20 @@ public class BossChimLac : BossBase
         bool hit = false;
         float t = 0f;
         Vector3 previous = start;
-        while (t < diveTime)
+        while (t < diveTime || !CanAct)
         {
             if (CanAct)
             {
                 t += Time.deltaTime;
                 Vector3 next = Vector3.Lerp(start, target, Mathf.Clamp01(t / diveTime));
+                Vector3 step=next-previous;
+                if(step.sqrMagnitude>.000001f&&Physics.SphereCast(previous+Vector3.up*1.4f,.9f,step.normalized,out _,step.magnitude,1<<3,QueryTriggerInteraction.Ignore))
+                {
+                    Vector3 safe=previous;
+                    if(Physics.Raycast(previous+Vector3.up*.2f,Vector3.down,out var floor,20,1<<3,QueryTriggerInteraction.Ignore))safe.y=floor.point.y;
+                    transform.position=safe;
+                    break;
+                }
                 FaceTowards(next - previous);
                 transform.position = next;
                 if (!hit) hit = TryHit(previous, next, attackId);
@@ -143,6 +166,7 @@ public class BossChimLac : BossBase
             }
             yield return null;
         }
+        if(diveLandingMarker)diveLandingMarker.gameObject.SetActive(false);
     }
 
     private IEnumerator Stun()
@@ -167,7 +191,7 @@ public class BossChimLac : BossBase
         Invulnerable = invulnerable;
         Vector3 from = transform.position;
         float t = 0f;
-        while (t < duration)
+        while (t < duration || !CanAct)
         {
             if (CanAct) t += Time.deltaTime;
             float k = Mathf.Clamp01(t / duration);
@@ -182,11 +206,13 @@ public class BossChimLac : BossBase
 
     private bool TryHit(Vector3 from, Vector3 to, string attackId)
     {
+        from+=Vector3.up;to+=Vector3.up;
         int count = Physics.OverlapCapsuleNonAlloc(from, to, diveRadius, hits, playerMask, QueryTriggerInteraction.Ignore);
         for (int i = 0; i < count; i++)
         {
             PlayerVitals target = hits[i].GetComponentInParent<PlayerVitals>();
             if (target == null || target != player) continue;
+            if(Physics.Linecast(from,target.transform.position+Vector3.up,1<<3,QueryTriggerInteraction.Ignore))continue;
             target.TryTakeDamage(new DamageInfo(gameObject, diveDamage, DamageTeam.Enemy) { AttackId = attackId });
             return true;
         }
@@ -196,6 +222,7 @@ public class BossChimLac : BossBase
     private void ShowDiveLine(Vector3 from, Vector3 to)
     {
         Vector3 d = to - from;
+        if(d.sqrMagnitude<.0001f){diveTelegraph.gameObject.SetActive(false);return;}
         diveTelegraph.position = from + d * 0.5f;
         diveTelegraph.rotation = Quaternion.LookRotation(d);
         diveTelegraph.localScale = new Vector3(2f, 0.05f, d.magnitude);
@@ -221,5 +248,29 @@ public class BossChimLac : BossBase
         State = ChimState.Dead;
         diveTelegraph.gameObject.SetActive(false);
         if (gustTelegraph != null) gustTelegraph.SetActive(false);
+        GustIsActive=false;
+        if(diveLandingMarker)diveLandingMarker.gameObject.SetActive(false);
+    }
+
+    protected override void OnReset()
+    {
+        State = ChimState.Waiting;
+        perchIndex = 0;
+        diveCount = 0;
+        if (focus != null) focus.ResetProgress();
+        if (diveTelegraph != null) diveTelegraph.gameObject.SetActive(false);
+        if (gustTelegraph != null) gustTelegraph.SetActive(false);
+        GustIsActive=false;
+        if(diveLandingMarker)diveLandingMarker.gameObject.SetActive(false);
+    }
+
+    protected override void OnDisable()
+    {
+        if(diveTelegraph)diveTelegraph.gameObject.SetActive(false);
+        if(gustTelegraph)gustTelegraph.SetActive(false);
+        if(diveLandingMarker)diveLandingMarker.gameObject.SetActive(false);
+        GustIsActive=false;
+        if(focus)focus.ResetProgress();
+        base.OnDisable();
     }
 }

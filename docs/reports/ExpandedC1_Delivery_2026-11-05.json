@@ -1,0 +1,52 @@
+{
+  "build": "Windows x64 Release",
+  "native_report": [
+    "Latest Windows build: Succeeded, errors=0, warnings=485, bytes=274273588"
+  ],
+  "runtime_excludes_editor_probe": true,
+  "credits_match_source": true,
+  "folder_bytes": 274891695,
+  "files": [
+    {
+      "file": "Assets/_Project/Scenes/02_HangLinhMach.unity",
+      "bytes": 9725768,
+      "sha256": "3069f9a243742923c12c4af80c8f93ea16feb991db9cc60edb941c756a653403"
+    },
+    {
+      "file": "Assets/_Project/Scenes/92_EnvironmentPreview.unity",
+      "bytes": 9652808,
+      "sha256": "040f3bc1b19f5d0b66a542a632f8ee236331e46acc1eda06b89f00f8f42241e3"
+    },
+    {
+      "file": "Builds/Chapter01Expanded/Windows/SonDoong.exe",
+      "bytes": 667648,
+      "sha256": "e83058c236f35a720c27e465dc42d1549f13b25a8573dce464438b855764e7af"
+    },
+    {
+      "file": "Builds/Chapter01Expanded/Windows/SonDoong_Data/Managed/Assembly-CSharp.dll",
+      "bytes": 232960,
+      "sha256": "87e30e3dcfe1392a610623974e143f75ebab906fb85f35317cd1e2ec6f634900"
+    },
+    {
+      "file": "Builds/Chapter01Expanded/Windows/CREDITS.txt",
+      "bytes": 1878,
+      "sha256": "d9e5d712c213299634283e802ea8714b4f49a92641e12dcc31bdb8a8a74ff098"
+    },
+    {
+      "file": "docs/reports/ExpandedC1_PlayMode_2026-11-05.json",
+      "bytes": 37896,
+      "sha256": "4c93086970dd597edc7150c6dfa8dc4dfe6e90f1b22832cfd02fde3ebc925c91"
+    }
+  ],
+  "warning_sources": {
+    "Sentis_pixel_shaders": 25,
+    "ConvGeneric_compute": 460,
+    "ConvGeneric_package_path": "Library/PackageCache/com.unity.ai.inference@9a123aee5df7/Runtime/Core/Resources/Sentis/ComputeShaders/ConvGeneric.compute"
+  },
+  "compiled_chapter1_scene_contains_final_art": {
+    "ENV_C1_ExpandedWorld": true,
+    "Handlaid_Paths": true,
+    "VIS_KimQuy_CurvedRoof": true,
+    "DongSon_WallMount": true
+  }
+}

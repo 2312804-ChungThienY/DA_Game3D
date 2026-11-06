@@ -1,0 +1,7 @@
+{
+    "action": "build",
+    "checks": [
+        "Native Windows x64: Succeeded, errors=0, warnings=485, size=292831364"
+    ],
+    "failures": []
+}

@@ -1,0 +1,101 @@
+{
+  "utc": "2026-11-05T02:41:49.227620+00:00",
+  "files": [
+    {
+      "path": "Assets/_Project/Scenes/02_HangLinhMach.unity",
+      "bytes": 11681284,
+      "sha256": "1cf290238bd0e400a32d0b551b4f4dba83a73e89b8ed704263b5ec54a119dc2a"
+    },
+    {
+      "path": "Assets/_Project/Scenes/92_EnvironmentPreview.unity",
+      "bytes": 11605929,
+      "sha256": "5c76035c3665d03b97dc824bd5951cf34fa3b8182a4182c8527063ecfc5a4fc6"
+    },
+    {
+      "path": "Builds/Chapter01Revision/Windows/SonDoong.exe",
+      "bytes": 667648,
+      "sha256": "e83058c236f35a720c27e465dc42d1549f13b25a8573dce464438b855764e7af"
+    },
+    {
+      "path": "Builds/Chapter01Revision/Windows/SonDoong_Data/Managed/Assembly-CSharp.dll",
+      "bytes": 257024,
+      "sha256": "b2d5c4e5bdd3f1672866a62bec4b8ddb904f19a1d5f64ee33aff3d737a51689a"
+    },
+    {
+      "path": "Builds/Chapter01Revision/Windows/CREDITS.txt",
+      "bytes": 5222,
+      "sha256": "7eb12f665d2b959994f8d0a7a948d269e5c07ae4f10bf5a71a4f2bd294fb64b7"
+    }
+  ],
+  "checks": [
+    {
+      "runtimeClass": "CampFireAnimation",
+      "present": true
+    },
+    {
+      "runtimeClass": "PuzzleCluePickup",
+      "present": true
+    },
+    {
+      "runtimeClass": "EnemyStunIndicator",
+      "present": true
+    },
+    {
+      "runtimeClass": "InventoryPanel",
+      "present": true
+    },
+    {
+      "runtimeClass": "EnemyPresentation",
+      "present": true
+    },
+    {
+      "runtimeClass": "CaveCameraCollisionGuard",
+      "present": true
+    },
+    {
+      "editorProbe": "Chapter01RevisionProbe",
+      "excluded": true
+    },
+    {
+      "editorProbe": "Chapter01CompletionProbe",
+      "excluded": true
+    },
+    {
+      "editorProbe": "CampEnvironmentSmokeProbe",
+      "excluded": true
+    },
+    {
+      "editorProbe": "CharacterPolishProbe",
+      "excluded": true
+    },
+    {
+      "report": "docs/reports/C1Revision_PlayMode_2026-11-05.json",
+      "checks": 213,
+      "failures": 0,
+      "errors": 0,
+      "sha256": "eb67ec2e2bce0da90159b81138dd720fb04970d515fa381e720d1eaa00483075"
+    },
+    {
+      "report": "docs/reports/C1Revision_Traversal_2026-11-05.json",
+      "checks": 542,
+      "failures": 0,
+      "errors": 0,
+      "sha256": "d752282376286619966208bcb546687a1e3b00781fbf5741a159df35b634893a"
+    },
+    {
+      "report": "docs/reports/C1Revision_Stun_2026-11-05.json",
+      "checks": 50,
+      "failures": 0,
+      "errors": 0,
+      "sha256": "498c4ebfda43bf4dd33a3fea4c072a74319aaab77c65615ed0ff86f5a9ba536a"
+    }
+  ],
+  "failures": [],
+  "limits": [
+    "Editor Play Mode automation with explicit positional/combat fixtures; Windows build compiled, not manually played.",
+    "Individual Sketchfab URLs/authors/licenses for A22/A23/A24 remain to be recorded; owner confirmed free download source."
+  ],
+  "creditMatchesSource": true,
+  "latestSaveBackup": "Temp\\CampEnvironmentPlayBackup_20261105_023329179\\manifest.json",
+  "personalSaveRestored": true
+}

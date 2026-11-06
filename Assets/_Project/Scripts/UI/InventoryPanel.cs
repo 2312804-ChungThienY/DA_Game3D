@@ -1,9 +1,10 @@
 using System.Text;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-// Túi 12 ô chỉ để xem (phím I). Không thay đổi inventory; dùng thuốc bằng Q ngoài menu.
+// Túi 12 ô (I), chế bình máu qua giao dịch InventoryService; dùng thuốc bằng Q ngoài menu.
 public class InventoryPanel : MonoBehaviour, IUiPauseOwner
 {
     [SerializeField] private InventoryService inventory;
@@ -15,11 +16,17 @@ public class InventoryPanel : MonoBehaviour, IUiPauseOwner
     [SerializeField] private TMP_Text detailText;
     [SerializeField] private TMP_Text keyItemsText;
     [SerializeField] private Button closeButton;
+    [SerializeField] private Button craftPotionButton;
+    [SerializeField] private TMP_Text recipeText;
+    [SerializeField] private TMP_Text craftingStatusText;
+    [SerializeField] private Image[] slotIcons;
     [SerializeField] private Color normalColor = new Color(0.15f, 0.15f, 0.18f, 0.95f);
     [SerializeField] private Color selectedColor = new Color(0.55f, 0.42f, 0.12f, 0.95f);
 
     private InputReader input;
     private int selected;
+    private float nextCraft,nextCraftRefresh,noticeUntil;
+    private static readonly List<KeyValuePair<string,int>> PotionRecipe=new List<KeyValuePair<string,int>>{new KeyValuePair<string,int>(InventoryService.LaCam,1),new KeyValuePair<string,int>(InventoryService.LinhChi,1)};
 
     public bool IsOpen => panel != null && panel.activeSelf;
 
@@ -45,6 +52,7 @@ public class InventoryPanel : MonoBehaviour, IUiPauseOwner
             slotButtons[i].onClick.AddListener(() => Select(index));
         }
         closeButton.onClick.AddListener(Close);
+        if(craftPotionButton)craftPotionButton.onClick.AddListener(()=>TryCraftPotion());
         panel.SetActive(false);
     }
 
@@ -62,6 +70,7 @@ public class InventoryPanel : MonoBehaviour, IUiPauseOwner
 
     private void Update()
     {
+        if(IsOpen&&craftPotionButton&&Time.unscaledTime>=nextCraftRefresh){RefreshCrafting();nextCraftRefresh=Time.unscaledTime+.12f;}
         if (input == null || !input.IsReady || !input.Inventory.WasPressedThisFrame()) return;
 
         if (IsOpen) Close();
@@ -89,6 +98,27 @@ public class InventoryPanel : MonoBehaviour, IUiPauseOwner
 
     public void CloseFromBack() => Close();
 
+    public bool TryCraftPotion()
+    {
+        var session=AppRoot.Instance?AppRoot.Instance.Session:null;
+        var vitals=lantern?lantern.GetComponent<PlayerVitals>():null;
+        if(!IsOpen||session==null||session.State!=GameSession.SessionState.InMenu||!vitals||vitals.IsDead||Time.unscaledTime<nextCraft)return false;
+        if(!inventory.TryCraft(PotionRecipe,InventoryService.ThuocMau,1,out string reason))
+        {if(craftingStatusText)craftingStatusText.text=reason;RefreshCrafting();return false;}
+        nextCraft=Time.unscaledTime+.25f;
+        noticeUntil=Time.unscaledTime+2.5f;
+        if(craftingStatusText)craftingStatusText.text="Đã chế 1 Bình máu. Lưu tại điểm lửa để giữ tiến trình.";
+        SoundscapeRuntime.Play(SoundCue.Pickup);RefreshCrafting();return true;
+    }
+    private void RefreshCrafting()
+    {
+        if(!craftPotionButton)return;
+        bool ready=inventory.CanCraft(PotionRecipe,InventoryService.ThuocMau,1,out string reason);
+        craftPotionButton.interactable=IsOpen&&ready&&Time.unscaledTime>=nextCraft;
+        if(recipeText)recipeText.text=$"<b>1 Lá cẩm</b>  ({inventory.Count(InventoryService.LaCam)}/1)\n+ <b>1 Linh chi</b>  ({inventory.Count(InventoryService.LinhChi)}/1)\n\nTạo 1 Bình máu · hồi 35 máu bằng Q";
+        if(craftingStatusText&&!ready&&Time.unscaledTime>=noticeUntil)craftingStatusText.text=reason;
+    }
+
     private void Select(int index)
     {
         selected = index;
@@ -104,6 +134,7 @@ public class InventoryPanel : MonoBehaviour, IUiPauseOwner
             InventoryService.Slot slot = inventory.GetSlot(i);
             ItemDefinition def = slot.IsEmpty ? null : inventory.GetDefinition(slot.itemId);
             slotTexts[i].text = def == null ? "—" : $"{def.displayName}\nx{slot.quantity}";
+            if(slotIcons!=null&&i<slotIcons.Length&&slotIcons[i]){slotIcons[i].sprite=def?def.icon:null;slotIcons[i].enabled=def&&def.icon;}
             slotButtons[i].image.color = i == selected ? selectedColor : normalColor;
         }
 
@@ -113,16 +144,32 @@ public class InventoryPanel : MonoBehaviour, IUiPauseOwner
             ? "Ô trống"
             : $"<b>{currentDef.displayName}</b> x{current.quantity} (tối đa {currentDef.maxStack})\n{currentDef.description}";
 
+        bool chapter2=gameObject.scene.name==GameSession.SecondChapterScene;
+        if(chapter2&&currentDef!=null&&current.itemId==InventoryService.ThuocMau&&!craftPotionButton)
+            detailText.text=$"<b>{currentDef.displayName}</b> x{current.quantity} (tối đa {currentDef.maxStack})\nDùng Q khi đang chơi để hồi 35 máu. Chế từ 1 Lá cẩm và 1 Linh chi tại lửa trại đáy giếng.";
+
         // Dùng "\n" thay AppendLine để TMP không nhận "\r" trên Windows.
         StringBuilder key = new StringBuilder("<b>Trang bị</b>\n");
         key.Append("Dao găm\n");
         if (lantern.HasLantern) key.Append("Lồng Đèn Sen\n");
+        if(chapter2)
+        {
+            int fragments=0;foreach(string id in new[]{"c2_frag_1","c2_frag_2","c2_frag_3"})if(worldState.Has(StateSet.Fragments,id))fragments++;
+            key.Append("Phúc Kim Quy\n");
+            key.Append(worldState.Has(StateSet.Abilities,WorldIds.AbilityWind)?"Lông Chim Lạc: đã nhận\n":"Lông Chim Lạc: chưa nhận\n");
+            key.Append($"\n<b>Mặt Trời Lông Chim</b> {fragments}/3 mảnh\n");
+            key.Append(worldState.Has(StateSet.BossTools,"c2_tool_long_gio_lon")?"Lông Gió Lớn: đã nhận\n":"Lông Gió Lớn: chưa nhận\n");
+            if(worldState.Has(StateSet.Puzzles,"c2_relic_restored"))key.Append("Cổ vật đã phục dựng\n");
+            if(worldState.Has(StateSet.Puzzles,"c2_linhthan_done"))key.Append("Lời Chim Lạc: xem Nhật ký (J)\n");
+            keyItemsText.text=key.ToString();RefreshCrafting();return;
+        }
         key.Append($"\n<b>Mảnh Trống Đồng</b> {worldState.RelicCount}/3\n");
-        AppendFragment(key, WorldStateStore.DrumA, "Mảnh Trống A");
-        AppendFragment(key, WorldStateStore.DrumB, "Mảnh Trống B");
-        AppendFragment(key, WorldStateStore.DrumC, "Mảnh Trống C");
+        AppendFragment(key, WorldStateStore.DrumA, "Mặt Trống");
+        AppendFragment(key, WorldStateStore.DrumB, "Thân Trống");
+        AppendFragment(key, WorldStateStore.DrumC, "Chân Trống");
         if (worldState.Has(StateSet.Puzzles, WorldIds.RelicRestoredC1)) key.Append("\n<b>Trống Đồng Kim Quy</b> (đã phục dựng)\n");
         keyItemsText.text = key.ToString();
+        RefreshCrafting();
     }
 
     private void AppendFragment(StringBuilder text, string id, string label)

@@ -14,8 +14,6 @@ public class WindColumn : MonoBehaviour
     [SerializeField] private float hoverTopY = 9f;
     [SerializeField] private GameObject visual;
 
-    private PlayerAbilities cachedAbilities;
-
     // Thời điểm cuối An được cột đang bật nâng (trùm quạt gió bỏ qua An khi ở trong cột).
     public static float PlayerLiftedTime { get; private set; } = float.NegativeInfinity;
     public static bool PlayerInActiveColumn => Time.time - PlayerLiftedTime < 0.15f;
@@ -39,18 +37,21 @@ public class WindColumn : MonoBehaviour
     private void OnEnable()
     {
         if (worldState != null) worldState.Changed += Refresh;
+        Refresh();
     }
 
     private void OnDisable()
     {
         if (worldState != null) worldState.Changed -= Refresh;
+        IsActive = false;
+        if (visual != null) visual.SetActive(false);
     }
 
     private void Start() => Refresh();
 
     public void Refresh()
     {
-        if (worldState == null) return;
+        if (worldState == null || visual == null || !isActiveAndEnabled) return;
         IsActive = (startsActive || worldState.Has(StateSet.Puzzles, columnId)) &&
                    (string.IsNullOrEmpty(requiredBossTool) || worldState.Has(StateSet.BossTools, requiredBossTool));
         if (visual.activeSelf != IsActive) visual.SetActive(IsActive);
@@ -59,7 +60,7 @@ public class WindColumn : MonoBehaviour
     // Gọi bởi câu đố (UnityEvent): cột mở bằng câu đố được lưu.
     public void Activate()
     {
-        if (!string.IsNullOrEmpty(columnId)) worldState.TryAdd(StateSet.Puzzles, columnId);
+        if (worldState != null && !string.IsNullOrEmpty(columnId)) worldState.TryAdd(StateSet.Puzzles, columnId);
         Refresh();
     }
 
@@ -69,8 +70,8 @@ public class WindColumn : MonoBehaviour
         PlayerMotor motor = other.GetComponentInParent<PlayerMotor>();
         if (motor == null) return;
 
-        if (cachedAbilities == null) cachedAbilities = motor.GetComponent<PlayerAbilities>();
-        if (cachedAbilities == null || !cachedAbilities.Has(requiredAbility)) return;
+        PlayerAbilities abilities = motor.GetComponent<PlayerAbilities>();
+        if (abilities == null || !abilities.Has(requiredAbility)) return;
 
         motor.RequestLift(liftSpeed, hoverTopY);
         PlayerLiftedTime = Time.time;

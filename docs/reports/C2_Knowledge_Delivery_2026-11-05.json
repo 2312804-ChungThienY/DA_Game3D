@@ -1,0 +1,220 @@
+{
+  "stage": "C2 stage3 knowledge, bells and atomic rewards",
+  "date": "2026-11-05",
+  "backupFolder": "SourceAssets/SceneBackups/2026-11-05_C2Knowledge/192230",
+  "editorChecks": 23,
+  "playChecks": 110,
+  "failures": [],
+  "runtimeErrors": [],
+  "metadata": [
+    {
+      "path": "Assets/_Project/Scenes/03_GiengTroiChimLac.unity.meta",
+      "preserved": true
+    },
+    {
+      "path": "Assets/_Project/Scenes/03_GiengTroiChimLac_NavMesh.asset.meta",
+      "preserved": true
+    },
+    {
+      "path": "Assets/_Project/Scripts/Inventory/InventoryService.cs.meta",
+      "preserved": true
+    },
+    {
+      "path": "Assets/_Project/Scripts/Knowledge/RewardService.cs.meta",
+      "preserved": true
+    },
+    {
+      "path": "Assets/_Project/Scripts/Knowledge/QuizPedestal.cs.meta",
+      "preserved": true
+    },
+    {
+      "path": "Assets/_Project/Scripts/UI/QuizPanel.cs.meta",
+      "preserved": true
+    },
+    {
+      "path": "Assets/_Project/Scripts/Core/WorldIds.cs.meta",
+      "preserved": true
+    },
+    {
+      "path": "Assets/_Project/Scripts/Core/WorldStateStore.cs.meta",
+      "preserved": true
+    },
+    {
+      "path": "Assets/_Project/Scripts/Puzzles/PuzzleCluePickup.cs.meta",
+      "preserved": true
+    },
+    {
+      "path": "Assets/_Project/Data/Chapters/C2/SC_C2_LongChimLac.asset.meta",
+      "preserved": true
+    },
+    {
+      "path": "Assets/_Project/Data/Knowledge/LR_c2_lore_p1.asset.meta",
+      "preserved": true
+    },
+    {
+      "path": "Assets/_Project/Data/Knowledge/LR_c2_lore_p2.asset.meta",
+      "preserved": true
+    },
+    {
+      "path": "Assets/_Project/Data/Knowledge/LR_c2_lore_p3.asset.meta",
+      "preserved": true
+    },
+    {
+      "path": "Assets/_Project/Data/Knowledge/LR_c2_lore_p4.asset.meta",
+      "preserved": true
+    },
+    {
+      "path": "Assets/_Project/Data/Knowledge/LR_c2_lore_p5.asset.meta",
+      "preserved": true
+    },
+    {
+      "path": "Assets/_Project/Data/Knowledge/QZ_c2_qz_lt1.asset.meta",
+      "preserved": true
+    },
+    {
+      "path": "Assets/_Project/Data/Knowledge/QZ_c2_qz_lt2.asset.meta",
+      "preserved": true
+    },
+    {
+      "path": "Assets/_Project/Data/Knowledge/QZ_c2_qz_lt3.asset.meta",
+      "preserved": true
+    },
+    {
+      "path": "Assets/_Project/Data/Knowledge/QZ_c2_qz_p1.asset.meta",
+      "preserved": true
+    },
+    {
+      "path": "Assets/_Project/Data/Knowledge/QZ_c2_qz_p2.asset.meta",
+      "preserved": true
+    },
+    {
+      "path": "Assets/_Project/Data/Knowledge/QZ_c2_qz_p3.asset.meta",
+      "preserved": true
+    },
+    {
+      "path": "Assets/_Project/Data/Knowledge/QZ_c2_qz_p4.asset.meta",
+      "preserved": true
+    }
+  ],
+  "c1SceneChecks": [
+    {
+      "path": "Assets/_Project/Scenes/02_HangLinhMach.unity",
+      "unchangedSinceStage1Delivery": true
+    },
+    {
+      "path": "Assets/_Project/Scenes/92_EnvironmentPreview.unity",
+      "unchangedSinceStage1Delivery": true
+    }
+  ],
+  "c1ScenesUnchanged": true,
+  "motorWindUnchanged": true,
+  "personalSaveRestored": true,
+  "files": [
+    {
+      "path": "Assets/_Project/Scenes/03_GiengTroiChimLac.unity",
+      "sha256": "643ede034abf28af1ec54f93800f02f5579897e7d2337d2687912d06db44b1d0"
+    },
+    {
+      "path": "Assets/_Project/Scenes/03_GiengTroiChimLac_NavMesh.asset",
+      "sha256": "a77faf7c07e93e51eb9ee2663c0c5ad73467e02e778276c96ef740cc865360bc"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Inventory/InventoryService.cs",
+      "sha256": "342bcbc4fb1f7193bcb84f55cfde7cb3e5db43492ad4fc24eaf85b100c1073cd"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Knowledge/RewardService.cs",
+      "sha256": "e1a05b9282ccd7df68672c850455124d0df75bf1257fa478c892cdd018d29286"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Knowledge/QuizPedestal.cs",
+      "sha256": "baf964201ca1a25b85d4d9da5ce9f864e240c5adf8b595441e26290bf4c98d46"
+    },
+    {
+      "path": "Assets/_Project/Scripts/UI/QuizPanel.cs",
+      "sha256": "7e5c37ee01a93fc3a02ce357e66b1b68e005a42f7b3c67fcbe6510bdec1d4c90"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Core/WorldIds.cs",
+      "sha256": "781060b0dab38aefdf59c5111a8dca8cfbc0221fc5b48c22c9aabccbfa65a6be"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Core/WorldStateStore.cs",
+      "sha256": "316f729e6c3ded7de0e12b32295ff37e069185b1f4a44b7939d68e83d54c3fb4"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Puzzles/PuzzleCluePickup.cs",
+      "sha256": "d249afbbc6d75d83d8bcc68cb3dd856265df9408b5719449fab1204145889d2a"
+    },
+    {
+      "path": "Assets/_Project/Data/Chapters/C2/SC_C2_LongChimLac.asset",
+      "sha256": "9ab92101982a35e0ae01bcfa26deb778fc075b775f839ea7ad560deefeaa270e"
+    },
+    {
+      "path": "Assets/_Project/Data/Knowledge/LR_c2_lore_p1.asset",
+      "sha256": "3fbdd79f9931e0f3816f4e44ed666679e206c2dcfba1b77818fad9fabf118af4"
+    },
+    {
+      "path": "Assets/_Project/Data/Knowledge/LR_c2_lore_p2.asset",
+      "sha256": "3923ee81909ea75b8d721bf5d80a7cc211893b0486d7f3de09928bb595187e52"
+    },
+    {
+      "path": "Assets/_Project/Data/Knowledge/LR_c2_lore_p3.asset",
+      "sha256": "58946469b602267d1184d15fba1852e82ebd5a68ac04359c62ebc05dbba81108"
+    },
+    {
+      "path": "Assets/_Project/Data/Knowledge/LR_c2_lore_p4.asset",
+      "sha256": "d3fb3f55c723b6132fe2abb5b774765df25694487904d310077847a9b7a5043c"
+    },
+    {
+      "path": "Assets/_Project/Data/Knowledge/LR_c2_lore_p5.asset",
+      "sha256": "28497d34f165467eea3700d650795e3b8f97cae17532f41a6c8b782de750fae3"
+    },
+    {
+      "path": "Assets/_Project/Data/Knowledge/QZ_c2_qz_lt1.asset",
+      "sha256": "0fbf1d949689511de80f0cda905780666610b2dee11ee3d4d1ffc09745443882"
+    },
+    {
+      "path": "Assets/_Project/Data/Knowledge/QZ_c2_qz_lt2.asset",
+      "sha256": "a97f9ae15d6bb7f3ea7b6bddc512e2dbe15883d328ca6ca15849f3373075277a"
+    },
+    {
+      "path": "Assets/_Project/Data/Knowledge/QZ_c2_qz_lt3.asset",
+      "sha256": "660c86db3c2e43a4f25a15d2a94649a360f139206c616d2d5fa596cea0bc4f1d"
+    },
+    {
+      "path": "Assets/_Project/Data/Knowledge/QZ_c2_qz_p1.asset",
+      "sha256": "91b6a2b9092c5ba85a7bfde97534d5500f0dc38f717fe79555c71083d698626e"
+    },
+    {
+      "path": "Assets/_Project/Data/Knowledge/QZ_c2_qz_p2.asset",
+      "sha256": "6db64d1e1290cd17d9b428ee2c15fc1667b30ddd2dbe56a479f05fa2e78c0cad"
+    },
+    {
+      "path": "Assets/_Project/Data/Knowledge/QZ_c2_qz_p3.asset",
+      "sha256": "de9e4a48d58ac8d26429335fe5d49dd0032bf444fdcd6bf4de8af2d1b8960685"
+    },
+    {
+      "path": "Assets/_Project/Data/Knowledge/QZ_c2_qz_p4.asset",
+      "sha256": "7ec3c8ad40bc699050884c710648c4c94be2696ceb06f5258daff232d33cfee4"
+    },
+    {
+      "path": "Assets/_Project/Editor/Chapter02KnowledgeSetup.cs",
+      "sha256": "7657e9b5eb7d0eb8b99c23e447a12ec2874c8e302365ee5d3cf5ad9bde10ccdc"
+    },
+    {
+      "path": "Assets/_Project/Tests/Chapter02KnowledgeProbe.cs",
+      "sha256": "695468f2c2658274416f2fcdc6bb7c990fe552ad3064c9883249cec31ad34d1b"
+    },
+    {
+      "path": "Assets/_Project/Scenes/02_HangLinhMach.unity",
+      "sha256": "c94343aac7d18aeff8d1370fcedfd6d693c9be2ea25b4173bcff5d97dab0f57e"
+    },
+    {
+      "path": "Assets/_Project/Scenes/92_EnvironmentPreview.unity",
+      "sha256": "896e58e8e8ce083fc8ed39f49ce6a5e542ac3bfd4338ceffe85ad085a2c2c141"
+    }
+  ],
+  "windowsBuildUpdated": false,
+  "manualHumanPlayOrFullC2Verified": false
+}

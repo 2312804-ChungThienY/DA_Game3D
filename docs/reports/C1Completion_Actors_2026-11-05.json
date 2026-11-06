@@ -1,0 +1,14 @@
+{
+    "action": "install-actors",
+    "checks": [
+        "HacAnh_01 uses A08 animated Ghost clips; original AI, health, focus hitboxes and root retained.",
+        "HacAnh_02 uses A08 animated Ghost clips; original AI, health, focus hitboxes and root retained.",
+        "Authored six bone-rig clips for imported Golem: idle/walk/sweep/slam/hurt/death; root motion disabled.",
+        "HoVeDa_Guardian uses Kevin Iglesias skinned Golem with six project bone clips; original AI, health, focus hitboxes and root retained.",
+        "HacAnh_01 uses A08 animated Ghost clips; original AI, health, focus hitboxes and root retained.",
+        "HacAnh_02 uses A08 animated Ghost clips; original AI, health, focus hitboxes and root retained.",
+        "HoVeDa_Guardian uses Kevin Iglesias skinned Golem with six project bone clips; original AI, health, focus hitboxes and root retained.",
+        "Scene backup: SourceAssets/SceneBackups/2026-11-05_Chapter01Completion/Actors_213032068"
+    ],
+    "failures": []
+}

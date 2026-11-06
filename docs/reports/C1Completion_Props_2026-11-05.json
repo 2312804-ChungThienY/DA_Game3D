@@ -1,0 +1,15 @@
+{
+    "action": "install-props",
+    "checks": [
+        "Added reverse-facing collision shells to 5 thin limestone walls, so camera queries also hit their exterior faces; original render meshes and physics settings retained.",
+        "Corrected upward stone/bevel normals: 0 project meshes; geometry, IDs and collision unchanged.",
+        "Refined lotus exposure, stone guardian palette, FBX cave crystals, bronze relic fragments, checkpoint crystals and beveled path stones; original IDs and colliders retained.",
+        "Lotus lantern replaces orange sphere in the hand and on pickup; no changes to An's model/rig, input, focus range or energy. FBX herbs/potions/crystal installed; junction collider thickness and navigation updated.",
+        "Added reverse-facing collision shells to 5 thin limestone walls, so camera queries also hit their exterior faces; original render meshes and physics settings retained.",
+        "Corrected upward stone/bevel normals: 0 project meshes; geometry, IDs and collision unchanged.",
+        "Refined lotus exposure, stone guardian palette, FBX cave crystals, bronze relic fragments, checkpoint crystals and beveled path stones; original IDs and colliders retained.",
+        "Lotus lantern replaces orange sphere in the hand and on pickup; no changes to An's model/rig, input, focus range or energy. FBX herbs/potions/crystal installed; junction collider thickness and navigation updated.",
+        "Scene backup: SourceAssets/SceneBackups/2026-11-05_Chapter01Completion/Props_000328344"
+    ],
+    "failures": []
+}

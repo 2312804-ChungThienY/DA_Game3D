@@ -1,0 +1,10 @@
+{
+    "action": "build",
+    "backup": "",
+    "scene": "",
+    "checks": [
+        "Windows x64 Release: Succeeded, errors=0, warnings=485"
+    ],
+    "failures": [],
+    "screenshots": []
+}

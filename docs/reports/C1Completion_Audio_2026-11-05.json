@@ -1,0 +1,8 @@
+{
+    "action": "install-audio",
+    "checks": [
+        "Moved project mixer into Resources with existing GUID/group file IDs retained.",
+        "Audio palette: Music/SFX/UI mixer routing; three streaming background clips, UI/impact/door/drum/pickup/ghost feedback; original source imports untouched."
+    ],
+    "failures": []
+}

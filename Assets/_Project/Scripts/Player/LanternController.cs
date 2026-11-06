@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[DefaultExecutionOrder(-30)]
 public class LanternController : MonoBehaviour
 {
     [Header("References")]
@@ -16,12 +17,15 @@ public class LanternController : MonoBehaviour
     [SerializeField] private float recoveryRate = 20f;
     [SerializeField] private float recoveryDelay = 1f;
 
+    private InputReader input;
+    private PlayerActionState actions;
     private InputAction toggleAction;
     private InputAction focusAction;
 
     private bool hasLantern;
     private bool lanternOn;
     private bool exhaustedUntilRelease;
+    private bool interruptedUntilRelease;
 
     private float energy;
     private float timeSinceFocus;
@@ -32,6 +36,7 @@ public class LanternController : MonoBehaviour
 
     private void Awake()
     {
+        actions = GetComponent<PlayerActionState>();
         energy = maxEnergy;
         timeSinceFocus = recoveryDelay;
 
@@ -52,7 +57,7 @@ public class LanternController : MonoBehaviour
 
     private void Start()
     {
-        InputReader input = AppRoot.Instance != null ? AppRoot.Instance.Input : null;
+        input = AppRoot.Instance != null ? AppRoot.Instance.Input : null;
         toggleAction = input != null && input.IsReady ? input.ToggleLantern : null;
         focusAction = input != null && input.IsReady ? input.Focus : null;
 
@@ -71,7 +76,7 @@ public class LanternController : MonoBehaviour
         IsFocusing = false;
 
         // Không tiêu hao hoặc hồi năng lượng khi gameplay bị khóa.
-        if (!Application.isFocused ||
+        if (input == null || !input.GameplayActive || !Application.isFocused ||
             Time.timeScale == 0f ||
             toggleAction == null ||
             focusAction == null ||
@@ -82,12 +87,15 @@ public class LanternController : MonoBehaviour
             return;
         }
 
-        if (hasLantern && toggleAction.WasPressedThisFrame())
+        if (hasLantern && input.WasPressed(toggleAction))
         {
             lanternOn = !lanternOn;
         }
 
-        bool focusHeld = focusAction.IsPressed();
+        bool focusHeld = input.IsHeld(focusAction);
+        bool canFocus = actions == null || actions.CanFocus;
+        if (focusHeld && (input.WasPressed(input.Attack) || input.IsHeld(input.Attack))) interruptedUntilRelease = true;
+        if (!focusHeld) interruptedUntilRelease = false;
 
         // Hết năng lượng phải thả chuột trước khi Focus lại.
         if (!focusHeld || !IsLanternOn)
@@ -98,6 +106,8 @@ public class LanternController : MonoBehaviour
         IsFocusing =
             IsLanternOn &&
             focusHeld &&
+            canFocus &&
+            !interruptedUntilRelease &&
             !exhaustedUntilRelease &&
             energy > 0f;
 
@@ -181,6 +191,7 @@ public class LanternController : MonoBehaviour
         energy = maxEnergy;
         timeSinceFocus = recoveryDelay;
         exhaustedUntilRelease = false;
+        interruptedUntilRelease = false;
         IsFocusing = false;
         RefreshVisuals();
     }
@@ -205,7 +216,9 @@ public class LanternController : MonoBehaviour
             }
             else
             {
-                string state = exhaustedUntilRelease
+                string state = interruptedUntilRelease
+                    ? "Thả rồi giữ lại chuột phải để chiếu"
+                    : exhaustedUntilRelease
                     ? "Hết năng lượng – thả chuột phải để hồi"
                     : IsFocusing ? "Đang chiếu tập trung" : "Giữ chuột phải để chiếu tập trung";
 

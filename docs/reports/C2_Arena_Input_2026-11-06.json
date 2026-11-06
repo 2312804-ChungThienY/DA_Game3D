@@ -1,0 +1,36 @@
+{
+  "mode": "Editor Play Mode; input-only encounter regression: W entry, actual wind lift, RMB scanner focus, Space descent and LMB combat hit; initial/progression/reset fixtures, no full chapter or manual balance claim",
+  "checks": [
+    "Ready: 03_GiengTroiChimLac",
+    "Input fixture saved before encounter",
+    "Real Game View focus and production input guard active",
+    "Controller reached arena point (5.00, 18.00, 76.00)",
+    "Walking through actual entry trigger starts boss and locks rear gate",
+    "Fresh screenshot: entry",
+    "Controller reached arena point (5.00, 18.00, 82.00)",
+    "Actual arena wind reaches hover during input test",
+    "Boss reaches perched state",
+    "Real RMB/InputReader/scanner triggers Chim Lac stun while hovering",
+    "Real-input focus puts boss into stunned state",
+    "Fresh screenshot: hover-focus",
+    "Real Space jumps out of arena hover",
+    "Controller reached arena point (9.10, 18.00, 82.00)",
+    "Player lands near stunned boss",
+    "Actual LMB combat hit damages grounded boss after focus and descent",
+    "No unexpected runtime errors/assertions/exceptions",
+    "Personal primary/backup/temp saves restored byte-for-byte",
+    "Console Error Pause restored to original setting: True"
+  ],
+  "failures": [],
+  "errors": [],
+  "screenshots": [
+    "docs/images/c2-arena-entry-2026-11-06.png",
+    "docs/images/c2-arena-hover-focus-2026-11-06.png"
+  ],
+  "notes": [
+    "Console Error Pause temporarily disabled for expected I/O diagnostic; original=True",
+    "Awaiting Game View; no input guard bypass",
+    "Landing: pos=(9.21, 18.02, 81.99), vertical=-2.21931, hovering=False, CCground=True, state=Playing, ignoredFocus=True"
+  ],
+  "expectedErrors": []
+}

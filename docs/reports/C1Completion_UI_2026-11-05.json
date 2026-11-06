@@ -1,0 +1,11 @@
+{
+    "action": "install-ui",
+    "checks": [
+        "Shared UI theme retained from completed prefab step.",
+        "Main menu theme retained from completed scene step.",
+        "C1 HUD: compact vitals, potion quickslot, contextual E, area banner, Moss Garden objective and separate 3-fragment/2-puzzle progress; inventory/journal/story restyled.",
+        "C1 HUD: compact vitals, potion quickslot, contextual E, area banner, Moss Garden objective and separate 3-fragment/2-puzzle progress; inventory/journal/story restyled.",
+        "UI prefab and scene backups: SourceAssets/SceneBackups/2026-11-05_Chapter01Completion/UI_214812296"
+    ],
+    "failures": []
+}

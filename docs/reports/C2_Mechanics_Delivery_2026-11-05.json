@@ -1,0 +1,56 @@
+{
+  "sceneUnchanged": true,
+  "sceneMetaUnchanged": true,
+  "c1ScenesUnchanged": true,
+  "personalSaveRestored": true,
+  "Editor": {
+    "checks": 21,
+    "failures": 0,
+    "errors": 0
+  },
+  "PlayMode": {
+    "checks": 56,
+    "failures": 0,
+    "errors": 0
+  },
+  "runtimeMetadataPreserved": true,
+  "files": [
+    {
+      "path": "Assets/_Project/Scripts/Chapters/C2/BossChimLac.cs",
+      "sha256": "fc8e3f3f21b7e012e6cda7f3bb1f51f6c56f9a0481a1046a445e7be485594835"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Chapters/C2/ChimLacFocusReceiver.cs",
+      "sha256": "70bb284e10328a3d7fa8871d68f59af1252add2ffc77b552dce9e311c09b5411"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Chapters/C2/ThrowerBrain.cs",
+      "sha256": "acbb5d7dd7247d1fe88773ac941300859688b33f532d3c5eaa5eaf53d04d69b4"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Chapters/C2/WindColumn.cs",
+      "sha256": "b3434c7122bb2a8f77b7d23e5413eecf0a1d8ad38ebefddbc056cd917c7bed52"
+    },
+    {
+      "path": "Assets/_Project/Scripts/AI/BossBase.cs",
+      "sha256": "63d9f01ca1255467b9bf336af3d5572e72225defa52caebe10da8e4f029997ca"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Core/WorldStateStore.cs",
+      "sha256": "b41cdd26d0d835a753dbfb4fa63b416d0ae26b9db1677a35f01c95a6ab70d3ed"
+    },
+    {
+      "path": "Assets/_Project/Scripts/Puzzles/SequencePuzzle.cs",
+      "sha256": "694f2249a087976eaf9f3ebc468588847b696cdc6598ab3fb2aaa8ab59d60ff0"
+    },
+    {
+      "path": "Assets/_Project/Editor/Chapter02MechanicsAudit.cs",
+      "sha256": "b0dbbc05d08ea19d006b1365a95ae1efcd16a06cba9c985047417135ce01dd6a"
+    },
+    {
+      "path": "Assets/_Project/Tests/Chapter02MechanicsProbe.cs",
+      "sha256": "2c266ae60ac83fbb17a4a337df9acc0cd82519a6491638f1ec7f0c23c72bd489"
+    }
+  ],
+  "windowsBuildUpdated": false
+}
