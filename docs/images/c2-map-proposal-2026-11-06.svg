@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-label="Sơ đồ đề xuất bố cục mới toàn bộ bản đồ chương 2 Chim Lạc Giếng Trời">
+  <defs>
+    <linearGradient id="bg" x2="0" y2="1"><stop stop-color="#102b31"/><stop offset="1" stop-color="#091b20"/></linearGradient>
+    <radialGradient id="void"><stop stop-color="#71857d" stop-opacity=".42"/><stop offset="1" stop-color="#24373c" stop-opacity=".13"/></radialGradient>
+    <linearGradient id="stone" x2="0" y2="1"><stop stop-color="#a49a79"/><stop offset="1" stop-color="#5f705d"/></linearGradient>
+    <linearGradient id="forest" x2="0" y2="1"><stop stop-color="#557f52"/><stop offset="1" stop-color="#315b4e"/></linearGradient>
+    <linearGradient id="gold" x2="0" y2="1"><stop stop-color="#f6d88c"/><stop offset="1" stop-color="#b68145"/></linearGradient>
+    <filter id="shadow"><feDropShadow dx="0" dy="7" stdDeviation="8" flood-color="#000" flood-opacity=".38"/></filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5 0 10Z" fill="#ffd377"/></marker>
+    <pattern id="dots" width="28" height="28" patternUnits="userSpaceOnUse"><circle cx="3" cy="4" r="1.4" fill="#c6d4a6" opacity=".19"/><circle cx="17" cy="16" r="1.1" fill="#f3d89b" opacity=".13"/></pattern>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#bg)"/>
+  <rect x="36" y="28" width="1528" height="944" rx="30" fill="#10282b" stroke="#8d9b72" stroke-width="2"/>
+  <text x="78" y="83" fill="#f6d88c" font-family="Arial, sans-serif" font-size="35" font-weight="700">CHƯƠNG 2 · CHIM LẠC — GIẾNG TRỜI</text>
+  <text x="80" y="115" fill="#b5c9bd" font-family="Arial, sans-serif" font-size="18">Phác thảo bố cục mới · tuyến vòng quanh hố sụt · bản để duyệt hình, chưa sửa Unity</text>
+
+  <rect x="60" y="145" width="1100" height="785" rx="22" fill="#173438" stroke="#6d8e7a" stroke-width="2"/>
+  <ellipse cx="548" cy="527" rx="330" ry="285" fill="url(#void)" stroke="#7c9d9b" stroke-dasharray="8 13" stroke-opacity=".55" stroke-width="2"/>
+  <ellipse cx="548" cy="527" rx="245" ry="199" fill="#c3d8ce" opacity=".06"/>
+  <text x="475" y="552" fill="#b5cbc2" opacity=".75" font-family="Arial, sans-serif" font-size="22" font-weight="700">VỰC SƯƠNG</text>
+  <text x="463" y="580" fill="#b5cbc2" opacity=".6" font-family="Arial, sans-serif" font-size="16">không có lối tắt</text>
+
+  <!-- Connected outer-rim route, clockwise from lower left to upper left. -->
+  <path d="M334 788 C450 850 610 852 747 781 L870 693 L900 585 L898 465 L865 390 L805 354" fill="none" stroke="#496b60" stroke-width="66" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M334 788 C450 850 610 852 747 781 L870 693 L900 585 L898 465 L865 390 L805 354" fill="none" stroke="#a7a083" stroke-width="39" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- P1: entry floor. -->
+  <path d="M97 641 Q118 595 223 589 L350 615 Q414 654 411 746 L376 834 Q322 890 202 875 L101 820 Q65 742 97 641Z" fill="url(#forest)" stroke="#c9b776" stroke-width="4" filter="url(#shadow)"/>
+  <path d="M97 641 Q118 595 223 589 L350 615 Q414 654 411 746 L376 834 Q322 890 202 875 L101 820 Q65 742 97 641Z" fill="url(#dots)"/>
+  <path d="M111 699 Q140 674 169 698 L165 746 Q132 746 111 728Z" fill="#374849" stroke="#c1a56c" stroke-width="3"/>
+  <text x="96" y="696" fill="#d8ded0" font-family="Arial, sans-serif" font-size="15">LỐI TỪ C1</text>
+  <circle cx="208" cy="799" r="19" fill="#a86b37" stroke="#f8cc78" stroke-width="3"/><path d="M201 797q8-31 15-3q-5-5-7 9Z" fill="#ffda82"/>
+  <path d="M275 685q-13-25 5-29q15 9 4 27q-8 11-9 2Z" fill="url(#gold)" stroke="#fff2b6" stroke-width="2"/>
+  <circle cx="332" cy="756" r="26" fill="#4db7b1" opacity=".48" stroke="#85f5ee" stroke-width="4"/>
+  <circle cx="332" cy="756" r="9" fill="#d0fff7"/>
+  <text x="136" y="634" fill="#fff0c6" font-family="Arial, sans-serif" font-size="25" font-weight="700">P1 · ĐÁY GIẾNG GIÓ</text>
+  <text x="137" y="663" fill="#e0e6cf" font-family="Arial, sans-serif" font-size="17">y = 0 → gờ +5 m</text>
+  <text x="150" y="847" fill="#e4eadc" font-family="Arial, sans-serif" font-size="16">Spawn · lửa lưu · lông chim · mảnh 1</text>
+
+  <!-- P2: ascending eastern cliff. -->
+  <path d="M690 668 L819 601 Q902 588 968 638 L1030 777 Q1003 849 917 864 L786 839 Q703 804 690 736Z" fill="url(#stone)" stroke="#c4b47d" stroke-width="4" filter="url(#shadow)"/>
+  <path d="M741 758 l98-39 37 27-98 40Z" fill="#b9ad80" stroke="#d8cd96" stroke-width="2"/>
+  <path d="M848 693 l97-38 37 27-97 40Z" fill="#c2b68b" stroke="#e1d3a2" stroke-width="2"/>
+  <circle cx="804" cy="718" r="20" fill="#4db7b1" opacity=".55" stroke="#85f5ee" stroke-width="4"/>
+  <circle cx="915" cy="664" r="20" fill="#4db7b1" opacity=".55" stroke="#85f5ee" stroke-width="4"/>
+  <text x="713" y="632" fill="#fff0c6" font-family="Arial, sans-serif" font-size="25" font-weight="700">P2 · VÁCH GIÓ</text>
+  <text x="712" y="660" fill="#263938" font-family="Arial, sans-serif" font-size="17" font-weight="700">gờ +9 m → +13 m</text>
+  <text x="744" y="814" fill="#213b37" font-family="Arial, sans-serif" font-size="16" font-weight="700">2 bệ · 2 cột gió · mảnh 2</text>
+
+  <!-- P3: three suspended houses and bells. -->
+  <path d="M778 220 Q830 172 954 187 L1071 257 L1081 438 Q1031 493 930 477 L798 429 Q755 356 778 220Z" fill="url(#stone)" stroke="#d3bc83" stroke-width="4" filter="url(#shadow)"/>
+  <text x="803" y="226" fill="#fff0c6" font-family="Arial, sans-serif" font-size="25" font-weight="700">P3 · NHÀ SÀN ĐÁ TREO</text>
+  <text x="802" y="253" fill="#293b3b" font-family="Arial, sans-serif" font-size="17" font-weight="700">y = 13 m → gờ +18 m</text>
+  <g fill="#6b5946" stroke="#e8c98c" stroke-width="3"><path d="M812 293l31-27 31 27v51h-62Z"/><path d="M891 309l31-27 31 27v51h-62Z"/><path d="M970 294l31-27 31 27v51h-62Z"/></g>
+  <g fill="#cd9a53" stroke="#f6d790" stroke-width="2"><path d="M805 296q38-55 76 0Z"/><path d="M884 312q38-55 76 0Z"/><path d="M963 297q38-55 76 0Z"/></g>
+  <g fill="#f4d783"><circle cx="843" cy="314" r="8"/><circle cx="922" cy="330" r="8"/><circle cx="1001" cy="315" r="8"/></g>
+  <rect x="870" y="390" width="108" height="25" rx="7" fill="#d7b36d"/><text x="882" y="408" fill="#283632" font-family="Arial, sans-serif" font-size="14" font-weight="700">CHUÔNG 2–3–1</text>
+  <text x="796" y="451" fill="#203631" font-family="Arial, sans-serif" font-size="16" font-weight="700">mốc giữa · bia · mảnh 3 · cột mở sau chuông</text>
+
+  <!-- P5: boss arena. -->
+  <circle cx="247" cy="292" r="145" fill="url(#stone)" stroke="#e2c47b" stroke-width="7" filter="url(#shadow)"/>
+  <circle cx="247" cy="292" r="120" fill="none" stroke="#eed7a0" stroke-width="4" stroke-dasharray="12 10"/>
+  <circle cx="247" cy="292" r="42" fill="#63756a" stroke="#d7bf7b" stroke-width="4"/>
+  <circle cx="247" cy="292" r="24" fill="#4db7b1" opacity=".62" stroke="#85f5ee" stroke-width="4"/>
+  <g fill="#d8ba72" stroke="#fce3a4" stroke-width="2"><rect x="202" y="181" width="23" height="32" rx="5"/><rect x="136" y="329" width="23" height="32" rx="5"/><rect x="330" y="322" width="23" height="32" rx="5"/></g>
+  <path d="M228 276q19-45 44-2q-18-11-25 9q-11-10-19-7Z" fill="#f0cb76" stroke="#fff0b6" stroke-width="2"/>
+  <text x="124" y="436" fill="#fff0c6" font-family="Arial, sans-serif" font-size="25" font-weight="700">P5 · ĐỈNH TỔ CHIM</text>
+  <text x="157" y="462" fill="#dce6da" font-family="Arial, sans-serif" font-size="17">y = 18 m · arena tròn</text>
+  <text x="102" y="488" fill="#dce6da" font-family="Arial, sans-serif" font-size="16">3 cột đậu · trùm · bệ phục dựng · Linh Thần</text>
+
+  <!-- P4 bridge: exactly two gaps and two elevated side ledges. -->
+  <path d="M384 322 H468 M492 322 H595 M619 322 H790" stroke="#403d37" stroke-width="49" stroke-linecap="butt"/>
+  <path d="M384 318 H468 M492 318 H595 M619 318 H790" stroke="#b5a87b" stroke-width="36" stroke-linecap="butt"/>
+  <path d="M384 301 H468 M492 301 H595 M619 301 H790" stroke="#e7d499" stroke-width="4" stroke-dasharray="10 14"/>
+  <path d="M384 337 H468 M492 337 H595 M619 337 H790" stroke="#e7d499" stroke-width="4" stroke-dasharray="10 14"/>
+  <rect x="510" y="242" width="64" height="34" rx="7" fill="#7d806c" stroke="#d5c490" stroke-width="3"/>
+  <rect x="510" y="363" width="64" height="34" rx="7" fill="#7d806c" stroke="#d5c490" stroke-width="3"/>
+  <text x="484" y="225" fill="#fff0c6" font-family="Arial, sans-serif" font-size="24" font-weight="700">P4 · CẦU MÂY GÃY</text>
+  <text x="485" y="424" fill="#dce6da" font-family="Arial, sans-serif" font-size="16">y = 18 m · 2 khe · 2 gờ quái ném · mốc trước trùm</text>
+
+  <!-- Main route arrows over terrain. -->
+  <path d="M358 801 C478 862 640 842 754 766" fill="none" stroke="#ffd377" stroke-width="7" stroke-linecap="round" stroke-dasharray="5 17" marker-end="url(#arrow)"/>
+  <path d="M950 611 C1025 538 1035 466 1017 429" fill="none" stroke="#ffd377" stroke-width="7" stroke-linecap="round" stroke-dasharray="5 17" marker-end="url(#arrow)"/>
+  <path d="M789 320 L716 320" fill="none" stroke="#ffd377" stroke-width="7" stroke-linecap="round" stroke-dasharray="5 17" marker-end="url(#arrow)"/>
+  <path d="M414 320 L368 320" fill="none" stroke="#ffd377" stroke-width="7" stroke-linecap="round" stroke-dasharray="5 17" marker-end="url(#arrow)"/>
+
+  <!-- Review sidebar. -->
+  <rect x="1190" y="145" width="350" height="785" rx="22" fill="#1d3839" stroke="#739780" stroke-width="2"/>
+  <text x="1221" y="200" fill="#f6d88c" font-family="Arial, sans-serif" font-size="25" font-weight="700">TUYẾN NGƯỜI CHƠI</text>
+  <text x="1224" y="238" fill="#f6e2ac" font-family="Arial, sans-serif" font-size="21">P1 → P2 → P3</text>
+  <text x="1224" y="269" fill="#f6e2ac" font-family="Arial, sans-serif" font-size="21">→ P4 → P5</text>
+  <path d="M1224 294H1503" stroke="#607d72" stroke-width="2"/>
+  <text x="1221" y="330" fill="#c2e4d9" font-family="Arial, sans-serif" font-size="18" font-weight="700">ĐỘ CAO CHƠI</text>
+  <text x="1224" y="362" fill="#e3ebdc" font-family="Arial, sans-serif" font-size="17">0 → 5 → 9 → 13 → 18 m</text>
+  <text x="1224" y="387" fill="#adc9c0" font-family="Arial, sans-serif" font-size="15">Lên bằng gió; nhảy sang bệ.</text>
+  <path d="M1224 414H1503" stroke="#607d72" stroke-width="2"/>
+  <text x="1221" y="449" fill="#c2e4d9" font-family="Arial, sans-serif" font-size="18" font-weight="700">KÝ HIỆU</text>
+  <circle cx="1238" cy="485" r="13" fill="#4db7b1" opacity=".6" stroke="#85f5ee" stroke-width="3"/><text x="1267" y="491" fill="#e3ebdc" font-family="Arial, sans-serif" font-size="17">Cột gió</text>
+  <path d="M1222 524h29" stroke="#ffd377" stroke-width="6" stroke-dasharray="4 8" marker-end="url(#arrow)"/><text x="1267" y="530" fill="#e3ebdc" font-family="Arial, sans-serif" font-size="17">Đường chính</text>
+  <rect x="1225" y="557" width="22" height="17" rx="3" fill="#7d806c" stroke="#d5c490" stroke-width="2"/><text x="1267" y="573" fill="#e3ebdc" font-family="Arial, sans-serif" font-size="17">Gờ cao quái ném</text>
+  <path d="M1224 602H1503" stroke="#607d72" stroke-width="2"/>
+  <text x="1221" y="638" fill="#c2e4d9" font-family="Arial, sans-serif" font-size="18" font-weight="700">NHỊP CẢNH</text>
+  <text x="1224" y="672" fill="#e3ebdc" font-family="Arial, sans-serif" font-size="16">P1: nắng và rêu, học gió</text>
+  <text x="1224" y="701" fill="#e3ebdc" font-family="Arial, sans-serif" font-size="16">P2: vách hẹp, leo cao</text>
+  <text x="1224" y="730" fill="#e3ebdc" font-family="Arial, sans-serif" font-size="16">P3: chuông và nhà sàn</text>
+  <text x="1224" y="759" fill="#e3ebdc" font-family="Arial, sans-serif" font-size="16">P4: vực sương, giao chiến</text>
+  <text x="1224" y="788" fill="#e3ebdc" font-family="Arial, sans-serif" font-size="16">P5: ánh trời, Chim Lạc</text>
+  <path d="M1224 814H1503" stroke="#607d72" stroke-width="2"/>
+  <text x="1224" y="846" fill="#f2d792" font-family="Arial, sans-serif" font-size="15">Ưu tiên A09 / A10 / A11 và</text>
+  <text x="1224" y="870" fill="#f2d792" font-family="Arial, sans-serif" font-size="15">asset C2 hiện có; hình thái/</text>
+  <text x="1224" y="894" fill="#f2d792" font-family="Arial, sans-serif" font-size="15">vị trí chi tiết chờ duyệt.</text>
+  <text x="79" y="961" fill="#9cb5ab" font-family="Arial, sans-serif" font-size="15">Sơ đồ ý tưởng, không theo tỷ lệ mét. Vị trí GameObject, collider, NavMesh và checkpoint hiện tại chưa thay đổi.</text>
+</svg>

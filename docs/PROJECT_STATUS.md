@@ -1,5 +1,9 @@
 # Trạng thái thực tế — Sơn Đoòng
 
+## Bản vẽ đề xuất bố cục mới C2 — 06/11/2026 (chờ duyệt)
+
+Theo yêu cầu mới, đã vẽ [phối cảnh và sơ đồ toàn map](C2_MAP_PROPOSAL.md) với tuyến vòng P1 tây nam → P2 đông nam → P3 đông bắc → P4 qua vực → P5 tây bắc. Đối chiếu đặc tả C2, ảnh Game View cũ và asset có trên đĩa; liệt kê ba link thử model chim miễn phí vì Chim Lạc hiện còn hình/rig tạm. Đây là đề xuất hình ảnh, **chưa sửa scene, collider, NavMesh, gameplay, ID, save, prefab hay nhập asset**. SVG parse XML thành công; Unity MCP không có trong phiên nên chưa kiểm Editor/Console/Play Mode. Chờ người dùng duyệt hình trước khi dựng.
+
 ## Trại Giếng Trời C1 theo phác thảo đã duyệt — 06/11/2026
 
 Đã sửa `Assets/_Project/Scenes/02_HangLinhMach.unity` ở `ENV_01_TraiGiengTroi` và đầu đường nối sang Vườn Rêu: tia nắng, 14 thạch nhũ có LOD, 30 phiến lát bất quy tắc, 6 dương xỉ rìa và biến thể màu vách. Giữ gameplay root, `cp_trai`, bệ đèn, phong ấn, collider nền và NavMesh. [Ảnh, file và kiểm chứng](C1_GIENG_TROI_WORKLOG.md): Unity Edit Mode validate 0 issues, 5 điểm NavMesh/4 đoạn PathComplete, 0 collider mới; Console không có lỗi. Chưa kiểm Play Mode sau lượt art, Windows build, chơi tay hoặc FPS; cần người dùng duyệt ảnh trước khi chuyển sang khu C1 kế tiếp.
